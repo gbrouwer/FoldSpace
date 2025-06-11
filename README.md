@@ -2,6 +2,8 @@
 
 ## Introduction
 
+![Drone Path Visualization](docs/cover.png)
+
 In preparation for this interview, I started this project as a way to understand how multi-agent drone navigation might work in 4D airspace. If I want to learn a new skill, method, or technology, I like designing and building something with it myself — often before diving into the textbooks. I’ve found that by building a system from the ground up, I can get a better sense of its structure, constraints, and possibilities than by starting with theory alone. And it usually makes you appreciate the clever things people have come up with in the textbooks and papers you end up reading afterward even more.
 
 Right now, everything is pretty basic. There’s a centralized controller — called the `UNetController` — that plans routes through a uniform grid of `VolumeAgents`. These VolumeAgents represent small cubes of airspace at specific times. The system builds a global path for each drone from a spoke vertiport to a central hub, making sure the paths don’t intersect in time or space. Drones then just follow those paths step by step. They’re not really autonomous. It’s all centrally planned.

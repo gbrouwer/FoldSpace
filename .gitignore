@@ -12,6 +12,8 @@ Blender/
 Textures/
 Assets/Fonts/
 Assets/Packages/
+*.exr
+*.hdr
 
 # ========== VSCode / Rider / MonoDevelop ==========
 .vscode/
