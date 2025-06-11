@@ -1,0 +1,605 @@
+
+
+--- Page 1 ---
+
+See discussions, stats, and author profiles for this publication at: https://www.researchgate.net/publication/268556341
+GRACE - a Versatile Simulator Architecture Making Simulation of Multiple
+Complex Aircraft Simple
+Conference Paper · August 2006
+DOI: 10.2514/6.2006-6477
+CITATIONS READS
+13 1,649
+3 authors, including:
+Bart Heesbeen Jacco Hoekstra
+Netherlands Aerospace Centre - NLR Delft University of Technology
+9 PUBLICATIONS 87 CITATIONS 162 PUBLICATIONS 3,027 CITATIONS
+SEE PROFILE SEE PROFILE
+All content following this page was uploaded by Bart Heesbeen on 16 May 2017.
+The user has requested enhancement of the downloaded file.
+
+--- Page 2 ---
+
+GRACE – a Versatile Simulator Architecture Making
+Simulation of Multiple Complex Aircraft Simple
+Bart W.W.M. Heesbeen*, Rob C.J. Ruigrok† and Jacco M. Hoekstra‡
+National Aerospace Laboratory NLR, Anthony Fokkerweg 2, 1059 CM Amsterdam, the Netherlands
+Versatility is an essential asset of any research flight simulator but at the same time a
+high level of realism is needed to create the right experimental environment. How can a
+research flight simulator combine both efficiently and become the ultimate research
+platform? The answer to this question lies in the design of the architecture of the research
+flight simulator and the software techniques used to enhance its versatility. Each research
+project poses its specific requirements on the research flight simulator. Different projects
+require different aircraft types to address specific operational issues. To cope with these ever
+changing requirements a research flight simulator must be modular not only in software but
+also in hardware. Flight training simulators need a high level of realism because it's essential
+for the quality of flight training to create a cockpit environment that closely matches the real
+live cockpit. For a research flight simulator the focus of attention is aimed at the research
+objective and the changes it brings to the flight deck. In order to produce a high level of
+realism for a number of aircraft types, as in the case of a research flight simulator, the
+simulator must be reconfigurable to represent these aircraft types. A cost-efficient solution is
+one cockpit which can be reconfigured to represent different aircraft types by exchanging
+hardware components. To combine both versatility and a high level of realism in a research
+flight simulator a special versatile modular architecture is needed that facilitates both. The
+National Aerospace Laboratory (NLR) has developed such an architecture and has
+implemented this architecture with the construction of its new research flight simulator
+called Generic Research Aircraft Cockpit Environment (GRACE). Both the hardware and
+the software used for GRACE are constructed to fit in this versatile modular structure. To
+make it easy to exchange components of the simulator the interfaces between the
+components must be designed to be generic. Generic in this sense means that the interfaces
+can support the superset of signals that any module may use. Special attention is needed to
+control the configuration of the simulator. Flexible configuration of the communication
+interfaces is the key to easy introduction of new and research specific modules to the
+architecture. Another technique applied to increase versatility is the use of adaptive software
+modules. The described versatile modular architecture and all the applied techniques to
+enhance this architecture are successfully demonstrated for the first time ever in the
+GRACE research flight simulator. In the most recent research projects GRACE was
+operated in four different aircraft configurations consisting of Fokker F100, Boeing B747-
+400, Airbus A320 and A330. A lot of research specific software and hardware was integrated
+into GRACE with low effort and in a short time span. Its unique architecture has made
+GRACE the most versatile research flight simulator in the world today.
+* Research Scientist Aeronautical Engineering (MSc), Training, Human Factors & Cockpit Operations (ATTH)
+Department, heesbeen@nlr.nl.
+† Head of Training, Human Factors & Cockpit Operations (ATTH) Department, Research Scientist Aeronautical
+Engineering (MSc), ruigrok@nlr.nl.
+‡ Head of Air Transport (AT) Division, Research Scientist Aeronautical Engineering (Dr MSc), hoekstra@nlr.nl.
+1
+American Institute of Aeronautics and Astronautics
+
+--- Page 3 ---
+
+I. Introduction
+T
+HIS paper describes the versatile architecture of the Generic Research Aircraft Cockpit Environment (GRACE)
+research flight simulator, developed and operated by the National Aerospace Laboratory NLR at the Amsterdam
+site in the Netherlands (Fig. 1). After some 25 years of operation NLR's first motion based flight simulator, the
+Research Flight Simulator (RFS) (Fig. 2), was finally ready for its retirement and needed to be replaced. With the
+growing need for a more realistic cockpit environment and at the same time a desire to simulate multiple aircraft
+types, this was the opportunity the make a completely new design that would meet these new challenges.
+The biggest challenge for this new design was finding a way to incorporate both a high level of realism and high
+flexibility, which in principle are conflicting features. Flight training simulators need a very high level of realism in
+order to qualify for flight training certification. In these simulators the cockpit must be a complete copy of the real
+cockpit in terms of functionality and geometry. It's not possible to change anything without loosing its training
+certification. A research flight simulator is almost the complete opposite on this point because there's a need to
+change just about anything for research purposes. With the GRACE design the NLR combined the best of both
+worlds; high realism and versatility.
+If financial resources and storing space were no limiting factor, the easiest solution for the design is to build a
+separate one-on-one copy simulator cockpit for each aircraft type that needs to be simulated. In the real world the
+solution must be cost efficient and reconfiguration should be easy and quick. The best solution for this is one cockpit
+that's reconfigurable to represent multiple aircraft types. Such a cockpit needs a modular setup of the cockpit
+hardware, where aircraft type specific hardware can be replaced to match the real cockpit. To be cost efficient,
+cockpit hardware is designed to be common for different aircraft types. This reduces the number of hardware
+components needed to represent different aircraft types.
+Not only the hardware needs a special design, the software is also specially designed to facilitate easy
+reconfiguration. The software must be adaptable to any changes in the hardware configuration. On top of this the
+software also must facilitate simulating aircraft types that differ from the cockpit hardware configuration. This is
+essential for testing of different aircraft simulations without changing cockpit hardware. During the parallel
+preparation and testing phase of simulator experiments, there's no time to swap back and forth between cockpit
+configurations. The use of common software components for different aircraft types makes software development
+efficient en reconfiguration very easy.
+Figure 1. NLR GRACE flight simulator.. Figure 2. NLR RFS flight simulator.
+Generic Research Aircraft Cockpit Environment Research Flight Simulator
+2
+American Institute of Aeronautics and Astronautics
+
+--- Page 4 ---
+
+II. The Concept of the GRACE Architecture
+The concept of the GRACE architecture is based on a modular approach with high compatibility. This means
+that the different variants of a module are designed to be compatible and therefore can easily be exchanged for each
+other. This makes it possible to configure a complete simulator out of any collection of modules. Each research
+project can construct its own tailor made simulator by selecting one of the variants for each module.
+In order to meet the high level of realism the design of GRACE incorporates two basic configurations
+representing each an aircraft type from the two biggest civil aircraft manufacturers, Boeing and Airbus. Many
+research projects request aircraft simulations of widely used aircraft types. One practical advantage of simulating a
+widely used aircraft type is that it's easier to get pilots for the experiments with a current type rating on that aircraft.
+It's important that pilots can focus on the experimental issues and therefore they must feel at home in the simulator
+cockpit.
+The B747-400 was selected as the basic Boeing configuration. The A340 was selected as the basic Airbus
+configuration. One of the reasons for the selection of these two aircraft types is the fact that they both have four
+engines. This implies that both the basic configurations must support four engine operation and that they in principle
+can share engine related hardware. The major reason for selecting the four engine configuration as the basic
+configuration is that it's the largest number of engines that will be supported and fewer engines can be simulated
+with the same hardware or by removing one or more of the engine control segments. To be able to reduce the
+number of engines, the engine control hardware is constructed out of separate segments per engine which can be
+removed individually. In practice this makes configurations possible with four, three and two engines. For each
+cockpit module a selection was made based on the required level of realism. The required level of realism is
+determined by the importance of a module for the operation of the aircraft. Controls and instrumentation which are
+part of the primary interface between pilot and aircraft must be of the highest level. Secondary cockpit systems
+require a lower level because slight differences in the operation of these systems are acceptable as long as this
+doesn't increase the workload of the flight crew. Cockpit systems that are seldom used or only in very specific
+situations, only require a low level of realism and may differ substantially from the real cockpit. This classification
+also applies to the software modules. Based on the required level of realism for each module it was determined if a
+type specific version, a type similar version or just a generic version was needed. The result of this classification can
+Table 1. Hardware and Software Module Compatibility Matrix.
+3
+American Institute of Aeronautics and Astronautics
+
+--- Page 5 ---
+
+be seen in Table 1, the hardware and software module compatibility matrix. This matrix shows the level of
+compatibility of each module in the different aircraft type simulator configuration. For the basic configuration "A",
+the Airbus A340, the complete set of modules are completely compatible. For the other Airbus types some
+secondary modules are not completely compatible. For the basic configuration "B", the Boeing 747-400, some more
+secondary and lower systems are shared with basic configuration "A". The only module with limited compatibility is
+the overhead panel, because in real live these panels are completely different. The choice was made to have only one
+type of overhead panel for both the Airbus and Boeing configurations. This was driven by the fact that the role of
+the overhead panel in most simulator experiments is limited and therefore this module is classified as not essential.
+Of course in future upgrades of GRACE there will be opportunities to add more type specific modules.
+The compatibility matrix (Table 1) also clearly shows that the software modules are almost all completely
+compatible in all configurations. The flexibility of software makes it much easier to represent different aircraft
+types. The main aircraft simulation model and the cockpit displays are very type specific. They are essential for a
+realistic simulation. Other software modules can often be designed to be universal or multi functional. Universal
+modules are completely general and therefore can be used for any configuration. Multi functional modules have a
+common core which contains the basic functions of the module. On top of that they have sets of aircraft type specific
+functions which can be activated through simulator configuration control. In this way these software modules can
+automatically adapt to configuration change.
+The interface software between simulator hardware and simulation models software has a special function in the
+GRACE concept. It's referred to as the hardware/software interface layer. It not only must pass on signals back and
+forth, it also must resolve mismatches in simulator hardware configuration and simulator software configuration. In
+other words it must cope with situations were a certain aircraft simulation must be performed with a conflicting
+cockpit hardware configuration. Like for instance performing a B747 simulation with an A330 cockpit
+configuration. This interface software must present to the simulation model the signals it expects, derived from the
+signals it has available from the cockpit and vice versa..
+Figure 3 shows the architecture of GRACE with its hardware and software modules. The host computer forms
+the hart of the simulator and contains the main simulation software modules. The host runs the main aircraft
+simulation model which consists of the aerodynamics, the engines and the landing gear. Some closely linked
+modules like atmosphere, auto pilot and auto throttle, run also on the host. Other software modules are run on
+Figure 3. GRACE Modular Architecture. Hardware and software modules
+4
+American Institute of Aeronautics and Astronautics
+
+--- Page 6 ---
+
+separate machines. In the past there was a trend to distribute simulation modules over many computers. This was
+driven by the limited computing power of computer hardware. With the computing power of today's PC's it is in
+principle possible to run all the modules on one machine. In the GRACE architecture the decision to place a module
+on a separate machine, is based on more practical advantages. One of the main practical advantages is the possibility
+to run stand alone simulations which makes testing and debugging easier. In many cases starting up a whole
+simulation with all modules is not needed and therefore not efficient. Besides that some of the simulation modules
+can be used as stand alone simulation tools. NLR's Traffic Manager1 (TMX) is part of the GRACE architecture but
+can also be used as a stand alone traffic simulator for fast time studies. One other big advantage is the portability of
+the software modules. Software modules like the Research Flight Management System (RFMS) or the TMX which
+run on a separate PC can easily be installed on board of a test aircraft for in-flight simulation experiments. This was
+for instance demonstrated in the MFF project2 where two NLR test aircraft were equipped with the RFMS, the TMX
+and experimental cockpit displays.
+III. Versatile Simulator Hardware
+The GRACE simulator is equipped with a six degrees of freedom electric powered motion platform. Because of
+building constraints, the current visual projection system consists of four Wide Area Collimated (WAC) displays,
+two front view, one left and one right view. In the near future when the GRACE simulator will be relocated in a new
+building, this system will be replaced by a wide view dome with five projectors which will enable cross cockpit
+viewing. The cockpit has two side by side pilot seats and two observer seats with workstations in the aft station.
+Basically all cockpit equipment can be exchanged or adapted to the needs of the simulator experiment. The
+following paragraphs will focus on the exchangeable hardware components and how they can be configured to
+represent different aircraft types.
+Figure 4. GRACE Cockpit Layout. Mixed configuration: Airbus A330 with generic instrument mask, two
+columns and one side-stick. Also two additional cursor control devices in front of the MCDU's.
+5
+American Institute of Aeronautics and Astronautics
+
+--- Page 7 ---
+
+Figure 5. Instrument Panel Masks.
+Current available instrument panel masks for representing different aircraft type layouts.
+A. Instrument Panel and Displays
+The main part of the instrument panel consists of five large LCD screens. Two 15" screens for both captain and
+first officer and one 17" in the center (Fig. 4). With the use of metal masks the location and the dimensions of the
+visible area of the LCD screens can be adapted to match the geometry of the display screens in the real cockpit.
+As shown in Fig. 5, currently available instrument panel masks include:
+1. Airbus A330/A340
+2. Boeing 747-400
+3. Fokker 100
+4. McDonnell Dougles - MD11
+5. Business Jet
+6. Generic - Portrait
+7. Generic - Landscape
+The instrument panel also contains a generic landing gear and auto brake panel based on the A340 panel, which can
+be used for all aircraft types. In the design of GRACE this panel is considered as a "not aircraft specific" system and
+therefore a generic implementation of this panel is sufficient for realistic operation. During the design process the
+decision was made for each hardware component if a generic implementation was sufficient. Due to budget
+limitations it was necessary to make a prioritization of the most essential cockpit components for creating a highly
+realistic cockpit environment. Components which initially could only be implemented as a generic or basic
+component can be replaced with aircraft type specific ones in a later stage if desired.
+B. Glare Shield Panel
+The glare shield panel is available in an A340 and a B747 variant (Fig. 6). The A340 glare shield consists of the
+Flight Control Unit (FCU) and two EFIS control panels. These panels are practically the same for most Airbus Fly
+By Wire (FBW) aircraft, and therefore the same glare shield panel can be used to simulate these aircraft. The B747
+equivalent consists of the Mode Control Panel (MCP) and two matching EFIS control panels. This glare shield panel
+is specific for the B747 and differs more from other Boeing aircraft. Since the functionality provided by the B747
+6
+American Institute of Aeronautics and Astronautics
+
+--- Page 8 ---
+
+panel is common to other Boeing aircraft and even to aircraft
+from other manufacturers, it still can be used to simulate
+these other aircraft, but with reduced compatibility. In other
+words pilots may need some extra familiarization time to get
+used to the different operation. For experiments where MCP
+operation is not critical this is acceptable.
+C. Pilot Controls
+The different hardware options for the pilot controls
+include a side-stick with Airbus grip or generic grip, a
+Figure 6. Glare Shield Panel Options.
+column with wheel and even a center stick (Fig. 7). With
+these options virtually any transport cockpit can be simulated
+realistically. It's even possible to combine two control
+columns with one additional side-stick. The electric control
+loading system which drives the forces on the pilot controls,
+can simulate any control forces to match the real cockpit
+controls.
+D. Pedestal
+The throttle section of the pedestal is available in the
+A340 and B747 configuration (Fig. 8). Besides the basic four
+engine layout, both these modules can be reconfigured for
+two or three engine operation. Each throttle can be removed
+individually. Besides the throttle section, the mid pedestal Figure 7. GRACE Flight Controls Options
+also contains corresponding flap, speed brake, engine
+master/fuel and parking brake panels.
+The aft part of the pedestal is shared between Airbus and
+Boeing configuration. It contains two Radio Management
+Panels (RMP), two Audio Control Panels (ACP), the weather
+radar panel, the ATC/TCAS panel, the rudder trim panel and
+the aileron trim panel (Fig. 9). The panels have the A340
+layout but their functionality and operation are practically the
+same as with the B747 panels. The small differences in the
+operation of these panels are considered to be acceptable for
+research simulation of Boeing and other types of aircraft.
+To make the two sections of the pedestal more modular
+some of the A340 panels are relocated from the original
+A340 layout. The flap, speed brake and parking brake panels
+are moved to the mid pedestal. And in return the two RMP's
+and ACP's are moved to the aft pedestal. In this way all the
+Airbus and Boeing specific panels are contained in the mid
+pedestal. So for changing between Airbus and Boeing
+pedestal configurations, only the mid pedestal has to be
+exchanged.
+The extra free space on the Airbus mid pedestal can be
+used for experimental and future control panels. For a
+Figure 8. GRACE Throttle Section Options
+number of research experiments this space was used to fit
+Cursor Control Devices (CCD), as can be seen in figure 4 and 8.
+E. Overhead Panel
+As previously noted the overhead panel is only available in Airbus configuration (Fig. 10). Because of the
+limited role of the overhead panel in most simulator experiments, it's considered to provide sufficient functionality.
+Simulator experiments that require realistic operation of the overhead panel should select the A340 simulator
+configuration.
+7
+American Institute of Aeronautics and Astronautics
+
+--- Page 9 ---
+
+Basically all parts of the overhead panel that are
+related to engine control, like the hydraulic, the fuel,
+the electric and the fire panel, can also be
+configured for two engine layout. Individual
+switches can be removed and the faceplates can be
+replaced by a faceplate with matching holes and
+inscriptions. In this way aircraft types like the A330
+and A320 can be simulated realistically.
+F. Generic Control Panel and Experiment
+Switches Figure 9. GRACE Aft Pedestal
+The Generic Control Panel (GCP) and the
+EXperiment SWitches (XSW) are special features of
+GRACE introduced to have auxiliary control panel
+inputs and indications which can be used to
+configure and control experimental applications.
+These are essential and very useful functions of a
+research flight simulator. They are used in most
+simulator experiments. The logic behind the GCP
+and XSW can easily be adapted to any experiment
+needs by editing data files or if needed changing the
+software logic. This offers a flexible way of
+introducing experimental functionality to the
+cockpit without any hardware modification.
+Two GCP's can be located in the center of the aft
+pedestal. Figure 9 shows one GCP in the aft
+pedestal. The XSW panels are located under the
+Figure 10. GRACE Overhead Panel
+glare shield on the outside for each pilot (Fig. 11).
+G. Electronic Flight Bag
+The latest addition to the GRACE cockpit
+equipment are two sets of Electronic Flight Bags
+(EFB). One set for the Airbus configurations and
+one set for the Boeing and other configurations. The
+EFB's are equipped with 11" LCD screens with a
+touch screen overlay. In the Airbus configurations
+the EFB's fold down from underneath the glare
+shield in front of the pilots (Fig. 11). In this
+configuration the EFB's are mounted in landscape
+orientation. There was no room below the cockpit
+displays to install the original A340 stowaway table
+with integrated EFB. For the Boeing and other
+configurations the EFB's have to be located on the
+outboard side of the pilots in front of the instrument
+panel. The EFB can't be used in front of the pilot in
+the Boeing configuration because this would
+interfere with the control column. The EFB is
+relatively new technology in the present day
+cockpits and still in development. That's why the
+EFB is an important feature of the research flight Figure 11. GRACE EFB and XSW
+simulator.
+8
+American Institute of Aeronautics and Astronautics
+
+--- Page 10 ---
+
+IV. Versatile Simulator Software
+The simulator software brings the simulator hardware to live. The hardware is the direct interface between pilot
+and simulator but the software defines the interaction with the simulator. Not only the cockpit hardware must
+resemble the real cockpit, the software must also resemble the real interaction and behavior. The software must also
+be reconfigurable to simulate the different aircraft types. Some of the simulation modules are universal and can be
+used to simulate any of the aircraft types. These modules may need some aircraft type specific data files. The multi
+functional software modules need to be configured in order to activate the aircraft type specific functions and set the
+corresponding parameters.
+The adaptive software modules will automatically reconfigure to the host simulation configuration. The aircraft
+type configuration of the host simulation is transmitted to all other applications through the aircraft type specifier.
+Based on this specifier other modules or applications can select the appropriate configuration and data files.
+A. Aircraft Models
+The hart of the complete simulation is the main aircraft simulation. The main aircraft model specifies the general
+behavior and performance of the simulated aircraft. The main aircraft model consists of the aerodynamic model, the
+engine or propulsion model, the landing gear or ground interaction model and the mass properties. With these four
+components all forces acting on the aircraft are determined and with the equations of motion the aircraft movements
+can be calculated. These four basic modules can be coded in Fortran or C, but they can also be developed using
+higher level methods like Matlab-Simulink. Matlab-Simulink is the choice for the development of new aircraft
+models because of its large tool set which makes testing and analyzing very easy. The NLR used this method for the
+development of their Airbus A330 simulation model3 and a number of derivatives.
+The interfacing with the rest of the simulation modules is kept as general as possible to make the complete
+simulation aircraft type independent as much as possible. In fact any aircraft model can be integrated easily into the
+GRACE simulation. Some research projects provide their own aircraft simulation to be integrated and evaluated in
+the research simulator. One example of such a project was the ADFCS-II project4. For this project a complete
+aircraft model and fly-by-wire system designed in Matlab-Simulink was integrated into the simulator software.
+B. Cockpit Displays
+The cockpit displays form one of the most important interfaces with the pilots. Therefore a good replication of
+the cockpit displays is essential for the realistic simulation of an aircraft. For many simulator experiments the
+cockpit displays need to be modified to include new experimental features. The NLR has many years of experience
+in the field of designing and building cockpit displays for simulator experiments with the focus on human factors.
+With this experience the NLR has developed its own display prototyping tool. The first two versions of this tool
+were called NADDES (NLR Avionics Display Design and Evaluation System), but with the new version it has been
+renamed to Vincent5,6 after the famous Dutch painter van Gogh. Vincent stands for Visual Interface design of New
+Control concepts for Effective and Natural Task performance. With the Vincent tool it's easy to replicate real
+Figure 12. Vincent Airbus PFD Figure 13. Vincent Synthetic Vision PFD
+9
+American Institute of Aeronautics and Astronautics
+
+--- Page 11 ---
+
+cockpit displays very accurately. Figure 12 shows an example of an Airbus PFD. Replicated displays build with
+Vincent are very hard to distinguish from the real cockpit displays. It's also easy to create new display concepts
+while reusing components of existing displays. An example of this is a synthetic vision display based on the Airbus
+PFD. This display is shown in figure 13. The displays are built up out of components, which makes it very easy to
+add new components with experimental functions and reuse components from existing displays. This versatile
+display software development tool is indispensable for the GRACE simulator.
+C. Avionics
+All the avionics simulation modules are universal or multi functional and can be used for any type of aircraft.
+Aircraft type specific parameters or functions are defined in configuration data files. The avionics systems generally
+provide the same functions onboard of all aircraft. Only special features may differ with aircraft type. The biggest
+difference between the Airbus and Boeing avionics is of course the fly-by-wire system. This system is only activated
+for the Airbus aircraft simulations. The RFMS can be used for both Airbus and Boeing aircraft. Its FMS core is
+common and is used for both configurations. The user interface and the special MCDU pages are contained in type
+specific modules within the RFMS. The Airbus or Boeing option selects which of these modules is active. In this
+way developments on the RFMS core are shared and available in both Airbus and Boeing configuration. Only the
+user interfaces have to be developed separately. For most of the other avionics modules and in general for all
+simulation modules the same philosophy is applied. Keeping the major part of the software modules common to all
+aircraft type makes development and maintenance efficient.
+D. Traffic Simulation
+A standard simulation module of grace is the Traffic Manager, TMX1. Its first function is to generate traffic
+around the GRACE simulator. This is used to test systems which are concerned with traffic avoidance like the
+Traffic alert and Collision Avoidance System (TCAS) and Airborne Separation Assistance System (ASAS). The
+generation of a present day traffic picture around GRACE also adds to the realism of the simulation. Certainly
+during taxiing interaction with surrounding aircraft is part of every day operation. Simulated traffic can also be
+relayed from an external source like for instance NLR's NARSIM (NLR ATC Research SIMulator). This enables the
+combined simulation of the aircraft cockpit and the ATC ground stations. This is very useful for evaluating new
+ATC procedures or Data Link (DL) systems from the air and the ground side simultaneously.
+The Traffic Manager can also be used to generate conflicts between GRACE and surrounding traffic. This is
+often a good way for forcing the pilots to take action and evaluate their responses. The Traffic Manager is also used
+as an experiment leader control station. The execution of the experiment scenario can be monitored and the
+experiment leader can interact with the scenario. Simulated traffic can be controlled instantly to force events, but
+also events acting on the host simulation can be commanded. For instance an engine failure or an avionics system
+failure can be introduced.
+V. Communication and Interfacing
+The communication and interfacing is the glue between all the hardware and software modules that makes them
+all work together as one. The interfacing also facilitates the interchangeability of the modules. With a good design of
+the interfaces it's easy to replace one module without any impact on the rest of the system. For good compatibility
+interfaces must be set up to be general of art. Using interfaces with a general or common definition makes the
+modules they connect highly compatible. Module specific signals must be avoided as much as possible. They
+require separate logic for processing which makes the software more complex and reduces interchangeability.
+A. Hardware Interfacing
+A very special interface is the hardware/software interface layer. This interface acts as an intermediary between
+the I/O signals from the cockpit and the I/O signals from the aircraft simulation. All cockpit hardware is connected
+to a so called "interface node". This is a VME (VERSA-Module Euroboard) rack computer system that translates
+analog, digital and RS485 signals to numbers and the other way around. The interface node communicates with the
+host computer via a high speed optical fiber (scram-net) connection. This makes all cockpit hardware I/O available
+on the host computer.
+The primary function of the hardware/software interface layer is translating hardware values to flight simulation
+values. The second function is to resolve mismatches between aircraft simulation model and cockpit hardware. The
+best example is the simulation of the A340 with the cockpit in the A330 configuration. The A330 cockpit only has
+1 0
+American Institute of Aeronautics and Astronautics
+
+--- Page 12 ---
+
+two throttle handles but the A340 simulation needs four. The interface layer will apply a patch table to reproduce 4
+throttles. Throttles #1 and #2 of the A340 model will be driven by the #1 throttle of the A330 cockpit, and throttle
+#3 and #4 of the A340 will be driven by the #2 throttle of the A330 cockpit. This is essential for simulating aircraft
+models that differ from the cockpit configuration. Parallel preparation of multiple simulator experiments often calls
+for fast switching between different aircraft simulations. That's why the simulator must support these mismatches
+between simulation model and cockpit configuration.
+The hardware/software interface layer also makes the simulation models hardware independent. The simulation
+models connect only to the interface layer and don't interact with the hardware directly. In fact it doesn't matter to
+the simulation models what sort of hardware is connected to the interface layer. This not only makes it possible to
+simulate independently form the cockpit hardware configuration, but also provides for scalability of the simulation.
+The complete GRACE simulation software can also be used in a lower fidelity simulator like NLR's fixed base
+simulator called APERO, which is an acronym for Advanced Prototyping Environment. In this simulator a lot of the
+simulator hardware is replaced by so called "soft panels". These soft panels show an image of the control panels and
+allow the pilot to interact with them through a touch screen. The signals from these soft panels are fed into the
+interface layer and presented to the simulation models the same way as with the cockpit hardware.
+B. Ethernet Communication
+The communication between the host computer and all simulation applications running on separate PC's, is
+established over ethernet. The NLR developed an ethernet communication library7 for easy and flexible
+configuration of the ethernet interfaces. The interface of each ethernet connection or service is defined in a separate
+data file. These ethernet interface files simply list all variable names, their types and dimensions. The ethernet
+library places data in and retrieves data from the ethernet buffers by reference of these variable names. This makes it
+very easy to add new variables to the communication. New variables only need to be defined by the sending and
+receiving application. Other applications on the same ethernet service don't need to be changed but only need the
+new ethernet interface file at runtime. The ethernet services can be set up as UDP or TCP. UDP stands for User
+Datagram Protocol and TCP stands for Transmission Control Protocol. There are two big differences between these
+protocols. TCP has a mechanism for reliable packet delivery and will automatically resend data which didn't reach
+the receiving application. UDP doesn't support this. UDP on the other hand can be send as broadcast to multiple
+receiving applications, which resembles a sort of avionics data bus with multiple receivers. TCP can only be used to
+communicate one-on-one. In order to communicate with multiple receivers, a separate TCP service needs to be used
+for each receiver.
+Most of the ethernet communication in the GRACE simulator is based on UDP broadcast. Every application that
+produces data which needs to be shared with other applications, transmits this data over an UDP ethernet service.
+Any application that wants to use this data can listen in on this service. The use of UDP also enables the use of an
+ethernet recorder that listens in on all ethernet traffic. It can play back all the ethernet traffic on a later time for
+debugging and analysis. Another benefit is the possibility to use an ethernet monitor which can be used to
+instantaneously show the data that's been transmitted over ethernet. This can be a command line monitor to quarry
+variable values or a plot monitor which shows time histories of selected signals. These tools have been developed by
+the NLR in support of the ethernet library and are very valuable during integration and testing of application in the
+GRACE simulator.
+VI. Simulator Configuration Control and Management
+Simulator configuration control facilitates easy reconfiguration of the simulator. First of all it is used to define
+the simulated aircraft type and the aircraft subsystems. It activates the corresponding functions of the multi
+functional simulation modules. For example the auto pilot is configured to activate the supported flight modes and
+mode switching logic. It loads the aircraft type specific data files for the configuration of the universal simulation
+modules. This for example concerns data like the aircraft geometry, mass properties and the control loading force
+characteristics. The adaptive simulation modules automatically configure themselves based on the aircraft type
+specifier. They load their own data files and select the corresponding functions. The RFMS for instance has this
+ability and will automatically adapt to the simulated aircraft type.
+Besides the configuration of the simulated aircraft type, simulator configuration control is also used to define the
+current cockpit hardware configuration. The current cockpit configuration is defined with the installed variants of all
+the exchangeable cockpit hardware modules. A good example is the number of throttles that's installed in the
+cockpit. The hardware/software interface layer needs to know this number in order to set up the throttle patching
+1 1
+American Institute of Aeronautics and Astronautics
+
+--- Page 13 ---
+
+Figure 14. GRACE Control Desk
+table. The throttle patching table is used to resolve any mismatch between the number of engines of the simulated
+aircraft and the number of throttles in the cockpit.
+For some hardware modules the change in hardware configuration is automatically detected through a
+configuration parameter that is transmitted to the host computer. For instance the control loading system reports its
+current configuration with a configuration number. This number specifies the presence of the control column and the
+number of side-ticks. With this information the hardware/software interface layer can select the available signals and
+if needed convert side-stick inputs to column and wheel inputs and vice versa.
+With the complete cockpit hardware configuration specification the hardware/software interface layer can
+translate all hardware signals to the general cockpit interface signals. Any simulated aircraft model can connect to
+this general cockpit interface which makes it possible to simulate any aircraft model independently form the cockpit
+hardware configuration. Of course this has its limitations. If a certain type specific function isn't available in a given
+cockpit hardware configuration and it can't be replaced through any other function, it simply will not be available
+with that cockpit configuration. This is acceptable because such a configuration will only be used for testing and
+preparation of simulator experiments.
+Simulator configuration management is concerned with setting up and maintaining the different configurations.
+Default configurations are prepared for all the available aircraft simulation models and cockpit hardware
+configurations. These are stored in configuration data files. The simulator operator can simply select de desired
+aircraft model and load the current cockpit hardware configuration from the predefined configuration data files. The
+current cockpit hardware configuration data files must be updated after any cockpit reconfiguration. In this way the
+operator doesn't need to select the different parts of the cockpit hardware configuration data files, but simply selects
+the current configuration data files.
+Startup of the cockpit display is done remotely from a workstation at the GRACE control desk (Fig. 14).
+Different scripts are available to startup the desired cockpit displays. These scripts contain the startup commands for
+each display which are distributed over ethernet to the display generating PC's. Default scripts are available for
+B747, F100, A340, A330 and A320. But many experiments have their own specific displays which can be started
+with tailor maid scripts.
+1 2
+American Institute of Aeronautics and Astronautics
+
+--- Page 14 ---
+
+VII. Conclusion
+With its unique architecture of hardware and software the GRACE simulator can be used to simulate a large
+range of civil transport aircraft with a high level of realism. Different research projects require the simulation of
+different types of aircraft to test new systems and operations in an appropriate cockpit environment. The flexibility
+in the software architecture even makes it possible to simulate completely different aircraft with the same cockpit
+hardware configuration. This is essential for parallel preparations of multiple simulator experiments. It also makes
+the operation of the simulator very efficient because it reduces the number of times that the cockpit hardware
+configuration has to be changed.
+In its first years of operation the GRACE simulator has proven to be very versatile in adapting to the
+requirements of many simulator experiments. In the most recent research projects GRACE was operated in four
+different aircraft configurations consisting of Fokker F100, Boeing B747-400, Airbus A320 and A330. A lot of
+research specific software and hardware was integrated into GRACE with low effort and in a short time span. Its
+unique architecture has made GRACE the most versatile research flight simulator in the world today.
+Abbreviations / Acronyms
+ACP = Audio Control Panel
+ADFCS = Affordable Digital Flight Control System for Small Commercial Aircraft
+AERO = Aerodynamic
+APERO = Advanced Prototyping Environment
+ASAS = Airborne Separation Assistance System
+ATC = Air Traffic Control
+CCD = Cursor Control Device
+DL = Data Link
+EFB = Electronic Flight Bag
+EFIS = Electronic Flight Instrument System
+ENG = ENGine
+FBW = Fly By Wire
+FCU = Flight Control Unit
+FMS = Flight Management System
+FWC = Flight Warning Computer
+GCP = Generic Control Panel
+GPWS = Ground Proximity Warning System
+GRACE = Generic Research Aircraft Cockpit Environment
+I/O = Input / Output
+L/G = Landing Gear
+MCP = Mode Control Panel
+MCDU = Multifunction Control and Display Unit
+MFF = Mediterranean Free Flight
+NADDES = NLR Avionics Display Design and Evaluation System
+NARSIM = NLR ATC Research SIMulator
+NAV = Navigation
+ND = Navigation Display
+PFD = Primary Flight Display
+RFMS = Research Flight Management System
+RFS = Research Flight Simulator
+RMP = Radio Management Panel
+TCAS = Traffic alert and Collision Avoidance System
+TCP = Transmission Control Protocol
+TMX = Traffic and Event Manager, traffic simulator
+UDP = User Datagram Protocol
+VINCENT = Visual Interface design of New Control concepts for Effective and Natural Task performance
+WXR = Weather Radar
+XSW = eXperiment SWitches
+1 3
+American Institute of Aeronautics and Astronautics
+
+--- Page 15 ---
+
+References
+1 Heesbeen, W.W.M., Hoekstra, J.M. and Valenti Clari, M.S.V., "Traffic Manager - Traffic Simulation for Validation of
+Future ATM Concepts", AIAA Guidance, Navigation, and Control Conference and Exhibit, Austin, Texas, Aug. 11-14, 2003,
+AIAA-2003-5368.
+2 Ruigrok, R.C.J. and Gelder de, N., "Flight Testing the Airborne Separation Assistance System", AIAA Guidance,
+Navigation, and Control Conference and Exhibit, Keystone, Colorado, Aug. 21-24, AIAA-2006-6061.
+3 Smaili, M.H., Laban, M. and Dominicus, J.W., "New Integrated Modeling and Simulation Techniques for Research and
+Training Applications", AIAA Modeling and Simulation Technologies Conference and Exhibit, Aug. 15-18, 2005, San
+Francisco, California, AIAA-2005-6294.
+4 Smaili, M.H., "Simulation of an Affordable Fly-By-Wire System for Small Commercial Aircraft", AIAA Modeling and
+Simulation Technologies Conference and Exhibit, Aug. 6-9, 2001, Montreal, Canada, AIAA-2001-4058.
+5 Vincent web site: URL: http://vincent.nlr.nl/ [cited 7 June 2006].
+6 Verhoeven, R.P.M. and Reus de, A.J.C., "Human Factors Assistance During Prototyping of Cockpit Applications", AIAA
+Modeling and Simulation Technologies Conference and Exhibit, Keystone, Colorado, Aug. 21-24, 2006, AIAA-2006-6722.
+7 Groeneweg, J., "Ethernet Interfacing Management and Programming Utilities", National Aerospace Laboratory NLR, Rept.
+Memorandum ATTH-2005-103, Amsterdam, 2005.
+1 4
+American Institute of Aeronautics and Astronautics
+View publication stats

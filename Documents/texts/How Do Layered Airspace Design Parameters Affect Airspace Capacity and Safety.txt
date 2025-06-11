@@ -1,0 +1,701 @@
+
+
+--- Page 1 ---
+
+Delft University of Technology
+How Do Layered Airspace Design Parameters Affect Airspace Capacity and Safety?
+Hoekstra, Jacco; Maas, J.B.; Tra, M.A.P.; Sunil, Emmanuel
+Publication date
+2016
+Document Version
+Accepted author manuscript
+Published in
+7th International Conference on Research in Air Transportation
+Citation (APA)
+Hoekstra, J., Maas, J. B., Tra, M. A. P., & Sunil, E. (2016). How Do Layered Airspace Design Parameters
+Affect Airspace Capacity and Safety? In 7th International Conference on Research in Air Transportation:
+Philadelphia, USA
+Important note
+To cite this publication, please use the final published version (if applicable).
+Please check the document version above.
+Copyright
+Other than for strictly personal use, it is not permitted to download, forward or distribute the text or part of it, without the consent
+of the author(s) and/or copyright holder(s), unless the work is under an open content license such as Creative Commons.
+Takedown policy
+Please contact us and provide details if you believe this document breaches copyrights.
+We will remove access to the work immediately and investigate your claim.
+This work is downloaded from Delft University of Technology.
+For technical reasons the number of authors shown on this cover page is limited to a maximum of 10.
+
+--- Page 2 ---
+
+How Do Layered Airspace Design Parameters
+Affect Airspace Capacity and Safety?
+Prof.dr.ir. Jacco M. Hoekstra, Jerom Maas M.Sc.
+Martijn Tra B.Sc., Emmanuel Sunil, M.Sc.
+Faculty of Aerospace Engineering, TU Delft
+Maintaining separation can therefore be divided into
+Abstract—In many ATM studies experiments are two subtasks:
+performed to determine the capacity. This paper looks - conflict detection
+at the effect of airspace design on the capacity. Using an - conflict resolution
+algebraic approach a relation is derived between the
+design parameters of a layered airspace design and the
+Before the conflict detection & resolution (CD&R),
+capacity of the airspace. The validity of the assumptions
+there is a third option: prevent conflicts form
+which are used in this derivation are tested
+happening. This is referred to as conflict prevention.
+experimentally. This airspace lay-out proved to be the
+airspace design which had the highest capacity for the This takes places before actual conflicts are detected.
+unstructured, extremely high traffic demand used in an Air Traffic is organised in such a way that it lowers
+earlier experimental study. The result is both a method the chance of conflicts occurring. Airspace design is
+to relate an airspace design to the capacity as well as a a way to prevent conflicts.
+relation which shows the effect on the airspace capacity
+for an airspace design where different levels or layers
+Other examples of conflict prevention are:
+are defined each with their own segment of heading
+- Structuring of air traffic by an air traffic
+angles.
+controller
+- Using the semi-circular rule for headings and
+Keywords — Capacity; Air Transportation System
+Performance Measurement; Traffic Complexity; altitudes (eastbound at odd levels and
+Airspace Design; Conflict Probability; Conflict Rate; westbound at even levels)
+Separation Assurance; Safety - Avoiding potential bottle-neck areas
+- Limiting the number of aircraft entering an
+I. INTRODUCTION airspace
+Many studies aim to increase the capacity of Air
+Conflict detection and resolution are tasks which are
+Traffic Control (ATC) [1] [2] , while others study the
+performed by humans and systems, both on the
+relation between traffic density and capacity [3] [4].
+ground as well as in the air. Different task allocation
+This paper is of the second category. Both types of
+combinations have become an important topic of
+studies acknowledge the strong relation between
+ATM research as this might increase the airspace
+traffic conflicts and capacity, even though the exact,
+capacity or efficiency [5].
+analytical relation is not known.
+In this paper, the focus is on airspace design. If an
+The ultimate goal of Air Traffic Control is to prevent
+airspace is designed in a way which lowers the
+aircraft from having collisions. Since the exact
+potential number of conflicts, the amount of
+locations of aircraft are not known to Air Traffic
+necessary conflict detections and resolutions
+Control, a safety buffer is used in the form of
+decreases as well. In this way, the task load on the
+separation criteria. When two aircraft actually are
+controller, pilot and the systems involved can be
+closer to each other than specified in the defined
+reduced. The number of conflicts per unit time is
+separation criteria, this is called a loss of separation.
+called the conflict rate and it is one of the main
+limiting factors for the capacity of an airspace.
+A conflict, on the other hand, is defined as a
+predicted, potential loss of separation within a
+Many attempts have been made to find geometrical
+specified prediction horizon, also called the look-
+metrics to define the capacity of the airspace via the
+ahead time. If a conflict is detected, it needs to be
+task load considerations. When these metrics are
+resolved to prevent the predicted loss of separation
+aimed at measuring the load on human air traffic
+from actually happening, this is referred to as conflict
+controllers, a metric like the so-called Dynamic
+resolution.
+Density [7], the traffic geometric complexity [8] or
+pragmatic variations of these [9] can be used.
+
+--- Page 3 ---
+
+However, as these definitions are very specific, or This equation can also be used to gain insight into the
+even require tuning, capacity limits found using these relation between capacity and safety. For example:
+approaches are dependent of the level of automation, the effect of decentralizing the task of separation
+the task allocation and properties of the specific assurance by moving it to the cockpit reduces the
+airspace considered. quadratic relation (2) to a linear relation when both
+aircraft are involved in solving a conflict:
+Furthermore, future changes in automation or task
+allocation may change the metrics for the task load of CR (N 1)p (3a)
+local 2
+resolving conflicts. However, these metrics will
+always be dependent on the conflict rate, and
+In words:
+therefore on the design of the airspace. Hence,
+The local conflict rate is the number of other aircraft,
+research on the effects of airspace design on conflict
+multiplied with the general chance that any two
+rate can lead to increases in airspace capacity.
+aircraft meet each other in this specific airspace.
+In many projects, capacity limits are based mainly on
+The difference between the effect of traffic density on
+conflict detection and resolution tasks, and are
+the centralised conflict rate on a global and de-
+determined experimentally [4] [6]. An example
+centralised level can be seen in Figure 1 [11].
+which focusses on conflict prevention by airspace
+design for extreme traffic densities is the Metropolis
+project, where fast-time simulations consisting of Conflict
+millions of flights were performed to study the effect rate
+1000
+of airspace structure effects on capacity [10].
+900
+800
+Next to experimental simulations, theoretical
+700
+relations between airspace structure and the conflict
+r
+a
+a
+ir
+t
+s
+e
+p
+a
+a
+r
+c
+e
+e
+al
+d
+s
+e
+o
+s i
+n
+g
+e
+n
+e d
+i
+e
+s
+d .
+a
+I
+n
+n
+a l
+t
+y
+h
+s
+i
+e
+s
+d
+p a
+b
+p
+y
+er t
+e
+h
+x
+e
+p r
+e
+e
+f
+s
+f
+s
+e
+i
+c
+n
+t
+g ,
+o f
+t
+a
+h
+n
+e
+2P
+/cP
+5
+6
+0
+0
+0
+0
+G
+A
+r
+ir
+o und
+400
+conflict rate in terms of the design parameters of the
+300
+airspace.
+200
+100
+0
+II. THEORETICAL RELATIONS FOR GLOBAL 0 10 20 30 40
+CONFLICT RATE Number of aircraft in sector
+The relationship between the global conflict rate for
+Figure 1 The relation between number of aircraft
+an airspace with the total number of aircraft N is
+for centralized (’Ground’) conflict rate and
+described by [11][12]
+decentralized (‘Air’) conflict rate [11]
+N When using priority rules, a fail-safe is removed but
+CR
+global
+
+  2  
+p
+2
+(1)
+the overall task load for humans and/or systems is
+halved, as only one of each pair of aircraft has to take
+This relation can also be written as: action:
+1 1
+CR  N(N 1)p (2) CR  (N 1)p (3b)
+global 2 2 localpriority 2 2
+With:
+CR global = global conflict rate in an airspace The same equation was later used by Jardin in [13]
+N = total number of aircraft in an airspace and [14] to derive p and study the effect of fixed
+2
+p 2 = average conflict probability for any given routes versus free routing on the conflict rate. Jardin
+pair of aircraft in this airspace also added the effect of the average ground speed V,
+the lateral separation minimum R for the two-
+In words this relation (2) can be summarized as: dimensional case (horizontal flight), the average time
+an aircraft spends in the airspace T and the total
+FL
+The global conflict rate is equal to the number of airspace area A and observation time T . This makes
+tot
+possible combinations of two aircraft, multiplied with the conflict rate proportional to ratio of the area
+the conflict rate for any given pair.
+
+--- Page 4 ---
+
+‘swept’ by the aircraft and the total area of the This airspace concept used the airspace structure as
+airspace depicted in Figure 2. Here, the airspace was divided
+in vertical segments, and to each layer a span of
+V RT aircraft headings was assigned.
+CR FL (4) This means that the cruise altitude of an aircraft is
+global AT
+dependent on the cruise heading. An exception was
+tot
+made for climbing and descending aircraft, allowing
+Imagine that all aircraft fly twice as fast, then the them to reach the level required for their preferred
+conflict rate will double as well, as the effect is heading in an efficient way. For the climb and
+similar to accelerating the time from a point of view descent phases, a tactical conflict prevention,
+of the pilot. Thus, the other aircraft then approach the detection and resolution (CD&R) system was used.
+ownship twice as fast. Consequently, the ground
+speeds affect the conflict rate via the relative velocity What is the effect of this airspace design on conflict
+of the aircraft. rate as expressed using the above equations? To
+answers this, two main effects which will be
+This example shows that the conflict rate is considered in this paper.
+proportional to the relative velocity. As the doubling
+example illustrates, this relation also holds on a
+global level when we use the average relative
+velocity (at larger distances this is equal to the range
+rate for conflicting aircraft trajectories). Hence we
+can write:
+CR V (5)
+global rel
+p cV (6)
+2 rel
+In which:
+V = relative velocity averaged over a/c pairs
+rel
+c = constant for a given airspace and number
+of aircraft
+And effective airspace design performs conflict
+prevention by reducing the probability that two
+aircraft will have a conflict, in other words: it either
+Figure 2. Layers concept as used in
+lowers the p , or the V in the above equations. The
+2 rel
+the Metropolis project for UAVs
+above equations form the starting point of the
+and Personal Air Transport Vehicles
+derivation in this paper.
+III. LAYERED AIRSPACE DESIGN AND CONFLICT
+A. Spreading effect
+PREVENTION
+The first effect is that separating the traffic over
+In the Metropolis project, the airspace capacity as a
+layers changes the combinations of aircraft pairs as
+function of the level of structure in the airspace
+we now have a vertical segmentation which separates
+design has been investigated for extreme traffic
+the air traffic.
+densities. Scenarios were based on package
+delivering UAVs and personal air transport to
+Imagine we defined L layers, and we assume that, on
+overload an airspace to find capacity limits. In terms
+average, the traffic is evenly spread over the layers.
+of safety the so-called Layers-airspace concept
+This could be achieved by choosing the headings
+performed best [10] at a minimal cost in terms of
+segments per layer wisely. In case of an uneven
+efficiency.
+distribution of traffic over headings, more layers
+could be assigned to these directions, ensuring an
+
+--- Page 5 ---
+
+efficient use of airspace by evenly distributing the
+traffic over the layers. This heading segment represents the maximum
+heading difference between two aircraft which could
+For each layer we can then write the relation for meet each other in a layer. To see the effect of
+conflict rate per layer: heading difference, we consider two aircraft, both
+flying with the average ground speed. The relation
+1 between the relative velocity and the heading
+ 
+CR  N N 1 p (7) difference follows from the conflict geometry in
+layer 2 layer layer layer
+Figure 3.
+To compute the total expected conflict rate, a In reality the speeds will vary per aircraft
+summation can be performed over multiple layers: combination, but when focussing on the global effect
+CR   L 1 N  N 1  p of heading difference by using the average ground
+global 2 layer layer layer speed V, the relative velocity can be expressed as a
+layer1 function of the heading difference:
+Equivalently, when it is assumed that aircraft are
+spread evenly over all flight levels and the conflict
+ hdg 
+rate p layer is equal in all layers: V  hdg  2Vsin   (9)
+rel
+
+2
+
+1 N 
+CR  N
+
+1
+
+p (8)
+global 2  L  2 In which:
+V
+rel
+= Relative ground speed (scalar)
+We can also see the effect of dividing the traffic over V = Ground speed (scalar)
+L layers by comparing this equation to Equation (2).
+hdg = Heading difference (absolute value of the
+Equation (2) can be seen a s special case for one
+layer, i.e. when L=1. difference of direction of two ground
+speed vectors)
+B. Reduction of relative velocity effect
+Next to spreading the traffic over different layers, the
+Layers design also uses heading segments per altitude
+band. More general we can call this angle, the
+heading span of a layer α (alpha). In the example in
+Figure 2, the segment is 45 degrees or in other words:
+α = π/4. As the 360 degrees (2π) of all possible
+headings was evenly divided, 8 segments and two
+sets of 8 layers were used. The result is: L=16 with α
+= π/4.
+Figure 4: The absolute value of subtracting two
+Figure 3. Geometric relation between heading
+uniform distribution results in a triangular
+difference for two aircraft with the same ground
+distribution
+speed
+
+--- Page 6 ---
+
+Please note that in Equation (9) it is assumed that all 4cV  2 
+aircraft fly with the same ground speed and the p  1 sin  (19)
+layer    2
+aircraft are flying towards the same point in time.
+Although the actual geometry can be very different
+p 4cV
+1
+1
+2
+sin
+
+ (20)
+when the aircraft miss each other at a large distance, layer   2
+those cases do not have to be included for the conflict
+rate. Two generalisations are made: identical, or Since the main goal of this derivation is to analyse
+similar, ground speed and the distance to the CPA is the effect of the heading segment α, we move the
+much larger than the separation criteria. other aspects to a constant k for now.
+The average relative velocity within a single layer 1 2 
+can be calculated based on the distribution of heading p k  1 sin  (21)
+differences in that layer. Assuming a uniform
+layer   2
+distribution of the headings within a layer, the
+resulting probability density function for the heading
+difference becomes a triangular distribution as
+illustrated in Figure 4.
+IV. COMBINING THE SPREADING EFFECT AND
+RELATIVE VELOCITY EFFECT
+The resulting probability density function (pdf) for
+the heading difference is described by: Combining the equation (8) and (20) gives the total
+effect of the airspace structure for N aircraft with L
+2 x 2 layers based on reducing the heading segments α.
+Phdg  x 1  x (10)
+      2 CR  1 N N 1   1 1 2 sin  k (22)
+   
+global 2  L    2
+Using stochastic calculus, this distribution function
+for the heading difference can be used to calculate the
+average relative velocity. This is done by integrating This equation shows the distinct influence of the two
+the product of relative velocity as function of the beneficial effects of a layered airspace structure
+heading difference with the probability distribution based on heading segments.
+function for the relative heading using equation (9)
+and (10): 1 N  1 2 
+CR  N 1  1 sin   k (22)
+p cV (11) global 2  L    2
+layer rel other influences
+ spreading effect reduced relative velocity effect
+p  P(|hdgx|)cV (|hdgx|)dx (12)
+layer rel
+0
+ 2 x This equation can also be used when no restrictions
+p cV  xsin dx (13) on heading are applied, substituting L=1 and α=2π, in
+layer 2 2
+0 which case it returns to the form similar to that of
+2cV  x Equation (8):
+p   xsin dx (14)
+layer 2 2
+0 1 k
+2cV  x  x  CR  NN 1  (23)
+p  sin dx  xsin dx (15) global 2 2
+layer 2
+
+2 2
+
+0 0
+2cV  x   x x  Combining this equation with Equation (22) given
+p   2cos  2xcos 4sin  (16) the relation between the conflict rate with layers and
+layer 2     2   0   2 2   0   the conflict rate without the layers:
+p layer  4  cV 2       cos  2         cos  2 2sin  2       (17)   CR global   L   CR global   L1  L N (N   L 1)  2     1  2 sin  2    (24)
+spreading factor heading segment factor
+p 
+4cV 
+2sin
+
+ (18)
+layer 2  2
+
+--- Page 7 ---
+
+The effect of the semi-circular rule can now be Solving this yields:
+expressed in factors as well, when compared to
+aircraft with all possible headings flying at the same 1 1 8LCR
+N  L L2 max
+altitude. Assume an airspace with 100 aircraft, and 10 max 2 2 k f()
+segments: 5 for eastbound traffic and 5 for
+westbound traffic. Equation 25 then shows the effect 1 2 
+with f() 1 sin  (29)
+of using this rule, as N=100, L=10 and α=π:   2
+10010 2 2 
+  CR global   L   CR global   L1  1099     1  sin 2   Finally, Equation (26) can also be combined with the
+Equation (4) to incorporate the ratio between the area
+spreading factor heading segment factor
+searched for conflicts and the total area of the
+CR  0.090.73 (25)
+ global
+L1
+airspace. In this way, all relevant airspace design
+parameters have been considered:
+This shows that in this example, using the semi- VRT 1 N 
+circular rule reduces the conflict rate with a factor of
+CR
+global
+k
+AT
+FL
+2
+N
+ L
+1
+
+f()
+15. It also shows that splitting the airspace into 10 tot
+layers has the largest effect (91% reduction), while with f()
+1
+1
+2
+sin
+
+ (30)
+using only two heading segments results in a   2
+reduction of 27%. With:
+The table below shows the heading effect for a k* constant
+number of heading segment sizes:
+V= average ground speed
+Table 1. Heading segment αeffect T = average time spent in airspace
+FL
+on conflict rate
+T = total time span
+tot
+alpha (deg) Conflict
+A =area of airspace
+reduction
+360 0% N = total number of aircraft
+180 27% L = number of subdivions (layers)
+90 60%
+ = heading range per subdivision of airspace
+45 80%
+22.5 90%
+When no heading segments are used, the value of α is
+10 95% 360 degrees, making f(α) equal to 1/2π (the 2π is
+accounted for in the constant k). Any equal
+Assuming there is a maximum allowable conflict subdivision of airspace can be expressed in terms of
+rate, equation (22) can also be used to determine the the number of layers L.
+capacity:
+A number of assumptions were made along the way
+1 N  in the derivation. They are summarized below:
+CR k N 1 f()
+global 2  L  1. The conflict probability of two aircraft is
+proportional to their relative velocity
+1 2 
+with f() 1 sin  (26) 2. The ground speed of each aircraft is equal
+  2
+3. The aircraft do not make turns
+We can use equation (26) to determine the capacity:
+V. VALIDATION
+1 N2 
+CR  k f() N (27)
+To test the validity of equation (30) a number of
+max 2  L  simulations were run. In these simulations, the focus
+is on the function f(a). The independent variable was
+1 2CR
+N2N  max 0 (28) thus the heading span a of the simulated layer.
+L k f()
+In each simulation an airspace was formed and
+aircraft were created in this airspace. After the
+
+--- Page 8 ---
+
+random initial condition, conflicts are counted within theoretical line follows hypothesis 1: this relation is
+the look-ahead time. After each count, the next assumed to be linear. The results can be seen in
+iteration was started. The experiment parameters are Figure 5.
+given in table 2.
+Number of aircraft: 150
+Initial aircraft position: R a n d o m ( u n i form) in
+creation region
+Creation region size: 1500 nm x 1500 nm
+Ground speed : 400 kts
+Heading: Random (uniform) in
+heading span [0, a]
+Protected zone radius: 5 nm
+Number of simulations: 10000 - 100000
+Table 2: Experiment parameters
+As the goal is to analyse how many conflict arise per
+Figure 6: Experimental(red) and theoretical(blue)
+time unit, initial intrusions are avoided in the start
+relations between heading span and conflict count.
+condition as a zero relative speed should correspond
+with a conflict rate of zero.
+It is found that this relation does indeed follow the
+The remaining constant k in the relation (30) is
+expected pattern: the conflict count is proportional to
+independent of a. In order to compare the theoretical
+V . Next, the effect conflict relation (30) is tested.
+and experimental conflict rates, it is assigned a scalar rel
+Now, the V is not given on the x-axis, but the
+value. The value of k is used as a scaling parameter. rel
+heading span a of the layer. The result is seen in
+Figure 6. The experimental data in the scatter plot are
+In the following figures, both the theoretical and
+sorted in bins of 10 degrees heading span width. Of
+experimental relations are plotted next to each other.
+each bin the average conflict count is computed, and
+The blue line is the theoretical relation between the
+the result is a line, indicated in figure 7. Here it can
+dependent and independent variables. The red dots
+be seen that the theoretical prediction of conflict
+show a scatter plot, where each simulation is
+count (Equation 30) closely matches the experimental
+represented as one point. The scatter plots contain
+simulation results
+10,000 points, as 10,000 different simulations were
+performed.
+Figure 7: Averaging the data points from only
+several experiment runs allows to compare the
+Figure 5: Experimental and theoretical relations
+experimental(red) and theoretical(blue) relations for
+between V and conflict count
+rel heading span per layer and conflict count
+First the average relative velocity is plotted against
+the conflict rate. This tests the relation between the VI. CONCLUSIONS
+average relative velocity magnitude in one
+The conflict rate in an airspace is proportional to the
+simulation, and the number of conflicts. The
+conflict probability and hence it is an indication for
+
+--- Page 9 ---
+
+safety. The conflict rate is, in turn, proportional to the heading differences analytically is more widely
+relative velocity. applicable. It is also an addition to the many
+empirical traffic complexity weighing factors which
+Using the conflict probability model for direct is more fundamental, The method presented here for
+routing airspace from [11] as a starting point, a one type os airspace design, can be used to relate
+relation that connects the conflict rate with the design many other, more4 conventional, airspace design
+parameters of a layered airspace concept has been parameters, air traffic complexity and capacity to
+found. This function has been derived using the each other in many different ways. Future research
+equations for 2D conflict geometry, probability can use this relative speed and relative heading effect
+distributions and the assumptions that aircraft fly method to find similar relations, both generic and
+straight paths with constant velocities. geo-specific for a variety of airspaces..
+For L layers, each with a heading segment of α
+REFERENCES
+degrees, the conflict rate can be expressed as: [1] R. Irvine, “Investigating the capacity benefit of airborne
+speed adjustment”, FAA/Eurcontrol ATM Seminar 2015,
+Lissabon, 2015
+1 N  1 2  VRT
+CR  N 1 1 sin  FL k [2] S. Ruiz, M.Soler, “Conflict pattern analysis under the
+global 2  L    2 AT consideration of optimal trajectories in the European ATM”,
+tot FAA/Eurcontrol ATM Seminar 2015, Lissabon, 2015
+[3] P. Brooker,”Control Workload, Airspace Capcity and Future
+In this equation the symbols have the following Systems”, Human Factors and Aerospace Safety 3(1), 2003
+meaning: [4] G. Tobaruela, A. Majumbar, W.Y. Ochieng, “Identifying
+Airspace Capacity Factors in the Air Traffic Management
+System”, ATACCS’2012, London, 2012
+L : number of layers
+[5] M. IJtsma, J.M.Hoekstra, R. Bhattacharyya, A. Prittchett
+N : global number of aircraft
+“Computational Assessment of Different Air-Ground
+α : heading span of a layer Allocations”, 11th FAA/Eurocontrol ATM Seminar,
+V : average ground speed of aircraft Lissabon, 2015
+R : horizontal separation requirement [6] K.J.Leiden, P.Kopardekar, S. Green, “Controller Workload
+T : time spent in airspace Analysis Methodology to Predict Increases in Airspace
+FL Capacity“, AIAA 3rd ATIO Tech 2003, Denver, 2003
+T : total observation/experiment time span
+tot [7] P. Kopardekar, A. Schwarz, S. Magyarits, J. Rhodes,
+A : area of the airspace
+“Airspace Complexity Measurement: An Air Traffic Control
+k : constant for airspace structure aspects Simulation Analysis”, International Journal of Industrial
+Engineering, 16(1), 2009
+The equation consists of three distinct elements. In [8] D. Delahaye, S. Puechmorel, “Air Traffic Complexity:
+Towards Intrinsic Metrics”, 3rd, FAA/Eurocontrol ATM
+the first factor, the conflict rate is reduced as a
+Seminar, Napoli, 2000
+consequence of spreading the traffic over multiple
+[9] G.M. Flynn, C. Leleu, B. Hilburn, “A Compelxity Study of
+layers. The second factor is a reduction of conflict
+the Maastricht Upper Airpsace Centre”, EEC Report No. 403,
+rate due to the sorting of aircraft in each layer by Project COCA, Eurocontrol Experiment Centre, Brétigny,
+heading. Combining this with the results by Jardin 2006
+[14] results in an additional, third, factor, which [10] E. Sunil, J.M.Hoekstra, J. Ellerbroek, et al, “Metropolis:
+Relating Airspace Strcuture and Cacpacity for Extreme
+accounts for other effects such as the size, the traffic
+Traffic Densities“, 11th FAA/Eurocontrol ATM Seminar,
+ground speed and structure of the airspace. Lissabon, 2015[13]
+[11] J.M. Hoekstra, R.C.J. Ruigrok, R.N.H.W. van Gent, “Free
+A validation was performed by computer simulations, Flight in Crowded Airspace?”,3rd FAA/Eurocontrol ATM
+which show strong correlations between theoretical Seminar, Napoli, 2000
+and experimental results. [12] J.M. Hoekstra, “Designing for Safety: Free Flight with
+Airborne Separation Assurance”, Doctoral Thesis, TU Delft,
+Delft, 2001
+Future research can build on this work by further
+[13] M.R. Jardin, “Air Traffic Conflict Models”, AIAA ATIO
+expanding or detailing this relation. For instance, forum, Chicago, 2004
+additional dependencies on the model constant k , [14] M.R. Jardin, “Analytical relationships between Conflict
+such different variations in the ground speeds and Counts and Air Traffic Density”, Journal of Guidance,
+Control and Dynamics, Vol. 28, No.6, 2005
+including the effect of descending and climbing
+traffic through cruise layers.
+The given relation, can be used for vertical
+segmentations of airspaces. The followed method of
+using the distributions of relative velocities and

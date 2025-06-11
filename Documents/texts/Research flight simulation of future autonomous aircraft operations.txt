@@ -1,0 +1,545 @@
+
+
+--- Page 1 ---
+
+See discussions, stats, and author profiles for this publication at: https://www.researchgate.net/publication/3997814
+Research flight simulation of future autonomous aircraft operations
+Conference Paper · January 2003
+DOI: 10.1109/WSC.2002.1166382 · Source: IEEE Xplore
+CITATIONS READS
+10 105
+4 authors, including:
+Bart Heesbeen
+Netherlands Aerospace Centre - NLR
+9 PUBLICATIONS 87 CITATIONS
+SEE PROFILE
+All content following this page was uploaded by Bart Heesbeen on 09 February 2023.
+The user has requested enhancement of the downloaded file.
+
+--- Page 2 ---
+
+Proceedings of the 2002 Winter Simulation Conference
+E. Yücesan, C.-H. Chen, J. L. Snowdon, and J. M. Charnes, eds.
+RESEARCH FLIGHT SIMULATION OF FUTURE AUTONOMOUS AIRCRAFT OPERATIONS
+Mario S.V. Valenti Clari
+Rob C.J. Ruigrok
+Bart W.M. Heesbeen
+Jaap Groeneweg
+National Aerospace Laboratory NLR
+Anthony Fokkerweg 2, PO Box 90502
+1006 BM Amsterdam, THE NETHERLANDS
+ABSTRACT defined standards. The compromise between realism and
+flexibility makes the research flight simulator the ideal
+A key element in the development and innovation of future platform for prototyping of new concepts, procedures and
+aviation concepts and systems is research flight simulation. systems. This implies that generic systems in the research
+Research flight simulation is applied when the perform- flight simulator can ultimately influence real aircraft de-
+ance and perception of human pilots is a key measure of velopment and thus also training simulators.
+the overall assessment. This paper will give an overview of Over the last decades the continuous global growth of
+the research simulation set-up of the National Aerospace air traffic has led to increasing problems with respect to air-
+Laboratory (NLR), Amsterdam, the Netherlands, which is space capacity and delays. This situation has initiated the re-
+used for the human-in-the-loop evaluation of future opera- search for new operational concepts and aircraft systems that
+tional concepts. Special attention is given to the research aim for more independent aircraft operations in so-called
+topic of Airborne Separation Assurance; often referred to Free Flight traffic environment. In order to aid this research,
+as Free Flight. The presented set-up has proven to be a flight simulation is often applied to probe the human factors
+flexible evaluation tool for assessing human-in-the-loop of pilots when operating in simulated Free Flight environ-
+performance when operating in a simulated future autono- ments using new avionics installed in the simulated aircraft.
+mous aircraft environment. The discussion in this paper will be based on the research
+experiences of the authors at the National Aerospace Labo-
+1 INTRODUCTION ratory (NLR), Amsterdam, the Netherlands.
+This paper will discuss research flight simulation and
+Simulation is a useful tool for aviation research. Simula- how it can contribute to the future of aviation, particularly
+tion has evolved and matured over the last forty years in the way aircraft are operated in a future air traffic system.
+equal pace with developments in the aerospace industry. The next section will discuss in more detail the research for
+One particular fascinating application of simulation for autonomous aircraft operations. Subsequently, a state-of-
+aviation research is real-time flight simulation. Real-time the-art simulation set-up will be described that has been
+flight simulation allows pilots to fly in simulated condi- used for recent “Free Flight” projects at NLR. Important
+tions, without the costs and safety issues that go with per- components of the set-up will be described on a high-level.
+forming real flight.
+When flight simulation and research are combined, the 2 AUTONOMOUS AIRCRAFT OPERATIONS
+objective is to measure the human performance in the
+simulated environment. Research will pose certain re- Due to the continuous growth of air traffic over the last
+quirements on the simulation hardware and software used; decades, the current Air Traffic Control (ATC) system is
+it requires generic tools that can be adjusted to the evolving approaching its capacity limits. The capacity limit of the
+insight in topics. This implies that flight simulators (hard- traffic system is highly dependent on the way ATC guides
+ware) and simulation models (software) used for research aircraft to its destinations. Present day ATC is organized
+will often be a compromise between realism and flexibility with a fixed airway structure that enables human traffic
+(Hoekstra 1995). This is completely contrary to the phi- controllers to detect conflicts between aircraft and perform
+losophy applied in training simulators for which realism is resolutions by guiding the traffic via radio communicated
+the most important objective and highly dependent on pre- commands. This rigid “highway” structure poses con-
+
+--- Page 3 ---
+
+Valenti Clari, Ruigrok, Heesbeen, and Groeneweg
+straints on the flexibility of aircraft operations. Moreover, 2.2 Airborne Separation Assurance System
+the capacity of an airspace sector is dependent upon the
+workload of the human controllers on the ground that are With Airborne Separation Assurance pilots will operate the
+responsible for separating and guiding all traffic. aircraft autonomously without depending on guidance of a
+ground-based air traffic controller. It is foreseen that the
+2.1 Free Flight with Airborne new task will imply a revolutionary change of ATC sys-
+Separation Assurance tem, but more importantly, a new cockpit system will have
+to be developed, tested, and certified.
+It has been argued that removal of constraints could enable This Airborne Separation Assurance System (ASAS)
+more efficient user-preferred routing, and that removal of will be an essential onboard system that will upgrade the
+all constraints may eventually lead to the realization of a flight deck into a free flight deck. The future system will
+Free Flight traffic environment (RTCA 1995). Free Flight encompass all the tools that pilots require for their new
+has been proposed as a new concept for a future ATC sys- procedures in autonomous airspace, such as traffic moni-
+tem that could relieve the growing congestion of the cur- toring, conflict detection, conflict resolution, and conflict
+rent system and, moreover, would have the potential to of- prevention.
+fer great economic benefits (Valenti Clari et. al., 2001). When subdividing ASAS, one can identify at least the
+Figure 1 below illustrates the traffic environment of an air- following subsystems (ICAO, 2000):
+space with ATC routes and an airspace in which traffic is
+free to select their routes. 1. Airborne Surveillance and Separation Assurance
+Processing (ASSAP) system
+2. Cockpit Display of Traffic Information (CDTI)
+a) ATC routes b) Preferred routes system
+3. Alerting system
+The CDTI and the Alerting system form the Human Ma-
+chine Interface of ASAS to the pilots. Examples of CDTI
+will be presented at the end of the next section. The re-
+mainder of this section will discuss in more detail some
+modules in the ASSAP that contains the logic for conflict
+detection, resolution and prevention.
+2.2.1 Conflict Detection Module
+Figure 1: ATC Traffic Compared to Free Flight traffic
+A conflict is defined as an actual or potential intrusion of a
+It is clear from the picture that user-preferred routing protected zone in the near future. The protected zone is a
+will result in a chaotic traffic environment, especially when circular zone of 5 nautical mile radius and a height of 2000
+observed by a single traffic controller. This controller will ft at the altitude from 1000 ft below to 1000 ft above an
+probably have problems with guiding the traffic, because aircraft; as shown in Figure 2.
+the traffic pattern is unpredictable from a ground perspec-
+tive. However, this is not true when observing the traffic
+situation from an aircraft perspective. This is why the most
+ultimate form of Free Flight assumes that the removal of
+current ATC constraints will also imply a complete shift of
+the separation assurance responsibility from the ground to
+the cockpit, resulting in a decentralized traffic control envi-
+ronment. In such a system, pilots will not only be allowed Figure 2: Protected Zone
+to freely select and fly their routes, but will also have an
+additional task and responsibility related to separation as- As part of the aircraft’s ASSAP system, the conflict
+surance; this is often referred to as Free Flight with Air- detection module detects only conflicts with aircraft for
+borne Separation Assurance. The shift of responsibility which an intrusion of the protected zone takes place within
+implies a change in tasks of pilots, and also a change of the a predetermined look-ahead time. This potential intrusion,
+onboard systems requirements. International research is or conflict, can be detected based on two basic aircraft tra-
+still ongoing with the purpose of defining in detail the con- jectory prediction methods, which are:
+cept, procedures and system requirements.
+1. State-based conflict detection, and,
+2. Intent-based conflict detection
+
+--- Page 4 ---
+
+Valenti Clari, Ruigrok, Heesbeen, and Groeneweg
+For the state-based method, the conflict detection module
+uses the aircraft current position and a trend vector (ground
+speed, track and vertical speed) to detect conflicts. This
+method has often been used in experiments with a look-
+ahead time of about five minutes.
+The intent-based method uses the aircraft active flight
+plan as a basis for trajectory prediction and conflict detec-
+tion. This method is better applied to the more strategic
+domain for operating aircraft, beyond five minutes look-
+ahead time. A detailed discussion of both methods is be-
+yond the scope of this paper. Nevertheless, the differentia-
+Figure 3: Modified Voltage Potential Method
+tion of the two methods is important, because they pose
+different requirements on the aircraft onboard systems. The avoidance vector is calculated as the vector start-
+Moreover, research on how both methods can be applied
+ing at the future position of the ownship and ending at the
+best for various circumstances, is still ongoing (INTENT
+edge of the intruder’s protected zone, in the direction of the
+Consortium, 2001).
+minimum distance vector. The length of the avoidance vec-
+A new conflict is detected when an intrusion of the
+tor is the amount of intrusion of the ownship in the in-
+protected zone is predicted, and the time of this intrusion is
+truder’s protected zone and reflects the severity of the con-
+within the look-ahead time. The conflict information from
+flict. It is also the shortest path out of the protected zone.
+the detection module can be presented graphically to the
+The ownship should try to accomplish this displace-
+flight crew by using the CDTI. The next step is presenting
+ment in the time remaining until the conflict start time.
+the crew with options to resolve the detected conflict
+Dividing the avoidance vector by the time-to-conflict
+yields a speed vector that should be summed to the current
+2.2.2 Conflict Resolution Module speed vector. The result is an advised track and ground
+speed. Using the three-dimensional vector, an advised ver-
+The conflict resolution module is a sub system of the tical speed is also calculated.
+ASSAP that is responsible for calculating resolutions for The state-based resolution determines maneuver advi-
+all detected conflicts. Over the years various methods for sories that resolve the detected conflict without considering
+resolving conflict situations have been proposed. Some the long-term goals of the aircraft of following a route
+methods use force field techniques, others use genetic al- from origin to destination. In some cases, such as with alti-
+gorithms, rule-based methods, or optimization techniques; tude changes, this is not necessary. However, with horizon-
+an overview of numerous approaches to conflict detection tal resolution of a conflict the crew must plan a recovery
+and resolution is given in (Kuchar and Yang 1997). A sub- maneuver that will take the aircraft back on track to the
+division of methods could also be made by taking into ac- destination. One way of dealing with this weak point of a
+count the conflict detection method. For example, a state- state-based resolution is adding an extra functionality that
+based conflict could be resolved by means of changing the enables pilots to anticipate and monitor potential conflicts.
+aircraft state until the conflict disappears. An intent-based This conflict prevention functionality will be discussed in
+conflict could be resolved by changing the aircraft’s active section 2.3.3.
+flight plan. This implies that calculated resolution adviso-
+ries must match the character of the detected conflict. 2.2.2.2 Intent-Based Conflict Resolution
+2.2.2.1 State-Based Conflict Resolution Another way to tackle the problem of the recovery maneu-
+ver, is to take the aircraft flight plan into account when cal-
+For state-based conflicts NLR has developed the Modified culating conflict resolution advisories. Hence, the conflict
+Voltage Potential concept (Hoekstra 2001), a method based resolution should be calculated and presented as an
+on force field algorithms (Eby 1994) which use the values amendment to the active route. This flight plan-based reso-
+shown in Figure 3. lution is best applied to the intent-based conflicts that are
+When the conflict detection module predicts a conflict also detected using the aircraft routes.
+with other traffic, the resolution module determines the Figure 4 shows a conflict situation between two air-
+predicted future positions of the current aircraft (ownship) craft in which the ownship has detected a conflict using the
+and the obstacle aircraft (intruder) at the moment of mini- intent-based conflict detection method. It is clear from the
+mum distance. The minimum distance vector is the vector conflict position (i.e., the highlighted loss of separation)
+from the predicted position of the intruder to the predicted that the method has taken into account the intent (flight
+position of the ownship at the closest point of approach. plans) of both aircraft, which has been shared via a data
+link system. Based on the conflict geometry and the air-
+
+--- Page 5 ---
+
+Valenti Clari, Ruigrok, Heesbeen, and Groeneweg
+discuss the Research Flight Simulator (RFS), and will focus
+on developments that enable autonomous aircraft research.
+3.1 Overview
+The RFS, shown in Figure 5, is a four degree-of-freedom
+motion-base simulator that is mainly used for civil aircraft
+simulation studies. The RFS cockpit consists of generic
+hardware for simulation of several civil aircraft types. The
+cockpit is equipped with four large Liquid Crystal Displays
+(LCDs) and four Cathode Ray Tube displays (CRTs) for
+avionics displays, control-loaded flight controls, throttle
+levers and several essential cockpit panels. The RFS has a
+Figure 4: Flight Plan-based Conflict Resolutions
+two channel collimated visual system that can be used with
+an image generator. The generic hardware can be operated
+craft flight plans, the resolution module can now determine
+with various aircraft simulation models.
+a route change that will resolve the conflict. The figure il-
+lustrates how the addition of a resolution waypoint will re-
+solve the conflict in the horizontal plane. This horizontal
+resolution has automatically a recovery maneuver, repre-
+sented by the leg after passing the resolution waypoint.
+Another option of resolving this conflict would have been
+a cruise altitude change to the flight plan of the ownship,
+taking it over/under the intruder trajectory.
+The advantage of a flight-plan based conflict resolu-
+tion, besides the incorporation of a recovery maneuver, is
+that route optimization techniques can be taken into ac-
+count for time-efficient resolution maneuvers. Moreover, it
+is expected that the method is best applied in the strategic
+Figure 5: NLR Research Flight Simulator
+operational domain of the aircraft, whereas, state-based
+resolution is more a tactical resolution method for near-
+3.2 Architecture
+term conflicts. The solution can probably be found in a
+combination of both. Current research projects are address-
+As discussed in the introduction, flexibility implies a com-
+ing this issue (INTENT consortium, 2001).
+promise regarding the realism of the simulated aircraft.
+Nevertheless, this compromise should not have significant
+2.2.3 Conflict Prevention Module
+impact on the research results. The philosophy applied is
+called the “Smart Software - Simple hardware” concept
+The purpose of conflict prevention is to provide pilots with
+(Hoekstra 1995), and can best be explained using the RFS
+additional situation awareness with respect to potential
+architecture as a high level overview; see Figure 6.
+conflicts. This is done by determining if maneuvers are
+The figure illustrates that the simulator consists of
+conflict free. Conflict prevention indication can be shown
+several networked systems, that are connected to a central
+on the cockpit displays, and can be applied to both aircraft
+host computer. This host computer, a Silicon Graphics
+state changes as to flight plan changes.
+Challenge L computer, is used for real-time execution of
+Simulator trials have proven that the additional aware-
+all real-time simulation tasks, such as the basic aircraft and
+ness is of vital importance for recovery maneuvers after
+environment simulation. Moreover, the host computer pro-
+resolving conflicts (“is it safe to turn back now?”), but also
+vides the user-interface for managing scenarios, events and
+for standard maneuvering (“what if…?”). Examples of the
+data recording. The simulator hardware can be subdivided
+presentation of conflict prevention functionality will be
+in three groups:
+give in the next section, when discussing cockpit displays.
+1. Dedicated simulator hardware
+3 RESEARCH FLIGHT SIMULATION OF
+2. Generic simulator hardware
+AUTONOMOUS AIRCRAFT OPERATIONS
+3. Generic cockpit hardware
+The NLR has various flight simulation facilities that cover
+The dedicated simulator hardware is rigid hardware with a
+the fidelity range from desktop simulation applications to
+specific dedicated task; such as the 4-degree of freedom
+high-fidelity motion base simulators. This paper will only
+
+--- Page 6 ---
+
+Valenti Clari, Ruigrok, Heesbeen, and Groeneweg
+cockpit hardware contains relevant embedded logic (as in
+the real aircraft), because all interpretation of functionality is
+done in software applications. This allows maximum flexi-
+bility regarding functionality of the simulated aircraft, which
+is essential for research flight simulation.
+3.3 Traffic and Experiment Manager
+Traffic environment simulation is one of the key compo-
+nents for autonomous aircraft research. In a typical ex-
+perimental scenario the autonomous aircraft (RFS) will fly
+through a Free Flight airspace with the additional responsi-
+bility of self separation with the surrounding traffic. The
+subject pilots will monitor the traffic environment by
+means of the CDTI and sometimes in the Out-of-the-
+Window View, generated by the visual system.
+In the RFS architecture the traffic simulation is per-
+formed by the TMX. This desktop simulation application
+runs on a Windows workstation and is interfaced to all
+other applications via the Ethernet network. The TMX has
+a dual purpose. First of all, the TMX is the central traffic
+environment simulation application. With the TMX it is
+possible to generate a traffic environment with various air-
+craft types, which can be both automatic pilot models and
+interactively controlled by user input and scenario scripts.
+The TMX also provides a graphical user interface, shown
+Figure 6: RFS Architecture
+in Figure 7, for the experiment manager to monitor the
+overall scenario and to trigger pre-defined events for the
+motion system or the visual system. A particularly impor-
+RFS simulated aircraft (e.g., engine failures).
+tant dedicated hardware system is the cockpit interface
+node that interfaces the cockpit panels and switches to the
+host computer aircraft simulation and other networked sys-
+tems. All of the dedicated hardware systems are connected
+to the host computer in a Scramnet reflective memory net-
+work, essential for the real-time exchange of data.
+The second network is an Ethernet network, which is
+also directly connected to the host computer. All the work-
+stations on this network have generic tasks. They form the
+“playing field” when it comes to prototyping new cockpit
+systems. The most important components, when focussing
+on autonomous aircraft simulation, are:
+1. Traffic and Experiment Manager (TMX)
+2. Research Flight Management System (RFMS) and Figure 7: TMX Graphical User Interface
+Airborne Separation Assurance System (ASAS)
+module 3.3.1 Autonomous Traffic Simulation
+3. Cockpit Displays
+4. Alerting Sounds For the simulation of the autonomous traffic the TMX uses
+six-degrees-of-freedom models containing auto-pilot and
+All of these components are simulation applications that auto-throttle functionality, route guidance functionality and
+are used for the replication of future aircraft system and a pilot model. The Eurocontrol Base-of-Aircraft Data is
+environment behavior. The mentioned components will be used as data base for the simulation of different aircraft
+discussed in more detail in the next sections. types (Bos 1997). Besides the basic aircraft simulation
+Finally, the generic cockpit is the platform of all simple model, traffic can be simulated as conventional ATC traf-
+hardware devices that enable the pilots to interact with smart fic or autonomous Free Flight traffic.
+software simulated aircraft systems. None of the generic
+
+--- Page 7 ---
+
+Valenti Clari, Ruigrok, Heesbeen, and Groeneweg
+Conventional traffic flies along predefined routes and monitor the functionality of the FMC. Via the CDU, the
+comparable to the present-day situation. Autonomous air- crew can manage the flight on a strategic level.
+craft flies direct user-preferred routes from origin to desti- This central role of the FMS in the modern cockpit
+nation. In order to separate the traffic, additional modules makes it an interesting system for research. Moreover,
+can be activated that enable airborne separation assurance from an ATM perspective the FMS is interesting because it
+of these aircraft. This implies that interaction between holds the aircraft intent, which could be used by ASAS.
+autonomous aircraft can be simulated in a chaotic traffic
+environment. Aircraft will detect and resolve conflicts de- 3.4.1 Generic Simulation Tool
+pending on the implemented conflict detection and conflict
+resolution algorithms in the ASAS module. It is also possi- The Research Flight Management System (RFMS) is an
+ble to create a so-called mixed-equipped traffic environ- NLR-developed generic simulation of an aircraft FMS that
+ment, by simulating both groups at the same time in the can be configured for various aircraft. The RFMS features
+same airspace. common functionality, such as route implementation and
+For more pilot-like behavior, the TMX pilot model in- editing, aircraft datalink functionality, aircraft progress
+cludes a delayed reaction to conflict resolution advisories monitoring and trajectory guidance. Beside these standard
+and a delayed resuming of navigation to the aircraft’s des- FMS functionalities the RFMS software has additional re-
+tination, once a conflict is solved. The ASAS module is search functionality such as the ASAS module, discussed
+discussed in more detail in section 3.4.2. in the next section.
+The RFMS software can be used in combination with
+3.3.2 Data Link Simulation hardware CDUs, of which two are fitted in the RFS cockpit.
+This hardware-in-the-loop simulation is often used for ex-
+The ASAS functionality of an autonomous aircraft must be periments with real pilots operating the system. It should be
+based on complete and accurate data of the surrounding emphasized that once again the smart software - simple
+traffic. This implies that data sharing between aircraft is of hardware concept is applicable, because none of RFMS
+crucial importance in order to enable aircraft to see and logic runs within the hardware CDU. The hardware CDU is
+avoid each other by using the available tools. One of the only used to simulate the actual look-and-feel for the pilots.
+most promising inter-aircraft data link systems is called The RFMS software responds to pilot inputs on the CDU.
+Automatic Dependent Surveillance Broadcast (ADS-B), Changes to the CDU displays are shown as an output of the
+for which standards are still under development. It is clear cockpit display simulation, discussed in the next section.
+that ADS-B will be one of the key enablers for autonomous Another option is to use the RFMS in combination
+aircraft operations and that the performance of the data with a software CDU, which is an interactive GUI running
+link system will have an impact on the technical feasibility on a PC or UNIX workstation. Both the hardware and the
+of airborne separation assurance. software CDU are shown in Figure 8.
+It is not difficult to realize actual data sharing within
+one application that simulates all traffic. Nevertheless, for
+realistic traffic environment simulation, TMX can simulate
+performance issues of future aircraft datalink systems (e.g.,
+update rate, range effects, transponder and/or receiver
+failures). Moreover, when simulating a traffic environment
+around the RFS, the Ethernet network will form the me-
+dium for datalink between RFS and the Traffic Manager
+aircraft. This is comparable to future datalink systems,
+such as ADS-B.
+3.4 Research Flight Management System
+(RFMS) and ASAS Module
+In an aircraft, the Flight Management System consists of the Figure 8: Hardware and Software Control Display Unit
+Flight Management Computer (FMC) and Control Display
+Units (CDUs). The FMC is the central computer system 3.4.2 ASAS Module
+comprising most functionality regarding navigation, com-
+munication and trajectory optimization. The most important The ASAS algorithms for conflict detection, resolution and
+functionality is the aircraft route guidance, when the aircraft prevention for the RFS are contained in a separate module
+flies with the auto-flight system engaged to the FMS. The within the RFMS simulation application. As described in
+CDU is the primary interface unit for the crew to interact section 2.2 an autonomous aircraft will have various sys-
+
+--- Page 8 ---
+
+Valenti Clari, Ruigrok, Heesbeen, and Groeneweg
+tems that are all part of ASAS. The conflict detection, reso- called NLR Avionics Display Development and Evaluation
+lution and prevention functionality will make the RFS ca- System (NADDES).
+pable of Free Flight. The ASAS algorithms will require NADDES facilitates the rapid development and
+data regarding aircraft state, flight plan of both the ownship evaluation of avionics display formats throughout the
+and the surrounding traffic. Hence a datalink between the complete human engineering and development stage. Dis-
+ownship and the surrounding traffic is required. play formats can be created and tested using a customiza-
+Figure 6 illustrates that the RFMS and ASAS simula- ble development environment on a standard desktop com-
+tion is connected to the Ethernet network which can trans- puter, which is highly accessible to all human engineering
+mit and receive data from other simulation applications. and software development experts. Figure 9 below is an
+The RFMS will send data to the aircraft simulation on the example of Boeing 747-400 Primary Flight Display (PFD)
+host computer for guidance of auto flight system. In return that has been made using NADDES.
+the host computer will relay back aircraft sensor data (e.g.,
+aircraft position and speeds) and status information of
+other aircraft systems.
+The ASAS module will receive from TMX state and
+intent information from the surrounding traffic. This is
+analogous to ADS-B data link. In return the ASAS module
+and RFMS will broadcast aircraft state and intent to the
+surrounding traffic simulated by TMX. Another important
+flow of information is from the RFMS and ASAS module
+to the cockpit displays and alerting sound system. The re-
+quired data regarding the aircraft route and ASAS system
+functionality are broadcast on the Ethernet so that these
+applications can use it.
+3.5 Cockpit Displays
+The development of affordable high fidelity display sys-
+tems over the last decade have resulted in the advance of Figure 9: Boeing 747-400 Primary Flight
+the glass-cockpit concept. This advance is a blessing for Display
+the flight simulation research community, because in mod-
+ern aircraft the analog avionics have been almost com- 3.5.2 Cockpit Display of Traffic Information
+pletely been replaced by digital multifunction displays.
+This implies that the modern glass cockpit is becoming In an autonomous aircraft environment the pilot will re-
+closer to that of a research flight simulator using the same quire information on the position of the surrounding traffic,
+display techniques. and the functionality of the ASAS tools. The detection and
+A difference between research and actual cockpits will resolution of conflicts with intruder aircraft must be pre-
+remain, but will be well hidden from the pilots’ eye. In a sented clearly, and the conflict prevention provides addi-
+real aircraft, each instrument is driven by one or more avi- tional awareness for potential conflicts. It is very likely that
+onics systems. In the RFS, pilots will operate the aircraft in the future cockpit all ASAS functionality will be inte-
+using the glass-cockpit avionics that have exactly the same grated in the current Navigation Display (ND), making it a
+look. The presented displays are generated by dedicated CDTI. Figure 10 below gives an example how this integra-
+desktop simulation applications, which replicate all real tion can be realized with a Boeing 747-400 ND.
+aircraft instruments plus additional functionality. The crew The Navigation Display is split into a horizontal dis-
+will not perceive the difference between the real aircraft play, which shows the ownship aircraft position as a trian-
+hardware devices or the simulated functionality presented gle comparable as in the real display. Below the horizontal
+on commercial-of-the-shelf LCDs and CRTs. display an additional vertical display has been added. This
+vertical display gives a side view of the airspace in the
+horizontal display.
+3.5.1 Display Development
+The presented situation shows a conflict detected with
+an intruder inbound from the left on the same altitude. The
+The smart software - simple hardware concept allows
+state-based detection module has determined the closest
+maximum flexibility, without the crew noticing the differ-
+point of approach of the intruder, which is shown as a
+ence with the real aircraft. To allow a flexible prototyping
+dashed red circle and rectangle around the intruder’s pro-
+of the used displays, NLR has developed a desktop tool
+tected zone; the protected zone of the ownship is a solid
+
+--- Page 9 ---
+
+Valenti Clari, Ruigrok, Heesbeen, and Groeneweg
+Figure 10: CDTI Integrated in a Boeing 747-400 ND
+yellow circle and rectangle. The conflict resolution module Figure 11: “Green” Intent-based Conflict
+has determined a state-based resolution presented as a
+heading change advisory and a vertical path advisory, this paper was to give an overview of the architecture and
+which are both marked as green dashed lines in the hori- functionality of important components. Examples have
+zontal and vertical displays, respectively. been given how the smart software – simple hardware con-
+Finally, the conflict prevention module provides the pi- cept has been successfully applied.
+lots with no-go bands on the horizontal heading scale and It can be concluded that NLR operates a powerful re-
+vertical speed scale. The no-go bands indicate which ma- search flight simulation facility which has shown to be ca-
+neuver will result in a conflict. The bands are also integrated pable of testing all future autonomous aircraft operational
+in the PFD. Figure 9 shows a different scenario than Figure concepts as demonstrated in various past and ongoing in-
+10, with a small amber band on the vertical speed scale. This ternational projects in which NLR participates.
+band indicates that an conflict will occur if the aircraft The scalability of the research facility from desktop
+climbs with that particular vertical speed. The color-coding flight simulation, full flight simulation, and even flight
+of display of the additional functionality is chosen such that testing with the exact same hardware and software compo-
+urgent conflicts (0 – 3 minutes) are marked red, medium ur- nents and architecture, is a promising set-up for efficient
+gent conflict (3 – 5 minutes) are marked amber and low ur- and effective research into autonomous aircraft operations.
+gent conflicts (beyond 5 minutes) are marked green. The
+green conflicts can only occur with look-ahead times beyond AKNOWLEDGMENTS
+5 minutes. An example of a “green” intent-based conflict is
+shown in Figure 11. This picture also shows that the intent- The presented set-up and the insight into the subject of
+based conflict detection has taken into account the intent (ac- Airborne Separation Assurance is a result of years of re-
+tive flight plan implemented into the FMS) of both the own- search, prototyping and development in various interna-
+ship and the intruder. tional research projects. Mentioning all people involved
+would be too much. Nevertheless, the authors would like to
+4 CONCLUSION acknowledge Dr. Jacco Hoekstra, (NLR/NASA Free Flight
+project leader) and Frank Bussink (NASA, former NLR),
+This concludes the overview of the simulation set-up used who have both had a major influence on the presented set-
+for autonomous aircraft operations research. The aim of up and have always been advocates of the smart software –
+simple hardware concept.
+
+--- Page 10 ---
+
+Valenti Clari, Ruigrok, Heesbeen, and Groeneweg
+REFERENCES ROB RUIGROK is a research engineer at the flight me-
+chanics department of NLR. He graduated in 1992 at Delft
+Bos, A. 1997. User Manual for the Base of Aircraft Data University of Technology on the design and analysis of
+(BADA) Revision 2.6. Eurocontrol Experimental Cen- automatic landing systems. After graduation he joined the
+tre Note 23/97, Bretigny, France. flight simulation department of NLR in which he partici-
+Eby, M.S. 1994. A Self-Organizational Approach for Re- pated in various simulation projects, studying Controller-
+solving Air Traffic Conflicts. The Lincoln Laboratory Pilot Datalink Communication (CPDLC), future Flight
+Journal Volume 7 (2), Lexington, USA. Management System (FMS) concepts, windshear detection
+Hoekstra, J.M. 1995. The ‘Smart Software-Simple Hard- and alerting systems and free flight with airborne separa-
+ware’ Concept for Maximum Flexibility in Research tion assurance (in cooperation with NASA). In 1998 Rob
+Flight Simulation. Proceedings of the Conference of Ruigrok transferred to the flight mechanics department of
+European Aerospace Societies (CEAS), CEAS paper NLR in which he continued to work on the NLR/NASA
+SSw02, NLR-TP-96215, Amsterdam, the Netherlands. Free Flight project. His current position is project co-
+Hoekstra, J.M. 2001. Designing for Safety, the Free Flight ordinator of the INTENT project and NLR project leader
+Air Traffic Management Concept. NLR-TP-2001-113, of the Mediterranean Free Flight project. His email address
+Amsterdam, the Netherlands. Available online: is <ruigrok@nlr.nl>.
+<http://www.nlr.nl/public/hosted-
+sites/freeflight/downloads/fftp.pdf> BART HEESBEEN is a research engineer at the flight
+[accessed August 21, 2002]. simulation department of NLR. He graduated in 1995 at
+ICAO. 2000. ASAS Circular. Draft Version 1.0, July 6th, Delft University of Technology. His graduation thesis ad-
+Washington, D.C., USA. dressed the development and use of an automatic source
+INTENT Consortium. 2001. INTENT D1-1 Project Scope, code generator for transformation of Simulink simulation
+Relevant Results from Other Projects, Activities and models. After graduation he joined the flight simulation
+Initiatives, Deliverable D1-1. Available online: department of the NLR. In his function of research engi-
+<http://www.nlr.nl/public/hosted- neer he is concerned with the design and development of
+sites/intent/downloads/INTENT_D1- real time simulation applications as part of the Research
+1_v03_04-05-2001_P.pdf> [accessed August Flight Simulator (RFS). He worked on simulations of an
+21, 2002]. airborne doppler weather radar, an Airborne Separation
+Kuchar, J.K. and L.C. Yang. 1997. Survey of Conflict De- Assurance System, the Research Flight Management Sys-
+tection and Resolution Modeling Methods. Proceed- tem (RFMS) and different types of aircraft. His email ad-
+ings of the AIAA Guidance, Navigation and Control dress is <heesbeen@nlr.nl>.
+Conference, New Orleans, USA.
+RTCA. 1995. Free Flight Implementation. Final Report of JAAP GROENEWEG is a research engineer at the hu-
+RTCA Task Force 3, Washington, D.C., USA man factors department of NLR. He graduated in 1990 at
+Valenti Clari, M.S.V., Ruigrok, R.C.J., Hoekstra, J.M., Delft University of Technology at the Faculty of Aero-
+Visser, H.G.G. 2001. Cost-benefit Study of Free Flight space Engineering research group for flight mechanics and
+with Airborne Separation Assurance, Air Traffic Con- propulsion on the design and implementation of a weight
+trol Quarterly, Volume 9 (4), Arlington, USA. calculation program for transport aircraft. In 1991 he
+started working at the flight simulation department of NLR
+AUTHOR BIOGRAPHIES in which he participated in various simulation projects es-
+pecially designing and evaluating new display concepts in-
+MARIO VALENTI CLARI is a research engineer at the volved in human factors, flight mechanics and control &
+National Aerospace Laboratory (NLR) in Amsterdam, the simulation projects. Since the beginning of 2001 he joined
+Netherlands. He graduated from Delft University of Tech- the human factors department. His email address is
+nology (M.Sc.) in August of 1998. His graduation assign- <groenewg@nlr.nl>.
+ment was a Cost-benefit Study of Free Flight with Air-
+borne Separation Assurance. After his graduation, he
+joined the flight simulation department of NLR and has
+since been involved in several international research pro-
+jects dealing with Free Flight and future Air Traffic Man-
+agement systems (INTENT, Mediterranean Free Flight,
+NLR/NASA Free Flight). Besides this main interest, Mario
+Valenti Clari has also performed research on the topics of
+Wake Vortex Encounter Simulation and Simulator Motion
+Cueing. His email address is <valenti@nlr.nl>.
+View publication stats

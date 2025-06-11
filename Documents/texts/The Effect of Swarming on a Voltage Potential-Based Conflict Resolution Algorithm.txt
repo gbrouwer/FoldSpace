@@ -1,0 +1,541 @@
+
+
+--- Page 1 ---
+
+Delft University of Technology
+The Effect of Swarming on a Voltage Potential-Based Conflict Resolution Algorithm
+Maas, Jerom; Sunil, Emmanuel; Ellerbroek, Joost; Hoekstra, Jacco; Tra, Martijn
+Publication date
+2016
+Document Version
+Accepted author manuscript
+Published in
+7th International Conference on Research in Air Transportation
+Citation (APA)
+Maas, J., Sunil, E., Ellerbroek, J., Hoekstra, J., & Tra, M. (2016). The Effect of Swarming on a Voltage
+Potential-Based Conflict Resolution Algorithm. In 7th International Conference on Research in Air
+Transportation: Philadelphia, USA
+Important note
+To cite this publication, please use the final published version (if applicable).
+Please check the document version above.
+Copyright
+Other than for strictly personal use, it is not permitted to download, forward or distribute the text or part of it, without the consent
+of the author(s) and/or copyright holder(s), unless the work is under an open content license such as Creative Commons.
+Takedown policy
+Please contact us and provide details if you believe this document breaches copyrights.
+We will remove access to the work immediately and investigate your claim.
+This work is downloaded from Delft University of Technology.
+For technical reasons the number of authors shown on this cover page is limited to a maximum of 10.
+
+--- Page 2 ---
+
+The Effect of Swarming on a Voltage Potential-Based
+Conflict Resolution Algorithm
+Jerom Maas, Emmanuel Sunil, Joost Ellerbroek and Jacco Hoekstra
+Control and Simulation, Faculty of Aerospace Engineering
+Delft University of Technology (TU Delft)
+Delft, The Netherlands
+Abstract— Several conflict resolution algorithms for airborne self- interacting agents, such as formation flight of Unmanned Aerial
+separation rely on principles derived from the repulsive forces Vehicles (UAVs) [2]. This study will investigate whether it is
+that exist between similarly charged particles. This research possible to use swarming traits to improve the performance of
+investigates whether the performance of the Modified Voltage autonomous Conflict Resolution (CR) strategies for
+Potential algorithm, which is based on this algorithm, can be conventional aircraft.
+improved using bio-inspired swarming behavior. To this end, the
+collision avoidance function of the algorithm is augmented with The goal of this work is to investigate the effect of
+the velocity alignment and flock centering swarming traits swarming-inspired flight maneuvers on self-separation under
+displayed by animals such as birds and fish. The basic and swarm Free Flight conditions, when a voltage potential based
+augmented versions of the algorithm were compared using large- separation method is applied. Here, the Modified Voltage
+scale fast time simulations, for multiple traffic demand scenarios. Potential (MVP) algorithm, initially developed during the
+For ideal conditions, the results show that the process of aligning NLR-NASA Free Flight study, will be used as an example of
+with neighboring traffic triggered a large number of conflicts. such voltage potential based CR methods [3]–[5]. It is
+However, when noise was added to scenarios, swarming led to a hypothesized that augmenting the collision avoidance
+lower increase in the number of intrusions, which could indicate
+capability of MVP with velocity alignment and flock centering
+that it can be used to improve the robustness of the Modified
+functions will help prevent some conflicts from occurring, by
+Voltage Potential algorithm. Furthermore, the stability results
+aligning and reducing relative velocities between neighboring
+suggest that both versions of the algorithm could reduce the
+traffic. This should, in turn, make it easier for the MVP
+number of conflict chain reactions with respect to simulations
+algorithm to resolve any remaining conflicts.
+without resolution. Future research will further explore the effect
+of conflict resolution on airspace stability, as well as whether To investigate whether swarming can improve the
+varying the relative weights of swarming elements can improve the performance of the MVP algorithm, a large-scale simulation
+safety of swarm augmentations. experiment is performed, comparing the basic and swarm
+augmented versions of MVP. These simulations are performed
+Keywords- Separation Management; Swarming; Modified
+using BlueSky [6], an open air traffic simulator developed at
+Voltage Potential (MVP); Conflict Resolution; Self Separation; Free
+the Delft University of Technology. The two versions of MVP
+Flight; Airspace Stability; Domino Effect Parameter; BlueSky
+are subjected to multiple traffic demands, with heterogeneous
+Free Flight-like demand patterns. Performance of the CR
+I. INTRODUCTION algorithms is evaluated using safety, efficiency and stability
+Birds are often seen flocking, or swarming, together as this metrics. To gain an understanding of the impact of
+offers several advantages in terms of searching for food, uncertainties, the effect of measurement errors, turbulence, and
+improving efficiencies for long distance migratory flights the consequences of discrete state transmitting, is also studied
+(using V-formations) and for protection from predators. Several in this work.
+other animals, such as fish and cattle, also display similar
+This paper is organized as follows: The basic and swarm
+behavior. In fact, the complex en-route swarming patterns
+augmented version of MVP, including implementation details,
+displayed by these animals can be modelled as a combination
+are described in Section II. This is followed in Section III with
+of three simple behavioral traits exhibited by each individual
+the setup of the simulation experiment used to compare the two
+member of the group, namely collision avoidance (to avoid
+CR algorithms. The results of the experiment are presented and
+crashes with neighbors), velocity alignment (to move in the
+discussed in section IV. The main conclusions and
+same general direction as neighbors), and flock centering (to
+recommendations are summarized in section V.
+remain close to neighbors) [1]. These bio-inspired
+characteristics have been used in the past to design collision-
+free path planning algorithms for systems with many
+
+--- Page 3 ---
+
+II. CONFLICT RESOLUTION METHODS
+To observe the effect of swarming, two CR methods are
+selected for comparison: a Modified Voltage Potential (MVP)
+[7] method and a formation flying method using swarm
+intelligence (SW) [2]. The underlying algorithms are discussed
+in the following paragraphs.
+A. Modified Voltage Potential
+The principle of MVP is to model conflicting aircraft as
+identically charged particles, that repel each other away from
+their Closest Points of Approach (CPA), such that a Loss of Figure 3: The three steps of VA
+Separation (LOS), or intrusion, is no longer predicted. The Once the distance vector 𝐶𝑂′ is determined, the resolution
+resulting displacement vectors are used to compute necessary velocity vector is computed through Equation 2, where 𝑡 is the
+𝐶
+changes in aircraft velocities. The three steps of the principle time at which point C is predicted.
+are illustrated in Figure 1. The second step of the MVP
+algorithm is illustrated with more detail in Figure 2. ⃑𝐶⃑⃑⃑𝑂⃑⃑⃑′
+𝑣⃑ = +𝑣⃑ (2)
+In Figure 2, a conflict situation is exaggerated for clarity 𝑀𝑉𝑃 𝑡 𝐶 𝑐𝑢𝑟𝑟𝑒𝑛𝑡
+purposes. The relative velocity of aircraft B with respect to
+Conflict detection is executed with a linear extrapolation of
+aircraft A is pointing through the Intruder Protected Zone (IPZ)
+the aircraft velocity vectors, for a look-ahead time of 5min. The
+of A. The strategy is to find the closest point of approach, point separation requirements are 5nm horizontally and 1000ft
+C, and from this point find the closest distance out of the IPZ, vertically. Conflicts that are detected are solved with a safety
+to O. Since a straight line from B to O would still cross the IPZ, margin of 5%.
+the line CO must be multiplied by a factor, computed by [7] as:
+Conflict resolution by MVP is implicitly coordinated
+cooperatively; both aircraft in a conflict will take (opposite)
+|𝐶𝑂| 𝑅 𝐴𝐶
+=|cos⁡(𝑎𝑟𝑐𝑠𝑖𝑛( )−𝑎𝑟𝑐𝑠𝑖𝑛( ))| (1) measures in order to evade the other. Additionally, if an aircraft
+|𝐶𝑂′| 𝐴𝐵 𝐴𝐵
+would encounter multiple conflicts at the same time, each
+conflict is resolved separately and the resolution vectors are
+summed together, resulting in a general steering action.
+B. Swarm Augmented Modified Voltage Potential
+This algorithm is based on a model for coordination of
+UAVs that fly in large groups [2]. The motion of UAVs in
+groups has been modelled as combinations of three behaviors:
+Collision Avoidance (CA), Velocity Alignment (VA) and
+Flock Centering (FC).
+1) Collision Avoidance
+CA is performed using the MVP resolution strategy. CA is
+always active: if no conflicts are detected, the resolution vector
+of CA points in the target heading of the aircraft. CA therefore
+Figure 1: The three steps of MVP conflict resolution always returns a resolution velocity vector.
+2) Velocity Alignment
+For VA, each aircraft will align its velocity vector to match
+the average velocity of the surrounding aircraft. In order to do
+so, the velocity vectors of all aircraft are summed together. The
+resulting velocity vector is scaled to match the average speed
+vector length of the swarm. This process is illustrated in Figure
+3.
+3) Flock Centering
+In FC, the aircraft flies to the center of the swarm. The goal
+of this is to reduce the size of swarms. This process also consists
+of three steps. In the first step, the swarm center is found by
+Figure 2: Finding the displacement vector in MVP
+
+--- Page 4 ---
+
+III. EXPERIMENT DESIGN
+This part contains a description of the experiment. This is
+found in four sections: the simulation platform, the construction
+of traffic scenarios and the dependent and independent
+experiment variables.
+A. Simulation Environment
+Figure 4: The three steps of FC The experiment of comparing the CR methods was
+taking the average location of neighboring aircraft, expressed performed using BlueSky. BlueSky is an open-source air traffic
+in Cartesian coordinates. The next step is to find the distance management simulator, written in Python, capable of
+vector from the ‘ownship’ location to the swarm center. This simulating thousands of simultaneous aircraft. The program
+distance vector is then scaled to match the current speed vector contains a graphical user interface that allows for real-time
+of the aircraft. These steps are illustrated in Figure 4. controlling of the air traffic, as well as logging facilities for
+post-analysis of the results.
+4) Swarming Weights
+1) Traffic Modelling
+The resulting action of the algorithm is a weighted
+combination of the three swarming elements. Each element In the current version of BlueSky, several default
+results in a separate resolution vector. The total resolution constraints to the aircraft performance are present. These are
+vector is found by computing a weighted sum of the resolution the following:
+vectors from each element. The weights of the three elements
+ When making corners, the bank angle is 25 degrees
+are determined by trial and error. This procedure aimed to find
+ If no vertical speed is specified, aircraft climb and
+values for VA and FC as high as possible, to increase swarming.
+descend with 1500 feet per minute
+However, swarming should not be so strong that it is impossible
+ Horizontal acceleration is equal to one knot per second
+for aircraft to leave a group. The resulting weights can be seen
+ Vertical acceleration is instantaneous to the desired
+in Table I.
+vertical Speed
+TABLE I: SWARM WEIGHTS 2) Noise
+Swarming element Weight value In order to observe the performance of the CR methods
+under imperfect circumstances, simulations with and without
+Collision avoidance (CA) 10
+noise will be performed. The implementation of noise consists
+Velocity alignment (VA) 3
+of three different elements, discussed in the following
+Flock centering (FC) 1
+paragraphs. A summary of the noise is given in Table II.
+5) Swarming Criteria 1. Measurement Noise: The measurements of relative
+positions of aircraft, expressed in polar coordinates to
+For VA and FC, all aircraft that are within predefined
+each other are distorted.
+swarming criteria are considered. These criteria are defined
+from an aircraft perspective: each aircraft defines a swarm 2. Turbulence: Turbulence is added for flights as an
+around itself. The criteria are defined as: additional velocity vector in the aircraft reference frame.
+Since turbulence is a continuous phenomenon, the
+ Horizontal distance < 7.5nm
+magnitude of the turbulence is multiplied with the
+ Vertical distance < 1500ft
+square root of the simulation time step.
+ Difference in heading < 90 degrees
+3. Sampling Effect: Each aircraft is not aware of the current
+C. Qualitative Analysis
+position of the other aircraft. Aircraft transmit their
+It is noted that the SW algorithm approaches the problem of exact locations once every time period. When
+CR from a fundamentally different concept than the MVP performing conflict detection, aircraft compare their
+algorithm. Although the CA algorithm is identical, the SW own real positions to the last transmitted positions of the
+algorithm can provide steering resolutions even if no conflicts surrounding aircraft. The transmission period is
+are detected. If this is effective, conflicts will be prevented from modelled to be constant.
+even occurring, as aircraft are flocking together with other
+aircraft flying in the same direction.
+
+--- Page 5 ---
+
+Figure 5: Size of the test and initialization region compared to the Netherlands
+TABLE II: NOISE MAGNITUDES
+Type of Noise Standard Deviation Figure 6: Horizontal aircraft trajectories without resolution after a traffic
+Measurement error (bearing) 1o scenario of 125 ac/hr traffic demand
+Measurement error (distance) 100 m 2) Aircraft Parameters
+Measurement error (altitude) 100 ft
+The aircraft in the simulation fly with different horizontal
+Lateral turbulence 0.1 m/s2
+and vertical velocities. Aircraft were created randomly on the
+Vertical turbulence 0.1 m/s2
+outer range of the initialization region. All headings are
+Sampling period 1 s
+possible as long as the aircraft trajectory is planned to cross the
+test region, with a 5% margin in order to prevent flight plans
+B. Traffic Scenarios that are almost tangent to the test region edge. The remaining
+aircraft parameters follow a normal distribution and are
+A program has been developed which is capable of
+summarized in Table III.
+generating and saving simulation scenarios, for testing the
+performance of the CD&R algorithms. Several elements of the 3) Traffic Scenarios Creation
+software design are discussed. These scenarios are developed
+A genetic algorithm is used to create random traffic
+offline by the program, in advance of performing the
+scenarios with as much conflicts as possible. Each scenario is
+simulations. By doing so, each tested CD&R method will be
+constructed with random numbers that specify the planned
+subjected to the same traffic scenario and therefore tested under
+flight paths through the airspace.
+the same conditions.
+Scenarios are evaluated for comparison. The number of
+1) Testing Region
+conflicts is predicted by the scenario generator, and counted as
+A circular airspace is constructed for simulating the air positive score. Negative points are rewarded for the root-mean-
+traffic. Around the airspace, a circular initialization region is squared error between the predicted and theoretical
+formed. Aircraft are generated at the outer edge of the distributions of specific parameters, expressed in 10-binned
+initialization region, and conflicts that occur outside the test histograms. The specific parameters are the locations of aircraft
+area are neither detected nor solved. The radii of the concentric at start and end of the flight, and the locations of the predicted
+regions are 45 nm and 68 km. An indication of the size of these conflicts.
+regions is given in Figure 5. Vertical limits on the airspace are
+Each scenario is evaluated and an evolutionary principle is
+not implemented, so as to give aircraft freedom for vertical
+applied. This principle consists of 1000 iterations of survival,
+resolution maneuvers. Aircraft are deleted when they are
+parenting, inheritance, mutation and again evaluation.
+outside the testing area and flying away from the circle center.
+Afterwards, the best evaluated scenario is saved to be used as
+It is possible that aircraft do not enter the test area at all, as they
+test scenario in the experiment. An example of a saved scenario
+might deviate before entering the circle. This is saved in the
+is given in Figure 6, where the resulting flight paths through the
+logs and aircraft that do not enter the test region are filtered out
+airspace are indicated.
+of the results. The aircraft which are generated outside of the
+logging hour are not considered in the results. C. Independent Variables
+TABLE III: NORMAL AIRCRAFT PARAMETERS One independent variable has already been introduced: the
+CR method that is used. CR method is a factor with three levels:
+Parameter Mean value Standard Deviation
+no conflict resolution, and resolution by MVP or swarming.
+TAS 140 m/s 10 m/s
+Traffic demand, defined as the rate at which new aircraft are
+CAS 109 m/s 8 m/s
+generated at the edge of the test region, is a factor with 5 levels.
+Altitude 5000 m 305 m (1000 ft) The traffic demand can be 50, 125, 200, 275 and 350 aircraft
+Climb rate 0 m/s 0.5 m/s per hour. This results in 15 (3x5) conditions. For each
+
+--- Page 6 ---
+
+condition, 5 repetitions are made with different scenarios. This IV. RESULTS AND DISCUSSION
+is done by running the scenario generator with different random
+In this section, data obtained from the simulation
+seeds.
+experiments are used to compare the MVP and SW CR
+D. Dependent Variables algorithms in terms of safety, efficiency and stability metrics.
+Additionally, the impact of noise on the safety of the two CR
+The dependent variables of this research are sorted in three
+algorithms, as well as the effect of varying the relative
+categories: safety, efficiency and airspace stability. These are
+importance of the three components of the SW method, are also
+logged during the 1-hour experiment, which starts after 35
+discussed.
+minutes of initialization time, and is followed by 35 minutes of
+cooling-down time. A. Traffic Volume
+Safety is expressed in numbers of intrusions and conflicts Before analyzing the dependent variables mentioned above,
+per flight. Definitions of flights, intrusions and conflicts are it is first necessary to consider the traffic volumes that were
+determined as: actually realized during the experiment, see Figure 7. Here it
+can be seen that the MVP and SW methods resulted in slightly
+ A flight is a simulation of an aircraft which does enter more aircraft in the simulations compared to no conflict
+the test region at any moment in its lifetime. resolution, even though all CR methods were subjected to the
+ An intrusion is a violation of separation requirements same traffic scenarios. This is because resolution maneuvers
+between two simulated aircraft at any time when at least increase flight distances, and therefore cause aircraft to exist for
+one of the two is in the test region. longer durations within the experiment area (see Efficiency
+ A conflict is a prediction of an intrusion within the set section below). To account for these differences in density, and
+look-ahead time as a consequence of linear trajectory thus to allow for a fair comparison between the two CR
+propagation of actual states of simulated aircraft. methods, whenever appropriate, dependent variables are
+computed relative to the number of flights simulated during the
+Additionally, the proportion of intrusions that were
+logging hour.
+successfully avoided, the Intrusion Prevention Rate, is
+computed: B. Safety
+𝐶𝑜𝑛𝑓𝑙𝑖𝑐𝑡𝑠−⁡𝐼𝑛𝑡𝑟𝑢𝑠𝑖𝑜𝑛𝑠 The number of conflicts and intrusions per flight are
+𝐼𝑃𝑅 =⁡ (3) displayed in Figures 8 and 9 respectively. Here it can be seen
+𝐶𝑜𝑛𝑓𝑙𝑖𝑐𝑡𝑠
+that the MVP algorithm resulted in the lowest number of
+conflicts and intrusions. Although SW caused significantly
+For each intrusion, the intrusion severity is measured. higher number of conflicts, in terms of intrusions, the difference
+Intrusion severity is defined using Equation 4. In this equation, between these two CR methods is small. This is because the CA
+d and R are the distance between two aircraft and the separation component of SW also used the MVP algorithm for avoiding
+requirement, respectively. Subscripts h and v denote horizontal intrusions. For the same reason, no noticeable differences
+and vertical variables. between MVP and SW were found in terms of intrusion
+severity, see Figure 10.
+𝑑 𝑑
+𝑖𝑛𝑡 =𝑚𝑖𝑛(1− ℎ ,1− 𝑣 ) (4)
+𝑠𝑒𝑣𝑒𝑟𝑖𝑡𝑦 𝑅 𝑅 It is interesting to note that the MVP algorithm resulted in
+ℎ 𝑣
+even fewer conflicts than the no resolution setting, see Figure
+Efficiency is monitored through the route efficiency metric, 8. This was an unexpected trend; as resolution maneuvers
+i.e., the ratio between the shortest and the actual route flown, in increase flight distances and the consequent probability of
+the horizontal plane: encountering other aircraft, both MVP and Swarming were
+𝑑 expected to cause an increase in the number of conflicts
+𝑠ℎ𝑜𝑟𝑡𝑒𝑠𝑡
+𝜂 =⁡ (5) compared to simulations without resolutions, as already
+𝑟𝑜𝑢𝑡𝑒 𝑑
+𝑓𝑙𝑜𝑤𝑛 described in [8]. This unusual result is further analyzed using
+Airspace stability is observed using the Domino Effect stability metrics.
+Parameter (DEP) [8]. The DEP is computed by comparing the
+Given the similarity and the low number of intrusions for
+number of conflicts in simulations with and without Conflict
+MVP and SW, it is not surprising that both CR methods
+Resolution (CR), as indicated in Equation 6:
+achieved high IPR scores for all demand scenarios, see Figure
+11. While IPR for the no resolution case was low, it was not
+𝐶𝑜𝑛𝑓𝑙𝑖𝑐𝑡𝑠
+𝐷𝐸𝑃 =⁡ 𝑤𝑖𝑡ℎ𝐶𝑅 −1 (6) equal to zero. This means that not all conflicts resulted in
+𝐶𝑜𝑛𝑓𝑙𝑖𝑐𝑡𝑠 𝑤𝑖𝑡ℎ𝑜𝑢𝑡𝐶𝑅 intrusions, even though aircraft did not maneuver during
+simulations without resolutions. A detailed analysis revealed
+that this effect was caused by atmospheric variations of air
+density with altitude, and the ensuing differences between True
+Air Speed (TAS) and Calibrated Air Speed (CAS). This caused
+
+--- Page 7 ---
+
+Figure 9: Number of intrusions per flight Figure 11: Intrusion Prevention Rate (IPR)
+Figure 7: Traffic volume
+(mean + standard deviation) (mean + standard deviation)
+(mean + standard deviation)
+Figure 8: Number of conflicts per flight (mean + Figure 10: Intrusion severity Figure 12: Route efficiency
+standard deviation) (mean + standard deviation) (mean + standard deviation)
+prediction errors for aircraft positions, which adversely affected suffered a lower number of conflicts, it resulted in shorter
+the Conflict Detection (CD) process; as aircraft flew using routes, and therefore, better efficiency than SW. It is also noted
+constant CAS, altitude changes would result in that the efficiencies of both CR methods are not significantly
+acceleration/decelerations, while CD was performed assuming affected by demand changes. This suggests that the airspace did
+constant TAS. Consequently ‘false conflicts’ would be not reach saturation levels with the current demand scenarios.
+predicted, particularly for climbing/descending traffic, due to
+differences between the actual and predicted flight paths. When D. Stability
+simulations were performed with a modified atmosphere The results for the Domino Effect Parameter (DEP), which
+model, where the density at all altitudes was equal to sea-level is used to assess airspace stability, are shown in Figure 13. It is
+density, the number of intrusions without resolutions exactly
+seen that for each simulated traffic density, the resulting DEP
+equaled the number of conflicts (not shown). This example
+for MVP is lower than zero. Here, a negative DEP implies a net
+illustrates the need to take notice of ‘small’ details in
+stabilizing effect of tactical CR whereby conflict chain
+simulations of conflict detection and resolution.
+reactions are outweighed by those that are solved without
+Based on the safety results, it can be concluded that the pushing aircraft into secondary conflicts. On the other hand,
+MVP algorithm results in a higher safety under ideal positive DEP values indicate the opposite: airspace instability.
+conditions. This is because the MVP method solves conflicts
+As expected, the DEP for simulations with no resolutions is
+with minimal steering resolutions and only when intrusions are
+always zero as these simulations are compared with
+predicted. On the other hand, the VA and FC components of the
+themselves. For the MVP method, the DEP was consistently
+SW algorithm caused aircraft to group together in the air. For
+the traffic densities simulated, this resulted in significantly negative, and also decreased with demand. This indicates that
+higher number of conflicts and degrading safety. MVP is actually improving the stability of the airspace at higher
+densities, corresponding with the lowest number of conflicts for
+C. Efficiency
+all CR methods noted earlier in the safety analysis. Although
+The route efficiency results are displayed in Figure 12. As the DEP for SW is positive for all demand conditions, at higher
+expected, simulations without resolutions resulted in optimal demands, a negative trend is also observed for this CR method.
+efficiency. As MVP used minimal steering maneuvers and
+
+--- Page 8 ---
+
+Figure 15: Negative DEP example: a line of Figure 17: Effect of noise on the
+Figure 13: DEP, original simulations conflicts solved by one resolution Intrusion Prevention Rate (IPR)
+(mean + standard deviation)
+Figure 14: Effect of three-dimensional Figure 16: Effect of scenario generation on Figure 18: Effect of noise on the
+simulations on the Domino Effect Parameter the Domino Effect Parameter (DEP) number of intrusions per flight
+(DEP)
+To analyze these unexpected trends in the DEP, particularly 2) Influence of Logging Period
+the reduction of DEP with increasing demand, several potential
+Because conflicts increased flight distances, it is possible
+explanations have been put forth. These are discussed in the that some conflicts, which took place during the experiment
+following subsections. hour for the no resolution case, occurred after the experiment
+time for the MVP and SW methods. This would lead to a
+1) Three-Dimensional Simulations
+reduction in the number of conflicts logged for both CR
+Due to the three-dimensional nature of the simulations, methods, leading to a negative DEP. To verify this hypothesis,
+aircraft could have used vertical CR maneuvers to 'escape' other the DEP was recomputed using conflicts from the entire
+traffic, reducing the total number of conflicts relative to the no duration of each simulation. This DEP showed very little
+resolution setting. To verify this hypothesis, additional differences with the original logging procedure (not shown),
+simulations were performed for the MVP algorithm during thus the logging method did not affect the DEP.
+which all flights were created at the same altitude, with aircraft
+3) Effect of Scenario Generation
+constrained to use only horizontal resolution maneuvers. This
+test was performed for a traffic demand of 200 ac/hr, using a As mentioned earlier, experiment scenarios were generated
+single scenario repetition. If this hypothesis is true, the DEP for using a genetic algorithm script that aimed to maximize the
+flights constrained to a single altitude should be higher than the number of conflicts per flight. It is hypothesized that this design
+DEP for three-dimensional flights. It was also assumed that this choice could have created scenarios in which several conflicts
+effect is independent of CR method, hence separate simulations line up one after another. For such 'conflict lines', resolving the
+were not performed for SW. first conflict could also solve the remaining conflicts, as
+illustrated in Figure 15. This would, in turn, reduce the number
+The results of this test, see Figure 14, show that the two-
+of conflicts relative to the no resolution setting, and cause a
+dimensional flights resulted in an even lower DEP. However,
+negative DEP. Furthermore, it is reasonable to expect that these
+this is not because MVP was better at resolving conflicts when
+'conflict lines' grow in size at higher demand levels, explaining
+constrained to using horizontal resolutions, but because the
+the decrease of DEP with demand. To verify this hypothesis,
+number of conflicts without resolution increased by a much
+the goal of maximizing the number of conflicts was removed
+greater amount compared to the number of conflicts with the
+from the GA's objective function, and new scenarios, with one
+MVP algorithm, for the two-dimensional simulation. Thus, the
+repetition per traffic demand volume, were created.
+three-dimensional nature of the simulations is not the cause of
+negative DEP values.
+
+--- Page 9 ---
+
+The DEP results for these new simulations are displayed in V. CONCLUSIONS
+Figure 16. While numeric values have changed, the updated
+This study focused on the effect of swarming for free flight.
+scenarios have not changed the major trends noted earlier for
+The algorithm is tested in large-scale traffic simulations created
+the original scenarios; MVP still displays negative DEP values
+with a focus on having as many conflicts as possible. The
+with a negative trend, and the SW causes the DEP to decrease
+results of swarming are compared to results when no swarming
+at higher traffic demand volumes (compare Figure 13 with
+is performed and to results when no steering is performed at all.
+Figure 16). Thus, while the scenario generation does affect the
+DEP results, it is not the predominant cause of the negative The best results of safety, efficiency and airspace stability
+DEP values or negative DEP gradient. are achieved for self-separation performed without swarming.
+The safety of the methods decreases when turbulence and
+4) Inherent Behaviour of CR Methods
+position uncertainties are added to the simulation, but
+Given that the three previous explanations do not fully
+swarming appears to increase the robustness of the resolution
+explain the unexpected DEP trends observed, it is hypothesized
+strategy with respect to noise. Airspace stability is influenced
+that these characteristics are inherent to the CR methods
+by the way in which the traffic scenarios are generated. The
+considered. The methods could cause an implicit restructuring
+performance of the swarming algorithm is also altered by
+of the randomly distributed traffic in such a way that the DEP
+tuning the method’s parameters.
+reduces for higher traffic demands considered here. For MVP,
+it is expected that the charged particle behavior used to resolve It is found that airspace stability, measured by the Domino
+conflicts will also disperse aircraft over the available airspace, Effect Parameter, can become negative. This indicates a
+both vertically and horizontally. This greater utilization of the stabilizing effect caused by the conflict resolution strategies.
+airspace would reduce the chance of aircraft encounters and Research should be performed to explain why the resolution
+lead to a reduction in the number of conflicts. For SW, grouping methods stabilize the airspace.
+aircraft with similar directions does cause problems during the
+This study has shown that decentralized conflict resolution
+alignment process, but it is possible that the benefits of
+strategies have potential in delivering safety and efficiency in
+swarming pay off for higher densities. While these effects are
+complicated three-dimensional traffic situations. More
+likely to improve stability at relatively low densities, at
+resolution strategies should be tested and compared to each
+extremely high traffic demand levels, the congestion of the
+other. Also, research should be done to the phenomenon of
+airspace, would make it progressively more difficult to solve
+negative airspace stability observed in the project.
+conflicts without triggering additional conflicts. Preliminary
+results of a study focusing on the relation between stability and
+REFERENCES
+CR can be found here [9].
+[1] C. W. Reynolds, “Flocks, Herds and Schools: A Distributed Behavioral
+E. Effect of Noise and Swarming Component Weights on CR Model,” in Proceedings of the 14th Annual Conference on Computer
+Performance Graphics and Interactive Techniques, New York, NY, USA, 1987, pp.
+25–34.
+To study the effect of uncertainties on safety, the CR
+[2] C.-S. Park, M.-J. Tahk, and H. Bang, “Multiple aerial vehicle formation
+methods were subjected to the three forms of noise mentioned using swarm intelligence,” in AIAA Guidance, Navigation, and Control
+in section IIIA2, at a traffic demand of 200 ac/hr. Figure 17 Conference and Exhibit, 2003, pp. 11–14.
+shows that the intrusion prevention rate is increased by the [3] J. M. Hoekstra, R. C. J. Ruigrok, and R. N. H. W. van Gent, “Free Flight
+presence of noise for all CR methods, as the number of false in a Crowded Airspace?,” in Proceedings of the 3rd USA/Europe Air
+Traffic Management R&D Seminar, Naples, 2000.
+alerts increases significantly with noise. This is particularly true
+[4] J. M. Hoekstra, R. N. H. W. van Gent, and R. C. J. Ruigrok, “Designing
+for the no resolution setting, where the number of conflicts with for safety: the ‘free flight’ air traffic management concept,” Reliab.
+noise was thirteen times greater than without noise. In terms of Eng. Syst. Saf., vol. 75, no. 2, pp. 215–232, Feb. 2002.
+the number of intrusions per flight, Figure 18 shows that [5] M. Ballin, J. Hoekstra, D. Wing, and G. Lohr, “NASA Langley and
+swarming (SW) actually benefits from the presence of noise. It NLR Research of Distributed Air/Ground Traffic Management,” in
+AIAA’s Aircraft Technology, Integration, and Operations (ATIO) 2002
+is believed that flocks of aircraft maintain more separation
+Technical Forum, 2002.
+inside the group when noise is present, and therefore less
+[6] J. M. Hoekstra, J. Ellerbroek “BlueSky ATC Simulator Project: an open
+intrusions take place. On the other hand, as (Modified Voltage Data and Open Source Approach” submitted to ICRAT 2016.
+Potential) MVP only uses the minimum resolutions needed to [7] J. M. Hoekstra, “Designing for safety: the free flight air traffic
+resolve conflicts, noise increases the number of intrusions. management concept,” PhD Dissertation, Delft University of
+Technology, Delft, 2001.
+To gain an initial understanding on the effects of varying [8] J. Krozel, Peters, M., K. Bilimoria, C. Lee, and J. S. . Mitchell, “System
+the weights of the three SW components, additional simulations performance characteristics of centralized and decentralized air traffic
+separation strategies,” in 4th USA/Europe Air Traffic Management
+were performed with greater emphasis on VA and FC,
+R&D Seminar, Santa Fe, 2001.
+separately, at a traffic demand of 200 ac/hr. However, these
+[9] E.Sunil, J.Maas, J.Ellerbroek, J. Hoekstra and M.Tra, “The
+simulations did not reveal any significant differences when the Relationship Between Traffic Stability and Capacity for Decentralized
+relative weights of VA and FC were changed. A more detailed Airspace,” in submited to ICRAT doctoral symposium, Philadelphia,
+analysis is needed to arrive at a conclusive verdict on this. 2016

@@ -1,0 +1,113 @@
+## Project Roadmap: Spoke-to-Hub Drone Simulation (3-Day Build)
+
+### 🧠 Core Scenario
+
+Simulate a realistic, multi-agent environment where autonomous drones fly from surrounding "spoke" vertiports into a central hub vertiport. Agents must navigate structured air corridors, obtain takeoff and landing slots, avoid collisions, and adapt to constraints. ATC and UTM are rule-based systems; drones are ML-Agents.
+
+---
+
+### 📌 Simulation Components
+
+#### 1. Unity Environment (URP)
+
+* Terrain or flat airspace map with visual grid overlay
+* Central hub vertiport (1–4 landing pads)
+* 3–6 spoke vertiports (launch zones)
+* Air corridors:
+
+  * Transit corridors between hubs (straight + curved mesh guides)
+  * Approach corridors (modeled as box or capsule volumes)
+* Optional: Buildings or obstacles for corridor shaping
+
+#### 2. Drone ML-Agent
+
+* Observation:
+
+  * Position, velocity, remaining battery
+  * Assigned slot/corridor status
+  * Nearby agents (ray perception or vector distance)
+* Actions:
+
+  * Move forward, strafe, ascend/descend
+  * Request slot (optional)
+* Rewards:
+
+  * +1 for reaching pad successfully
+  * -1 for collisions or airspace violations
+  * -0.01 per time step to encourage efficiency
+
+#### 3. ATC & UTM (Rule-Based Systems)
+
+* UTMManager.cs:
+
+  * Manages corridor reservations, flight slots, and telemetry tracking
+* SpokeATC.cs:
+
+  * Approves/denies takeoff based on spacing or congestion
+* HubATC.cs:
+
+  * Schedules landing times, approach corridors, manages final sequencing
+* Shared data structure: Queue/Stack per vertiport, per corridor
+
+#### 4. Approach Corridors
+
+* Defined by two Vector3 points with thickness/altitude buffer
+* Visualized using transparent box meshes or debug lines
+* Trigger zones to validate corridor entry + timing
+
+#### 5. Drone Prefab
+
+* Rigidbody with thrust-based movement
+* Collider for physical/trigger detection
+* ML-Agent component with behavior script
+* Optional: simple 3D model with visible orientation
+
+#### 6. Scene Controller
+
+* Orchestrates simulation lifecycle:
+
+  * Spawns agents at spoke pads
+  * Assigns destinations, registers with ATC
+  * Logs performance per episode
+
+#### 7. Training Setup (if time allows)
+
+* Python training config for ML-Agents
+
+  * PPO or SAC policy
+  * Multiple parallel drones per episode
+* Reward shaping script
+* Reset conditions (timeout, collision, success)
+
+---
+
+### 📦 Assets & Tools
+
+* Unity 6000.1.5 URP
+* ML-Agents Toolkit (latest)
+* Optional: Simple drone model from Unity Asset Store or Sketchfab
+* Transparent materials for corridors
+* Debug tools (log overlays, reward display)
+
+---
+
+### 🛠 Day-by-Day Breakdown
+
+**Day 1**
+
+* Build environment layout (hubs, corridors)
+* Implement corridor logic and slot systems
+* Set up basic drone prefab and dummy ATC scripts
+
+**Day 2**
+
+* Integrate ML-Agent drone with sensing and motion
+* Add UTM/ATC interactions (request-response system)
+* Add basic reward logic and test in inference mode
+
+**Day 3**
+
+* Begin training with multiple drones
+* Visualize agent performance
+* Add stretch features (holding patterns, battery logic)
+* Polish: logs, overlays, camera flythrough, mock report

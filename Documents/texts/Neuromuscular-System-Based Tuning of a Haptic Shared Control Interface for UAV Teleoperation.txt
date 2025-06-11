@@ -1,0 +1,1286 @@
+
+
+--- Page 1 ---
+
+See discussions, stats, and author profiles for this publication at: https://www.researchgate.net/publication/309293535
+Neuromuscular-System-Based Tuning of a Haptic Shared Control Interface for
+UAV Teleoperation
+Article in IEEE Transactions on Human-Machine Systems · August 2017
+DOI: 10.1109/THMS.2016.2616280
+CITATIONS READS
+35 477
+5 authors, including:
+Jan Smisek Emmanuel Sunil
+Transcelestial Technologies Netherlands Aerospace Centre
+27 PUBLICATIONS 805 CITATIONS 38 PUBLICATIONS 566 CITATIONS
+SEE PROFILE SEE PROFILE
+Marinus M. Van Paassen David Abbink
+Delft University of Technology Delft University of Technology
+490 PUBLICATIONS 6,819 CITATIONS 225 PUBLICATIONS 5,328 CITATIONS
+SEE PROFILE SEE PROFILE
+All content following this page was uploaded by Jan Smisek on 25 November 2017.
+The user has requested enhancement of the downloaded file.
+
+--- Page 2 ---
+
+IEEETRANSACTIONSONHUMAN-MACHINESYSTEMS 1
+Neuromuscular System Based Tuning of a Haptic
+Shared Control Interface for UAV Teleoperation
+J. Smisek1,2, Student Member, IEEE, E. Sunil1, M. M. van Paassen1, Senior Member, IEEE,
+D. A. Abbink3, Senior Member, IEEE, and M. Mulder1
+operator to decide how to react to these. The operator can
+Abstract—Haptic guidance is a promising way to support Un-
+dothisintwoways:byconsciouslygeneratingaforcetogive
+mannedAerialVehicle(UAV)operators,butthedesignofhaptic
+guidanceforcesisoftenheuristic.Thispaperdescribesthedesign wayorcounteracttheguidanceforces,butalsobyintentionally
+and experimental validation of a systematic neuromuscular changing the neuromuscular system (NMS) properties of the
+analysisbasedtuningprocedureforhapticguidance,hereapplied limb interacting with the control interface. In other words,
+tohapticcollisionavoidancesystemforUAVtele-operation.This
+if the operator agrees with the provided automatic’s support,
+tuning procedure is hypothesized to reduce operator workload
+he/shecanbecomecompliantandgivewaytothehapticforces.
+as compared to current heuristic tuning methods. The proposed
+procedure takes into consideration the estimated mechanical In contrast, if the operator disagrees, he/she can stiffen up to
+response of the neuromuscular system (NMS) to haptic cues. A resist the haptic force, effectively overruling the automation.
+‘relaxtask’settingoftheNMS,forwhichreflexiveandmuscular In this manner, the operator can dynamically interact with the
+activation is minimal, is chosen as the design point for tuning
+automation during the operation [2].
+the haptic support, as this setting is expected to yield minimal
+physical workload. The paper first presents a neuromuscular Theadvantageousadaptabilityoftheoperator’sneuromuscu-
+identification experiment, performed to estimate the ‘relax task’ lar system also makes HSC systems challenging to design. To
+admittance of an operator’s arm. The averaged admittance of cause the desired control interface position, thereby providing
+a group of subjects (n = 10) was then used for tuning the
+the correct inputs to the controlled system, the HSC system
+haptic shared controller, which was subsequently evaluated in
+force needs to be correctly scaled to match the instantaneous
+its ability to support different operators (n=12) in a simulated
+unmannedaerialvehiclesurveillancetask.Resultsshowthatour ‘setting’ of the operator’s arm NMS (i.e., whether the op-
+novel tuning procedure indeed reduces operator workload and erator’s arm is compliant, stiff or in between). Although it
+also improves situation awareness compared to haptic settings may be feasible to estimate the NMS admittance in real-
+that ignore the neuromuscular system. In fact, it is shown
+time [4], adapting the HSC system based on adaptation of the
+that over-tuning, which frequently occurs for these heuristically
+operator might lead to undesirable outcomes. For instance, if
+tuned systems, leads to even lower user acceptance scores than
+interfaces without any haptic support. the operator, by stiffening-up, aims to regain control authority
+over the controlled system, the automation could adapt to
+Index Terms—Haptic cues, Human-automation Interaction,
+this change by increasing the force scaling, and effectively
+Human-Vehicle Interface, Musculoskeletal system
+over-ruling the operator [5]. Therefore, we explored tuning
+the HSC system to one fixed scaling, that corresponds to a
+I. INTRODUCTION
+specific (and beneficial) setting of the NMS system. When
+InHapticSharedControl(HSC)systems,ahumanoperator
+the operator matches his/her neuromuscular behavior to this
+and an automatic controller share control of a dynamical
+expected stiffness, the haptic forces will then cause correctly
+processonacommoncontrolinterface,thatservesastheonly
+scaled inputs to the human-in-the-loop system.
+input to the controlled system [1]. Such design ensures that
+It is common practice to heuristically tune this scaling to
+the operator is continuously informed about the actions of the
+thesatisfactionofthesystemdesigner[6].However,weaimto
+automation, allowing him/her to stay involved in the decision
+improve and formalize the tuning process. In our preliminary
+making process through intuitive haptic interactions [2]. In
+studieswepresentedanidentificationmethodtomeasurerelax
+doing so, HSC has the potential to support operators while
+task admittance on realistic haptic control interfaces [7] and
+mitigating some of the human-machine interaction issues
+then tested its utility in a UAV collision avoidance system [8].
+frequently associated with automated control systems, such
+The aim of the current paper is twofold: First, we provide
+as loss of skills and situational awareness [1]–[3].
+a complete systematic and experimentally validated tuning
+Implementing the actions of the automatic system as ad-
+method that uses the operator’s arm relax task setting as
+ditional guidance forces on the control interface allows the
+the design stiffness. Second, expanding upon our previous
+This research is supported by the Dutch Technology Foundation STW, studies [7], [8], this research will provide more insight into
+whichispartoftheNetherlandsOrganizationforScientificResearch(NWO), the interaction of the operators with the haptic cues by inves-
+andwhichispartlyfundedbytheMinistryofEconomicAffairs.
+1FacultyofAerospaceEngineering,DelftUniversityofTechnology,Delft, tigating the agreement of operators with the provided haptic
+theNetherlands;{j.smisek,e.sunil,m.m.vanpaassen,m.mulder}@tudelft.nl support and analyzing how this agreement changes based on
+2Telerobotics and Haptics Laboratory, ESTEC, European Space Agency, specific situation during the flight.
+Noordwijk,theNetherlands
+3Faculty of Mechanical, Maritime and Materials Engineering, Delft Uni- We first introduce a haptic collision avoidance system that
+versityofTechnology,Delft,theNetherlands;d.a.abbink@tudelft.nl reliesonanartificialforcefieldandexplaintheavailableHSC
+©2016 IEEE. Personal use is permitted, but republication/redistribution requires IEEE permission. This article was accepted for publication in IEEE
+TransactionsonHuman-MachineSystemsandthefinalversionisavailableathttp://ieeexplore.ieee.org/.DOI:10.1109/THMS.2016.2616280
+
+--- Page 3 ---
+
+2 IEEETRANSACTIONSONHUMAN-MACHINESYSTEMS
+UAVstatefeedback(vision,instruments)
+tuning choices based on the attainable settings of the human
+Humanoperator
+NMS,inSectionII.Motivationfortherelax-tasksettingbased
+tuning is discussed in detail. We then identify the challenges MH δst UAVstate
+associated with obtaining (relax task) neuromuscular admit- Cognitivecontrol + + arm+stickdyn UAV
+tance measurement on a spring-centered control interface and
+presentanappropriateexperimentalidentificationprocedurein MG δ s ∗ t
+SectionIII.InSectionIV,relaxtasktuning,usingtheaverage (arm+stickdyn)−1 Parametricriskfield Environment
+data from the first experiment, is used in a human-in-the- Collisionavoidancesystem
+loop experiment simulating UAV teleoperation, to judge user
+acceptanceofthenoveltuningprocedure.Thepaperconcludes Fig. 1. UAV teleoperation with a haptic Collision avoidance system. Based
+ontheUAVstateintheenvironment,theParametricriskfield calculatesan
+withacomprehensivediscussionoftheresultsandsummarizes
+optimalcollisionavoidancemaneuver,thatisscaledbytheinversearm/stick
+the main conclusions, in Sections V and VI. dynamicstoahapticcueonthecontrolside-stick(basedon[7]).Amethod
+tochosethisscalingoptimallyisthefocusofthecurrentpaper.
+II. NEUROMUSCULARBASEDTUNINGOF reduced, but without sacrificing system safety or human
+HAPTICSHAREDCONTROL control authority over the automation. The motivation was,
+This section introduces a human-centered tuning approach building on our preliminary studies [7], [19], to provide a
+for haptic cues that is based on properties and measurements systematicandvalidatedtuningmethodthatwouldachievethe
+oftheoperator’sarmNMS.First,theUAVcollisionavoidance aforementioned objective, without relying on heuristic tuning.
+system is introduced. Second, neuromuscular properties rele-
+vant to the tuning approach are presented together with the A teleoperated UAV scenario, with addition of the collision
+theoretical rationale of the tuning method. avoidance system, is illustrated in Fig. 1. An outer feedback
+loop to the UAV teleoperator is complemented with an inner
+haptic feedback loop generated by the collision avoidance
+A. UAV collision avoidance system and previous work
+system. The operator controls the UAV through the side-
+An interesting application of HSC in aviation is the use of stick position δ . The haptic guidance moment, M , and
+st G
+hapticfeedbacktoimprovethesafetyofUnmannedAerialVe- the moment generated by the teleoperator, M , act together
+H
+hicles(UAVs)[9].Previouslypresentedstudiesaugmentedthe on the side-stick. The resulting position of the side-stick, δ ,
+st
+visual feedback from onboard cameras with haptic guidance constitutes the sole steering command issued to the UAV.
+momentsappliedonacontrolinterfacetohelpteleoperatorsin Thecollisionavoidancesystembecomeseffectiveonlyifthe
+steeringaUAVawayfromobstacles[10]–[14].Allthesestud- UAV flies into a close vicinity of an obstacle. The parametric
+ies have indicated that such a system improves the safety of risk field system scans the environment for obstacles and
+teleoperation, but at the cost of increased workload [14], [15]. computes the risk of collision with the corresponding optimal
+Similar issues were also reported from systems implemented avoidance maneuver [16]. The optimal collision avoidance is
+in car driving domain [1]. achieved with the optimal side-stick position δ ∗. To yield the
+st
+These previous HSC systems were designed heuristically, desired δ ∗, it has to be converted to a properly scaled haptic
+st
+i.e., the HSC force scaling was found by testing different guidance moment, M . The optimal choice of this particular
+G
+values in a human-in-the-loop study, until satisfactory perfor- scaling is the focus of the current paper.
+mance was achieved. For instance, the primary objective of
+one of the studies was to improve system safety over pure
+B. Properties of the Human Neuromuscular System
+manual control [16]. To realize this goal, the haptic controller
+was typically tuned to generate very strong haptic guidance Neuromuscular system admittance of the operator arm to
+moments. While ‘over-tuning’ haptic cues improved safety, external (haptic) forces, i.e., the displacement caused by an
+it also biased control authority towards the automation [15]. external force, is an important parameter for designing HSC
+Recent research has shown that heuristic tuning can result in systems [20]. The intrinsic NMS properties are formed by
+disagreementsbetweenthehumanoperatorandtheautomation the contribution of the skeleton (mainly the inertia) and by
+on a the neuromuscular level [17]. the contribution of different muscles (the inertia, stiffness
+The difficulty with heuristic tuning has been attributed to and damping) [21]. However, the NMS is highly adaptive,
+the large adaptation range of the neuromuscular system. It Fig. 2a, and admittance can be varied over a wide range of
+was observed that operators are able to adapt their NMS values through two physiological mechanisms: fast subcon-
+properties such that performance and overall system stability sciousspinalreflexesandmusclepairco-contraction[21].The
+are satisfactory, regardless of the specific tuning used. How- neuromuscularsystemusesseveralsensorslocatedinandnear
+ever, adaptations to non-optimal settings of the NMS, as is the muscles for its feedback mechanism, such as the muscle
+oftenthecasewithheuristictuningmethods,causesthehaptic spindles and the Golgi Tendon Organs (GTO). The muscle
+cues to be perceived as too strong, resulting in increased user spindles feedback muscle length and muscle velocity and the
+discomfort and workload over time [18]. GTO feed back the force measured in the muscle tendons.
+As a objective for the current study, it was hypothesized The NMS adaptation is achieved by changing the reflex path
+that in order to improve user acceptance of HSC systems, strength.Strongermusclespindlefeedbackproducesaposition
+it is necessary to tune haptic cues such that workload is feedbackloopthatgeneratesaloweradmittance(stifferNMS).
+
+--- Page 4 ---
+
+SMISEKetal.:NEUROMUSCULARSYSTEMBASEDTUNINGOFAHAPTICSHAREDCONTROLINTERFACEFORUAVTELEOPERATION 3
+TABLEI
+DESCRIPTIONOFTHETHREENEUROMUSCULARTASKINSTRUCTIONS.
+Task Admittance Description
+Yield to haptic moments and the
+ForceTask(FT) High
+motionofcontrolinterface
+Donotreacttohapticmomentsand
+RelaxTask(RT) Medium
+followmotionofcontrolinterface
+Resist haptic moments and main-
+PositionTask(PT) Low
+tainpositionofcontrolinterface
+dynamics of the NMS and of the control interface to com-
+pute the haptic guidance force, see Fig. 2b. Applying this
+specific haptic guidance force, assuming the operator keeps
+thesameNMSsetting,willresultinoptimalstickpositionand
+consequently in a successful avoidance maneuver. Here, the
+HSC provides mostly low frequency inputs [16], [19] and so
+the stick/arm inverse dynamics can be considered as stiffness,
+(a)Armposition-forcerelationshipatdifferentNMSsettings.
+yielding a guidance control law:
+∗
+M δ
+(cid:20) M G G p r (cid:21) =[K NMS(δst)+K st] (cid:20) δ s s ∗ t t p r (cid:21) , (1)
+combinedstiffness
+where K NMS is the|stiffness{ozf the NM}S and K st is the
+stiffness of the side-stick control interface. The K NMS and
+K st are defined separately along the pitch (p) and roll (r)
+hand/stick axes. The optimal side-stick input δ ∗ in Eq. (1)
+st
+represents the output of the parametric risk field (described
+in more detail in Section IV-A3). Note that the tuning law
+accounts for the dependence of K NMS on the magnitude and
+direction of manual control inputs applied on the side-stick,
+δst. To implement the control law described above, a value
+for K NMS has to be selected. Three available, NMS inspired,
+design options are described next.
+D. NMS related tuning choices
+(b) Optimal stick position as result of correctly scaled haptic The following choices for neuromuscular stiffness, and
+guidanceforce.
+therebythetuningofthehapticfeedback,canbedistinguished:
+1) Intrinsic (relax task) stiffness: The haptic feedback is
+Fig.2. Neuromuscularbasedtuningrationale.Figure(a)illustratesthewide
+rangeofarmadmittancesettingstheoperatorcanadopt.Theintrinsicstiffness tuned to match the intrinsic stiffness of the operator’s NMS,
+correspondstorelaxtasksituation,whenoperatorsdonotexertanyforcesor i.e., the haptic feedback moment is scaled such that when
+changetheiradmittance.In(b)thesharedcontrolsystemistunedtoadesign
+applied, it will move operator’s relaxed arm holding the stick
+stiffness which, together with the side stick stiffness, forms the combined
+stiffnessofthewholesystem.Figureadaptedfrom[7]. to the ‘optimal stick position’. The haptic feedback will result
+in the correct stick response, unless the operator stiffens up,
+The reverse is also possible, stronger GTO feedback produces actively disagreeing with the guidance. The advantage of this
+a higher admittance (less stiff NMS). Effectively, the stiffness
+tuning is that the physical work of the operator is minimized;
+oftheneuromuscularsystemcanberaisedorloweredthrough
+for the intrinsic stiffness the Golgi tendon organ and muscle
+theneuralfeedback [20]–[22].Toevoke differentNMSadmit-
+spindle feedback paths are not used. In many cases the spring
+tancesettings,humanscanbeinstructedtorespondtoexternal
+stiffness of the stick will be higher than the intrinsic stiffness
+momentsinthreedistinctwaysknowninliteratureastheforce,
+of the human operator. Consequently, the stick stiffness alone
+the relax and the position tasks [20], see Table I.
+will not be too different from the combined stiffness of the
+stick and hand, and so the this tuning will also produce an
+acceptable response for a hands-off control.
+C. Neuromuscular admittance based tuning method
+2) Lower than intrinsic stiffness: The haptic feedback is
+Haptic guidance moments applied on the control interface tuned to match a lower than intrinsic stiffness of the NMS
+aretransmittedtothehumanoperatorviahis/herNMS.There- of the operator [18] (with force task stiffness being the lower
+fore it is necessary to include the response of the NMS limit). Such tuning keeps the operator more involved in the
+to haptic cues when tuning the haptic controller [17], [18]. control loop by requiring active NMS adaptation towards
+Effectively, this approach uses the inverse of the combined the force task, which can be described as requiring active
+
+--- Page 5 ---
+
+4 IEEETRANSACTIONSONHUMAN-MACHINESYSTEMS
+agreement. Interestingly, even negative stiffness tuning has Ethics Committee. Subjects gave their informed consent prior
+been used in literature: to encourage fast evasive maneuvers to the experiment and no monetary compensation was offered.
+in a car driving support system [23]. Thesubjectswereseatedinanadjustablechair,Fig.3,such
+3) Higher than intrinsic stiffness: The haptic feedback is thattherightforearmwasparallelwiththerollaxisofthestick.
+tuned to match a higher than intrinsic stiffness of the NMS The stick’s hardware casing served as a rest for the forearm.
+(with position task stiffness being the upper limit). The haptic Subjects were asked to perform force task, Table I, keeping
+guidance moment would result in correct stick position if the constant grip and hand position during the experiment.
+operator maintains increased arm stiffness, otherwise the stick 2) Experiment design and procedure: Three levels of bias
+position response to the haptic guidance will be too large, moment magnitude were tested, 0, 0.7 and 1.4 [Nm], in six
+leading to overshoots during the avoidance maneuvers [17]. directions: 0 ◦, 45 ◦, 90 ◦, 135 ◦, 180 ◦, and 270 ◦; constituting
+Depending on the actual tuning, it can be difficult for the thirteen test conditions C . A wide-band test signal (Sec-
+1..13
+operator to overrule the haptic feedback. tion III-A4), applied as an additional moment on the stick,
+Inthispaper,weadvocatethechoiceofusingintrinsicstiff- wasused.Both,asameansofexcitationtobeabletoidentify
+ness as the reference in tuning the collision avoidance HSC, the NMS, and to ensure that the reflex feedback action is
+forthreereasons.First,intrinsicstiffnessbasedtuningensures suppressed. The experiment lasted approximately 1.5 hours,
+that the physical workload of the operator is minimized, since includingbriefing,debriefing,familiarizationruns,andbreaks.
+no muscular activity is required to maintain intrinsic stiffness. The experiment started with performing multiple training
+Second, the system prevents colliding, unless the operator runs to familiarize the subjects with the tasks. After that
+actively disagree by stiffening up the arm. And third, this three experimental runs were done for all 13 conditions. Each
+setting has the attractive property that when the stick is individualrunlasted60seconds,consistingof10secondsrun-
+released, the UAV will steer away from nearby obstacles. in time and of approximately 50 seconds measurement time,
+resultingin9fullperiodsofthetestsignalforeverycondition.
+3) Apparatus: Theelectro-hydraulicsidestickwitharmrest
+E. Identifying intrinsic neuromuscular system admittance
+(A),inFig.3,islocatedtotherightofanadjustablechair.An
+The NMS properties of human subjects are typically deter- 18inchdisplay,(B),waslocatedatadistanceof80cminfront
+mined in three fundamental tasks, Table I [24]. The intrinsic of the subject. The side stick could move with two degrees of
+stiffness of the neuromuscular system can be directly deter- freedom, in pitch and roll rotation. The effective length, from
+minedintherelaxtask,inwhichthereflexesarenotusedand axis of rotation to the center of the hand, between the middle
+thearmdynamicsaredominatedbyitsvisco-elasticproperties. andindexfinger,was0.09[m]andthemotionrangewas±22 ◦
+However, the UAV control stick is normally spring centered, for pitch and ±30 ◦ for roll motion. The side stick measured
+requiring the operator, in order to command UAV motion, to T
+the stick angular displacement δ (t) = δ (t), δ (t) ,
+deflect the stick by applying force on it. The intrinsic NMS the handling moment m(t) = [m st (t), m(cid:2)( s t t ) p ] T app st l r ied (cid:3)by
+p r
+properties therefore need to be determined in presence of a
+the subject on the stick, and the disturbance moment d(t) =
+bias force. Unfortunately, it is unattainable for subjects to [d (t), d (t)] T imposed on it, for both roll and pitch respec-
+maintain the required bias force and simultaneously suppress p r
+tively. Signals were sampled at 250 Hz. The active side stick
+their neural reflexes to correctly execute the relax task. A
+was controlled to behave as a mass-spring-damper system, as:
+method to overcome this practical challenge and identify the
+intrinsic NMS in a force task is described in the next section. δ (s) 1
+H (s)= st = , (2)
+st m(s) I s2+B s+K
+st st st
+III. NEUROMUSCULARIDENTIFICATIONEXPERIMENT where, for both the pitch and roll directions, inertia of I =
+st
+The identification of human neuromuscular properties tradi- 0.02[kgm2], damping coefficient B st =0.2[Nmsrad −1] and
+tionally relies on using multisine signals to provide excitation spring coefficient K st =2[Nmrad −1] were used.
+forces on a range of frequencies. However, the distribution 4) Disturbance signal design: Two uncorrelated multi-sine
+of power over the frequencies influences the reflexive action signalsd p (t)andd r (t)weredesignedinthefrequencydomain
+of the NMS [25]. A novel identification method, described in to excite the stick-arm dynamics in pitch and roll directions.
+detail in a previous study [7], uses a disturbance signal with Bothsignalscontainedpowerat20logarithmicallydistributed
+a wide-band spectrum, to suppress the arm’s natural reflexes. frequencies, f = [f p , f r ] T, within a range of 0.4Hz and
+In this manner the adaptation range of the NMS is effectively 20Hz, Fig. 4a. The phases were selected to minimize the
+limited to the intrinsic visco-elastic properties. crest factor (peak-to-average amplitude ratio) [26]. Figure 4b
+shows one period (16.38s) of the disturbance signal in the
+time domain [27].
+A. Method
+The signals had full power between 0.4Hz and 2.5Hz
+1) Subjects and task instructions: Ten subjects (three fe- and 20% of the power above that frequency. A standard
+male), all staff or graduate students of TU Delft, with an approach in human NMS admittance identification literature
+averageageof28.6years(σ =2.4)performedtheexperiment. isto usethe fullpower signalonly approximately below 1 Hz
+All subjects were right-handed, none reported injuries or any (reducedpowermethod[25]).Incontrast,inthiswork,thefull
+otherdisorderintheupperextremities.Theexperimentwasap- powersignalwasintentionallyappliedabovethisfrequency,to
+provedbytheDelftUniversityofTechnologyHumanResearch actuallysuppressthenaturalreflexesoftheoperator’sarm,and
+
+--- Page 6 ---
+
+SMISEKetal.:NEUROMUSCULARSYSTEMBASEDTUNINGOFAHAPTICSHAREDCONTROLINTERFACEFORUAVTELEOPERATION 5
+Fig.3. Neuromuscularidentificationexperimentsetup.Thesubjectusedthe
+stick(A),tocontrolpositionofawhitedotonthedisplay(B).
+allow the identification of intrinsic admittance. Alternatively,
+a uniform power distribution over all disturbance frequencies
+could have been used, or the higher frequencies could be
+omitted altogether in the future identification experiments,
+since these are not needed for the presented tuning method.
+]zH/2m2N[ddS
+Roll Pitch
+0.45
+0.3
+0.15
+0
+0 4 8 12 16 20
+Frequency[Hz]
+(a)Perturbationsignaldesignedinfrequencydomain.
+Time[s]
+]mN[)t(d
+uated by using four separate single-input and single-output
+spectral estimators [27], [29]. The admittance is calculated
+separately for all thirteen conditions (C ):
+i=1..13
+Sδstpdp (f
+p
+) Sδstpdr (f
+r
+)
+Gˆ (f)= Smpdp (f p ) Smrdr (f r )  (3)
+Ci Sδstrdp (f
+p
+) Sδstrdr (f
+r
+)
+
+
+Smpdp (f
+p
+) Smrdr (f
+r
+) 
+
+7) Endpoint admittance ellipse: An intuitive way to vi-
+sualize the 2-DOF dynamic characteristic of the endpoint
+admittance is using admittance ellipses [24]. The admittance
+ellipsedisplaysthemagnitudeanddirectionoftheresponseof
+the NMS to a unit moment input and is characterized by the
+sizeanddirectionofitsmajorandminoraxes.Themajoraxis
+oftheellipsecorrespondstothedirectionoftheNMSwiththe
+least resistance to moment disturbances (highest admittance),
+and the minor axis to the direction with the largest resistance.
+The admittance ellipse can be evaluated at frequencies of the
+disturbances f ∈f by:
+δ cos(α)
+ellr =|Gˆ (f)| ,0≤α≤2π, (4)
+(cid:20) δ ellp (cid:21) Ci (cid:20) sin(α) (cid:21)
+where δ and δ are the endpoint rotations for roll and
+ellr ellp
+pitch to unit moment disturbances, respectively.
+B. Results
+The endpoint admittance ellipses at a low frequency (f =
+0.5Hz)forallconditionsaveragedoverallsubjectsareshown
+asinFig.5(standarddeviationisdisplayedinlightgray).Data
+of one subject were discarded due to its very low admittance
+indicating incorrect execution of the requested task. Presented
+experimental data are publicly available online [30].
+90◦
+pitch
+Roll Pitch
+0.4
+0.2
+135◦ 45◦
+0
+−0.2
+−0.4
+0 4 8 12 16
+(b)Onecompleteperiod(16.38s)ofthedisturbancesignal.
+Fig. 4. Disturbance signal. Frequency and time domain content of the
+disturbancemomentrealizationsforrollandpitch.
+180◦
+0◦
+roll
+5) Experimental data pre-processing: As a first step, mean
+0.7Nm
+values were subtracted from the measured time domain sig-
+nals, (d(t), δ st (t) and m(t)). Then the repetitions over the 1.4Nm
+same condition were averaged in the time domain to reduce
+measurement noise and non-linear behavior of the NMS (e.g.,
+voluntary inputs, muscle fatigue).
+6) Admittance estimation using spectral analysis: The mo-
+0.4rad/Nm
+mentinputm(t),disturbanceinputd(t)andstickangleoutput
+δ (t) were used to estimate auto- and cross-spectral densities
+st
+S
+δstd
+(f) and S
+md
+(f) at the frequencies of the disturbance 270◦
+signal f. The NMS admittance is then obtained by using a
+Fig.5. Meanestimatedadmittanceellipsesoverallsubjectsatf =0.5Hz.
+closed-loop identification method [28].
+Thestandarddeviation,showninlightgray,indicatesrelativelyhighconsis-
+Because the disturbance moment inputs are uncorrelated, tencyinresponsesamongthegroupofsubjects.
+themultiple-inputandmultiple-outputadmittancecanbeeval-
+
+--- Page 7 ---
+
+6 IEEETRANSACTIONSONHUMAN-MACHINESYSTEMS
+IV. UAVTELEOPERATIONEXPERIMENT hapticmomentsarecalculatedandappliedontheside-stickby
+thehapticcontrollertohelptheteleoperatortosteerawayfrom
+The set of NMS admittance measurements, previously ob-
+possible collisions. The PRF [16], was specifically designed
+tained in Section III, is in this section used as a reference for
+for UAV teleoperation. It was found to generate more stable
+tuning a HSC collision avoidance system, and evaluated in a
+haptic moments, when compared to other haptic collision
+human study with a teleoperated UAV control task.
+avoidance fields discussed in literature [15], [16], [31].
+The shape and size of the risk field is proportional to the
+A. UAV Teleoperation
+instantaneous UAV velocity, v, and inversely proportional to
+1) UAV model: The UAV was modeled as an ‘easy-to- its maximum deceleration, a . If the UAV is stationary, the
+max
+fly’, control-augmented, helicopter with a rotor diameter of field spans only a small circular region around the UAV. For
+3 [m] [14]. Longitudinal side-stick inputs δ p were mapped to non-zerovelocities,thefieldextendsinthedirectionofmotion
+forwardvelocitycommandsV x ,whereaslateralinputsδ r were to provide sufficient time for the teleoperator to react to the
+mappedtoyawratecommandsψ˙,whichisnotuncommonfor,
+haptic cues. Fig. 7 displays the parameters and zones that
+e.g., stabilized quadrotors: define the PRF. Parameters d and d are responsible
+stop ahead
+for extending the size of the field when the UAV is moving
+V (s) 1
+x
+H UAVx (s)=
+δ (s)
+=
+(0.3s+1)(0.18s+1)
+(5) and are defined as [14]:
+p
+ψ˙(s) 1 |v|2
+H UAVy (s)= δ r (s) = (0.2s+1) d stop = 2a max d ahead =|v|t ahead (6)
+In addition to the above dynamics, the UAV has a maximum
+Theriskfieldgeometryisdefinedbyfourconstantparameters:
+velocity, V max , and acceleration, a max , of 5.0 [m/s] and r , d , t and a . The values of these parameters
+pz min ahead max
+1.0 [m/s2] in the longitudinal direction, and a maximum yaw
+were refined through simulations for the UAV model used in
+rate, ψ˙
+max
+, and yaw acceleration, ψ¨
+max
+, of 0.32 [rad/s] and
+this research by Lam et al. [16] and are listed in Table II.
+2.0[rad/s2]inthelateraldirection.TheUAValtitudewaskept
+The risk of collision, R, is based on the relative distance
+constant by an autopilot. between the UAV and an obstacle, p, also taking in account
+2) Environment: Six obstacles, modeled as buildings of the instantaneous UAV velocity, v:
+different shapes, see Fig. 6, made up the virtual environment
+of the remote sensing task (the environment was also used in 1 if p in Zone 1
+previous studies [14]). Each obstacle was designed to evoke R(p,v)= cos d π + π +1 if p in Zone 2 (7)
+different control behavior. For instance, obstacle 3 required  (cid:16) d0 2 2 (cid:17)
+0 if p in Zone 3
+subjects to fly backwards into a U-shape building, with no
+visual cues in the direction of motion. Obstacles were re- The cosine fun
+
+ction for risk computation in Zone 2 enables a
+arranged to create three different measurement and three smooth transition in risk values between zones, consequently
+training trajectories, to reduce boredom and learning effects. ensuring that there will be no sudden changes in the applied
+haptic moments. To evaluate the risk at point p, distances d
+and d need to be computed, see Fig. 7.
+0
+The risk is used to compute an optimal side-stick input δ ∗.
+st
+First, the magnitude of the risk is calculated using Eq. (7),
+and its direction is defined from the obstacle to the center of
+1 2 3 the UAV. This allows for a straightforward implementation if
+a discrete sensor spanning the 360 ◦ area around the UAV is
+used[16].Ifmultipleobstaclesaredetected,thefinalcollision
+avoidancesteeringvectoriscomputedbyvectoriallysumming
+the largest and smallest collision avoidance steering vectors,
+using the ‘max-min’ method [14]. Second, the resulting risk
+4 5 6 vector is scaled to the physical input limits of the side-sticks
+(for details see Section III-A3), i.e., the maximal risk value
+corresponded to the maximal deflection of the side-stick.
+Fig.6. Anexampleofavirtualenvironmentcomposedofsixobstacles;with
+waypoints(starsymbols)tobeflownthrough.Apathtobeflownbackwards
+TABLEII
+(diamond)endsinsidetheobstacle3opening(visuallymarkedbyanasterisk).
+PARAMETRICRISKFIELDPARAMETERS.
+3) Parametric risk field: The parametric risk field (PRF)
+Parameter Value Description
+is the component of the automatic controller responsible for
+mapping obstacles in the environment to the optimal collision rpz 1.5 Radiusofprotectionzone[m]
+avoidance side-stick inputs, see Fig. 1. The risk field is dmin 1.5 Distancebetweenzone1andzone2[m]
+computed in the UAV reference frame, expressing the risk tahead 2 Maximumavailablereactiontime[s]
+of collisions for obstacles detected within the scanned area. amax 1 MaximumUAVdeceleration[m/s2]
+Subsequently, in Section IV-A4, the corresponding repulsive
+
+--- Page 8 ---
+
+SMISEKetal.:NEUROMUSCULARSYSTEMBASEDTUNINGOFAHAPTICSHAREDCONTROLINTERFACEFORUAVTELEOPERATION 7
+[7.2 0 ]
+20 0 0.7
+d0
+Zone3
+d 15 [8 0 .5 0 0 .9 ] [5 0 .6 0 0 .8 ]
+Zone2 [5 0 .4 0 0 .5 ]
+10
+[5.0 0 ] [4.4 0 ]
+Zone1 p 0 0.7 0 0.6
+5
+v 0 [4.9 0 ] [1 0 .5 0 0 .5 ] [4.4 0 ]
+[6.0 0 ] 0 0.4 0 0.5 [6.6 0 ]
+−5 0 1.7 0 0.6
+rpz
+−10 [4.5 0 ]
+dstop dmin dahead 0 0.7
+−15
+Fig. 7. Parametric risk field. Variables used to describe the shape of the −20 [5.7 0 ]
+parametricriskfield(basedon[14]). 0 0.7
+−30 −20 −10 0 ◦ 10 20 30
+δ [ ]
+4) Haptic controller implementation: The haptic controller
+str
+(HC) was implemented using the averaged admittance of ten
+subjects measured in Section III, at a measurement/excitation
+signal frequency of 0.5 Hz. As discussed in Section II, ad-
+mittance depends on the magnitude and direction of manual
+control inputs [7], [32]. To account for this, the tuning was
+determined for 13 different conditions, as is shown in Fig. 5.
+The control law relating the optimal side-stick position δ ∗
+st
+(based on the risk calculated by Eq. (7) to the applied haptic
+moment, M , was implemented according Eg. (1).
+G
+The motions of the UAV with respect to the obstacles in
+the surroundings, and thereby the fluctuations in the haptic
+feedback, will produce signals from the collision avoidance
+system that are generally lower in bandwidth than 1Hz [14].
+Based on the estimated frequency responses, the combination
+of the NMS and the control interface can be for design
+purposes considered to be a constant gain [7]. The admittance
+atalowfrequency(f =0.5Hz)overallconditionsC was
+1..13
+transformed to stiffness:
+−1
+K NMS(δ
+st
+)= Gˆ
+Ci
+(f) (8)
+(cid:16) (cid:17)
+Toaccountforallpermissiblestickinputsδ ,nearestneighbor
+st
+interpolation was used to compute appropriate haptic cues
+(i.e., the closest available K NMS(δ
+st
+) to the instantaneous
+teleoperator manual control input is selected). The mapping
+of the instantaneous stick position δ
+st
+to the K NMS(δ
+st
+)
+stiffness gains is visualized in Fig 8. It is hypothesized that
+this stick position-depended tuning approach will allow the
+haptic controller to better account for adaptation in NMS (in
+contrast to using only one constant NMS stiffness value), and
+as a consequence, improve the teleoperator’s appreciation of
+the haptic cues.
+By visual inspection of the identified admittance ellipses,
+Fig. 5, a small roll-pitch and pitch-roll cross-term effect (i.e.,
+rotation of the admittance ellipses) was observed. However,
+it was deemed undesirable for the guidance forces to utilize
+this cross coupling and so to prevent it, the corresponding
+stiffness cross-term gains were set to zero, as: K NMS(δ st )=
+KNMSp 0
+.
+h
+0 KNMSri
+B. Method
+1) Subjects and task instructions: Twelve right-handed
+male subjects, all graduate students of TU Delft, with an
+◦
+]
+[
+δ
+pts
+Fig. 8. Mapping of actual stick position δst to the tuning gain
+K NMS(δst) Nmrad−1 .
+(cid:2) (cid:3)
+average age of 23.4 years (σ = 0.7), took part in the
+experiment. None of the subjects participated in the previous
+identification stage and none had any prior experience with
+hapticinterfaces.Subjectgaveconsentpriortotheexperiment
+and no monetary compensation was offered. The experiment
+was approved by the Delft University of Technology Human
+Research Ethics Committee.
+During the experiment, subjects performed a UAV surveil-
+lance task in an obstacle laden urban environment. Subjects
+were instructed, in order of priority to: 1) avoid collisions,
+2) fly as closely as possible through the center of waypoints
+(represented as smoke plumes), and 3) to perform the task
+as fast as possible. To improve experiment realism, each
+collision resulted in a 20 second time penalty during which
+the experiment was paused. Each trial took approximately
+150 seconds to complete (when flown without collisions).
+2) Apparatus: A fixed-base flight simulator was used to
+perform the experiment, see Fig. 9. Subjects were seated in a
+pilot chair (1) and used the same electro-hydraulic side-stick
+withthesamedynamicalparametersasintheprecedingNMS
+admittance identification experiment. The side-stick (2) was
+used to manually control the UAV through the environment.
+Visual cues of the surroundings were projected on a wall in
+front of the subject, originating from a simulated onboard
+camera fixed to the longitudinal forward axis of the UAV (4).
+Additionally,atop-downviewdisplaywasprovidedtoaidthe
+operator with navigating around obstacles (3).
+3) Independent measures: Two categories of independent
+variables were studied in the experiment. The first category
+was concerned with the tuning profile (TP) of the haptic
+controller. A total of four TPs were tested, resulting in the
+four experiment conditions listed in Table III. Here, UT and
+OT controllers represent TPs that are half and twice as strong
+as RT tuning, respectively. These two TPs were defined to
+study the sensitivity of the novel tuning procedure.
+The second independent variable was obstacle (OB). Six
+different obstacles were tested during the experiment and the
+subjectswererequiredtoflythroughallofthemineverytrial,
+for details see Section IV-A2.
+
+--- Page 9 ---
+
+8 IEEETRANSACTIONSONHUMAN-MACHINESYSTEMS
+TABLEIV
+EXPERIMENTDEPENDENTMEASURES.
+Measure Symbol Description
+Safety ncollisions Numberofcollisions[-]
+V Meanvelocity[m/s]
+Performance
+dwp Minimumdistancetowaypoints[m]
+Control Standard deviation of stick rate [rad/s],
+Activity σ δ˙ bothrollandpitch
+Haptic Standarddeviationofhapticguidancemo-
+Activity σMG ment[Nm],bothrollandpitch
+RMSerrorbetweenthemagnitudeofhu-
+Haptic Mrms manappliedmomentandthehapticguid-
+Controller
+ancemoment[Nm]
+Agreement
+Msgn Ratio of haptic guidance and human ap-
+Fig.9. UAVteleoperationexperimentsetup.Fixed-baseflightsimulatorwith
+pliedmomentshavingthesamesign[-]
+aircraftchair(1),hydraulicside-stick(2),navigationdisplay(3)andonboard
+cameraview(4).
+NASATLX Workloadassessmentsurvey
+TABLEIII Subjective SA Situationalawarenesssurvey
+UAVTELEOPERATIONEXPERIMENTCONDITIONSANDCOLORCODING.
+HA Hapticfeedbackacceptancesurvey
+Color Symbol Description
+the roll (r) axes to investigate the control strategy differences
+between the two directions observed during a pilot study.
+NHF Nohapticfeedback/puremanualcontrol
+Questionnaires were used to measure subjective workload,
+UT HSCunder-tunedrelativetoRT(UT=0.5RT) situational awareness (SA) and haptic feedback acceptance
+HSCtunedbasedonrelaxtaskadmittancedata (HA).WorkloadismeasuredusingtheNASATaskLoadIndex
+RT collectedinSectionIII (TLX) questionnaire [33]. The NASA TLX calculates work-
+OT HSCover-tunedrelativetoRT(OT=2RT) loadastheweightedaverageofsixsubjectivesub-scales:men-
+tal demand, physical demand, temporal demand, performance,
+4) Dependent measures: The dependent measures used to frustration and effort. A higher weighted average (ranging
+compare the different haptic controllers can be divided into between 0 and 100), suggests higher subjective workload. SA
+six categories: safety, performance, control activity, haptic and HA are measured using questionnaires similar to the Eu-
+activity, haptic controller agreement and subjective question- rocontrol SASHA method [34]. These questionnaires capture
+naires. They are listed in Table IV. To assess the agreement theteleoperators’awarenessoftheirsurroundingsandwhether
+between the operator’s voluntary moment inputs, M , and haptic feedback was subjectively helpful in completing the
+H
+the haptic guidance moment, M , two separate metrics were task, respectively. The SA and HA questions are answered on
+G
+calculated. The metrics were calculated in discrete time, for a five point Likert type scale (ranging between 0 and 4), and
+timeswhenthehapticcontrollerwasactive,i.e.,forallkwhen the mean score of all the questions is taken as the measure of
+|M (k)|>0. Magnitude comparisons are based on the RMS SA and HA, with higher scores indicating higher SA/HA.
+G
+error between the magnitudes of measured moment and the 5) Hypotheses: Three hypotheses were formulated for the
+haptic moment as: validationexperiment.Firstly,wehypothesizedthattasksafety,
+in accordance with previous research [15], [16], will be
+1 n increased with stronger tuning profile of the haptic controller.
+M rms =v un (|M G (k)|−|M H (k)|)2, (9) Secondly, the task performance would remain unaffected
+u kX=1 by the tuning profiles, since the haptic cues should ideally not
+t
+interfere with the task and only prevent collisions.
+with smaller values indicating higher magnitude agreement.
+Thirdly, the workload associated with the task and the
+Directional agreement is assessed as the ratio of haptic and
+acceptance of haptic feedback should be optimal for the RT.
+measured moments having the same sign as:
+6) Procedure: The experiment began with three initial
+n
+1 trainingtoallowsubjectstopracticecontrollingtheUAVwith
+M = eql(sgn(M (k)),sgn(M (k))), (10)
+sgn n G H and without the aid of haptic cues. Afterward, subjects flew
+kX=1
+one additional training run and four measurement runs for
+where operator eql(a,b) equals 1 if a=b, otherwise it equals eachTP.Experimentconditionswererandomizedandsubjects
+0. A M value of 1 indicates perfect agreement, whereas a had no prior knowledge of the conditions performed. At the
+sgn
+value of 0 indicates total disagreement of moment directions. end of each condition, subjective workload (using NASA
+The control activity, haptic activity, and haptic controller TLX), situational awareness and haptic feedback acceptance
+agreement were analyzed separately along the pitch (p) and were measured using questionnaires. The total duration of the
+
+--- Page 10 ---
+
+SMISEKetal.:NEUROMUSCULARSYSTEMBASEDTUNINGOFAHAPTICSHAREDCONTROLINTERFACEFORUAVTELEOPERATION 9
+experiment,includingbriefing,debriefing,familiarizationruns,
+and breaks, was approximately 2 hours.
+7) Data analysis: All objective dependent measures were
+computed per obstacle to take into account the different order
+of obstacles in each trajectory. The effects of the independent
+variables (TP and OB) on the dependent measures were
+analyzedusingtwo-wayrepeated-measuresANOVA,withpair-
+wise Bonferroni corrected comparisons used as post-hoc tests.
+For non-spherical data the Greenhouse-Geisser corrections
+were applied to the degrees of freedom [35].
+Ordinaldependentmeasures,n andsubjectiveques-
+collisions
+tionnairesresults,wereevaluatedusingtheFriedmantest;with
+Bonferroni corrected Wilcoxon signed-rank test as post-hoc.
+8) Visualization of results: Results are shown using their
+means and the 95% confidence intervals of the mean. The
+colorcodingoftuningprofilesfollowsTableIII.Questionnaire
+results are visualized as box-plots, showing the median, the
+25thand75thpercentilesandthemaximalandminimalvalues
+(excluding outliers) over all subjects.
+Due to the low number of collisions, the n were
+collisions
+summed over all subjects; corresponding confidence intervals
+(95%) are bootstrapped using the bias-corrected and acceler-
+ated percentile method (BCa) with 5000 samples [35].
+C. Results
+The experimental results are in this section presented sep-
+arately for all studied dependent measures. Overall, after the
+initial training period, there were no learning effects observed
+in the experimental data.
+1) Safety: Fig.10ashowsthatthetotalnumberofcollisions,
+n , decreased with increasing strength of the haptic collisions
+controller, and was the lowest for the OT condition. However,
+the Friedman test did not reveal a significant effect of TP on
+n (TP: χ2(3)=7.48, p=0.058). collisions
+The Friedman test did show an effect of OB on n , collisions
+Fig. 10b, (OB: χ2(5) = 17.31, p ≤ 0.01). Obstacle 5, which
+resultedinthehighestnumberofcollisions,wasalsoreported
+by subjects to be the most difficult.
+20
+15
+10
+5
+0 NHF UT RT OT
+Tuning Profile
+]-[snoisillocn
+20
+15
+10
+5
+0 1 2 3 4 5 6
+Obstacle
+(a)ncollisionsTP
+]-[snoisillocn
+collisions.ThisindicatesthatsubjectsdecreasedUAVvelocity
+inanattempttofollowtheprimarytaskinstructionofavoiding
+collisions, particularly for difficult obstacles.
+5
+4.5
+4
+3.5
+3
+2.5
+2
+1.5 1 2 3 4 5 6
+Obstacle
+(b)ncollisionsOB
+Fig.10. Tasksafetyevaluatedseparatelyasatotalnumberofcollisionsfor
+alltuningprofilesTPandobstaclesOBoverallsubjects.
+2) Performance: The mean velocity of the UAV, V, is
+shown in Fig. 11a. Here it can be seen that for a particular
+obstacle, V was relatively constant for all haptic controllers.
+On the other hand, V did vary substantially with OB, a
+significant effect (OB: F =107.16,p≤0.01). When
+2.39,26.29
+comparing Fig. 11a with Fig. 10b, it can be seen that velocity
+tends to be lower for obstacles with a higher number of
+]s/m[
+V
+2.2
+1.8
+1.4
+1
+0.6
+0.2 1 4 5 6
+Obstacle
+(a)V
+]m[pwd
+(b)dwp
+Fig. 11. Task performance. Obstacles 2 and 3 did not have smoke plumes
+servingaswaypoints.TPcodingisdescribedinTableIII.
+Similar to V, the minimum distance to waypoints, d ,
+wp
+was not influenced by TP, but affected by OB (OB: F =
+3,33
+296.79,p≤0.01), see Fig. 11b. Moreover, it can be seen that
+d followed the same trend as n and obstacles
+wp collisionsOB
+with more collisions had higher d . This provides additional
+wp
+evidencethatsubjectsemployedaconservativecontrolstrategy
+when tackling difficult obstacles.
+3) Control activity: The standard deviation of the longi-
+tudinal side-stick deflection rate, σ , is shown in Fig. 12a.
+δ˙
+p For all obstacles, σ was the smallest for NHF and the
+δ˙
+p largest for OT (TP: F = 19.56,p ≤ 0.01). The roll
+1.33,14.59
+stick deflection rate σ was the lowest for obstacle 2 (OB:
+δ˙
+p F =42.80,p≤0.01).
+1.93,21.27
+Inthelateraldirection,Fig.12b,σ wasthehighestforthe
+δ˙
+r OT controller (TP: F = 17.57,p ≤ 0.01). Similar to the 3,33
+longitudinal direction, post-hoc tests revealed no differences
+between UT and RT for σ . Since turning was not necessary
+δ˙
+r tocompleteobstacle2,thisobstacleresultedinthelowestσ δ˙
+r (OB: F =25.95,p≤0.01). 1.93,21.27
+0.6
+0.5
+0.4
+0.3
+0.2
+0.1
+0
+1 2 3 4 5 6
+Obstacle
+]s/dar[
+δ˙σ
+0.45
+0.35
+0.25
+0.15
+0.05
+1 2 3 4 5 6
+Obstacle
+(a)σ δ˙
+p
+]s/dar[
+δ˙σ
+(b)σ δ˙
+r
+2.6
+2.2
+1.8
+1.4
+1
+0.6
+0.2
+1 2 3 4 5 6
+Obstacle
+]mN[
+GMσ
+0.7
+0.6
+0.5
+0.4
+0.3
+0.2
+0.1
+1 2 3 4 5 6
+Obstacle
+(c)σMGp
+]mN[
+GMσ
+(d)σMGr
+Fig.12. Controlandhapticactivity.CodingisdescribedinTableIII.
+
+--- Page 11 ---
+
+10 IEEETRANSACTIONSONHUMAN-MACHINESYSTEMS
+4) Haptic activity: The standard deviation of the longi-
+tudinal haptic guidance moment, σ , shown in Fig. 12c,
+MGp
+increased with increasing strength of the haptic controller
+(TP: F = 75.88,p ≤ 0.01). Post-hoc tests showed 1.35,14.87
+differences between all three haptic controllers (p≤0.01). In
+terms of OB, variations increased from obstacle 1 to 6 (OB:
+F =6.50,p≤0.05). 2.66,29.24
+Standard deviation of the lateral haptic guidance moment,
+σ , are much greater for obstacles 4-6 when compared to MGr
+obstacles 1-3 (OB: F =9.57,p≤0.01), see Fig 12d. The 2,22
+OT tuning produced the largest σ for all obstacles (TP: MGr
+F =9.57,p≤0.01). Post-hoc tests showed no differences 2,22
+between UT and RT controllers.
+2
+1.5
+1
+0.5
+0 1 2 3 4 5 6
+Obstacle
+]mN[
+smrM
+0.7
+0.6
+0.5
+0.4
+0.3
+0.2
+0.1
+1 2 3 4 5 6
+Obstacle
+(a)Mrmsp
+]mN[
+smrM
+(b)Mrmsr
+0.7
+0.6
+0.5
+0.4
+0.3
+0.2
+1 2 3 4 5 6
+Obstacle
+]1-0[
+ngsM
+0.8
+0.7
+0.6
+0.5
+0.4
+0.3
+0.2
+1 2 3 4 5 6
+Obstacle
+(c)Msgnp
+]1-0[
+ngsM
+ofTPonM (TP:F =26.35,p≤0.01).Obstacle1and
+sgn 4,44
+p
+3exhibitedhighdirectionalagreement,butagreementwasfell
+sharply for obstacles 4-6 (OB: F =231.75,p≤0.01).
+5,55
+Lateral directional agreement, M , is shown in Fig. 13d. sgn
+r
+Itcanbeseenthatlateraldirectionalagreementis,onaverage,
+greater than for the longitudinal direction. Obstacle 3 resulted
+in the highest lateral directional agreement as the UAV was
+required to fly backwards, forcing subjects to rely on haptic
+cues to avoid obstacles outside their lateral field of view.
+Obstacles 1 and 6 also resulted in much higher directional
+agreementsthanotherobstacleasthesetwoobstaclesinvolved
+sharp90o turnswhich,whilemakingtheturn,obscuredvisual
+position of obstacles. These findings yield a significant effect
+of OB on M (OB: F =76.813,p≤0.01). Concerning
+sgn 5,55 r
+the relationship with TP, lateral directional agreement deteri-
+orated with increasing strength of the haptic controller (TP:
+F =10.38,p≤0.01). 4,44
+6) Subjective questionnaires: Fig. 14a displays overall
+workload, orZ-score,computed usingtheNASATLXsubjec-
+tive questionnaire. Here a lower subjective rating symbolizes
+lower workload. The Friedman test showed that there was
+an effect of TP on overall workload (TLX: χ2(3) = 18.10,
+p ≤ 0.01). Post-hoc analysis revealed that the differences
+were caused by the extreme conditions, NHF and OT, which
+had the highest workload levels. However, no substantial
+differences were recorded between UT and RT, and these
+two controllers led to the lowest measured workload. The six
+100 100 100
+80 80 80
+60 60 60
+40 40 40
+20 20 20
+(d)Msgnr 0 NHF UT RT OT 0 NHF UT RT OT 0 NHF UT RT OT
+Fig.13. Hapticcontrolleragreement.CodingisdescribedinTableIII.
+(a)TLXZ (b)TLXMental (c)TLXPhysical
+100 100 100
+5) Haptic Controller Agreement: Longitudinal agreement
+80 80 80
+of the haptic moment magnitude, M , is shown in Fig. 13a. 60 60 60
+rmsp
+OT was found to have the highest value for M , and 40 40 40
+rmsp 20 20 20
+consequentlythelowestmagnitudeagreementofallcontrollers
+0 0 0
+NHF UT RT OT NHF UT RT OT NHF UT RT OT
+(TP: F = 49.35,p ≤ 0.01). With respect to OB,
+1.70,18.67 (d)TLXTemporal (e)TLXPerformance (f)TLXEffort
+obstacle 1 resulted in highest magnitude agreement while it
+was lowest for obstacle 6 (OB: F 2.24,24.55 = 5.45,p ≤ 0.01). 100 4 4
+As the differences between controllers is more evident for ob- 80 3 3
+60
+stacles4-6,atwo-wayinteractionwasalsoobserved(TP×OB: 2 2
+40
+F 3.59,39.53 =10.99,p≤0.01). 20 1 1
+For the haptic moment magnitude agreement in the lateral 0 NHF UT RT OT 0 NHF UT RT OT 0 UT RT OT
+direction, M rmsr , in Fig. 13b, OT had the lowest lateral (g)TLXFrustration (h)SA (i)HA
+magnitude agreement (TP: F = 13.17,p ≤ 0.01). When
+4,44 Fig. 14. Subjective metrics: NASA TLX, Situational Awareness (SA), and
+compared to the longitudinal direction, magnitude agreement HapticAcceptance(HA).
+is higher for M . However, variations between controllers
+rmsr
+increase for obstacle 4-6 yielding a significant two-way inter- workload sources of the NASA TLX are pictured in Figs. 14b
+action (TP×OB: F = 2.124,p ≤ 0.01), and as these to 14g. Mental load (ML) and effort (EF) for UT/RT were
+20,220
+three obstacle also caused lower magnitude agreement (SB: reduced compared to NHF (ML: χ2(3) = 16.20, p ≤ 0.01;
+F =46.36,p≤0.01). EF: χ2(3) = 15.91, p ≤ 0.01). However, physical load
+5,55
+Directional agreement of longitudinal haptic moments is (PL) continued to be higher for the novel tuning method,
+assessedusingM ,inFig.13c,withlargervalues implying and increased with the strength of the haptic controller, a
+sgn
+p
+greater agreement. Highest directional agreement was found significant effect (PL: χ2(3) = 25.23, p ≤ 0.01). Despite
+for UT, and the lowest for OT, resulting in a significant effect improvements in performance, frustration and temporal load
+
+--- Page 12 ---
+
+SMISEKetal.:NEUROMUSCULARSYSTEMBASEDTUNINGOFAHAPTICSHAREDCONTROLINTERFACEFORUAVTELEOPERATION 11
+for UT/RT, TP effects were not significant. under-tuning the haptic controller (up to half the strength of
+Box plots for subjective situational awareness (SA) and the relax task controller) might provide a preferred option,
+haptic feedback acceptance (HA) are given in Figs. 14h sincetheoperatorneedstoactivelyagreeandcomplywiththe
+and 14i. Here, higher subjective ratings imply better SA and guidance tocorrectlyfollowaprescribedtrajectory(withinga
+HA. A Friedman test showed an effect of TP on SA, with range of acceptable trajectories). However, if failing to follow
+the highest and lowest median SA recorded for RT and NHF thehapticguidancemightleadtoanaccident,aswithcollision
+respectively (SA: χ2(3) = 11.58, p ≤ 0.01). A similar trend avoidance systems, relax task tuning presents a better alter-
+was found for HA, with the highest acceptance for UT and native. Such tuning ensures a successful collision avoidance,
+RT, and the lowest for OT (HA: χ2(2)=8.21, p≤0.05). unless the operator, by stiffening up, actively disagrees.
+V. DISCUSSION Safety and performance alone are poor tuning metrics
+The main objective of this study is to provide a system- As formulated in the first hypothesis the number of colli-
+atic and validated approach for tuning Haptic Shared Con- sionswaslowerforstrongertuningprofile(TP).Theobserved
+trol (HSC) systems based on estimated admittance of the decrease, Fig. 10a, however, was not found to be statistically
+neuromuscular system (NMS), and – more specifically – to significant. The sample size used in this study (n = 12) was
+advocate the choice of the relax task admittance as the setting higher than the minimal n = 5 for a sufficient statistical
+min
+with the minimal required operator workload. To this end, a power 1−β = 0.8 estimated based on effects observed in
+human-in-the-loop experiment simulating UAV teleoperation somesimilarhapticcollisionavoidanceexperiments[14],[15].
+wasperformedtovalidatethetuningprocedure.Thefollowing However, total n for all conditions and participants
+collisions
+effects were observed: in this study was substantially lower than in those previous
+studies. Based on the observed effect sizes, a recommended
+sample size for a future study would be n = 20. The low
+NMS based tuning works as a systematic method min
+n might be partially attributed to putting a strong
+collisions
+In general, subjective workload and situational awareness
+emphasis on avoiding collisions during the task instructions
+improved significantly for the under-tuned and the relax-task
+and to the addition of the twenty second collision penalty.
+tuned haptic controllers when compared to manual control.
+Based on the results, and in accordance with the second
+Additionally, over-tuning the haptic controller, as is might
+hypothesis, TP had no measurable effect on performance.
+be the case for heuristic tuning methods optimizing for
+This may be due to subjects adapting their control strategies
+safety [14], yields lower user acceptance than the condition
+to ensure that task instructions are followed with similar
+with no haptic support. These results indicate that including
+performance for all TPs. This also suggests, that it would
+UT/RTneuromuscularresponseinthehapticcontrollertuning
+difficulttoselectanappropriatetuningsettingusingsafetyand
+procedure indeed improves overall user acceptance.
+performance metrics alone, whereas different tuning profiles
+do result in other differences.
+Over-tuning increases workload even over no haptic feedback
+The results of the three subjective questionnaires indicate The NMS admittance identification stage can be shortened
+thatacceptanceofhapticcuesincreasedforUTandRThaptic In accordance with findings of a previous study [32], the
+controllers, supporting the third hypothesis. The reduction of measured admittance responses of all subjects over tested
+overall NASA TLX workload for UT/RT compared to NHF conditions, Fig. 5, were similar. Moreover, the influence of
+can be traced back to a reduction of mental load and effort. bias force magnitude and direction followed a similar trend
+This is in sharp contrast to earlier research where haptic cues for all participants. This suggests, that to obtain a sufficient
+contributed negatively towards mental load and effort [15]. setof representative admittance measurements, for instance in
+Over-tuning the controller was found to be more detrimental a future practical application, a lower number of subjects and
+than providing no haptic support at all. This supports the no- tested conditions could be used. The individual differences
+tionthatincorrecttuningcanadverselyimpactuseracceptance in the identified NMS setting fit within the UT/RT range,
+of HSC systems, and our formal tuning method provides a suggesting that there might be only little to gain in perusing
+non-heuristic approach that prevents such incorrect tuning. an operator-individualized NMS tuning.
+The optimal tuning range is relatively broad Haptics is appreciated when no visual feedback is available
+Formostdependentvariables,nostatisticaldifferenceswere Due to the limited lateral camera field of view supplied
+foundbetweentheadmittancecharacteristicsoftheunder-and during the experiment, subjects had a greater appreciation
+relax-task tuned controllers; but both led to improved user for lateral haptic cues. It is interesting to note, that haptic
+acceptance relative to manual control. activitydecreasedinthelateraldirection,whilecontrolactivity
+The design space available for selecting an appropriate was found to be higher. Also the haptic controller agreement
+tuningprofileisbroaderthanexpectedandifeitheroneshould results show that agreement between the teleoperator and the
+be preferred remains an open questions. Selection between haptic controller, both in terms of magnitude and direction of
+the two tunings might be task specific. For tasks where the haptic moments, was better in the lateral direction. Due to
+operator should be actively involved, e.g., in car driving [5], the feedback architecture of the system, greater lateral stick
+
+--- Page 13 ---
+
+12 IEEETRANSACTIONSONHUMAN-MACHINESYSTEMS
+motion combined with a decrease in lateral haptic activity [9] P.W.Merlin,CrashCourse:LessonsLearnedfromAccidentsInvolving
+impliesthatsubjectsweremorewillingtofollowlateralhaptic Remotely Piloted and Autonomous Aircraft, ser. NASA Aeronautics
+BookSeries. NationalAeronauticsandSpaceAdministration,2013.
+cues.Thismaybeduetoinsufficientlateralvisualcues,forcing
+[10] A. Franchi, C. Secchi, M. Ryll, H. H. Bu¨lthoff, and P. Giordano,
+subjects to rely on lateral haptic moments: for obstacles with “Shared Control: Balancing Autonomy and Human Assistance with a
+sharp turns (obstacles 1, 4, 5 and 6) or when visual cues from Group of Quadrotor UAVs,” IEEE Robotics & Automation Magazine,
+vol.19,no.3,pp.57–68,Sep.2012.
+the camera were not in the direction of motion (obstacle 3).
+[11] A. M. Brandt and M. B. Colton, “Haptic collision avoidance for a
+In the longitudinal direction, however, differences between remotely operated quadrotor uav in indoor environments,” in IEEE
+the provided haptic and visual cues apparently led to ‘goal’ International Conference on Systems Man and Cybernetics, Istanbul,
+2010,pp.2724–2731.
+related conflicts. These conflicts need to be addressed in the
+[12] H.I.Son,J.Kim,L.Chuang,A.Franchi,P.Giordano,D.Lee,andH.H.
+future to further improve user acceptance of HSC systems. Bu¨lthoff,“Anevaluationofhapticcuesonthetele-operator’sperceptual
+Control activity was lower than in the lateral direction, which awareness of multiple UAVs’ environments,” in IEEE World Haptics
+Conference,Istanbul,2011,pp.149–154.
+can be attributed to the continuous corrective lateral stick
+[13] S. M. Alaimo, L. Pollini, M. Innocenti, J. P. Bresciani, and H. H.
+inputs required to meet the secondary objective of flying Bu¨lthoff, “Experimental comparison of direct and indirect haptic aids
+through the center of waypoints. insupportofobstacleavoidanceforremotelypilotedvehicles,”Journal
+of Mechanics Engineering and Automation, vol. 2, pp. 2159–5275,
+2012.
+VI. CONCLUSIONANDRECOMMENDATIONS
+[14] T.M.Lam,“HapticinterfaceforUAVTeleoperation,”Ph.D.dissertation,
+We experimentally verified the effectiveness of using a DelftUniversityofTechnology,2009.
+[15] T. M. Lam, M. Mulder, and M. M. van Paassen, “Haptic Interface
+formal tuning method for haptic shared controllers, based
+For UAV Collision Avoidance,” The International Journal of Aviation
+on relax-task setting of the neuromuscular system. For the Psychology,vol.17,no.2,pp.167–195,2007.
+studied conditions, we conclude that: 1) tuning based on [16] T. M. Lam, H. W. Boschloo, M. Mulder, and M. M. van Paassen,
+“ArtificialForceFieldforHapticFeedbackinUAVTeleoperation,”IEEE
+safety and performance metrics alone would be difficult and
+Transactions on Systems, Man and Cybernetics, Part A: Systems and
+the neuromuscular knowledge should be included; 2) tuning Humans,vol.39,no.6,pp.1316–1330,2009.
+based on the relax task NMS setting was appreciated by the [17] D. A. Abbink, D. Cleij, M. Mulder, and M. M. van Paassen, “The
+importance of including knowledge of neuromuscular behaviour in
+operators, with both physical and mental workload reduced;
+hapticsharedcontrol,”inSystems,Man,andCybernetics(SMC),2012
+3) this tuning optimum is; however, not sharp and both the IEEEInternationalConferenceon. IEEE,2012,pp.3350–3355.
+under-tuned and the relax-task-tuned systems behaved equally [18] D.A.AbbinkandM.Mulder,“Neuromuscularanalysisasaguideline
+well in the tested conditions and thus the requirements for the in designing shared control,” Advances in haptics, vol. 109, pp.
+499–516,2010.
+identification procedure could be reduced; 4) haptic feedback
+[19] E. Sunil, “Tuning of a haptic collision avaoidance system for UAV
+is most effective in directions with limited visual feedback; 5) teleoperation: Preliminary Report,” Faculty of Aerospace Engineering,
+in contrast, haptic feedback provided in the forward direction, TUDelft,Delft,Preliminary,Aug.2013.
+[20] D.A.Abbink,“NeuromuscularAnalysisofHapticGasPedalFeedback
+where the operator had a good view, was more often opposed
+during Car Following,” PhD, Delft University of Technology, Delft,
+by the operators. Ways to minimize these conflicts should be 2006.
+investigated in future research. [21] E.DeVlugt,“IdentificationofSpinalReflexes,”Ph.D.dissertation,Delft
+UniversityofTechnology,Delft,2004.
+[22] W.Mugge,D.A.Abbink,A.C.Schouten,J.P.A.Dewald,andF.C.T.
+REFERENCES
+van der Helm, “A rigorous model of reflex function indicates that
+[1] P.G.GriffithsandR.B.Gillespie,“SharingControlBetweenHumans position and force feedback are flexibly tuned to position and force
+and Automation Using Haptic Interface: primary and secondary task tasks,” Experimental Brain Research, vol. 200, no. 3-4, pp. 325–340,
+performance benefits,” Human Factors: The Journal of the Human Jan.2010.
+FactorsandErgonomicsSociety,vol.47,no.3,pp.574–590,2005. [23] M.D.Penna,M.M.VanPaassen,D.Abbi,M.Mulder,M.Mulder,and
+[2] D. A. Abbink, M. Mulder, and E. R. Boer, “Haptic shared control: others, “Reducing steering wheel stiffness is beneficial in supporting
+smoothly shifting control authority?” Cognition, Technology & Work, evasive maneuvers,” in Systems Man and Cybernetics (SMC), 2010
+vol.14,no.1,pp.19–28,2012. IEEEInternationalConferenceon. IEEE,2010,pp.1628–1635.
+[3] G.Baxter,J.Rooksby,Y.Wang,andA.Khajeh-Hosseini,“Theironies [24] T.Tsuji,P.G.Morasso,K.Goto,andK.Ito,“Humanhandimpedance
+of automation: still going strong at 30?” in Proceedings of the 30th characteristics during maintained posture,” Biological Cybernetics,
+European Conference on Cognitive Ergonomics, Edinburgh, 2012, pp. vol.72,no.6,pp.475–485,1995.
+65–71. [25] W.Mugge,D.A.Abbink,andF.C.T.vanderHelm,“Reducedpower
+[4] M. Olivari, F. M. Nieuwenhuizen, H. H. Bu¨lthoff, and L. Pollini, method: how to evoke low-bandwidth behaviour while estimating full-
+“Pilot Adaptation to Different Classes of Haptic Aids in Tracking bandwidth dynamics,” in International Conference on Rehabilitation
+Tasks,” Journal of Guidance, Control, and Dynamics, vol. 37, no. 6, Robotics,Noordwijk,2007,pp.575–581.
+pp.1741–1753,Nov.2014. [26] A. Schouten, E. de Vlugt, and F. van der Helm, “Design of
+[5] D. A. Abbink and M. Mulder, “Exploring the Dimensions of Haptic Perturbation Signals for the Estimation of Proprioceptive Reflexes,”
+Feedback Support in Manual Control,” Journal of Computing and IEEE Transactions on Biomedical Engineering, vol. 55, no. 5, pp.
+InformationScienceinEngineering,vol.9,no.1,p.011006,2009. 1612–1619,May2008.
+[6] D. A. Abbink, M. Mulder, F. C. T. van der Helm, M. Mulder, and [27] J.S.BendatandA.G.Piersol,Randomdata:analysisandmeasurement
+E. R. Boer, “Measuring Neuromuscular Control Dynamics During Car procedures,2nded. NewYork:Wiley,1986.
+Following With Continuous Haptic Feedback,” IEEE Transactions on [28] F.C.T.vanderHelm,A.C.Schouten,E.DeVlugt,andG.G.Brown,
+Systems,Man,andCybernetics,PartB:Cybernetics,vol.41,no.5,pp. “Identification of intrinsic and reflexive components of human arm
+1239–1249,Oct.2011. dynamics during postural control,” Journal of Neuroscience Methods,
+[7] J. Smisek, M. M. van Paassen, M. Mulder, and D. A. Abbink, vol.119,no.1,pp.1–14,2002.
+“Neuromuscular analysis based tuning of haptic shared control [29] E.J.Perreault,R.F.Kirsch,andP.E.Crago,“Effectsofvoluntaryforce
+assistanceforUAVcollisionavoidance,”inWorldHapticsConference, generationontheelasticcomponentsofendpointstiffness,”Experimen-
+2013,pp.389–394. talBrainResearch,vol.141,no.3,pp.312–323,2001.
+[8] E. Sunil, J. Smisek, M. M. van Paassen, and M. Mulder, “Validation [30] J.Smisek,E.Sunil,M.M.V.Paassen,D.A.Abbink,andM.Mulder,
+of a tuning method for haptic shared control using neuromuscular “Humanoperatorlimbneuromuscularadmittanceidentifiedonaspring-
+systemanalysis,”inSystems,ManandCybernetics(SMC),2014IEEE centered control interface,” [Dataset], DOI: 10.4121/uuid:cb7ddb1c-
+InternationalConferenceon. IEEE,2014,pp.1499–1504. 0bda-4434-a0b6-e8a31a071ac7,TUDelft,2016.
+
+--- Page 14 ---
+
+SMISEKetal.:NEUROMUSCULARSYSTEMBASEDTUNINGOFAHAPTICSHAREDCONTROLINTERFACEFORUAVTELEOPERATION 13
+[31] B.H.Krogh,“Ageneralizedpotentialfieldapproachtoobstacleavoid- MaxMulderreceivedtheM.Sc.andPh.D.degrees
+ancecontrol,”SocietyofManufactuingEngineers,Tech.Rep.,1984. (cumlaude)inaerospaceengineeringfromtheDelft
+[32] J.Lasschuit,T.Lam,M.Mulder,M.M.vanPaassen,andD.A.Abbink, University of Technology, Delft, The Netherlands,
+“MeasuringandModelingNeuromuscularSystemDynamicsforHaptic in1992and1999,respectively,withafocusonthe
+Interface Design,” in AIAA Modeling and Simulation Technologies cyberneticsoftunnel-in-the-skydisplays.Heiscur-
+Conference,Honolulu,2008. rentlyaFullProfessorandtheHeadoftheControl
+[33] S. G. Hart and L. E. Staveland, “Development of NASA-TLX (Task andSimulationDivision,FacultyofAerospaceEngi-
+Load Index): Results of Empirical and Theoretical Research,” Human neering,DelftUniversityofTechnology.Hiscurrent
+MentalWorkload,vol.1,no.3,pp.139–183,1988. researchinterestsincludecyberneticsanditsusein
+[34] E. Jeannot, C. Kelly, and D. Thompson, The development of situation modeling human perception and performance, and
+awarenessmeasuresinATMsystems. Brussels:Eurocontrol,2003. cognitivesystemsengineeringanditsapplicationin
+[35] A. Field, Discovering Statistics using IBM SPSS Statistics. London: thedesignof“ecological”human–machineinterfaces.
+Sage,2013.
+JanSmisek(S’14)receivedtheM.Sc.degree(cum
+laude) in Systems and Control from the Czech
+TechnicalUniversityinPrague,CzechRepublic,in
+2011. Currently, he is working towards the Ph.D.
+degree at the Delft University of Technology, the
+Netherlands. He is also a Robotics Engineer at the
+Telerobotics and Haptics lab, with the European
+Space Research and Technology Centre (ESTEC)
+of the European Space Agency (ESA), situated in
+Noordwijk, the Netherlands. His research interests
+includeteleoperationandsharedautonomy.
+Emmanuel Sunil received the M.Sc. degree in
+AerospaceEngineering(cumlaude)fromTUDelft
+in 2014, for his work on a haptic interface for
+unmanned aircraft collision avoidance. During his
+M.Sc. program, he did an internship at the Max
+Planck Institute for Biological Cybernetics in Tub-
+ingen, Germany. He is currently working as Ph.D.
+studentattheControlandSimulationsectionofthe
+faculty of Aerospace Engineering, TU Delft. His
+research focuses on airspace design, airborne sep-
+arationassuranceandairspacecapacitymodeling.
+DavidA.Abbink(M’12–SM’14)receivedtheM.Sc.
+and Ph.D. degrees in mechanical engineering from
+the Delft University of Technology, Delft, The
+Netherlands, in 2002 and 2006, respectively. He is
+an Associate Professor with the Delft Haptics Lab-
+oratory,DelftUniversityofTechnology.Hiscurrent
+research interests include neuromuscular behavior,
+driversupportsystems,andhaptics.Dr.Abbinkisan
+associateeditoroftheIEEETransactionsonHuman-
+MachineSystem.
+MarinusM.(Rene´)vanPaassen(M’08–SM’15)re-
+ceivedtheM.Sc.degree(cumlaude)fromtheDelft
+University of Technology, Delft, The Netherlands,
+in 1988, and a Ph.D. in 1994, both on studies into
+the neuromuscular system of the pilot’s arm. He
+is an associate professor in Aerospace Engineering
+at the Delft University of Technology, working on
+human machine interaction and aircraft simulation.
+Hisworkonhuman-machineinteractionrangesfrom
+studies of perceptual processes, haptics and haptic
+interfaces and human manual control to design of
+and interaction with complex cognitive systems. Rene´ is a senior member
+of IEEE and of AIAA, and an associate editor for IEEE Transactions on
+Human-MachineSystem.
+View publication stats

@@ -1,0 +1,461 @@
+
+
+--- Page 1 ---
+
+Noise computation for future urban
+air traffic systems
+Customer
+National Aerospace Laboratory NLR
+NLR-TP-2015-289 - July 2015
+
+--- Page 2 ---
+
+National Aerospace Laboratory NLR
+Anthony Fokkerweg 2
+1059 CM Amsterdam
+The Netherlands
+Tel +31 (0)88 511 3113
+www.nlr.nl
+
+--- Page 3 ---
+
+UNCLASSIFIED
+EXECUTIVE SUMMARY
+Noise computation for future
+urban air traffic systems
+Report no.
+NLR-TP-2015-289
+Author(s)
+M. Arntzen
+R. Aalmoes
+F.J.L. Bussink
+E. Sunil
+J. Hoekstra
+Report classification
+UNCLASSIFIED
+Date
+Problem area
+July 2015
+The increasing popularity of Unmanned Aerial Vehicles (UAVs)
+Knowledge area(s)
+and Personal Air Vehicles (PAVs) is hypothesized to lead to a
+Aircraft Noise
+change of future urban environments. Within the EU Metropolis
+project, future air traffic systems are designed to cope with the Descriptor(s)
+Future urban noise
+expected high amount of traffic. This report describes the
+RPAS
+expected noise impact for the different air space design concepts.
+Air traffic system
+Description of work
+Within the EU Metropolis project, four different air space design
+concepts are studied: a Full Mix scenario, a Layered concept, a
+Zonal concept and a Tubes concept. Each concept commands a
+different way of navigating a vehicle through the urban
+environment without colliding in other UAVs or PAVs. Since the
+noise impact of such aircraft is yet unknown, or not disclosed by
+manufacturers, source noise levels were assumed to equal levels
+that are maximally allowed by the FAA. This is a crude
+approximation but allows to make a first assessment on the noise
+impact. Furthermore, the decay of sound levels as function of
+distance was modelled using NPD-curves from INM.
+This report is based on a presentation to be held at the Internoise conference, 9-12 august
+UNCLASSIFIED in San Francisco (USA), 2015.
+
+--- Page 4 ---
+
+N oise computation for future urban air traffic systems UNCLASSIFIED
+Results and conclusions
+Since a lot of traffic was simulated, the noise model was tailored
+to be fast. All individual flights were calculated on a relevant grid
+part of the urban environment. These results were accumulated
+to generate the overall noise impact expressed in LDEN footprints
+and noise contours. The footprints showed the basic structure of
+each airspace design concept. For instance, the zonal concept
+displayed clear radials and circular arcs along which the sound
+levels would intensify. The tubes concept spreads out the sound
+very evenly, although it results were hampered by air traffic
+capacity issues. The full mix and layered concept provided the
+least noise nuisance on the ground. The layered concept
+outperformed the full mix concept slightly in terms of noise
+exposure on the ground.
+Applicability
+The demonstrated methodology can be used to assess future air
+traffic noise environments in high density traffic situations. The
+results show that a careful design of the airspace structure can
+control noise nuisance in futuristic urban environments.
+National Aerospace Laboratory NLR
+Anthony Fokkerweg 2, 1059 CM Amsterdam,
+P.O. Box 90502, 1006 BM Amsterdam, The Netherlands
+Telephone +31 (0)88 511 31 13, Fax +31 (0)88 511 32 10, www.nlr.nl UNCLASSIFIED
+
+--- Page 5 ---
+
+Noise computation for future
+urban air traffic systems
+M. Arntzen, R. Aalmoes, F.J.L. Bussink, E. Sunil1 and
+J. Hoekstra1
+1 TU Delft
+Customer
+National Aerospace Laboratory NLR
+July 2015
+
+--- Page 6 ---
+
+Noise computation for future urban air traffic systems
+This report is based on a presentation to be held at the Internoise conference, 9-12 august in San Francisco
+(USA), 2015.
+The contents of this report may be cited on condition that full credit is given to NLR and the authors.
+Customer National Aerospace Laboratory NLR
+Contract number 2043107
+Owner European Commission
+Division NLR Air Transport
+Distribution Unlimited
+Classification of title Unclassified
+Date July 2015
+Approved by:
+Author Reviewer Managing department
+M. Arntzen D. Bergmans F.J.J.M. Hermans
+Date Date Date
+2 | NLR-TP-2015-289
+
+--- Page 7 ---
+
+Content
+1 Introduction 5
+2 Study setup 6
+2.1 Traffic 6
+2.2 Source Noise Levels 7
+2.3 Propagation Transmission Loss 7
+2.4 Noise Metrics 8
+3 Results & Discussion 8
+4 Conclusions 11
+5 Acknowledgements 12
+6 References 12
+NLR-TP-2015-289 | 3
+
+--- Page 8 ---
+
+Noise computation for future urban air traffic systems
+Noise computation for future urban air traffic systems
+Michael Arntzena)
+Roalt Aalmoes
+Environment & Policy support department, NLR
+Anthony Fokkerweg 2, 1059 CM, Amsterdam, the Netherlands
+Frank Bussink
+Cockpit & Flight Operations, NLR
+Anthony Fokkerweg 2, 1059 CM, Amsterdam, the Netherlands
+Emmanuel Sunil
+Jacco Hoekstra
+Communication, Navigation, Surveillance/Air Traffic Management, TU Delft
+Kluyverweg 1, 2629 HS, Delft, the Netherlands
+The development of Personal aerial vehicles and unmanned aerial vehicles are expected to
+have a considerable influence on the development of future airspace design around large
+cities. In the Metropolis project, four different concepts for airspace design are assessed for
+a (metropolitan) city of the future. The different noise impact on the ground is addressed in
+this paper. The noise model is based on the maximum allowable source noise levels as
+proposed by the Federal Aviation Authority, as actual noise data from the considered
+aircraft is not available. Transmission loss has been modelled using Noise-Power-Distance
+relations from the Integrated Noise Model. The resulting noise model shows remarkable
+different noise footprints between the four concepts and between different traffic patterns,
+which included both converging and diverging flows. The layered airspace structure
+provided the lowest noise impact on the ground.
+a) Email: Michael.arntzen@nlr.nl, also affiliated with the Aircraft Noise & Climate Effects group of the TU Delft.
+4 | NLR-TP-2015-289
+
+--- Page 9 ---
+
+1 INTRODUCTION
+The popularity and availability of Unmanned and Personal Aerial Vehicles (UAVs and
+PAVs) has increased in the past years. Furthermore, these means of transportation have been
+proposed as alternatives for road traffic and may become more common in a future air
+transportation system. This leads to the question if the airspace can accommodate a large number
+of these flying vehicles safely. Within the Metropolis project (EU FP7) four different airspace
+structure concepts were designed and put to the test in rather extreme traffic densities [1]. Each
+concept uses a Self-Separation system to allow each vehicle execute conflict detection and
+resolution, i.e. safe flight. However, the different airspace concepts generate, even with the same
+source and destinations for the traffic, very different movements in the air.
+The first concept is the ‘Full Mix’ (FM) concept, which uses an unstructured airspace. Each
+individual vehicle is allowed to find its own path towards its destination. This can be a very
+efficient structure since each vehicle is allowed to fly a direct path between the origin and
+destination. Aircraft are also allowed to fly at their optimum altitude.
+The second concept is the ‘Layered’ (LAY) concept and can be regarded as an extension of
+the hemispheric rules [2]. The LAY concept creates horizontal layers (300 ft. high) of airspace in
+which flights are only allowed in a particular direction separated by 45 degrees of heading, i.e.
+layer 1 from 0-45 degree, layer 2 from 45-90 degrees, etcetera. See figure 1 (left) for an
+illustration of this concept. Thus, aircraft have to base their altitude (and also efficiency) based
+on their heading. However, within each layer the aircraft are headed in the same direction which
+theoretically leads to fewer conflicts.
+The third concept is the ‘Zonal’ concept (ZON). Within the ZON concept there are multiple
+rings, similar to city-rings allowing road traffic nowadays, around the city center of Metropolis.
+On these rings the traffic is allowed either to travel either a clockwise or anti-clockwise
+direction. There are inbound and outbound radials that lead traffic from and to the rings. The
+altitude of the vehicles is chosen by the vehicles themselves. See figure 1 (middle) for an
+illustration of this concept.
+The final, fourth concept, is the ‘Tubes’ concept (TUB). Within the TUB concept, the
+vehicles are assigned a 4-D tube in which they have to fly to reach their destination. The tubes at
+the same altitude do not intersect except at nodes, in which aircraft are allowed to travel in
+vertical and horizontal direction. In TUB all aircraft are a-priori de-conflicted by ground
+automation. See figure 1 (right) for an illustration of this concept.
+Fig. 1 - Impressions of the LAY concept (left), the ZON concept (middle) and TUB concept
+(right).
+NLR-TP-2015-289 | 5
+
+--- Page 10 ---
+
+Noise computation for future urban air traffic systems
+Hence, airspace concepts range from unstructured FM via LAY and ZON to the most
+structured TUB concept. Besides safety [3] and efficiency related parameters, as part of the
+environmental impact study, the noise impact was also considered. To calculate the noise level
+on the ground, information about the source noise level of each aircraft and associated
+propagation transmission loss is necessary. This information and noise calculations are typically
+implemented with noise assessment models such as the Integrated Noise Model (INM) [4].
+The Metropolis vehicles are not integrated in INM. Hence, a dedicated analysis was
+executed (similar to the approach of INM) to assess the noise impact. The resulting model should
+not be considered to predict the exact absolute noise levels of these futuristic scenarios due to
+constraints on available information. However, it does provide an indication of the differences in
+noise impact of the four airspace design concepts. This paper highlights the results from the
+noise study of the Metropolis project.
+2 STUDY SETUP
+2.1 Traffic
+The simulated Metropolis area was based on present-day Paris, i.e. 40x40 nautical miles.
+While traffic was simulated for the entire area, environmental metrics were logged for a smaller
+‘experimental area’ of 448 NM2. The actual traffic was simulated using the Traffic Manager
+(TMX) software from the NLR [5]. To simulate some of the ‘real-world’ intricacies, some
+random parameters such as wind and rogue aircraft (aircraft that did not conform to the airspace
+routing) were added.
+Different day-time periods and traffic densities have been simulated in the Metropolis
+project. The traffic pattern for morning, lunch and evening flights were severely different due to
+traffic headed to the city center (morning) or the other way around (evening). PAV traffic
+densities were also varied from low (2625 movements), medium (3375 movements), high (4125
+movements) to ultra (4875 movements). These movements are averaged instantaneous traffic
+volumes. The UAV traffic volume per hour can be considered (roughly) as half of the reported
+PAV values.
+The Metropolis project considered four vehicles, one UAV and three PAVs. The UAV is
+projected to be 2 meter in diameter and capable of carrying up to five average-sized packages for
+delivery of goods. Only the three PAVs were taken into account for the current noise analysis
+and were one (heavy) tilt-rotor vehicle, considered to be an alternative to a bus, and two light-
+weight ‘flying cars’, considered to be alternatives to either a car or a motorcycle. UAV
+movements are expected to occur only for short-ranges and where, consequently, in all four
+concepts allowed to operate by the FM ‘rules’. Hence, the UAVs trajectories were similar for all
+four concepts and are thus ignored in assessing the four concepts.
+The individual trajectories of each flight were analyzed and sorted. Parts of the flight
+trajectory below 1650ft were ignored: below that altitude the aircraft are landing or taking-off
+and are ignoring the airspace design concept rules. Therefore, it does not make a difference for
+the evaluation of these concepts if these movements are removed from the comparison.
+Figure 2 shows the simulated topology of the aircraft trajectories. The FM and LAY concept
+show rather similar trajectories, although notice that for the LAY concept the aircraft tend to fly
+at a higher altitude. The TUB concept shows a rather different structure, individual tubes can be
+picked out. The ZON concept show the circular arcs that aircraft fly on the clockwise and anti-
+clockwise rings.
+6 | NLR-TP-2015-289
+
+--- Page 11 ---
+
+Fig. 2 - The individual trajectories plotted for the four concepts. (FM: upper left, LAY: upper
+right, TUB: lower left and ZON, lower right; Red: tiltrotor, Blue and Green are flying cars)
+2.2 Source Noise Levels
+The source noise levels for the considered vehicles are unknown or not disclosed by their
+manufacturers. Hence, the FAA regulation [5, fig K4] for certification of tiltrotor aircraft was
+used to indicate the maximum allowable source noise level for the three aircraft. These sound
+levels depend on the maximum take-off weight of the aircraft. Consequently, the tiltrotor had
+higher source noise level (9-10 dB) than the two ‘flying cars’.
+These certification noise values are prescribed in the EPNdB noise metric. However, for
+our analysis the LAmax noise metric needs to be known and implied that a conversion was
+necessary. Hence, the certification values were converted to LAmax by using the difference in
+EPNdB and LAmax as found in INM’s Noise-Power-Distance (NPD) relations.
+2.3 Propagation Transmission Loss
+Noise levels decay as a function of distance during propagation by a transmission loss.
+Such a transmission loss is in INM inherently included in the NPD relations. A similar approach
+was created for the current analysis by adopting the noise decay trend from existing NPD
+relations. The tiltrotor used the NPD trend from a heavy (S-76) helicopter whereas the ‘flying
+cars’ were given the NPD trend belonging to a small aircraft (DA-20). The source noise
+dependency of each aircraft on thrust was not modeled due to uncertainty regarding the aircraft
+NLR-TP-2015-289 | 7
+
+--- Page 12 ---
+
+Noise computation for future urban air traffic systems
+noise production and a lack of data. Hence, the maximum allowed source noise from certification
+was thus taken, i.e. a worst case scenario. The noise impact is calculated for the ground-level, not
+the city high-rise (flat ground), to reduce the complexity in the calculations.
+2.4 Noise Metrics
+Three noise metrics were assessed:
+1. Time in specific altitude band
+2. Number Above 55 dB(A) contour (N55)
+3. LDEN noise footprints and contour area (70 LDEN)
+The first, time based, metric provides an assessment of the differences in time spend at
+specific altitudes. The idea is that whilst the aircraft is at a higher altitude, the nuisance on the
+ground is minimized.
+The N55 metric provides an indication on how audible the flyover events are. If the sound
+on the ground (LAmax) is more than 55 dB(A), the individual aircraft is assumed to be audible.
+Although higher values as limit could have been chosen, the 55 dB(A) limit is selected to
+balance a lower city background noise level and tonality that these aircraft (especially
+tiltrotors/propellers) are expected to exhibit. Contours are drawn for 400 events, i.e. 400 events
+where the noise level exceeded 55 dB(A), and the corresponding contour area is assessed.
+The LDEN is a noise metric measuring the cumulative effect of each individual flight
+passing through the experimental area. An LDEN footprint visualizes differences between the
+concepts and daytime periods. The day-evening-night multiplier of the LDEN metric is set to
+equal (day-time) events to allow a fair comparison between the time periods.
+3 RESULTS & DISCUSSION
+Results were examined for the different periods in the simulation: Morning, Lunch (middle
+of the day), and Evening. Figure 3 shows the resulting footprints for the morning scenario in case
+of the ultimate traffic density.
+The difference between the four concepts shown in Figure 3 is remarkable. The FM and
+LAY concept show a similar noise footprint pattern whereas the TUB and ZON concept show a
+footprint that is very different. In the TUB concept, the individual tubes can be picked out in the
+noise footprint whereas in the ZON footprint the circular arcs and radials are distinguishable.
+The noise footprint of the TUB concept lacks the distinctive high intensity at the origin
+(city center) but spreads noise more evenly. Since the number of flights accommodated by the
+TUB concept is lower than the others, due to capacity constraints, its results are not further
+analyzed in detail here because such a comparison is unfair.
+Differences between the FM and LAY concept include the lack of the high intensity area at
+the origin in the LAY concept. This can be caused by aircraft that need to ascend/descend
+quicker, compared to the FM concept, to reach a particular altitude/heading layer combination.
+This results in aircraft that fly at higher altitudes in the layer concept than in the FM concept and
+thus a reduced noise level at ground level. This also shows in the time metric results later in this
+section.During lunch-time in the scenario, the characteristics of each concept are retained. It
+seems that the only (slight) difference is that noise is reduced further away from the city center.
+Due to the small deviations, the figures for the lunch-time characteristics are not presented in this
+document. Figure 4 illustrates the results for the evening.
+8 | NLR-TP-2015-289
+
+--- Page 13 ---
+
+Fig. 3 - The LDEN footprints for the four airspace concepts for the morning (ultimate traffic
+density) scenario.
+Fig. 4 - The LDEN footprints for the four airspace concepts for the evening (ultimate traffic
+density) scenario.
+NLR-TP-2015-289 | 9
+
+--- Page 14 ---
+
+Noise computation for future urban air traffic systems
+If examined more closely, t here are differences between the morning (Figure 3) and
+evening scenario (Figure 4). The noise footprints of the FM and LAY concept show that more
+noise is present further away from the city. The LAY concept shows as well a small focus of
+noise near the city center.
+However, the largest difference can be found for the ZON concept. The radials are more ‘lit
+up’ in the noise footprint, indicating higher noise levels that also extend to the edge of the
+experiment area. Moreover, the noise level is higher near the city center.
+In essence, there are differences between the morning, lunch or evening scenario. The
+largest differences can be found between the morning and evening scenario but the characteristic
+noise footprint of each concept does not change dramatically during the time of the day. This is
+also observed for lower traffic densities, which was not included here for brevity.
+To quantify all the noise metrics, the N55 and LDEN footprints were converted into
+contours depicting a specific value, i.e. a contour where N55 equals 400 events and the 70 LDEN
+contour. The area enclosed by such a contour can be compared between the concepts. Such
+results are shown in table 1 for low and ultimate traffic densities.
+Table 1: A quantification of the contour areas for N55 and LDEN and the time spend below
+2000 ft. and above 4000 ft.
+N55 - 400 70 LDEN t <2000 ft. t >4000 ft.
+Concept Density km2 km2 hours hours
+Morning FM Low 24 0 142 209
+LAY Low 3 0 125 317
+TUB Low 0 1 295 236
+ZON Low 190 56 107 248
+Morning FM Ult 477 229 290 387
+LAY Ult 417 207 251 572
+TUB Ult 176 685 644 345
+ZON Ult 968 389 240 461
+Evening FM Low 106 5 143 210
+LAY Low 66 0 128 323
+TUB Low 0 0 207 169
+ZON Low 228 79 110 222
+Evening FM Ult 525 352 308 419
+LAY Ult 464 304 290 616
+TUB Ult 3 75 524 285
+ZON Ult 821 481 335 514
+Table 1 illustrates the results of the different concepts. Results for lunch time, medium and high
+densities have been left out for the sake of brevity. Furthermore, notice that the majority of the
+TUB concept has been greyed out. This is due to the fact that the amount of flights used in that
+concept was too low due to capacity constraints. As a result, these particular scenarios cannot be
+used in a comparison since the resulting noise impact is much lower.
+10 | NLR-TP-2015-289
+
+--- Page 15 ---
+
+There are several interesting observations resulting from table 1, amongst others:
+ The contour area of the N55 and LDEN metric of the LAY concept is the lowest (a
+smaller noise impact) for all daytime periods and densities if the TUB concept is ignored.
+ The differences between the contour area for the FM and LAY concept are reduced for a
+higher traffic density.
+ It is noticed that the LAY concept spends less time below 2000 ft. and more time above
+4000 ft. This is beneficial for noise impact since noise impact on the ground is lower at
+higher altitudes. (this explains why the LAY contours are smaller than the FM ones)
+ The ZON concept spends, for the majority of occasions, the least time below 2000 ft. but
+also exhibits, quite contradicting, the largest LDEN and N55 contour.
+It should be noted that in the current analysis, the ZON concept accommodated more flights (7%
+more) than the FM and LAY concept. This difference is not large enough to explain the larger
+contour area found of the ZON concept compared to the FM or LAY.
+4 CONCLUSIONS
+The current noise methodology is based on the regulatory limitation for tiltrotor noise to
+predict the source noise levels. As such, the absolute levels are likely to be off compared to the
+case when these vehicles would actually fly. However, it does allow evaluating differences that
+may be expected for the airspace design concept.
+Based on the LDEN footprints shown in figures 3 and 4 it is concluded that the spreading of
+the total amount of sound is different between the airspace concepts. The FM and LAY concept
+spread the noise impact very similar and show higher intensities near the busy origin (Metropolis
+center). Quite different is the footprint of the TUB concept that shows a very uniform spreading
+of noise over the grid. The ZON concept is again different as it shows higher sound intensities
+along the radials and circular arcs limiting the zones. In that sense, the ZON concept could be
+useful to dispense sound in particular areas of Metropolis.
+Based on the observations of table 1 it becomes clear that the LAY concept offers the
+smallest contour areas. The reported differences between the FM and LAY concept become
+smaller for higher traffic intensity. The fact that the LAY concept offers smaller noise contours
+than the FM concept can be associated with the fact that less time is being spent below 2000 ft.
+The TUB concept could not be quantified extensively due to the lower number of flights
+accommodated by that airspace concept. It remains unknown what the absolute noise levels
+would be if the same amount of traffic could have been accommodated. The ZON concept shows
+that, despite the least time spend below 2000 ft., that its contour areas is larger than that of the
+FM and LAY concept.
+Hence, the TUB and ZON concept exhibit characteristic footprints that are either uniformly
+spread (TUB) or condensed along radials and arcs (ZON). Footprints resulting from the LAY
+and FM concept are very similar. Based on the absolute size of the noise contours it is concluded
+that the LAY concept provides the lowest noise impact on the ground of the current Metropolis
+city.
+NLR-TP-2015-289 | 11
+
+--- Page 16 ---
+
+Noise computation for future urban air traffic systems
+5 ACKNOWLEDGEMENTS
+This research received funding from the Seventh Framework Programme of the European
+Commission under grant number 341508 (Metropolis).
+From the Metropolis project, the authors would like to thank Oliver Schneider, and Stefan
+Kern (both DLR), professor Daniel Delahaye, Georges Mykoniatis, and Andrija Vidosavljevic
+(all from ENAC), Joost Ellerbroek (TU Delft), and Dennis Nieuwenhuisen, Marieke
+Suijkerbuijk, and Pim van Leeuwen (all NLR) for their contribution for concept and scenario
+definition, and the simulation tracks that are used in the noise calculations.
+6 REFERENCES
+1. Metropolis: Relating Airspace Structure and Capacity for Extreme Traffic Densities, ´E.
+Sunil, J. Hoekstra, J. Ellerbroek, F. Bussink, D. Nieuwenhuisen, A. Vidosavljevic, S. Kern,
+11th USA/Europe ATM R&D seminar (ATM 2015).
+2. Rules of the air, ICAO, Annex 2, July 2005.
+3. A conceptual third party risk model for personal and unmanned aerial vehicles, R. Aalmoes,
+Y.S. Cheung, E. Sunil, J. Hoekstra, F. Bussink, ICUAS15, 6-9 June, Denver USA, 2015.
+4. Integrated Noise Model (INM) Version 7.0 Technical Manual, FAA-AEE-08-01, January
+2008.
+5. Traffic manager: a flexible desktop simulation tool enabling future ATM research, F.
+Bussink, J. Hoekstra, B. Heesbeen, Digital Avionics Systems Conference (DASC), 2005, vol
+1. P 3-B.
+6. Noise Certification Standards for Tiltrotors, FAA- 2013-00111, 78 FR 1133, January 2013.
+(https://federalregister.gov/a/2013-00111)
+12 | NLR-TP-2015-289
+
+--- Page 17 ---
+
+WHAT IS NLR?
+The NLR is a Dutch organisation that identifies, develops and applies high-tech knowledge in the
+aerospace sector. The NLR’s activities are socially relevant, market-orientated, and conducted
+not-for-profit. In this, the NLR serves to bolster the government’s innovative capabilities, while
+also promoting the innovative and competitive capacities of its partner companies.
+The NLR, renowned for its leading expertise, professional approach and independent consultancy, is
+staffed by client-orientated personnel who are not only highly skilled and educated, but also
+continuously strive to develop and improve their competencies. The NLR moreover possesses an
+impressive array of high quality research facilities.
+NLR – Dedicated to innovation in aerospace
+
+--- Page 18 ---
+
+www.nlr.nl

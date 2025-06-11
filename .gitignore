@@ -1,0 +1,72 @@
+# ========== Unity generated files ==========
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+MemoryCaptures/
+UserSettings/
+WorldCreator/
+Blender/
+Textures/
+Assets/Fonts/
+Assets/Packages/
+
+# ========== VSCode / Rider / MonoDevelop ==========
+.vscode/
+.idea/
+*.sln
+*.csproj
+*.pidb
+*.user
+*.unityproj
+*.booproj
+
+# ========== OS-generated files ==========
+.DS_Store
+Thumbs.db
+
+# ========== Auto-generated or cache files ==========
+*.swp
+*.bak
+*.tmp
+*.orig
+
+# ========== Unity cache ==========
+*.stackdump
+*.apk
+*.aab
+
+# ========== Crash/Debug logs ==========
+sysinfo.txt
+error.log
+crash.log
+
+# ========== Git LFS tracked files (optional if you're using LFS) ==========
+# NOTE: You still need to track these using `git lfs track "*.filetype"`
+*.psd
+*.fbx
+*.glb
+*.mp4
+*.wav
+*.tga
+*.tif
+*.jpg
+*.png
+*.zip
+*.unitypackage
+
+# ========== Builds & deploy artifacts ==========
+*.exe
+*.dll
+*.app
+*.so
+*.pdb
+
+# ========== Unity Collaborate (if used) ==========
+.collab/
+
+# ========== Rider logs (if used) ==========
+.idea/
+*.sln.iml

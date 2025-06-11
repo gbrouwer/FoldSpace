@@ -1,0 +1,1064 @@
+
+
+--- Page 1 ---
+
+Delft University of Technology
+Modeling the Intrinsic Safety of Unstructured and Layered Airspace Designs
+Tra, Martijn; Sunil, Emmanuel; Ellerbroek, Joost; Hoekstra, Jacco; Maas, Jerom
+Publication date
+2017
+Document Version
+Final published version
+Published in
+12th Seminar Papers
+Citation (APA)
+Tra, M., Sunil, E., Ellerbroek, J., Hoekstra, J., & Maas, J. (2017). Modeling the Intrinsic Safety of
+Unstructured and Layered Airspace Designs. In 12th Seminar Papers: 12th USA/Europe Air Traffic
+Management Research and Development Seminar
+Important note
+To cite this publication, please use the final published version (if applicable).
+Please check the document version above.
+Copyright
+Other than for strictly personal use, it is not permitted to download, forward or distribute the text or part of it, without the consent
+of the author(s) and/or copyright holder(s), unless the work is under an open content license such as Creative Commons.
+Takedown policy
+Please contact us and provide details if you believe this document breaches copyrights.
+We will remove access to the work immediately and investigate your claim.
+This work is downloaded from Delft University of Technology.
+For technical reasons the number of authors shown on this cover page is limited to a maximum of 10.
+
+--- Page 2 ---
+
+Twelfth USA/Europe Air Traffic Management Research and Development Seminar (ATM2017)
+Modeling the Intrinsic Safety of Unstructured
+and Layered Airspace Designs
+Martijn Tra, Emmanuel Sunil, Joost Ellerbroek and Jacco Hoekstra
+Control and Simulation, Faculty of Aerospace Engineering
+Delft University of Technology (TU Delft)
+Delft, The Netherlands
+Abstract—Previous research relating airspace structure and ca- To model the intrinsic safety benefits of layered airspace,
+pacity has shown that a decentralized layered airspace concept, the understanding gained from the Metropolis project was
+in which each altitude band limited horizontal travel to within used to develop probabilistic conflict rate models for level
+a predefined heading range, improved safety when compared to
+flying aircraft [10]. In this paper, conflict rate models for
+unstructured airspace. However, the extent of the safety benefits
+ofsuchlayeredairspacedesignswerenotquantified.Tothisend, bothunstructuredandlayeredairspacedesignsareextendedto
+inthispaper,conflictratemodelsaredevelopedtodeterminethe take into account conflicts between aircraft in different flight
+intrinsic safety of unstructured and layered airspace designs. In phases,i.e,conflictsbetweenpairsofcruisingaircraft,between
+comparison to previous work, the present models consider con- cruising and climbing/descending aircraft, and between pairs
+flictsbetweenaircraftindifferentflightphases.Thus,conflictsfor
+of climbing/descending aircraft, are treated to determine the
+climbing and descending traffic, as well as for cruising aircraft,
+are taken into account when computing the total conflict rate. overall conflict rate.
+Tovalidatethemodels,fast-timesimulationswereperformedfor The derived models are tested using three fast-time sim-
+several different layered airspace concepts, and for unstructured ulation experiments. The first experiment focused on testing
+airspace.Theresultsindicatethatthemodelsareabletoestimate the conflict rate models for unstructured and layered airspace
+theconflictrateforhightrafficdensitiesusingamodelfitforlow
+designs under ideal conditions, and investigated the effect of
+densities.Whencomparingthedifferentlayeredairspaceconcepts
+tested,themodelpredicted,andthesimulationresultsconfirmed, heading range per altitude layer on safety. The second and
+a clear safety improvement when the permitted heading range third experiments considered the effect of variations in flight
+per altitude band is reduced. Thus the models can be used to path angle and airspeed, respectively, on conflict rate.
+study the effect of airspace design parameters on the safety of Thispaperbeginswithanoverviewofthepreviousresearch
+unstructured and layered airspace concepts.
+onconflictratemodelingforunstructuredandlayeredairspace
+Keywords—airspacesafety;conflictratemodel;conflictproba- designs in section II. Next, in section III, the conflict models
+bility; unstructured airspace; layered airspace; Free-Flight; are extended to take into account climbing and descending
+airspace capacity; airspace structure; self-separation; BlueSky
+traffic. This is followed with the design of simulation exper-
+ATM simulator
+iments used to validate the models in section IV. The results
+of these simulations are presented and discussed in section V.
+I. INTRODUCTION
+The paper ends with a summary of the main conclusions.
+Air traffic demand has been growing rapidly in many II. PREVIOUSRESEARCH
+parts of the world over the last decade, and this growth is
+Conflicts are defined as predicted losses of separation, and
+expected to continue. The increased demand has stressed the
+conflict rate is defined as the number of conflicts per unit
+current ‘centralized’ Air Traffic Management (ATM) system
+time. The conflict rate without conflict resolution can be
+to near saturation levels [1], [2]. To keep pace with demand,
+used to measure the intrinsic safety of an airspace design
+manystudieshavesuggestedsomedegreeof‘decentralization’
+concept, i.e., to measure the ability of an airspace concept
+of traffic separation responsibilities, from ground based air
+to prevent conflicts from occurring. This section describes the
+traffic controllers to each individual aircraft, to increase en
+conceptualdesignofthe‘Layers’airspacedesignconcept,and
+route airspace capacity [3]–[5]. To support decentralization,
+also discusses previous work on modeling conflict rate for
+numerousairborneConflictDetectionandResolution(CD&R)
+unstructured and layered airspace.
+algorithms [6], and accompanying display interfaces [3], [7],
+have been developed. A. The Layers Airspace Design Concept
+WhileCD&Ralgorithmsarenecessarytoimplementdecen- Several different layered airspace designs have been dis-
+tralization, results from the Metropolis project have indicated cussedinliterature[11]–[13].Theconceptunderconsideration
+thatthestructuringoftrafficalsoplaysanimportantroleonthe in this work was developed in the Metropolis project [8], [9],
+capacity of decentralized airspace [8], [9]. In that study, four and is known as the ‘Layers’ concept.
+airspace concepts of increasing structure were compared. The The Layers concept was developed as an extension to
+results showed that a decentralized layered airspace concept, the hemispheric/semicircular rule [14]. It uses a vertical seg-
+in which a vertical segmentation of airspace was used to mentation of airspace to separate traffic with different travel
+separate traffic with different travel direction at different flight directions at different flight levels. This is achieved using so
+levels, led to the highest capacity when compared to other called ‘heading-altitude’ rules which describe the headings
+conceptsthatconstrainedthehorizontalmotionofaircraft.The permitted per altitude band. Consequently, operators have the
+increased capacity for ‘layers’ was found to be a result of the freedom to select their preferred horizontal trajectories and
+reduction in relative velocities between aircraft cruising at the airspeed.Climbinganddescendingaircraftareexemptedfrom
+same altitude, which in turn improved safety when compared the heading-altitude rules, and can violate them to reach their
+to completely unstructured airspace. cruising altitude or destination.
+
+--- Page 3 ---
+
+dimensionalairspace,A canbeapproximatedasarectangular
+c
+‘conflict search area’ that is defined by t , the horizontal
+l
+FL 127 315o - 360o separation minimum, d , and the average aircraft velocity,
+seph
+v, see Fig. 2. Since conflicts are detected if the Closest Point
+FL 116 270o - 315o
+of Approach (CPA) of an intruder aircraft is located in A , p
+c 2
+FL 105 225o - 270o is defined as [15]:
+FL 94 180o - 225o p = A cp = 2 d seph (cid:1)v(cid:1)t l (cid:1)p (2)
+2 A s A s
+FL 83 135o - 180o
+Here, p is the effect of airspace structure on instantaneous
+s
+FL 72 90o - 135o conflict probability, and it can be thought of as a scaling
+factor to the A =A term in the above expression. Since
+FL 61 45o - 90o c
+there are no limitations on aircraft trajectories in unstructured
+airspace, there are also no procedural mechanisms to prevent
+FL 50 0o - 45o
+conflicts from occurring. Therefore, this kind of structure has
+no beneficial effect of on conflict probability and p = 1 for
+s
+Fig.1. SchematicviewofanexampleLayersconceptwithanallowedheading two dimensional unstructured airspace, i.e., there is no scaling
+range of 45o per flight level. The airspace volume and Flight Levels (FL) oftheA =Atermforunstructuredairspace.SubstitutingEq.2
+c
+picturedarealsousedinthefast-timesimulationsperformedinthisstudy.
+in Eq. 1 yields the following expression for the conflict rate
+An example Layers topology is shown in Fig. 1. An im- of unstructured airspace in the horizontal plane (2D):
+portant design requirement for the Layers concept is that the
+d (cid:1)v(cid:1)t
+spacing between altitude bands is at least equal to the vertical C =N (N (cid:0)1)(cid:1) seph l (3)
+separationminimumtopreventconflictsbetweenaircraftcruis- ssua;2D ss ss A
+ing in adjacent flight levels. In this work, a vertical separation
+ofa1000ftisused.Therefore,thealtitudebandsfortheLayers
+C. Modeling Conflict Rate for Cruising Aircraft in Layered
+concepts considered here are separated by 1100ft.
+Airspace
+One complete set of layers is needed to specify all possible
+travel directions. Thus, eight altitude bands are needed to In our previous work, a conflict rate model for the Layers
+define one complete layer set when an allowed heading range concept has been derived for cruising aircraft [10]. This was
+of 45o per flight level is used, as shown in Fig. 1. When done by extending the conflict rate model for unstructured
+multiple sets of layers are available, the total flight distance is airspace with the two aspects that differentiate layered and
+usedtodeterminethecruisingaltitudeofanaircraft,i.e.,short unstructured airspace: the reduction of the number of possible
+flights use lower layer sets, and longer flights use higher layer conflict pairs, and the reduction of relative velocity between
+sets.Thiscanbeusedtominimizetheeffectofpredetermined cruising aircraft. Below, a summary of these two aspects, and
+altitudes on efficiency. theresultantconflictratemodelforLayers,isgiven.Thereader
+is referred to [10] for the complete derivation.
+B. Modeling Conflict Rate for Unstructured Airspace in 2D
+1) Conflict Pair Reduction
+Unlike Layers, in unstructured airspace, no constraints are
+Since the spacing between the predefined flight levels of the
+imposedonaircrafttrajectories.Thus,aircraftarefreetoselect
+Layers concept is at least equal to the vertical separation
+theirpreferredaltitudes,flightpathsandspeedsinunstructured
+minimum, cruising aircraft at different altitude bands can not
+airspace.
+conflictwitheachother.Therefore,theLayersconceptreduces
+As aircraft move independently of each other without con-
+thenumberofpossibleconflictpairsbetweencruisingaircraft,
+flict resolution, the conflict rate for unstructured airspace,
+and the corresponding conflict rate for a particular altitude
+C , has been modeled in literature as the expected value
+ssua layer can be expressed as:
+of a binomial random variable model that is summed over all
+aircraft in the airspace [4], [15]: N (N (cid:0)1)
+C = sslayi sslayi (cid:1)p (4)
+sslayi 2 2layi
+1 ∑Nss N (N (cid:0)1) Here, the subscript lay indicates that the variables are for
+C = (N (cid:0)1)p = ss ss p (1) i
+ssua 2 ss 2 2 2 one specific layer. The expected total number of conflicts at a
+i=1 given moment in time in the entire airspace can be computed
+Here, N is the steady-state number of aircraft, and p is by summing Eq.4 over all altitude bands:
+ss 2
+theinstantaneousconflictprobabilitybetweenanytwoaircraft.
+Note that the number of conflicts is divided by 2 in the above
+expression so that conflicts between the same two aircraft are
+not counted twice at a given moment in time.
+To model p it is necessary to take into account the method
+2
+used for Conflict Detection (CD). In most studies, CD is
+performed through linear extrapolation of aircraft positions
+over a predefined ‘look-ahead’ time, t . For such CD in two
+l
+dimensional airspace, [15] proposed that p can be computed
+2 Fig. 2. Area searched for conflicts, Ac. Here A is the total airspace area
+by comparing the area searched for conflicts by an aircraft, underconsideration.AconflictoccursiftheClosestPointofApproach(CPA)
+A
+c
+, to the total airspace area under consideration, A. For two ofanintruderaircraftisinsideAc.
+
+--- Page 4 ---
+
+∑L N (N (cid:0)1)
+C = sslayi sslayi (cid:1)p (5)
+sslay;2D 2 2layi
+i=1
+Here, L is the number of altitude layers. If traffic is assumed
+to be evenly distributed over all (predefined) flight levels,
+thenN =N =L.Furthermore,theinstantaneousconflict
+probabi
+s
+l
+s
+i
+l
+t
+a
+y
+yi
+betwee
+ss
+nanytwoaircraftinalayer,p ,isequal
+2layi
+for all layers. Therefore, this term can be generalized to the
+instantaneousconflictprobabilityp foralllayers.Usingthese
+2
+assumptions, Eq. 5 can be simplified to:
+( )
+C = N ss N L ss (cid:0)1 p (6) F be ig tw . e 4 e . n T tw h o e u p n ro if b o a r b m il l i y ty di d s e tr n i s b i u ty ted fu h n e c a ti d o i n ng o s f b t e h t e we a e b n so 0 lu a te nd he (cid:11) ad is in t g ria d n if g f u e l r a e r nc in e
+sslay;2D 2 2 shape[10].
+When comparing Eqs. 1 and 6, it can be seen that the first conflict probability, p , can be calculated by integrating the
+s
+way in which the Layers concept reduces the conflict rate product of Eqs. 7 and 8 for the range of heading differences
+over unstructured airspace is by decreasing the number of two between two aircraft in a layer:
+aircraft combinations that can conflict with each other.
+∫
+2) Relative Velocity Reduction 1 (cid:11)
+p = P(j∆hdg =xj)(cid:1)v (j∆hdg =xj)dx (9)
+As aircraft in the Layers concept are ‘sorted’ into different s v rel
+0
+altitude bands based on their heading, the relative velocities
+The above equation is divided by v so that the resulting p
+betweencruisingaircraftataparticularflightlevelarelowered. s
+is dimensionless. Finally, the conflict rate for two dimensional
+Therefore, the effect of a layered airspace structure on the
+layered airspace can be determined by substituting Eq. 9 into
+instantaneousconflictprobabilitybetweentwoaircraft,p ,can
+s
+Eq. 2, and then substituting the result into Eq. 6:
+be modeled by considering the effect of a predefined heading
+range on the relative velocities between traffic in a particular ( ) ( )
+altitude layer [10], see Fig. 3. N d (cid:1)v(cid:1)t 2(cid:25) 2 (cid:11)
+C =N ss (cid:0)1 (cid:1) seph l(cid:1) 1(cid:0) sin
+For the conflict situation shown in Fig. 3, the relative sslay;2D ss L A (cid:11) (cid:11) 2
+velocity, v rel , can be computed as a function of the absolute (10)
+heading difference, j∆hdgj, between the two aircraft:
+( ) III. CONFLICTRATEMODELSWITHCLIMBINGAND
+j∆hdgj DESCENDINGTRAFFIC
+v (j∆hdgj)=2 vsin (7)
+rel 2 For a given airspace volume, climbing and descending
+aircraft will affect the total number of conflicts. Therefore
+Here, it is assumed that all aircraft in a layer have the same
+in this section, the conflict rate models for unstructured and
+true airspeed, v, and fly in the same altitude layer. The
+layered airspace designs are extended to take into account the
+allowed heading range per layer, (cid:11), is the also the maximum
+effect of climbing and descending aircraft.
+heading difference between any two aircraft cruising in the
+same altitude band. If the headings of all aircraft in a layer A. Modeling the Effect of Conflict Detection on Conflict
+are uniformly distributed within the heading range (cid:11), then the Probability in 3D
+probability density function of the heading difference between
+For motion restricted to the horizontal plane, the instan-
+two aircraft has a triangular shape, see Fig. 4, and can be
+taneous conflict probability, p , was shown to be dependent
+2
+described as:
+on the area searched for conflicts, A , and the total airspace
+c
+( )
+2 x 2 area under consideration, A, see Fig. 2. Analogously, for
+P(j∆hdgj)= 1(cid:0) = ((cid:11)(cid:0)x) (8) three dimensional airspace, p is dependent on the volume
+(cid:11) (cid:11) (cid:11)2 2
+searchedforconflicts,V ,andthetotalairspacevolumeunder
+c
+The effect of layered airspace structure on instantaneous consideration, V:
+V
+p (cid:24) c (11)
+2 V
+Fig. 5 displays the side-view of the volume searched for
+conflictsbyanaircraft,V .ItshowsthatV isdependentonthe
+c c
+horizontal separation minimum, d , the vertical separation
+seph
+minimum, d , the aircraft velocity, v, the CD look-ahead
+sepv
+time, t , and the flight path angle, (cid:13). The flight path angle of
+l
+an aircraft can be described using its horizontal and vertical
+speeds, v and v :
+h v
+( )
+v
+(cid:13) =tan (cid:0)1 v (12)
+v
+h
+Fig.3. Relationbetweenheadingdifferencebetweentwoconflictingaircraft For most practical cases, v(cid:1)t l >>d seph . Therefore, V c can
+andrelativevelocity be approximated using the simplified side-view presented in
+
+--- Page 5 ---
+
+the bottom half of Fig. 5. Here, the distance x depends on (cid:13),
+1
+d and d :
+seph sepv
+x =2 d sin((cid:13))+2 d cos((cid:13)) (13)
+1 seph sepv
+As the vertical speed, v , is usually smaller than the hori-
+v
+zontal speed, v , the flight path angle will also be relatively
+h
+small. For small (cid:13), the following assumptions can be used to
+simplify the above model:
+2 d sin((cid:13)) = 2 d (cid:13) (14a)
+seph seph
+2 d cos((cid:13)) = 2 d (14b)
+sepv sepv
+Using the above simplifications, V can be formulated as:
+c Fig. 5. Side-view of the volume searched for conflicts by an aircraft in a
+three-dimensional airspace. The top figure indicates the dependency on the
+V =2 d v t x airspaceparameters,andthebottomfigurerepresentsthesimplificationusing
+V
+c
+=2 d
+seph
+v t
+l
+(2
+1
+d j(cid:13)j+2 d )
+(15) v(cid:1)t>>dseph .
+c seph l seph sepv
+1) Cruising vs. Cruising
+CombiningEqs.15and.11resultsinthefollowingrelationfor
+2) Cruising vs. Climbing/Descending
+p forthreedimensionalairspace.Thisrelationwillbeusedto
+2 3) Climbing/Descending vs. Climbing/Descending
+model the conflict rates for unstructured and layered airspace
+designs. The overall conflict rate for the Layers concept for three-
+dimensional can be modeled as a summation of the conflict
+2 d v t (2 d j(cid:13)j+2 d ) rates of the different conflict types listed above:
+p (cid:24) seph l seph sepv (16)
+2 V
+B. ModelingtheTotalConflictRateforUnstructuredAirspace C = N cruise (Ncr L uise (cid:0)1) (cid:1) 2 d seph (cid:1)v(cid:1)t l (cid:1)g((cid:11))(cid:1)k
+As mentioned earlier, for unstructured airspace, there is sslay;3D 2 A 1
+no a priori separation of traffic or prevention of conflicts.
++N (cid:1)N (cid:1)f(j(cid:13)j )(cid:1)k
+Consequently, the instantaneous conflict probability, p , is cruise CD avg 2
+2
+independent of aircraft flight phase, and it is not necessary to N (N (cid:0)1)
+considerdifferencesbetweencruisingandclimbing/descending + CD 2 CD (cid:1)f(j(cid:13)j)(cid:1)k 3
+aircraft.Therefore,thetwo-dimensionalconflictratemodelfor (19)
+unstructured airspace can be extended to three dimensions by
+simply using the 3D version of p , i.e., by substituting Eq. 16 Here, g((cid:11)) and f((cid:13)) are defined as:
+2
+into Eq. 1: ( )
+2(cid:25) 2 (cid:11)
+C = N ss (N ss (cid:0)1) (cid:1)f(j(cid:13)j )(cid:1)k (17) g((cid:11))= (cid:11) 1(cid:0) (cid:11) sin 2 (20)
+ssua;3D 2 avg
+2 d v t (2 d j(cid:13)j+2 d )
+where f(j(cid:13)j ) is defined using Eq. 16: f((cid:13))= seph l seph sepv (21)
+avg V
+2 d v t (2 d j(cid:13)j +2 d ) In the above equations, j(cid:13)j is the absolute flight path
+f(j(cid:13)j avg )= seph l sep V h avg sepv (18) angle of climbing/descending aircraft, j(cid:13)j avg is the average
+absoluteflightpathangleofallaircraftintheairspace,N
+cruise
+Here, j(cid:13)j avg is the average absolute flight path angle of all is the instantaneous number of cruising aircraft, and N CD
+aircraft in the airspace, and k is a constant term introduced to is the instantaneous number of climbing/descending aircraft.
+account for any non-modeled aspects that may influence the Note that the second term on the right hand side of Eq. 19
+conflictrate.Thevalueofk isdeterminedbyfittingthemodel considers combinations of cruising and climbing/descending
+to the simulation results in a least-square sense. If k = 1, aircraft. Since a particular aircraft can not be cruising and
+then the model as defined above is able to predict the conflict climbing/descending at the same time, it is not required to
+rate accurately. On the other hand, if k < 1, the model is divide this term by 2. Also note that k-constants have been
+over-estimatingtheconflictrate,andifk >1,modelisunder- introduced into Eq. 19. As for unstructured airspace, these
+estimating the conflict rate. Thus, the value of k can be used constants are used to to determine the accuracy of the three
+to determine the accuracy of the model. components of the model when it is fitted to data from
+simulation experiments.
+C. Modeling the Total Conflict Rate for Layered Airspace
+The structure of the Layers concept prevents conflicts be- IV. FAST-TIMESIMULATIONDESIGN
+tween aircraft cruising at different altitude bands. However,
+there are no procedural mechanisms in Layers to separate To validate the conflict rate models derived for three-
+climbing and descending traffic from cruising aircraft. There- dimensional airspace, three fast-time simulation experiments
+fore, the total conflict rate for Layers can be modeled by were performed for unstructured and layered airspace designs.
+splittingthenumberofinstantaneousconflictsintothreetypes: This section describes the design of these experiments.
+
+--- Page 6 ---
+
+A. Simulation Development TABLEI
+EXPERIMENTAIRSPACECONCEPTS
+1) Simulation Platform
+The BlueSky open-source ATM simulator was used as the
+Heading Range Number of
+simulation platform in this research. It was developed at Symbol Name
+Per Layer, (cid:11) Layer Sets
+the Delft University of Technology (TU Delft) using the
+UA Unstructured Airspace - -
+Python programming language1. BlueSky has numerous fea- L360 Layers 360 360o 8
+tures including the ability to simulate more than 5000 aircraft L180 Layers 180 180o 4
+simultaneouslywithCD&R.FormoreinformationonBlueSky, L90 Layers 90 90o 2
+the reader is referred to [16]. L45 Layers 45 45o 1
+2) Conflict Detection
+Conflicts were detected using the so called ‘state-based’ Con-
+4
+flict Detection (CD) method. In this CD method, conflicts are
+3
+detected if separation violations are predicted when aircraft
+2
+positions are linearly extrapolated over a predefined ‘look-
+1
+ahead’time.Inthisstudy,a‘look-ahead’timeof5minutes,as
+0
+wellasseparationrequirementsof5nauticalmileshorizontally
+−1
+and 1000 ft vertically, were used.
+−2
+3) Airspace Concepts and Concept Implementation −3
+Four different layered airspace concepts and an unstructured −4
+−4 −3 −2 −1 0 1 2 3 4
+airspaceconceptwereusedinthefast-timesimulations.TableI longitude (decimal degrees)
+displays the properties of these concepts. Additionally, all
+concepts were defined between FL50 and FL127, see Fig. 1.
+This figure also shows the altitudes of the eight flight levels
+used by all layered airspace concepts. The altitude bands for
+layeredconceptsareseparatedby1100ft.Incombinationwith
+averticalseparationrequirementof1000ft,theadditional100
+ftseparationbetweenaltitudebandsguaranteesthataircraftdo
+not trigger conflicts with traffic cruising in adjacent layers. It
+shouldalsobenotedthattheonlydifferencebetweentheL360
+and UA concepts is the use of predefined cruising altitudes in
+L360.
+The airspace concepts were implemented into BlueSky by
+modifying its trajectory planning functions. Aircraft in both
+unstructured and layered airspace concepts used the direct
+horizontal route. For unstructured airspace, altitude was lin-
+earlydependentonthedistancebetweenoriginanddestination.
+Since traffic scenarios with a uniform distribution of flight
+distances were used, this form of altitude selection resulted
+in a uniform vertical distribution of traffic, i.e., altitude was
+proportional to flight distance.
+On the other hand, altitude for the Layers concept was
+selected based on the bearing to the destination and the
+matching flight level from a predefined list, i.e, by using the
+‘heading-altitude’ruleforeachlayeredairspaceconcept.When
+multiple sets of layers were available, the total flight distance
+was used to determine the cruising altitude of an aircraft:
+short flights used lower layer sets, while longer flights used
+higher layer sets. Because traffic scenarios with a uniform
+distribution of trip distances were used, traffic was distributed
+uniformly over the eight predefined flight levels used by all
+layered concepts.
+B. Traffic Scenarios
+1) Testing Region and Flight Profiles
+A large square region of 480 (cid:2) 480 nautical miles was used
+as the physical environment for the traffic simulations. A total
+of289airportswereevenlydistributedinagridpatterninthis
+region, with a spacing of 30 n miles (similar to the spacing
+between airports in Europe including small ones).
+1BlueSkycanbedownloadedfromhttps://github.com/ProfHoekstra/bluesky
+)seerged
+lamiced(
+edutital
+126
+65
+4
+2mn000.01/CA
+Fig.6. Densitydistributionforarepresentativetrafficscenario.Tocompensate
+for the reduced densities near the edge of the simulation area, a smaller
+experimentareawasdefinedbetween-2o and2o latitudeandlongitude.
+Pilot simulations revealed that traffic densities near the
+edges of the ‘simulation volume’ were much lower than in
+its center, see Fig. 6, because origins and destinations for
+all traffic were located within the simulation volume. To
+compensate for this, a smaller ‘experiment volume’ of 240
+x 240 n miles was defined in which traffic was more evenly
+distributed in the horizontal plane. As mentioned earlier, in
+theverticalplane,theexperimentvolumewasdefinedbetween
+FL50andFL127.Onlyconflictsforaircraftlocatedwithinthe
+experiment volume were used in the validation of the conflict
+rate models.
+Aircraft were spawned at 0 ft, and subsequently took off
+and climbed to their assigned cruising altitudes. All aircraft
+climbed and descended with the same flight path angle. At a
+predetermineddistancefromtheirdestination(whichdepended
+on the cruise altitude), aircraft descended to the ground. Since
+the focus of this research is on en route airspace design,
+aircraftweredeletedfromthesimulationwhentheydescended
+through 4000 ft. Furthermore, to avoid take-off conflicts, CD
+was performed for altitudes above 1000 ft.
+2) Scenario Generation
+A scenario generator was created to produce traffic scenarios
+with a desired and constant traffic density, as well as with a
+uniform distance distribution. Constant density scenarios were
+requiredsothatthetotalthenumberofconflictsloggedduring
+asimulationruncouldbeattributedtoaparticulardensity.Uni-
+form distance distributions were required to ensure a uniform
+vertical distribution of traffic, as altitude was selected based
+on distance for unstructured airspace, and if multiple layer
+sets were available for the Layers concept.
+Since aircraft were deleted from the simulation as they
+exited the sector, to realize constant density scenarios, aircraft
+were introduced into the simulation at rate, ! , equal to:
+ac
+(cid:26) A v
+! = ac (22) ac s
+
+--- Page 7 ---
+
+TABLEII TABLEIII
+SIMULATIONPARAMETERSFORPRIMARYEXPERIMENT TRAFFICDEMANDSCENARIOS
+Parameter Value Description Density3 Number of
+#
+A 57.6(cid:1)103 n miles2 Experiment Area [ac/10,000 NM2] Instantaneous AC3
+V 1.64(cid:1)1016 ft 3 Experiment Volume 1 2.0 46.1
+2 2.7 62.2
+s 345 n miles Average distance
+3 3.8 87.6
+v 500 kts Speed of all aircraft 4 5.4 124.4
+t 5 mins CD look-ahead time 5 7.6 175.1
+l
+d 5 n miles Horizontal separation 6 10.6 244.2
+seph
+7 14.8 341.0
+d 1000 ft Vertical separation
+sepv 8 20.7 476.9
+L 8 Number of altitude layers
+9 29.0 668.2
+j(cid:13)j 2.8o Flight path angle of climb- 10 40.6 935.4
+ing/descending aircraft 11 56.9 1311.0
+j(cid:13)j avg 0.39o Averageflightpathangleofall 12 79.6 1834.0
+aircraft 13 111.5 2569.0
+Here,Aistheairspaceareausedforsimulation,visaverage (cid:15) 2 airspaceconceptsnamely,UnstructuredAirspace(UA)
+aircraft speed, s is average flight distance, and (cid:26) is the and Layers 45 (L45), see Table I
+ac
+desired traffic density, defined as (cid:26) = N =A. These and (cid:15) 11 traffic demand densities ranging between 2.0 and 56.9
+ac ss
+other constant simulation parameters are listed in Table II. aircraft per 10,000 square nautical miles, see Table III
+Using this approach, thirteen traffic demand scenarios of (cid:15) 2 flight path angle settings for climbing and descending
+increasing density were defined, see Table III. Note that the traffic, namely 2.8o (standard) and 1.4o (non-standard)
+values in Table III are for the total simulation area, which is Two repetitions were performed for each traffic demand sce-
+larger than the experiment area. nario.Therefore,atotalof88simulationrunswereperformed
+To ensure that aircraft had a minimum cruise phase during for this experiment, using a total of 103,736 flights.
+their flight, the minimum distance between origin and desti-
+3) Airspeed Variation Experiment
+nation was selected to be 240 n miles. The maximum flight
+The third and final experiment focused on the effect of
+distancewassetto450nmiles.Usingthesesettings,scenarios
+airspeedvariationsontheconflictrateoflayeredairspace.This
+showed a uniform distribution of flight lengths.
+experiment compared simulations in which all aircraft flew at
+C. Independent Variables the same airspeed to simulations were airspeed was uniformly
+distributed. The independent variables were:
+Three separate experiments were performed. The indepen-
+(cid:15) 1 airspaceconceptsnamely,Layers45(L45),seeTableI
+dent variables of each experiment are discussed below.
+(cid:15) 11 traffic demand densities ranging between 2.0 and 56.9
+1) Primary Experiment aircraft per 10,000 square nautical miles, see Table III
+The focus of the primary experiment was to validate the con- (cid:15) 2 airspeedsettings;1)airspeedof500ktsforallaircraft;
+flict rate models derived for unstructured and layered airspace 2)uniformlydistributedairspeedbetween450ktsand550
+concepts under ideal conditions. Additionally, this experiment kts
+investigated the effect of heading range per altitude band on Two repetitions were performed for each traffic demand sce-
+thesafetyofthelayersconcept.Theindependentvariablesfor nario.Therefore,atotalof44simulationrunswereperformed
+this experiment were: for this experiment, using a total of 51,868 flights.
+(cid:15) 5 airspace concepts, see Table I.
+D. Dependent Variables
+(cid:15) 13trafficdemanddensitiesrangingbetween2.0and111.5
+aircraft per 10,000 square nautical miles, see Table III. Theconflictratemodelsderivedforunstructuredandlayered
+Note that this relates to a current en route density2 [17] airspace concepts, described by Eqs. 17 and 19 respectively,
+of approximately 21.6 aircraft per 10,000 square nautical were validated using the instantaneous number of conflicts
+miles. logged during the simulation experiments.
+For each traffic demand scenario, two repetitions were per- E. Simulation Procedure and Data Logging
+formed using different traffic realizations. This resulted in a
+To minimize unsystematic variation in the results, stan-
+a total of 130 simulation runs for the primary experiment,
+dardized simulation conditions were used. For a particular
+involving a total of 257,300 flights.
+repetition of a traffic demand scenario, the creation times of
+2) Flight Path Angle Variation Experiment aircraft and the origins and destinations for aircraft were kept
+Since flight path angle, (cid:13), was an important parameter that constant across all airspace concepts. Additionally, scenarios
+affected the instantaneous conflict probability between two had a duration of 2 hrs, consisting of a 1 hr traffic volume
+aircraftinthreedimensionalairspace,seeEq.16,aexperiment buildup period and a 1hr logging period during which the
+wasperformedwithtwodifferentvaluesof(cid:13).Theindependent traffic density was kept constant.
+variables for this experiment were: To compute the conflict rate, the properties of active con-
+flicts, and the states of all aircraft in the simulation, were
+2Based on traffic densities in upper airspace for an area centered around logged periodically every 30 seconds. As mentioned earlier,
+Brussels that includes five large TMAs, the positions of which are approxi-
+matedtoBrussels,London,Frankfurt,ParisandAmsterdam. 3Insimulationarea,whichislargerthanexperimentarea
+
+--- Page 8 ---
+
+onlyconflictsforaircraftwithintheexperimentareawereused
+for model validation, as traffic was more evenly distributed in
+this region, see Fig. 6.
+V. RESULTSANDDISCUSSION
+In this section, the results of the three simulation experi-
+ments are presented and discussed.
+A. Primary Experiment
+The goal of the primary experiment was to validate the
+conflictratemodelsforbothunstructuredandlayeredairspace
+concepts, and to investigate the effect of heading range per
+altitude band on the intrinsic safety of the layers concept.
+These two aspects are discussed below.
+1) Model Accuracy
+The conflict rate for unstructured airspace is shown in Fig. 7,
+and the corresponding conflict rate model is given by Eq. 17.
+The conflict rate results for the Layers 45 concept is shown in
+Fig. 8. In addition to the total conflict rate, Fig. 8 also shows
+the results for the three different types of conflicts considered
+by the conflict rate model for layered airspace, see Eq. 19.
+From Figs. 7 and 8, it can be seen that model fitting at
+low densities yields accurate conflict rate predictions at high
+densities. This suggests that the overall structure of the model
+is sound, and that the binomial random variable approach
+used for modeling conflict rates in this work is a good way
+2000
+1500
+1000
+500
+0
+0 200 400 600 800 1000 1200 1400 1600
+Number of Instantaneous Aircraft [-]
+]-[
+stcilfnoC
+fo
+rebmuN
+Simulation Data Least-Square Fit Validation
+Fig. 7. Total conflict rate for unstructured airspace (primary experiment).
+Scatter: simulation data. Red line: least-square fit to Eq. 17. Blue Line:
+validationforhigherdensities
+Simulation Data Least-Square Fit Validation
+400
+300
+200
+100
+0
+400
+300
+200
+100
+0
+0 500 1000 0 500 1000
+Number of Instantaneous Aircraft [-]
+]-[
+stcilfnoC
+suoenatnatsnI
+fo
+rebmuN
+TABLEIV
+MODELACCURACY(UNFILTERED)
+Unstructured Layers Layers Layers Layers
+Airspace 360 180 90 45
+k 1.03 - - - -
+k - 1.30 1.44 1.66 2.18
+1
+k - 1.77 1.73 1.45 1.23 2
+k - 1.23 1.24 0.96 0.73
+3
+to analyze the intrinsic safety of unstructured and layered
+airspacedesigns.Similartrendswerefoundfortheotherlayers
+concepts (not shown).
+To quantitatively assess model accuracy, the values of the
+‘k’-constants introduced to the conflict rate models can be
+examined,seeTableIV.The‘k’-constantscanbethoughtofas
+ascalingfactor.Therefore,thecloser‘k’-constantsareto1,the
+moreaccuratethemodelsare.ThevaluesshowninTableIV,as
+wellasforallotherresultsfiguresandtables,takeintoaccount
+the two repetitions performed for every traffic demand density
+scenario.
+Table IV shows that the k value for unstructured airspace is
+very close to 1. This indicates that Eq. 17 is a very good at
+predicting the conflict rate of unstructured airspace. However
+forlayers,thek valuesdeviatesignificantlyfrom1.Moreover,
+the results show that the model accuracy decreases when the
+headingrangeperaltitudelayerisreduced,andthatthemodel
+underestimates the conflict rate in most cases (k > 1). This
+means that the layers conflict rate model is not very accurate
+at estimating the number of conflicts, even though it is able to
+predict the shape of the conflict rate curve well.
+To determine why the conflict rate model for layered
+airspace is not as accurate as expected, two hypotheses are
+tested.
+The first hypothesis is concerned with differences in the
+definitions used for Conflict Detection (CD) by the model
+and by the simulation. In the model, a conflict is defined
+to occur at a time t when the minimum distance point
+cpa
+between two aircraft is located within a rectangular ‘conflict
+search area’, see Fig. 2. However, in the simulation, the first
+moment of conflict detection occurs at time t when the
+inconf
+separationrequirementsareabouttobeviolated.Consequently,
+conflicts are detected earlier in the simulation than for the
+approachusedbythemodel,seeFig.9.Furthermore,sincethe
+magnitudeofthedifferencebetweenthesetwotimesincreases
+with decreasing conflict angle, this hypothesis also explains
+why the accuracy of the conflict rate model decreases when
+the heading range per altitude layer is reduced.
+a b
+c d
+Fig. 8. Conflict rate for the Layer 45o concept (primary experiment). a)
+cruising vs. cruising b) cruising vs.C/D c) CD/ vs. C/D d) total conflict
+rate.Scatter:simulationdata.Redline:least-squarefittoEq.19.BlueLine: Fig.9. Differencebetweentcpa,thetimetoclosestpointofapproach,and
+validationforhigherdensities tinconf ,thefirstmomentofapredictedlossofseparation
+
+--- Page 9 ---
+
+TABLEV TABLEVII
+MODELACCURACY(CONFLICTSFILTEREDBASEDONtcpa) MODELACCURACY(CONFLICTSFILTEREDBASEDONtcpa,AND(cid:11)
+CORRECTEDBASEDONMEASUREDCONFLICTANGLE)
+Layers Layers Layers Layers
+Layers Layers Layers Layers
+360 180 90 45
+360 180 90 45
+k 1.15 1.21 1.23 1.35
+1 k (not corrected) 1.15 1.21 1.23 1.35
+k 1.65 1.61 1.34 1.12 1
+2 k (corrected) 1.15 0.99 0.93 0.93
+k 1.05 1.09 0.82 0.64 1
+3
+TABLEVI 2000
+MEASUREDAVERAGECONFLICTANGLE
+Average Conflict Angle [deg] 1500
+Layers 360 112
+Layers 180 82
+1000
+Layers 90 41
+Layers 45 22
+500
+Totestthishypothesis,afilteringofconflictswasperformed
+during post-processing: only conflicts with a t cpa less than 0
+the CD look-ahead time were considered since these types of 0 200 400 600 800 1000 1200
+conflicts can be predicted by the model. The corresponding Number of Instantaneous Aircraft [-]
+results are shown in Table V.
+When comparing the results before and after filtering the
+conflicts based on t , it can be seen that the accuracy of the cpa
+model has improved significantly. However, in absolute terms,
+the model still lacks accuracy.
+Thesecondhypothesisregardingtheaccuracyoftheconflict
+rate model for Layers is related to the heading distribution of
+cruising aircraft. The model is derived assuming a uniform
+distributionofaircraft headings withintherangepermittedfor
+each altitude band. A uniform distribution of headings should
+lead to a triangular distribution of conflict angles between
+0o and the allowed heading range per layer, (cid:11), see Fig. 4.
+Accordingly, the mean conflict angle should be equal to 1(cid:11).
+3
+Table VI shows that this assumption was not satisfied for any
+ofthelayersconcepts.Thisstronglysuggeststhattheheadings
+for aircraft in the traffic scenarios used to validate the model
+were not uniformly distributed within the required range per
+layer.
+To account for the actual heading distribution in the traffic
+scenarios, a new model fit was performed after correcting the
+allowed heading range, (cid:11), to match the measured conflict
+angle for each layered concept using (cid:11) = 3(cid:1)(cid:18), where (cid:18) is
+the measured conflict angle. For example (cid:11) for the Layers
+45 concept is taken to be 66o based the data presented in
+Table VI. This resulted in the k values displayed in Table VII.
+Note that in Table VII only values of k1 are shown since
+this correction only affects conflicts between pairs of cruising
+aircraft. The table shows that the k values are very close to 1
+for all layered concepts after correcting for conflict angle, and
+filtering conflicts based on t .
+cpa
+Tosummarize,theaboveanalysisrevealedthattheaccuracy
+of the conflict rate model for unstructured airspace is high.
+However, the accuracy of the conflict rate model for Layers is
+negativelyaffectedbythemismatchbetweentheCDdefinition
+used by the simulation and by the model. Since the CD
+definition used in the simulation reflects reality better, model
+accuracy could be improved by using a larger (trapezoidal)
+‘conflict search area’ so that conflicts with a t greater than,
+cpa
+and a t less than, the look-ahead time can also predicted
+inconf
+by the model. Additionally, the results for layered airspace
+indicated that the heading range per layer was not distributed
+]-[
+stcilfnoC
+suoenatnatsnI
+fo
+rebmuN
+UA L360 L180 L90 L45
+Fig.10. Totalconflictrateforallconcepts(primaryexperiment).Thecurves
+representtheleast-squarefitofthesimulationdatatoEq.17forUnstructured
+Airspace(UA)andtoEq.19forthelayeredairspaceconcepts.
+2000
+1500
+1000
+500
+0
+0 200 400 600 800 1000 1200
+Number of Instantaneous Aircraft [-]
+]-[
+stcilfnoC
+suoenatnatsnI
+fo
+rebmuN
+UA L360 L180 L90 L45
+Fig.11. Conflictrateforcruisingaircraft(primaryexperiment).Thecurves
+representtheleast-squarefitofthesimulationdatatoEq.3forUnstructured
+Airspace(UA)andtoEq.10forthelayeredairspaceconcepts.
+within the expected range. While this also led to a reduction
+in accuracy, it should be noted that this was caused by the
+scenarios used in the simulation, and not due to the structure
+of the model itself. When conflicts were filtered based on t
+cpa
+and corrections were applied to compensate for the heading
+range in the scenario, the accuracy of the model was found to
+be high. This suggests that the current conflict rate model for
+Layeredairspacecanbealteredasdescribedabovetoimprove
+its absolute accuracy.
+2) Effect of Heading Range Per Altitude Layer
+Fig. 10 shows the conflict rate results for all five airspace
+concepts used in the primary experiment. As predicted by
+the conflict rate model for layered airspace, this figure shows
+that decreasing the heading range per altitude layer leads to
+a reduction of the total conflict rate. Further analysis showed
+that this safety improvement was mainly due to a reduction
+in the number of conflicts between cruising aircraft when the
+allowed heading range per layer was decreased, see Fig 11.
+
+--- Page 10 ---
+
+2000
+1500
+1000
+500
+0
+0 200 400 600 800 1000 1200
+Number of Instantaneous Aircraft [-]
+]-[
+stcilfnoC
+suoenatnatsnI
+fo
+rebmuN
+standard non-standard
+Fig.12. Effectofvariationinflightpathangleonconflictrateforunstructured
+airspace.Herestandardrepresentsthesimulationswitha(cid:13)of2.8o,andnon-
+standard represents a (cid:13) of 1.4o. The curves represent the least-square fit of
+thesimulationdatatoEq.17
+900
+800
+700
+600
+500
+400
+300
+200
+100
+0
+0 200 400 600 800 1000 1200
+Number of Instantaneous Aircraft [-]
+]-[
+stcilfnoC
+suoenatnatsnI
+fo
+rebmuN
+500
+400
+300
+200
+100
+0
+0 200 400 600 800 1000 1200
+Number of Instantaneous Aircraft [-]
+standard non-standard
+Fig. 13. Effect of variation in flight path angle on conflict rate for Layers
+45o. Here standard represents the simulations with a (cid:13) of 2.8o, and non-
+standard represents a (cid:13) of 1.4o. The curves represent the least-square fit of
+thesimulationdatatoEq.19
+Since all layered airspace concepts used the same number of
+flight levels, based on the structure of Eq. 19, this increased
+safety can be attributed to the reduction of relative velocities
+between cruising aircraft when the permitted heading range
+per altitude layer is decreased.
+When comparing the layered concepts to unstructured
+airspace, Fig. 10 shows that the conflict rate is always higher
+for unstructured airspace. It is interesting to note that this
+is also true for the Layers 360 concept. Since there are
+no heading-altitude constraints, and therefore no reduction
+in relative velocities, for either of these two concepts, the
+increasedsafetyofLayers360canbeattributedtotheapriori
+vertical separation of traffic that prevents conflicts between
+aircraft cruising at different flight levels. Therefore, in this
+case,safety wasimprovedby reducingthe number ofpossible
+conflictpaircombinationsforlayeredairspacewhencompared
+to unstructured airspace.
+B. Flight-Path Angle Variation Experiment
+The effect of flight path angle on conflict rate has been
+analyzed for unstructured airspace and for the Layers 45
+concept, see Figs. 12 and 13, respectively. The same traffic
+scenariosareusedasfortheprimaryexperiment,buttheflight
+path angle, (cid:13), during the climbing and descending phases of
+]-[
+stcilfnoC
+suoenatnatsnI
+fo
+rebmuN
+standard non-standard
+Fig.14. EffectofvariationintrueairspeedonconflictrateforLayers45o.
+Herestandardrepresentsthesimulationswithaconstantairspeedof500kts,
+andnon-standardrepresentsauniformlydistributedairspeedbetween450kts
+and550kts.
+flight is varied; simulations are performed for a (cid:13) of 2.8o and
+for a (cid:13) of 1.4o.
+Although the origins, the destinations and the cruising
+altitudes for traffic are the same, a change in (cid:13) changes the
+ratio between the number of cruising vs. climbing/descending
+aircraft at any given moment in time. A reduction in (cid:13) causes
+an aircraft to take more time to reach its cruising altitude.
+Therefore, a reduction in (cid:13) also increases the proportion of
+climbing/descending aircraft in the simulation.
+The conflict probability between aircraft in unstructured
+airspace is not significantly affected by their flight phases.
+Consequently,Figure12onlyshowsasmalleffectofachange
+in (cid:13) on conflict rate. The slight increase in conflict rate for
+(cid:13) =1:4o canbeexplainedbythefactthataircraftspendmore
+time climbing/descending, and less time cruising, for a lower
+(cid:13). This slightly increases average flight path angle over the
+course of a flight, which in turn slightly increases the conflict
+probability between aircraft as described by Eq. 16.
+In contrast, Fig. 13 shows that (cid:13) has a drastic effect on the
+conflict rate for layered airspace. The safety benefits offered
+by layered airspace applies only to cruising aircraft as there
+arenoproceduralmechanismstoseparateclimbing/descending
+aircraft from each other or with cruising aircraft. Therefore, a
+reduction in (cid:13) increases the amount of time needed for an
+aircraft to reach its cruising altitude, and benefit from the
+reduction in conflict probability between cruising aircraft in at
+thesameflightlevelforLayers.Thisexplainswhytheconflict
+rate is significantly higher when (cid:13) is reduced to 1.4o for the
+Layers 45 concept.
+Basedontheaboveanalysis,itcanbeconcludedthatconflict
+rate is inversely proportional to flight path angle because it
+changes the ratio between cruising and climbing/descending
+aircraft. Moreover the safety of Layers is more sensitive to
+flight path angle changes than for unstructured airspace.
+C. Airspeed Variation Experiment
+The final experiment investigated the effect of airspeed
+variations on conflict rate. To this end, two sets of simulations
+were performed for the Layers 45 concept. In the first set of
+simulations, all aircraft flew at 500 kts, while in the second
+set, the speed of aircraft was uniformly distributed between
+450 kts and 550 kts.
+Theconflictrateresultsforairspeedvariationsaredisplayed
+in Fig. 14. The figure shows no difference in the conflict rate
+between the two airspeed cases, since the average speed of
+
+--- Page 11 ---
+
+all aircraft in both cases is the same and equals 500 kts. This [7] J. Ellerbroek, “Airborne Conflict Resolution in Three Dimensions,”
+suggests accurate estimates of conflict rate can be computed Ph.D.dissertation,DelftUniversityofTechnology,FacultyofAerospace
+Engineering, Sep. 2013. [Online]. Available: http://resolver.tudelft.nl/
+using the models derived in this work as long as the average
+uuid:96c65674-06d4-410c-87c2-b981af95211e
+traffic speed, or the distribution of speeds, is known. [8] Sunil,E.,Hoekstra,J.M.,Ellerbroek,J.,andBussink,F.,“TheInfluence
+of Traffic Structure on Airspace Capacity,” in Proceedings of the 7th
+VI. CONCLUSIONSANDRECOMMENDATIONS International Conference on Research in Air Transportation (ICRAT
+2016),Jun.2016.
+In this paper, conflict rate models for unstructured and
+[9] E. Sunil, J. Ellerbroek, J. Hoekstra, A. Vidosavljevic, M. Arntzen,
+layered airspace designs were developed. The models derived F.Bussink,andD.Nieuwenhuisen,“AnalysisofAirspaceStructureand
+in this work take into account conflicts between aircraft in Capacity for Decentralized Separation Using Fast-Time Simulations,”
+JournalofGuidance,Control,andDynamics,vol.40,no.1,pp.38–51,
+different flight phases; conflicts between cruising aircraft,
+2017.[Online].Available:http://dx.doi.org/10.2514/1.G000528
+between climbing/descending aircraft, and between cruising [10] Hoekstra, J., Maas, J., Tra, M., and Sunil, E., “How Do Layered
+and climbing/descending aircraft are considered. Fast-time Airspace Design Parameters Affect Airspace Capacity and Safety?” in
+Proceedings of the 7th International Conference on Research in Air
+simulationexperimentswereconductedtovalidatethemodels,
+Transportation,Jun.2016.
+and to compare unstructured and layered airspace designs in [11] R.IrvineandH.Hering,“TowardsSystematicAirTrafficManagement
+terms of safety. The following conclusions can be drawn: in a Regular Lattice,” in 7th AIAA ATIO Conf, 2nd CEIAT Int’l Conf
+on Innov and Integr in Aero Sciences, 17th LTA Systems Tech Conf;
+(cid:15) A model fit at low densities produced accurate conflict followed by 2nd TEOS Forum, 2007, p. 7780. [Online]. Available:
+rate estimates for high densities. Therefore, the binomial http://arc.aiaa.org/doi/pdf/10.2514/6.2007-7780
+[12] K. Leiden, S. Peters, and S. Quesada, “Flight level-based dynamic
+randomvariableapproachusedformodelingconflictrates
+airspace configuration,” in Proceedings of the 9th AIAA Aviation
+in this work is a good way to analyze the intrinsic safety Technology, Integration and Operations (ATIO) Forum. American
+of unstructured and layered airspace designs. Institute of Aeronautics and Astronautics, 2009. [Online]. Available:
+http://arc.aiaa.org/doi/pdf/10.2514/6.2009-7104
+(cid:15) The safety of layered airspace increases when the head-
+[13] R. A. Paielli, “A Linear Altitude Rule for Safer and More Efficient
+ing range per altitude layer is decreased. This effect is Enroute Air Traffic,” Air Traffic Control Quarterly, vol. 8, no. 3,
+predicted by the presented conflict rate model, and it is 2000. [Online]. Available: http://www.aviationsystemsdivision.arc.nasa.
+gov/publications/2000/Paielli ATCQ Alt-Rules 2000.pdf
+because the relative velocities, and therefore the conflict
+[14] InternationalCivilAviationOrganization,“Annex2,RulesoftheAir,”
+probabilities,betweencruisingaircraftareproportionalto Tech.Rep.,Jul.2005.
+the heading range per flight level. [15] M. R. Jardin, “Analytical Relationships Between Conflict Counts and
+Air-Traffic Density,” Journal of Guidance, Control, and Dynamics,
+(cid:15) Layered airspace was found to be safer than unstructured
+vol. 28, no. 6, pp. 1150–1156, 2005. [Online]. Available: http:
+airspacefortheentirerangeofdensitiesconsideredinthis //dx.doi.org/10.2514/1.12758
+work. This was also true for a layered concept that did [16] J. Hoekstra and J. Ellerbroek, “BlueSky ATC Simulator Project: an
+Open Data and Open Source Approach,” in Proceedings of the 7th
+notrestricttheheadingsofaircraft,butdidusepredefined
+InternationalConferenceonResearchinAirTransportation,Jun.2016.
+flight levels for cruising aircraft. This is because the a [17] Eurocontrol, “High-Density 2015 European Traffic Distributions for
+priori vertical separation of traffic in the layers concept Simulation,”Tech.Rep.,Mar.2000.
+reduces the number of possible conflict pairs, and also
+AUTHORBIOGRAPHIES
+reduces the conflict probability between cruising aircraft.
+Martijn Tra received the MSc degree in Aerospace Engineering
+(cid:15) Conflictrateisinverselyproportionaltoflightpathangle.
+from TU Delft in 2016, for modeling the effect of layered airspace
+The safety of the Layers concept was found to be more
+on conflict rate and capacity. During his MSc, he performed an
+sensitive to changes in flight path angle compared to internship at Schiphol Group, where he developed a tool to assess
+unstructured airspace. This is because the safety benefits thecompetitivenessofSchipholairport.Heiscurrentlyworkingasan
+oflayeredairspaceareonlyapplicabletocruisingaircraft, engineer at ADB Safegate, working with advanced airport solutions.
+Emmanuel Sunil received the MSc degree in Aerospace Engi-
+while conflict probability is not significantly affected by
+neering(cumlaude)fromTUDelftin2014,forhisworkonahaptic
+flight phase for unstructured airspace.
+interface for unmanned aircraft collision avoidance. He is currently
+(cid:15) The absolute accuracy of the conflict rate models, partic- a PhD candidate at the faculty of Aerospace Engineering, TU Delft.
+ularly for layered airspace, can be further improved by His work focuses on airspace design and capacity modeling.
+relaxing model assumptions related to conflict detection. Joost Ellerbroek received the M.Sc. (2007) and Ph.D. (2013)
+degrees in aerospace engineering from the Delft University of Tech-
+This will be the focus of future work.
+nology, The Netherlands, with the Control and Simulation section,
+REFERENCES whereheiscurrentlyworkingasanAssistantProfessor.Hisresearch
+interestslieinthefieldofAirTrafficManagement,andincludetopics
+[1] SESAR Consortium, “The Concept of Operations at a glance,” Single suchastheanalysisofairspacecomplexityandcapacity,datascience
+EuropeanSky,Tech.Rep.,2007. in ATM, the design and analysis of conflict detection and resolution
+[2] JointPlanningandDevelopmentOffice,“Conceptofoperationsforthe algorithms, and human-automation interaction.
+Next Generation Air Transportation System,” FAA, Tech. Rep., Jun. Jacco Hoekstra obtained his MSc, PhD and private pilot license
+2007.
+from TU Delft. He has worked at the Dutch National Aerospace
+[3] J. M. Hoekstra, R. N. H. W. van Gent, and R. C. J. Ruigrok,
+Laboratory(NLR)for16years,andhasco-operatedwithNASA,the
+“Designing for safety: the free flight air traffic management concept,”
+Reliability Engineering & System Safety, vol. 75, no. 2, pp. 215–232, FAA and many European organizations. He founded the Association
+Feb. 2002. [Online]. Available: http://www.sciencedirect.com/science/ for Scientific Development of ATM, was the founding director of
+article/pii/S0951832001000965 AT-One and was the head of NLR’s Air Transport Division. After
+[4] J. M. Hoekstra, R. C. J. Ruigrok, and R. N. H. W. van Gent, “Free serving two terms as dean of the Aerospace Engineering faculty of
+FlightinaCrowdedAirspace?”inProceedingsofthe3rdUSA/Europe TU Delft, he is now a full professor at this faculty, and holds the
+AirTrafficManagementR&DSeminar,Naples,Jun.2000. chair in CNS/ATM. His research topics include 4D trajectory based
+[5] M. Ballin, J. Hoekstra, D. Wing, and G. Lohr, “NASA Langley ATM, airborne separation assurance and controller-pilot data link
+and NLR Research of Distributed Air/Ground Traffic Management,”
+communication. Next to research, he teaches courses on CNS/ATM,
+in AIAA Aircraft Technology, Integration, and Operations (ATIO)
+programming in Python and aeronautics.
+Conference, AIAA-2002-5826. American Institute of Aeronautics and
+Astronautics, 2002. [Online]. Available: http://arc.aiaa.org/doi/abs/10.
+2514/6.2002-5826
+[6] J. K. Kuchar and L. C. Yang, “A Review of Conflict Detection and
+ResolutionModelingMethods,”IEEETransactionsonIntelligentTrans-
+portationSystems,vol.1,pp.179–189,2000.

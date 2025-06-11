@@ -1,0 +1,1039 @@
+
+
+--- Page 1 ---
+
+Delft University of Technology
+CAMDA: Capacity Assessment Method for Decentralized Air Traffic Control
+Sunil, Emmanuel; Ellerbroek, Joost; Hoekstra, Jacco
+Publication date
+2018
+Document Version
+Accepted author manuscript
+Published in
+2018 International Conference on Research in Air Transportation
+Citation (APA)
+Sunil, E., Ellerbroek, J., & Hoekstra, J. (2018). CAMDA: Capacity Assessment Method for Decentralized Air
+Traffic Control. In 2018 International Conference on Research in Air Transportation: Barcelona, Spain, 2018
+Important note
+To cite this publication, please use the final published version (if applicable).
+Please check the document version above.
+Copyright
+Other than for strictly personal use, it is not permitted to download, forward or distribute the text or part of it, without the consent
+of the author(s) and/or copyright holder(s), unless the work is under an open content license such as Creative Commons.
+Takedown policy
+Please contact us and provide details if you believe this document breaches copyrights.
+We will remove access to the work immediately and investigate your claim.
+This work is downloaded from Delft University of Technology.
+For technical reasons the number of authors shown on this cover page is limited to a maximum of 10.
+
+--- Page 2 ---
+
+ICRAT 2018
+CAMDA: Capacity Assessment Method for
+Decentralized Air Traffic Control
+Emmanuel Sunil, Joost Ellerbroek and Jacco M. Hoekstra
+Faculty of Aerospace Engineering, Delft University of Technology
+Kluyverweg 1, 2629 HS, Delft, The Netherlands
+Abstract—This paper presents a semi-empirical method to deter- regardless of the type or location of separation management,
+mine the maximum theoretical capacity of decentralized airspace can be considered equivalent to the density at which the
+concepts. The method considered here, named Capacity Assess- airspace becomes saturated; i.e., the density beyond which no
+ment Method for Decentralized ATC (CAMDA), formalizes an additional traffic can be accommodated without significantly
+earlier approach described in literature, extends it for three- degradingsystem-widemacroscopicproperties;propertiessuch
+dimensional airspace, and also improves the accuracy of the
+as the safety and efficiency of travel.
+underlying models. CAMDA defines capacity as the traffic den-
+sity at which conflict chain reactions propagate uncontrollably Using this view of airspace capacity as a starting point, pre-
+throughout the entire airspace. CAMDA identifies this critical viousresearchhasidentifiedairspacestability,whichconsiders
+densityusingasemi-empiricalapproachwherebymodelsdescrib- the propagation of conflicts as a result of tactical Conflict
+ing the actions of decentralized conflict detection and resolution Resolution (CR) maneuvers, as an important aspect when
+algorithmsarecombinedwithempiricallyobtainedconflictcount evaluating the saturation density of decentralized ATC [8], [9].
+data. The CAMDA method is demonstrated in this work for a These studies have shown that CR can destabilize the airspace
+decentralizeddirectroutingen-routeairspaceconceptthatutilizes at high traffic densities by triggering conflict chain reactions
+astate-basedconflictdetectionalgorithm,andavoltagepotential-
+due to the scarcity of airspace, as well as due to the type
+based conflict resolution algorithm. Three fast-time simulation
+of airspace design and CD&R algorithms used. To measure
+experiments were performed to study how the capacity of this
+airspace stability, literature has also presented the so called
+particular airspace design is affected by: a) conflict detection
+Domino Effect Parameter (DEP) metric [8], [9]. The DEP
+parameters;b)conflictresolutiondimension;andc)thespeeddis-
+tribution of aircraft. The results showed that CAMDA estimated was subsequently used by Jardin to relate airspace stability
+theoccurrenceofconflictchainreactionswithhighaccuracyforall to capacity for decentralization [10]. While Jardin’s approach
+cases,enablingcapacityestimationsusingrelativelynon-intensive providesaninnovativemethodformeasuringairspacecapacity,
+lowdensitytrafficsimulations.Therefore,CAMDAcanbeusedto it is only applicable for motion restricted to the horizontal
+speed up the airspace design process by reducing the number of plane. Therefore the method, as derived by Jardin, does not
+time consuming high-density traffic simulations that are required account for the effect of climbing/descending traffic, or the
+when performing a trade-off between different airspace designs, effect of cruise-climb procedures, on capacity.
+orwhenfine-tuningtheparametersoftheselectedairspacedesign.
+The main goal of the current paper is to extend Jardin’s
+Keywords—Airspacecapacity;airspacestability;DominoEffect
+method for application in three-dimensional airspace such that
+Parameter (DEP); self-separation; BlueSky ATM simulator
+the effects of all flight phases on capacity can be taken into
+account. Additionally, we have used our past experiences in
+I. INTRODUCTION
+developing and validating conflict count models to further
+Despite the significant R&D efforts undertaken to overhaul increasetherealismandaccuracyofthemethod[11],[12].The
+aging Air Traffic Control (ATC) systems, air traffic delays and resulting improved method, termed here Capacity Assessment
+congestion continue to rise at an alarming rate [1]. In response Method for Decentralized ATC (CAMDA), makes use of the
+to this pressing issue, several researchers have long advocated DEP to define the maximum theoretical capacity of decentral-
+for a transfer of traffic separation responsibilities in en-route ized airspace as the density at which conflict chain reactions
+airspace from ground-based Air Traffic Controllers (ATCos) become uncontrollable. Because conflict chain reactions are
+to each individual aircraft [2]–[4]. The resulting decentralized caused by many interconnected factors that cannot be accu-
+trafficseparationparadigmhasbeenshowntoincreaseairspace rately modeled for all conditions in a purely analytical sense,
+capacity over current centralized operations by increasing the CAMDA is a semi-empirical approach. Therefore CAMDA
+efficiency with which the available airspace is utilized [2]–[4]. relies on empirical data, obtained through simulation, to apply
+To support decentralization, the research community has its capacity definition, and evaluate the capacity of a particular
+largely focused on developing automated algorithms for air- airspaceconcept.Nonetheless,becausetheunderlyingCAMDA
+borne Conflict Detection and Resolution (CD&R) [5]. Some models are based on the processes that govern CD&R, all its
+studiesinthisdomainhavealsoinvestigatedifsuchalgorithms parameters have physical meaning. As such, the structure of
+canbecombinedwithdifferentoptionsforstructuringairtraffic the CAMDA models themselves provide useful insights into
+to further increase capacity over current operations [6]. the relationships between the factors that affect capacity for
+However, in spite of over two decades of active research decentralization.
+highlighting its theorized benefits, as well as successful flight- Thispaperbeginswithanoverviewoftherelevantdefinitions
+testdemonstrationsoverMediterraneanairspace[7],decentral- in section II. Next, in section III, the complete derivation
+ization is yet to be deployed in the field. From a technical of the CAMDA method is presented. To illustrate the utility
+point of view, one possible reason for the reluctance to in- of the developed method, it is applied on empirical data
+troduce decentralization may be explained by an insufficient gatheredfromfast-timesimulationsofadirect-routingen-route
+understanding of the factors that affect airspace capacity for airspace concept that utilizes a state-based Conflict Detection
+decentralization. This aspect is further complicated by the fact (CD) algorithm, and a voltage potential-based CR algorithm.
+that most capacity measurement tools, such as those related to The design of these simulation experiments, which consider
+ATCo workload, are not relevant for decentralized ATC. the effects of CD parameters, CR dimension, and the speed
+But before a comprehensive capacity assessment method distribution of aircraft on capacity, are described in section IV.
+can be developed for decentralized ATC, it is first necessary TheresultsoftheCAMDAmethodfortheconsideredairspace
+to consider what the term ‘airspace capacity’ refers to in a design are given in section V. Finally, the main conclusions of
+more general sense. At a fundamental level, airspace capacity, this study are summarized in section VI.
+
+--- Page 3 ---
+
+ICRAT 2018
+II. BACKGROUND
+This section summarizes the definitions and background
+material used by the CAMDA method.
+A. The Difference Between Conflicts and Intrusions
+A conflict occurs if the horizontal and vertical distances
+between two aircraft are expected to be less the prescribed
+separationstandardswithinapredetermined‘look-ahead’time.
+Fig.2. TheDominoEffectParameter(DEP)comparessimulationswithand
+Conflicts are, therefore, predictions of future separation viola-
+withoutConflictResolution(CR)tomeasureairspacestability
+tions. Intrusions, also referred to as losses of separation, occur
+when separation requirements are violated at the present time. denominator of the above equation1. Consequently, based on
+This distinction between conflicts and intrusions is shown in the structure of (1), the DEP can be thought of as the number
+Fig. 1. of secondary conflicts per primary conflict. Correspondingly, a
+As mentioned earlier, CAMDA is concerned with the occur- higher value of DEP indicates higher airspace instability.
+rences of conflict chain reactions. Therefore, the rest of this AstheDEPisconcernedwithconflictchains,itisinvariably
+paper only deals with aspects that are relevant to conflicts. linked to the safety of the airspace. But because conflict chain
+reactions also increase the flight distances of aircraft, the DEP,
+and consequently the notion of airspace airspace stability, also
+B. Airspace Stability and the Domino Effect Parameter
+relates to airspace efficiency. The ability to simultaneously
+Airspacestabilityrelatestotheoccurrenceofconflictchains consider both the safety and efficiency of air travel makes the
+whentacticalCRmaneuversareused.Athightrafficdensities, DEP a powerful tool for airspace capacity analysis purposes.
+such chain reactions can ‘destabilize’ the airspace by propa-
+gating conflicts throughout the entire airspace. To measure the III. THECAMDAMETHOD
+propagationofconflictchainreactions,literatureintroducesthe
+ThissectionpresentsthecompletederivationoftheCAMDA
+‘Domino Effect Parameter’ (DEP) [8], [9]. The DEP can be
+method. It begins by introducing the airspace capacity defini-
+visualized using the Venn diagram in Fig. 2. Here, C is
+total,nr tion used by CAMDA. This definition is subsequently used to
+thesetofallconflictswithoutCR,andC isthesetofall
+total,wr derive the six components of the CAMDA approach.
+conflicts with CR, for identical traffic scenarios. Furthermore,
+three regions can be identified in Fig. 2; R1, R2 and R3.
+A. CAMDA Capacity Definition
+By comparing R3 with R1, the proportion of ‘destabilizing’
+conflicts caused by CR can be determined. Thus, the DEP is When a conflict occurs, a conflict resolution action needs to
+defined as: be taken to prevent that conflict from turning into an intrusion.
+In the case of decentralized ATC, these resolutions can be
+R3(⇢) R1(⇢) C total,wr (⇢) determined by pilots, or by automated onboard CR algorithms.
+DEP =   = 1 (1)
+C (⇢) C (⇢)   In either case, such tactical CR maneuvers can cause new
+total,nr total,nr
+conflicts, and in some cases, they can trigger conflict chain
+The number of conflicts that occur is dependent on the reactions. At low traffic densities, the ample maneuvering
+traffic density, ⇢, regardless of whether CR is used. Hence, room available would, under normal conditions, allow such
+all parameters in the above equation are a function of ⇢. chainreactionstodissipatebythemselves,i.e.,withoutexternal
+To interpret the output of the above equation, it is useful intervention.
+to categorize conflicts in R 1 , R 2 , and R 3 . First, conflicts that When extrapolating this logic for extreme traffic densities, it
+are common to both the CR OFF and CR ON cases are given islikelythatatacriticaltrafficdensity,thescarcityofairspace
+by R 2 . However, as soon as CR is applied, the aircraft that becomes so severe that conflict chain reactions propagate
+suffer conflicts will fly different routes, both spatially and throughout the entire airspace. This would cause all aircraft
+temporally. Because of this, some conflict pairs that would to be inter-connected by a continuous, and perpetual conflict
+have occurred with the original CR OFF trajectories will be chain. Under such circumstances, it is unlikely that any CR
+avoided, and similarly, the altered CR ON trajectories can also maneuver by any aircraft could stabilize the airspace system.
+trigger different conflict pairs. In Fig. 2, R 1 represents the This would in turn result in an uncontrollable situation where
+avoided conflict pairs, and R 3 corresponds to the additional, allaircraftareresignedtocontinuallyperformmeaninglessCR
+different conflict pairs. These additional conflict pairs can maneuvers, without ever being able to fly to their actual desti-
+be either due to chance, or due to chain reactions, where a nations.TheCAMDAmethoddefinesthemaximumtheoretical
+conflict resolution of a primary conflict immediately triggers a capacityofadecentralizedairspacedesignatthiscriticaltraffic
+secondary, or knock-on, conflict. Therefore it follows that the density.
+numerator,R 3 R 1 ,indicatestheamountbywhichthenumber To pin-point the aforementioned hypothetical density at
+ 
+of additional conflicts outweighs the number of conflicts that which conflict chain reactions are uncontrollable, CAMDA
+are avoided with CR, and as such, the net destabilizing effect makes use of the DEP; if all aircraft are ‘stuck’ in conflict
+ofCR(orstabilizingifR 1 >R 3 ).Ifitisassumedthatconflict at the maximum theoretical density, then an infinite number
+probability doesn’t change due to CR, the number of primary of secondary conflicts would be triggered by the resolution of
+conflicts can be considered equivalent to C total,nr , i.e., the any primary conflict. Therefore, CAMDA defines the maximum
+theoretical capacity as the density at which the rate of change
+2𝑆 of the DEP with density tends to infinity. More formally, the
+ℎ
+CAMDA capacity definition can be stated as:
+dDEP (⇢)
+lim = , where ⇢ capacity (2)
+max
+⇢
+!
+⇢max d⇢ 1 ⌘
+(a) Conflict (b) Intrusion 1CRmaneuversareunlikelytoreducethenumberofconflictscomparedto
+thenoresolutioncase,expectforrelativelylowtrafficdensitieswhenCD&R
+Fig.1. Thedifferencebetweenintrusionsandconflicts,displayedhereforthe algorithms are combined with Conflict Prevention (CP) systems. CP is not
+horizontalplane.Here,Sh isthehorizontalseparationrequirement. consideredinthiswork.Referto[2]formoreonCP.
+
+--- Page 4 ---
+
+ICRAT 2018
+B. CAMDA Framework
+Step 1:
+To evaluate the CAMDA capacity definition given by (2), it Instantaneous Conflict
+isnecessarytoexpresstheDEPasafunctionof⇢.Asindicated Count Without CR
+by (1), this requires the derivation of models for C and (𝐶 𝑖𝑛𝑠𝑡,𝑛𝑟 , Eq. 3)
+total,nr
+C as functions of ⇢. CAMDA derives such expressions
+total,wr
+using a six-step sequential framework, see Fig. 3. Here it can
+beseenthattheframeworkconsistsoftwomainparts.Thefirst Step 2:
+part focuses on modeling C , while the second focuses Total Conflict Count total,nr
+on modeling C . Two assumptions, shown on the left Without CR
+total,wr
+(𝐶 , Eq. 8)
+side of Fig. 3, are used to bridge these two main parts of the 𝑡𝑜𝑡𝑎𝑙,𝑛𝑟
+framework. The final step uses these models, and applies the
+CAMDA capacity definition to determine ⇢ via the DEP.
+max
+BeforeproceedingwiththederivationoftheCAMDAmodel Step 3:
+components, it is necessary to highlight three aspects. Local Conflict Count
+Firstly, it should be noted that CAMDA is a semi-empirical Per Unit Distance
+Without CR
+methodasoneofitsparametersneedtobedetermineddirectly
+(𝐶′ , Eq. 12)
+from simulation data. This is because conflict chain reactions, 1,𝑛𝑟
+which are central to the CAMDA capacity definition, are
+Assumption 1:
+dependent on a number inter-linked factors, and the effects of
+Local Conflict Count +
+these interactions on capacity are difficult to model accurately
+Per Unit Distance
+using a purely analytical approach. These include emergent
+behavior that results from interactions between the considered
+Step 4:
+CD&R algorithms and the selected mode for structuring air
+Local Conflict Count
+traffic. Per Unit Distance
+Secondly, this work aims at demonstrating CAMDA for a With CR
+three-dimensional direct-routing en-route airspace design that (𝐶′ , Eq. 13)
+1,𝑤𝑟
+is combined with a state-based CD algorithm, and a voltage
+potential-based CR algorithm. Hence the models, as derived
+Assumption 2: here, are only applicable for this particular case. Nevertheless,
+Total A/C Count
+the basic framework displayed in Fig. 3 can be applied to any
+given decentralized airspace design. Because CAMDA is se-
+quential,thismostlyinvolvesmakingappropriatemodifications Step 5:
+to the first step of the CAMDA framework. Total Conflict Count
+Finally, it should be noted that CAMDA is inspired by With CR
+Jardin [10]. In addition to formalizing Jardin’s approach, (𝐶 𝑡𝑜𝑡𝑎𝑙,𝑤𝑟 Eq. 20)
+the current paper extends his method for three-dimensional
+airspace. Furthermore, because CAMDA relies on a sequential
+framework, by using an improved model for the first step of Step 6:
+theCAMDAframeworkusingresultsfromourpriorwork[11], Domino Effect
+[12], the accuracy and realism of all subsequent steps is also Parameter
+(𝐷𝐸𝑃, Eq. 23)
+expected to be higher than in [10].
+C. Step 1: Instantaneous Conflict Count Without CR
+The goal of the first part of the CAMDA framework is to
+compute the total number of conflicts without CR: C .
+total,nr
+As can be seen in Fig. 3, this process begins by modeling the
+instantaneousconflictcountwithoutCR,C ,asafunction
+inst,nr
+of the number of instantaneous aircraft in the airspace without
+CR, N . C will subsequently be used to calculate
+inst,nr inst,nr
+C in the next step of the derivation.
+total,nr
+For any airspace design, C can be modeled as the
+inst,nr
+product of two factors, namely the number of combinations
+of two aircraft, and the conflict probability between any two
+aircraft, p. In essence, the number of combinations of two air-
+craft is the maximum number of conflicts that can occur, since
+multi-aircraft conflicts, i.e., conflicts involving more than two
+aircraft, can also be decomposed into a series of two-aircraft
+conflicts. The conflict probability, on the other hand, scales
+down the number of combinations so that only those aircraft
+that are within range each other and those with intersecting
+trajectories are counted as conflicts.
+For the unstructured airspace design that is the focus of this
+derivation process, the number of combinations can be com-
+puted directly using the binomial theorem, since this airspace
+design imposes no constraints on the motion of aircraft [11],
+[12]. Therefore, C can be expressed as:
+inst,nr
+N (N 1) inst,nr inst,nr C =   p (3) inst,nr
+2
+To model the conflict probability, p, it is necessary to
+consider the process of CD. In state-based CD, aircraft search
+for conflicts within a volume of airspace in front of them. In
+noituloseR
+tcilfnoC
+tuohtiW
+noituloseR
+tcilfnoC
+htiW
++
+Fig.3. SixstepsoftheCAMDAframework
+essence, this involves a 4D extrapolation of aircraft position
+vectors,assumingconstantvelocityvectors.Therefore,pcanbe
+computedastheratiobetweenthevolumeofairspacesearched
+for conflicts, B , and the total volume of the airspace under
+c
+consideration, B . For mathematical convenience, B can
+total c
+bedecomposedintoitshorizontalandverticalcomponents,see
+Fig. 4. Using this approach, p as can be expressed as:
+B +B 4 S S E(V )t +⇡S2 E(V )t p= c,h c,v = h v r,h l h r,v l
+B B
+total total
+(4)
+Here, S and S are the horizontal and vertical separation h v
+requirements, and t is the CD ‘look-ahead’ time. E(V ) and l r,h
+E(V ), are the horizontal and vertical components of the
+r,v
+expected relative velocity of all aircraft pairs. The expected
+relative velocity can be considered equivalent to the weighted
+average of the relative velocity of all aircraft pairs in the
+airspace, taking into account the heading, altitude, spatial
+and speed distributions of all aircraft. For a direct-routing
+unstructured airspace design, we have derived the following
+expressions for these two variables in our prior work [12]:
+4V
+E(V ) = (5a) r,h ⇡
+E(V ) = V sin( ) 1 "2 (5b)
+r,v  
+   
+Here, V is aircraft ground speed,   is the flight path angle
+
+--- Page 5 ---
+
+ICRAT 2018
+countsperunitdistanceflown,forasingleaircraft withoutCR
+(local). These models are needed to bridge the CR OFF and
+CR ON parts of the CAMDA framework in subsequent steps.
+Considerfirstthenumberofconflictsencounteredbyasingle
+aircraft without CR, C . This can be calculated by dividing
+1,nr
+C by the total number of aircraft in the airspace during
+total,nr
+the analysis time interval T without CR, N :
+total,nr
+C
+total,nr
+C = (9)
+1,nr
+N
+total,nr
+Subsequently, the number of conflicts per unit distance for
+a single flight, C , can be computed by dividing (9) by
+Fig.4. Volumesearchedforconflictsbyanaircraftin3Dairspace 10,nr
+the average flight distance in the airspace volume of interest
+of climbing/descending aircraft, and " is the proportion of
+without CR, D :
+cruising aircraft in the airspace. All three variables are traffic nr
+scenario related. Furthermore, the specific version of (4) and  C C
+1,nr total,nr
+(5) apply only for scenarios with uniform heading, altitude, C 10,nr =
+ D
+=
+N D
+(10)
+and spatial distributions. The above equations also assume all nr total,nr nr
+aircraft to fly with equal ground speeds. Because CAMDA is NotethattheCAMDAmethodconsidersD tobeaknown
+nr
+a sequential method, these assumptions affect subsequent steps input parameter. To express C as a function of ⇢, a model
+10,nr
+of the derivation. Nevertheless, the effect of the equal speed for N as a function of ⇢ is needed. This can be derived
+total,nr
+assumption on CAMDA is specifically tested in this research, as follows; to maintain a constant density of one aircraft in
+see section V-C. The reader is referred to [13] for alternate an airspace, the aircraft replacement rate would have to be
+versions of E(V r,h ) and E(V r,v ) for cases where the above V/D nr . Likewise, to maintain a density of N inst,nr aircraft,
+‘ideal’ traffic scenario assumptions do not hold. the replacement rate would have to be N V/D .
+inst,nr nr
+·
+Correspondingly,thetotalnumberofaircraftintroducedduring
+D. Step 2: Total Conflict Count Without CR
+an analysis interval of length T would be T N V/D .
+inst,nr nr
+The total number of conflicts without CR, C , can be By using (7), and the logic described here · , N · can be
+total,nr total,nr
+computedbysummingupthenumberofinstantaneousconflicts formulated as:
+detected at each time step during an analysis time interval
+T. The result of this summation should be divided by the
+TVN TV
+averageconflictduration,t c ,sothatconflictswhichoccurover N total,nr = inst,nr +N inst,nr =⇢A +1 (11)
+multiple time steps are only counted once. Since a continuous D nr ✓ D nr ◆
+summation over time is equivalent to an integration over time,
+The first term on the right hand side of (11) is the number
+a model for C can be computed as:
+total,nr of aircraft that started their flights during the analysis time
+interval, while the second term is the number of aircraft that
+1 T were already present in the airspace at the start of the analysis
+C = C dT
+total,nr inst,nr time. Substitution of (8) and (11) into (10) yields:
+t
+c Z0 (6)
+C inst,nr T pTA⇢
+= t c C 10,nr = 2t c (TV +D nr ) (12)
+To introduce traffic density, ⇢, into the derivation process,
+F. Step 4: Local Conflict Count Per Unit Distance With CR
+thefollowingrelationshipbetweenthenumberofinstantaneous
+aircraft, N , and the area of the airspace, A, can be used: Whilethelastthreederivationstepsconsideredthecasewith-
+inst,nr
+out CR, the following three steps focus on conflict modeling
+N
+inst,nr with CR. Modeling the case with CR begins by developing an
+⇢= (7)
+A expression for the local conflict count per unit distance with
+CR,C ,i.e.,the‘withCR’counterpartofthepreviousstep.
+Substitution of (3) and (7) into (6) leads to the following 10,wr
+final expression for C totalnr :
+cen
+T
+t
+o
+ra
+m
+liz
+o
+e
+d
+d
+el
+sy
+C
+st
+10
+e
+,w
+m
+r
+.
+,
+I
+c
+n
+o
+s
+n
+u
+s
+c
+id
+h
+e
+a
+r
+s
+t
+y
+h
+s
+e
+te
+m
+m
+o
+,
+t
+i
+i
+t
+on
+is
+o
+p
+f
+os
+tr
+s
+a
+ib
+ffi
+le
+c
+t
+w
+ha
+i
+t
+th
+th
+in
+er
+a
+e
+d
+ar
+e
+e
+-
+no preferred directions, or because of a popular destination(s),
+C = pTA2⇢ ⇢   A 1 pTA2⇢2 if ⇢ 1 (8) therecanbeoneormorepreferreddirections.Regardlessofthe
+total,nr 2t ⇡ 2t   A typeofheadingdistribution,CRmaneuversbyasingleaircraft,
+ c   c
+or by multiple aircraft in different parts of the airspace, are
+Notethattheaboveequationhasbeensimplifiedusingthefact
+unlikely to affect the shape of the overall heading distribution
+that ⇢ 1/A ⇢ for practical values of ⇢ and A. Also note
+  ⇡ of the total airspace. Because this logic can also be applied
+that under ideal conditions, t is equal to the look-ahead time,
+c to all other traffic scenario distributions, such the altitude and
+t , for state-based CD. However, simulation artifacts, such as
+l spatial distribution of traffic, Jardin assumes that the number
+pop-upconflictsbetweennewlyintroducedaircraftandexisting
+of conflicts per unit distance does not vary substantially with
+aircraft, can cause t <t . Because the frequency of such arti-
+c l andwithoutCR[10].Asdescribedinsection.II-B,thisimplies
+facts is very much dependent on the design of the simulations
+that the number of primary conflicts does not depend on CR.
+themselves, and not by any naturally occurring interactions
+More formally, the first assumption used by CAMDA can be
+between aircraft, they are difficult to predict. Therefore, for
+stated as:
+the purposes of this derivation, t is considered to be a known
+c CAMDA Assumption 1:
+input parameter. For the conditions studied here, t was found
+c
+to be between 75-90% of t l , depending on the value of t l . pTA⇢
+E. Step3:LocalConflictCountPerUnitDistanceWithoutCR
+C 10,wr
+⇡
+C 10,nr
+⇡ 2t c (TV +D nr )
+(13)
+While the previous steps of the CAMDA framework have As stated above, this assumption was used by Jardin, but
+consideredconflictcountsforalltrafficintheairspace(global), it was not verified [10]. The results section of this paper,
+this step focuses on determining conflict counts, and conflict on the other hand, will specifically investigate the validity of
+
+--- Page 6 ---
+
+ICRAT 2018
+this assumption, and its effect on the final CAMDA capacity
+2t (TV +D )
+assessment, see section V-A. DEP = c nr 1 (21)
+2t (TV +D ) pD TA⇢  
+G. Step 5: Total Conflict Count With CR c nr   cdr
+As stated before, to compute the DEP, it is necessary to To apply the CAMDA capacity definition, it is useful to
+derive a model of the total number of conflicts in an airspace collect together all terms in the above equation that are not
+with CR, C . This can be computed by first considering a function of ⇢. To this end,   and   are defined as:
+total,wr
+the average number of conflicts for a single aircraft with CR,
+C , which can in turn be expressed as the product of the
+1,wr   = 2t (TV +D ) (22a)
+average flight distance with CR, D , and the local conflict c nr
+wr 1
+count per unit distance with CR, C 10,wr :   = (22b)
+pD TA
+cdr
+C 1,wr =D wr C 10,wr (14)
+Using (22), (21) can be rewritten as:
+Although C was assumed to be not affected by CR, see
+10,wr ⇢
+(13), this can not be assumed for D wr . This is because CR DEP = (23)
+maneuvers cause aircraft to deviate from their nominal paths,    ⇢
+ 
+and these deviations increase the total distance flown relative
+The CAMDA capacity definition, given by (2), can now be
+to the case without CR. Therefore, D can be expressed as:
+wr evaluated. This involves determining the density at which the
+rate of change of the DEP with ⇢ equals infinity:
+D =D +D C (15)
+wr nr cdr 1,wr
+dDEP   
+The above equation states that the distance flown by an = = (24)
+aircraftwithCRincreaseslinearlywiththenumberofconflicts d⇢ (   ⇢ )2 1
+detected. Here, the ‘extra’ distance flown as result of each     ⇢ ! ⇢max   max
+Based on (24), it can be seen that the rate of change of the
+conflictresolutionmaneuver,includingtheextradistanceflown  
+DEPwithdensityequalsinfinityif,andonlyif,   ⇢ =0.
+by an aircraft to recover its pre-conflict destination, is denoted   max
+Therefore,aninfinitenumberofsecondaryconflictsistriggered
+asD .ThisparameterisaffectedbythetypeofCRalgorithm
+cdr per primary conflict when ⇢ is equal to   . Using (22):
+used, and also by the occurrence of conflict chain reactions. max
+As such, D is the sole empirical parameter of the CAMDA
+cdr 2t (TV +D )
+c nr
+method, and therefore its value needs to be determined from ⇢ =   = (25)
+max
+pD TA
+simulation. Substituting (15) into (14) leads to: cdr
+This equation shows that ⇢ is directly proportional to
+D C max
+C = nr 10,wr (16) the ground speed of aircraft, V, and inversely proportional to
+1,wr
+1
+ 
+D cdr C 10,wr the expected relative velocity between aircraft via the conflict
+probability p, see (4). Unsurprisingly, the above equation also
+The above equation can be written as a function of ⇢ by
+states that ⇢ is dependent on the extra distance flown per
+substituting (13) into (16): max
+conflict due to CD&R, D , i.e., the empirical parameter of
+cdr
+pTD nr A⇢ the CAMDA method. Therefore, a value for ⇢ max can be
+C 1,wr = (17) determined by fitting simulation logged DEP data to (23) in
+2t (TV +D ) pD TA⇢
+c nr   cdr a least-squares sense. Thus, even though all parameters used
+ThetotalnumberofconflictswithCR,C cannowbe by CAMDA have a physical meaning and take into account
+total,wr
+computed as the product between C and the total number CD and CR, it is regarded as a semi-empirical method.
+1,wr
+ofaircraftduringtheanalysistimeintervalwithCR,N :
+total,wr IV. FAST-TIMESIMULATIONDESIGN
+C =C N (18) To demonstrate the utility of the CAMDA method, as well
+total,wr 1,wr total,wr
+as to study the effects of CD parameters, CR dimension, and
+To formulate N total,wr as a function of ⇢, the following the speed distribution aircraft on airspace capacity, fast-time
+assumptionismade;althoughCRisexpectedtoincrease⇢due simulation experiments were performed for a decentralized
+to longer flights, CR is also expected to increase the average directroutingen-routeairspaceconcept.Thissectiondescribes
+distanceflownbyaproportionalamount.Thus,thetotalnumber the design of these experiments.
+of aircraft during the analysis time interval is assumed to be
+similar with and without CR, as can be seen when this logic A. Simulation Development
+is applied to (11). More formally, the second assumption used 1) Simulation Platform
+by the CAMDA framework can be stated as: The BlueSky open-source ATM simulator [14], developed at
+CAMDA Assumption 2: TU Delft, was used as the simulation platform in this research.
+TV
+N totalwr
+⇡
+N totalnr
+⇡
+⇢A
+D
++1 (19) 2) Airborne Self-Separation Automation
+✓ nr ◆ As stated before, state-based CD was used in this study, see
+Thevalidityofthisassumptionisalsotestedinthiswork.A section III-C. It should be noted that CD was performed
+final expression for C as a function of ⇢ can be derived assuming perfect knowledge of aircraft states. This is in line
+total,wr
+by substituting (17) and (19) into (18): with the findings of a recent study that concluded that ADS-B
+characteristics have little effect on the performance of state-
+pTA2⇢2(TV +D nr ) based CD [15].
+C = (20)
+total,wr 2t (TV +D ) pD TA⇢ Once conflicts occurred, the Modified Voltage Potential
+c nr cdr
+  (MVP) algorithm was used for CR. MVP works similar to the
+H. Step 6: Modeling Capacity Using the DEP repulsion that occurs between similarly charged particles to re-
+The final step of the CAMDA framework uses the models solve conflicts between aircraft in a pairwise fashion, resulting
+developedaboveforC andC toexpresstheDEP in implicit cooperative resolution strategies. This implies that
+total,nr total,wr
+asafunctionof⇢.ThisallowstheCAMDAcapacitydefinition all conflicting aircraft shared the task of avoiding intrusions
+to be applied, enabling the calculation of the maximum theo- using equal, but opposite, resolution maneuvers. It should be
+retical capacity of a given airspace design, ⇢ . Substitution noted that MVP uses minimum-path deviation resolutions, and
+max
+of (8) and (20) into (1) gives: it was used for cases where CR was limited to either the
+
+--- Page 7 ---
+
+ICRAT 2018
+TABLEI
+CONDITIONSOFCONFLICTDETECTION(CD)EXPERIMENT
+Condition Name S h [NM] S v [ft] t l [mins]
+Baseline 2.5 500 5.0
+Double Separation 5.0 1000 5.0
+Double Separation
+5.0 1000 2.5
++ Half Look Ahead
+to the horizontal direction. This experiment resulted in a total
+Fig.5. Topandsideviewsofthesimulation’sphysicalenvironment
+of 600 runs, involving over 850,000 flights.
+horizontal or the vertical dimension. For a full description of
+the MVP algorithm, the reader is referred to [2], [16]. 2) Conflict Resolution Experiment
+After CR, aircraft flew directly to their pre-conflict destina- The second experiment focused on the effect of conflict reso-
+tionsinthehorizontaldirection,andrecoveredtheirpre-conflict lution dimension on airspace capacity. Therefore, simulations
+altitudesintheverticaldirection.Thismatchesthefunctionality were performed for ten traffic densities using the baseline
+of most modern Flight Management Systems (FMS). CD setting for cases where conflict resolution was a) OFF,
+b) limited to the horizontal direction (combined heading and
+B. Traffic Scenarios ground speed resolutions), and c) limited to the vertical direc-
+tion (vertical speed resolutions). For this purpose, the MVP
+1) Testing Region and Flight Profiles CR algorithm was used, resulting in a cooperative resolution
+A large three-dimensional en-route sector was used as the maneuvers, see section IV-A2. Once again ten repetitions were
+physicalenvironmentfortrafficsimulations,seeFig.5.Because performed at each traffic density, and all aircraft flew with an
+no traffic was simulated outside the simulated sector, aircraft equal ground speed of 400 kts. This simulation resulted in a
+neartheedgesofthe‘simulationregion’areunlikelytogetinto total of 300 simulation runs, using over 425,000 flights.
+conflicts. To solve this issue, a smaller cylindrical ‘experiment
+region’ was defined in the center of the ‘simulation region’. 3) Ground Speed Experiment
+The resulting gap between the experiment and simulation The final experiment considered the effect of the equal speed
+regions ensures that aircraft within the experiment region are assumptionthatwasmadeduringthederivationoftheCAMDA
+surrounded by traffic in all directions. Correspondingly, only models. Therefore in this experiment, simulations were per-
+aircraft within the experiment region, and only conflicts with formedforalltentrafficdensitiesandforcaseswherethespeed
+closest points of approach within the experiment region, were distribution of aircraft was a) equal at 400 kts, b) normally
+used to assess the accuracy of the CAMDA models. distributed with a mean of 400 kts and a standard deviation
+of 16.7 kts, and c) uniformly distributed between 350-450 kts.
+Fig.5alsoshowsthehorizontalandverticalflightprofilesof
+Once again, each traffic density was repeated 10 times, and
+an example flight. Because the simulations consider a direct-
+scenarios were repeated with and without CR to calculate the
+routing airspace design, aircraft use direct-horizontal routes.
+DEP from simulation data. In this experiment resolutions were
+Aircraft altitudes were selected to be linearly proportional to
+limited to the horizontal direction. This experiment resulted in
+their flight distances. Since traffic scenarios with a uniform
+a total of 600 runs, involving over 850,000 flights.
+distribution of flight distances were used, this method of
+altitude selection resulted in a uniform distribution of aircraft
+D. Dependent Variables
+cruising altitudes.
+In addition to studying the effects of CD parameters, CR
+2) Scenario Generation
+dimension and the speed distribution of aircraft on airspace
+Ten traffic demand scenarios of increasing density, ranging
+capacity, data collected from the experiments was also used to
+between8-80aircraftper10,000NM2intheexperimentregion,
+assess the accuracy of the CAMDA modeling approach. The
+wereusedforallthreeexperiments.Notethatthisismorethan
+specific approach used to measure accuracy varied between
+twice the maximum traffic density of 32 aircraft per 10,000
+the analytical and semi-empirical components of the CAMDA
+NM2 in the upper airspace (>18,000 ft) over the Netherlands
+framework. The appropriate methods are discussed with the
+in 2017 (computed using logged ADS-B data). Additionally,
+corresponding results in the following section.
+all traffic scenarios had uniform heading, altitude and spatial
+distributions. The speed distribution of aircraft varied between
+the three experiments, see section IV-C. V. RESULTSANDDISCUSSION
+Traffic scenarios were generated with a duration of 2.5 hrs, Inthissection,theresultsofthethreesimulationexperiments
+consistingofa1hrtrafficvolumebuildupperiod,a1hrlogging arepresentedanddiscussed.Asstatedbefore,theresultsapply
+period, and 0.5 hr wind-down period. Traffic density was held for a decentralized direct-routing en-route airspace design.
+constantattherequiredlevelduringtheloggingandwind-down
+periods.Itshouldbenotedthatallscenariosweregeneratedoff A. Conflict Detection Experiment
+line prior to the simulations so that all independent variables
+The goal of the Conflict Detection (CD) experiment is to
+could be subjected to the same initial conditions.
+study the effect of horizontal and vertical separation require-
+ments, and look-ahead time, on the capacity of the airspace,
+C. Independent Variables
+see Table I. Data gathered from this experiment is also used to
+1) Conflict Detection Experiment analyzetheaccuracyofallCAMDAsub-models.Thefollowing
+Thegoalofthefirstexperimentwastoinvestigatetheeffectof paragraphs discuss the results of the analytical and the semi-
+conflict detection parameters, namely horizontal and vertical empirical components of the CAMDA framework separately.
+separation requirements, and look-ahead time, on airspace
+capacity. Using different combinations of these three variables, 1) Analytical Model Components
+three experiment conditions have been defined, see Table I. Figure 6 displays the simulation results for the analytical com-
+Experimentswereperformedforalltentrafficdensities,ranging ponentsoftheCAMDAmethod.Inthisfigure,thescatterpoints
+between 8-80 aircraft per 10,000 NM2, using ten random represent the raw data collected from the simulations, and the
+initializationsforeachtrafficdensity,andusinganequalground solid lines represent the model predictions for each CAMDA
+speed of 400 kts for all aircraft. Furthermore, to calculate the component. To assess the accuracy of analytical models, a
+DEP from simulation data, scenarios were repeated with and modelaccuracyparameter,k,isintroduced,asillustratedbelow
+withoutCR.Inthisexperimentconflictresolutionswerelimited for a generic case:
+
+--- Page 8 ---
+
+ICRAT 2018
+(a) InstantaneousConflictCountWithoutCR (b) TotalConflictCountWithoutCR
+(c) LocalConflictCount,BaselineExperiment (d) TotalAircraftCount,BaselineExperiment
+Fig.6. Simulationdata(scatter)andmodelpredictions(lines)foranalyticalcomponentsoftheCAMDAframework,ConflictDetection(CD)experiment
+The results for C with and without CR are pictured in
+10
+Fig.6(c).Notethatduetolimitedspace,thefigureonlydisplays
+Simulation Measurement=Analytical Model k
+⇥ the results for the ‘baseline’ condition; the results of the other
+Hereitcanbeseenthatkactsasaconstantscalingparameter conditions are similar. Moreover, the baseline condition led to
+to the analytical models. Its value is determined by fitting the the lowest model accuracy, similar to C total,nr .
+models to the simulation data in a least-square sense. A value An important assumption made by the CAMDA method to
+of k close to 1 indicates high model accuracy, while k < 1 bridge the cases with and without CR is that C 10,wr
+⇡
+C 10,nr ,
+and k > 1 indicates model over- and under-estimation of see (13). Analysis of Fig. 6(c) shows that this assumption is
+simulationdata,respectively.Modelaccuracyisalsocomputed true up to a density of approximately 40 aircraft per 10,000
+as a percentage by comparing the fitted k to a reference value NM2. But beyond this density, the simulation data indicates
+of 1. C 10,wr > C 10,nr . Furthermore, the difference between the
+modelpredictionsandthesimulationresultsappearstoincrease
+Instantaneous Conflict Count Without CR, C inst,nr beyondthisdensity.Itishypothesizedthatthelargernumberof
+TheresultsforC inst,nr aredisplayedinFig.6(a).Thefigure conflict chain reactions that occur at higher densities leads to
+showsthattheanalyticalmodel,givenby(3),isabletoclosely a break-down of this assumption; for instance, if such conflict
+predictboththeshapeandthemagnitudeofthesimulationdata chains are concentrated in one or more parts of the airspace,
+very closely for all densities, and for all CD conditions. This then it is logical that the local conflict count per unit distance
+high accuracy is also reflected by k values that are very close with CR would increase relative to the case without CR case.
+to 1.0. On comparing the three curves in Fig. 6(a), it can be Regardless,Fig.6(c)indicatesthatthefirstassumptionmade
+s th e a e n nt l h o a o t k s - e a p h a e r a a d ti t o i n m r e e . quirementhasagreatereffectonC inst,nr b fo y r t d h e e ns C it A ie M st D h A ata fr r a e m co e m wo p r a k ra , b th le at to C t 1 h 0, e w p r e ⇡ ak C d 1 e 0, n n s r i , ti i e s s o fo n r ly to v d a a l y id s
+operations(32aircraftper10,000NM2).Fordensitiesthatare
+Total Conflict Count Without CR, C
+total,nr approximately three times greater than today, this assumption
+Figure 6(b) shows the results for the second model of the
+doesnotholdinapurelymathematicalsense.However,because
+CAMDA framework, namely C . In contrast to C ,
+total,nr inst,nr the absolute difference between model and simulation at the
+this figures shows that look-ahead time does not significantly
+highestsimulateddensityislessthan5e-7conflictsperaircraft
+affect C . This can be explained by the fact that the
+total,nr permeter,theviolationofthisassumptionisnotlikelytoaffect
+model for C , given by (8), contains look-ahead time, t ,
+total,nr l the final CAMDA capacity estimate; at this level of difference,
+in the numerator (via the conflict probability, p), and conflict
+anaircraftwouldhavetoflymorethananadditional1000NM
+duration, t , in the denominator. Since these two parameters
+c inthesimulationforittoencounterjustoneadditionalconflict
+have similar values, the effect of t on C is, therefore,
+l total,nr relativetothemodelpredictionforthebaselinecondition.This
+almost ‘canceled-out’.
+conclusion is further exemplified model accuracies which are
+Although the model curves in Fig. 6(b) closely follow the greater than 85%.
+trendbetweenC andtrafficdensity,itisclearthatequa-
+total,nr Total Aircraft Count, N
+tion(8)slightlyunderestimatesC .Thisisalsoindicated total
+total,nr The CAMDA framework assumes that N
+byk >1forallconditions.Moreover,themodelaccuraciesfor total,wr
+⇡
+N .Tovalidatethisassumption,resultsforN forthe
+C are lower than for C . This is because CAMDA total,nr total
+total,nr inst,nr ‘baseline’ condition are displayed in Fig. 6(d). The results for
+usesasequentialframework,andthereforeanymodelingerrors
+theothertwoconditionsaresimilar,butarenotshownbecause
+will accumulate further down the framework. Nonetheless,
+the corresponding model, given by (19), is independent of CD
+model accuracy is still approximately 90% for all cases. This
+parameters.ThisfigureshowsthatthemodelforN closely
+means that equation (8) still provides a good understanding of total
+matches the simulation data for the cases with and without
+the relationships between the factors that affect C .
+total,nr CR. The high accuracy is further emphasized by k values that
+Local Conflict Count Per Unit Distance, C are very close to 1. Therefore it can be concluded that the
+10
+
+--- Page 9 ---
+
+ICRAT 2018
+secondassumptionusedbyCAMDAisvalidforallconsidered Because the DEP model matches well with the simulation
+densities. data, it is possible to apply the CAMDA capacity definition,
+given by (2), to analyze the effect of CD parameters on the
+2) Semi-Empirical Model Components maximum theoretical capacity of the direct-routing airspace
+The last two models of the CAMDA framework, namely concept considered here. From a graphical point of view, this
+C total,wr and the DEP, are influenced by D cdr . This parameter entails determining the traffic density corresponding to the
+describes the extra distance flown by an aircraft to resolve vertical asymptote of the model fitted curves.
+each detected conflict. Because D cdr is affected by conflict Using this procedure, ⇢ max for all three CD conditions is
+chain reactions, its value can only be determined by fitting the computed, see Fig. 7(c). As for many of the other metrics,
+modelforC total,wr ,orthemodelfortheDEP,tothesimulation thisfigureshowsthatseparationrequirementhasasignificantly
+datainaleast-squaressense.Sincethesetwomodelsaresemi- greater effect on airspace capacity than look-ahead time. This
+empirical, it is not possible to measure model accuracy using trend can be explained by considering equation (25). This
+the procedure outlined earlier for the analytical components of equation states that CD parameters affect ⇢ via the conflict
+max
+the CAMDA framework. probability, p, which is in turn described by (4). The later
+Instead, the accuracy of semi-empirical models can be
+equationstatesthatadoublingoflook-aheadtime,forinstance,
+determined by considering two aspects. The first aspect is would lead to a doubling of p, while a doubling of the
+qualitative, and it considers the ability of a model to predict
+horizontal and vertical separation requirements would lead
+the shape of the relationship between traffic density and the to a quadrupling of p. This effect of CD parameters on p
+airspace state of interest, in this case C and the DEP.
+total,wr explainstherelativecapacitydifferencesbetweenthethreeCD
+This aspect can be studied visually by checking whether the
+conditions considered here. This example also illustrates the
+shapeofthefittedmodelcurvefollowsthetrendsdisplayedby
+utility of the CAMDA method; even though CAMDA is semi-
+the raw simulation data.
+empirical, because all underlying models and parameters are
+The second aspect aims to quantify the accuracy of the
+derived with a physical interpretation, the effect of a number
+fitting process. To this end, the available simulation data is
+of airspace parameters can be directly understood from the
+split into two datasets of equal size, known as the ‘training’
+structure of the models themselves.
+and the ‘validation’ datasets. Only the training dataset is used
+to determine the semi-empirical parameters. Subsequently, the
+B. Conflict Resolution Experiment
+RootMeanSquare(RMS)errorbetweenmodelpredictionsand
+the empirical data is computed for both training and validation Thesecondexperimentinvestigatedtheeffectofconflictres-
+datasets. If the RMS error for the training data set is small, olutiondimensiononairspacecapacity.Tothisend,simulations
+then the fitting accuracy is considered to be high. If the RMS were repeated for the cases where conflict resolution was a)
+errors for the training and validation datasets are comparable, limited to the horizontal direction and b) limited to the vertical
+then the model fitting process was not significantly affected by direction.
+simulation artifacts and noise, i.e, over-fitting was limited. The DEP and capacity results for the CR experiment are
+shown in Fig. 8. Here it can be seen that the airspace becomes
+Total Conflict Count With CR, C
+total,wr
+Figure7(a)showstheresultsforC .Thisfigureshows more unstable when vertical conflict resolutions are used. In
+total,wr
+fact, limiting CR in the vertical direction decreases airspace
+thatseparationrequirementhasalargeeffect,whilelook-ahead
+timehasaminimaleffect,onC ,atrendalsonotedabove capacity by a factor of three.
+total,wr
+for C . Furthermore, as the fitted model curves closely Although the horizontal separation requirement is 30 times
+total,nr
+approximatetheshapeandmagnitudeofthesimulationdata,it larger than the vertical separation minima for the settings used
+canbeconcludedthatstructureofequation(20)wellrepresents in this experiment, this unusual result can be explained by
+C . considering the horizontal and vertical density distributions
+total,wr
+To quantify the accuracy of the models fits for C , of aircraft in the airspace. In en-route airspace, aircraft tend
+total,wr
+Fig. 7(b) displays the RMS errors for the training and val- to be more closely packed in the vertical direction than in
+idation datasets. This figure shows that the errors are low the horizontal plane. For example, most long-distance flights
+for the ‘baseline’ and for the ‘double separation + half look- cruisebetweenFL300-FL400,whereasaircraftcanbeseparated
+ahead’ conditions. However, the RMS errors for the ‘double laterally by many nautical miles. As a result of the closer
+separation’ condition is relatively high. On close inspection of packing of aircraft along the vertical direction, vertical conflict
+Fig. 7(a), it can be seen that the fitting error for the double resolution maneuvers are more likely to trigger new conflicts,
+separationconditionarisesmainlyatthehighesttrafficdensity. andtherefore,moreliketocauseconflictchainreactions.Con-
+It is important to consider the magnitude of this fitting error sequently, vertical resolutions reduce the maximum theoretical
+in view of the number of conflicts that occurred during the capacity of the airspace.
+simulation at this density; an RMS error of 188 conflicts
+for the validation dataset of the double separation condition C. Ground Speed Experiment
+correspondstoanerrorofonly3%relativetotheactualnumber
+To reduce the complexity of the derivation process, the
+of conflicts logged at this density. Therefore, while the RMS
+modelsdescribedinthispaperassumeequalgroundsspeedsfor
+errorsarelargerforthedoubleseparationconditioninarelative
+allaircraftintheairspace.Tostudytheeffectofthisassumption
+sense, theyare quitelow in theabsolute sense. Forthis reason,
+on the accuracy of the CAMDA method, simulations were
+the accuracy of the model fits for all CD conditions can be
+performedforthecaseswhereaircraftspeedswerea)equal,b)
+considered to be high.
+normally distributed and c) uniformly distributed.
+Domino Effect Parameter (DEP) and Airspace Capacity, ⇢ The DEP and capacity results for the ground speed experi-
+max
+The results for the DEP, the final and most important com- ment are displayed in Fig. 9. This figure shows no substantial
+ponent of the CAMDA framework, are pictured in Fig. 7(c). differences in the DEP for the three speed distributions tested.
+As expected, the figure shows that the DEP, which considers Moreover, the CAMDA capacity estimate for the normal and
+the occurrence and propagation of conflict chain reactions, uniform distributions are within 5% of the capacity estimated
+increases with traffic density for all experiment conditions. for the case where all aircraft flew with equal ground speeds.
+Althoughthesimulationresultsforlowtrafficdensitiesarevery This can be explained by the fact that the mean speed of all
+noisy, the figure still shows that the model for the DEP, given considered distributions was the same. This result suggests
+by (23), is able to well characterize the shape and magnitude that accurate capacity estimates can be computed using the
+of the logged simulation data. The high accuracy of the model CAMDA approach as the long as the average speed of all
+fittingprocessisfurtherindicatedbythelowRMSerrorsfound aircraft in the airspace is known, regardless of the shape of
+for both training and validation datasets, see 7(d). the speed distribution of aircraft.
+
+--- Page 10 ---
+
+ICRAT 2018
+(a) TotalConflictCountWithCR (b) RMSErrorofTotalConflictCountWithCR
+(c) DominoEffectParameter (d) RMSErrorofDominoEffectParameter
+Fig.7. Simulationdata(scatter)andmodelfits(lines)forsemi-empiricalcomponentsoftheCAMDAframework,ConflictDetection(CD)experiment
+Itwasfoundthatchangestotrafficseparationrequirements
+•
+had a greater impact on airspace capacity than changes
+to the conflict detection look-ahead time. This is because
+separationrequirementshavealargereffectontheaverage
+conflict probability between aircraft.
+Because aircraft tend to be more closely packed in the
+•
+vertical direction than in the horizontal direction, cooper-
+ative vertical conflict resolution maneuvers cause a larger
+numberofconflictchainreactions,decreasingairspaceca-
+pacityrelativetocooperativehorizontalconflictresolution
+maneuvers.
+Usingdifferentspeeddistributionsforaircraftdidnotsig-
+Fig.8. DominoeffectparameterandairspacecapacityresultsfortheConflict • nificantly affect the capacity of the direct-routing airspace
+Resolution(CR)experiment concept considered in this work. This indicates that accu-
+rate capacity estimates can be computed using CAMDA
+if the average speed of all aircraft is known.
+To further increase CAMDA accuracy, it is recommended
+•
+to investigate methods to relax modeling assumptions,
+particularly an assumption concerning the local conflict
+count per unit distance with conflict resolution.
+CAMDAreliesontheconflictprobabilitybetweenaircraft
+•
+to compute the maximum theoretical capacity for decen-
+tralized ATC. The conflict probability modeling compo-
+nent of CAMDA could be used as a starting point to
+develop similar methods for current-day operations. This
+will be the topic of future research.
+Fig.9. Dominoeffectparameterandairspacecapacityresultsfortheground
+speedexperiment As a final note, it is important to realize that CAMDA
+determines the absolute maximum theoretical capacity of an
+VI. CONCLUSIONS
+airspacedesign.Inpractice,however,societywillnotrecognize
+This paper presented the derivation of the Capacity Assess- anasymptoticlimitofairspacestabilityasanacceptabledefini-
+mentMethodforDecentralizedATC(CAMDA).CAMDAwas tion of airspace capacity. Moreover, airline economics, which
+demonstrated in this work using three-dimensional simulations is primarily focused on improving efficiency, and stochastic
+ofadecentralizeddirect-routingen-routeairspaceconcept.The effects, such as weather, affect the practical capacity of the
+following conclusions can be drawn: airspace.Nevertheless,thetheoreticalcapacitylimitdetermined
+byCAMDAcanbeusedasafairandobjectivemetricforcom-
+CAMDAdefinesthecapacityoftheairspaceasthedensity
+• paring different decentralized airspace designs, and/or CD&R
+at which the Domino Effect Parameter (DEP), a measure
+algorithms.
+of airspace stability, approaches infinity. At this density,
+all aircraft in the airspace exist in a persistent state of
+ACKNOWLEDGMENTS
+conflict due to uncontrollable conflict chain reactions.
+Fast-time simulation results showed that the underlying The authors would like to thank Junzi Sun, PhD candidate, TU
+• Delft,forcalculatingthemaximumtrafficdensityovertheNetherlands
+CAMDA models can accurately predict the occurrence
+in 2017 using logged ADS-B data. This research would not been
+of conflict chain reactions, enabling capacity estimations possiblewithouttheeffortsoftheopen-sourcecommunitythatcontin-
+usingrelativelynon-intensivelow-densitytrafficscenarios. ually contributes to the development of the BlueSky ATM simulator.
+
+--- Page 11 ---
+
+ICRAT 2018
+BlueSky can be downloaded from https://github.com/ProfHoekstra/
+bluesky.
+REFERENCES
+[1] Performance Review Commission, “Eurocontrol Performance Review
+Report2016,”Eurocontrol,Tech.Rep.PRR2016,2016.
+[2] J.M.Hoekstra,R.N.H.W.vanGent,andR.C.J.Ruigrok,“Designing
+for safety: the free flight air traffic management concept,” Reliability
+Engineering&SystemSafety,vol.75,no.2,pp.215–232,Feb.2002.
+[3] J. M. Hoekstra, R. C. J. Ruigrok, and R. N. H. W. van Gent, “Free
+Flight in a Crowded Airspace?” in Proceedings of the 3rd USA/Europe
+AirTrafficManagementR&DSeminar,Naples,Jun.2000.
+[4] M. Ballin, J. Hoekstra, D. Wing, and G. Lohr, “NASA Langley and
+NLRResearchofDistributedAir/GroundTrafficManagement,”inAIAA
+Aircraft Technology, Integration, and Operations (ATIO) Conference,
+AIAA-2002-5826,2002.
+[5] J.K.KucharandL.C.Yang,“AReviewofConflictDetectionandResolu-
+tionModelingMethods,”IEEETransactionsonIntelligentTransportation
+Systems,vol.1,pp.179–189,2000.
+[6] E. Sunil, J. Ellerbroek, J. Hoekstra, A. Vidosavljevic, M. Arntzen,
+F.Bussink,andD.Nieuwenhuisen,“AnalysisofAirspaceStructureand
+Capacity for Decentralized Separation Using Fast-Time Simulations,”
+JournalofGuidance,Control,andDynamics,vol.40,no.1,pp.38–51,
+2017.
+[7] F.Maracich,“Flyingfreeflight:pilotperspectiveandsystemintegration
+requirement,”IEEEAerospaceandElectronicSystemsMagazine,vol.21,
+no.7,pp.3–7,Jul.2006.
+[8] K.Bilimoria,K.Sheth,H.Lee,andS.Grabbe,“Performanceevaluation
+of airborne separation assurance for free flight,” in AIAA Guidance,
+NavigationandControlConference,2000.
+[9] J.Krozel,M.Peters,andK.Bilimoria,“Adecentralizedcontrolstrategy
+fordistributedair/groundtrafficseparation,”inAIAAGuidance,Naviga-
+tion,andControlConferenceandExhibit,2000.
+[10] M.R.Jardin,“AnalyticalRelationshipsBetweenConflictCountsandAir-
+Traffic Density,” Journal of Guidance, Control, and Dynamics, vol. 28,
+no.6,pp.1150–1156,2005.
+[11] Hoekstra,J.,Maas,J.,Tra,M.,andSunil,E.,“HowDoLayeredAirspace
+DesignParametersAffectAirspaceCapacityandSafety?”inProceedings
+of the 7th International Conference on Research in Air Transportation,
+Jun.2016.
+[12] Sunil, E., Ellerbroek, J., Hoekstra, J.M., and Maas, J., “Three-
+Dimensional Conflict Count Models for Unstructured and Layered
+AirspaceDesigns,”submittedtoTransportationResearchPartC:Emerg-
+ingTechnologies,Dec.2017.
+[13] Sunil, E., rarson, O., Ellerbroek, J., and Hoekstra, J.M., “Analyzing
+the Effect of Traffic Scenario Properties on Conflict Count Models,” in
+SubmittedtoInternationalConferenceonResearchinAirTransportation
+(ICRAT’18),Jun.2018.
+[14] J.HoekstraandJ.Ellerbroek,“BlueSkyATCSimulatorProject:anOpen
+DataandOpenSourceApproach,”inProceedingsofthe7thInternational
+ConferenceonResearchinAirTransportation,Jun.2016.
+[15] T. Langejan, E. Sunil, J. Ellerbroek, and J. Hoekstra, “Effect of ADS-
+B Characteristics on Airborne Conflict Detection and Resolution,” in
+Proccedingsofthe6thSesarInnovationDays,2016.
+[16] J. M. Hoekstra, “Designing for safety: the free flight air traffic
+managementconcept,”PhDDissertation,DelftUniversityofTechnology,
+Delft, Nov. 2001. [Online]. Available: http://resolver.tudelft.nl/uuid:
+d9f6078a-0961-403f-871e-cad365ee46a9
+VViieeww ppuubblliiccaattiioonn ssttaattss

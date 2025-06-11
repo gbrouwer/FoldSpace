@@ -1,0 +1,818 @@
+
+
+--- Page 1 ---
+
+A conceptual third party risk model
+for personal and unmanned aerial
+vehicles
+Customer
+National Aerospace Laboratory NLR
+NLR-TP-2015-367 - September 2015
+
+--- Page 2 ---
+
+National Aerospace Laboratory NLR
+Anthony Fokkerweg 2
+1059 CM Amsterdam
+The Netherlands
+Tel +31 (0)88 511 3113
+www.nlr.nl
+
+--- Page 3 ---
+
+UNCLASSIFIED
+EXECUTIVE SUMMARY
+A conceptual third party risk model
+for personal and unmanned aerial
+vehicles
+Report no.
+NLR-TP-2015-367
+Author(s)
+R. Aalmoes
+Y.S. Cheung
+E. Sunil
+J.M. Hoekstra
+F.J.L. Bussink
+Report classification
+UNCLASSIFIED
+Date
+September 2015
+Knowledge area(s)
+Externe Luchtvaart Veiligheid en
+beleidsondersteuning
+Descriptor(s)
+RPAS
+UAS
+PAV
+Problem area
+Third party risk
+The impact of aircraft on the environment has always played an
+important role in the acceptance of new airports, air routes, and
+aircraft types. With the current development of personal aerial
+vehicles (PAVs) and unmanned aerial vehicles (UAVs), new aerial
+transportation concepts will arise that will only succeed to be
+implemented if the environmental impact is accepted by the
+public. Third party risk (TPR) concerns the safety (risk) for the
+people on the ground, who are involuntarily exposed to an
+aircraft accident.
+This paper is published in an IEEE publication of the 2015 International Conference on
+UNCLASSIFIED Unmanned Aircraft Systems, June 9-12, 2015, Denver, Colorado, USA.
+
+--- Page 4 ---
+
+A conceptual third party risk model for personal and unmanned aerial UNCLASSIFIED
+vehicles
+The TPR is important in the (densely populated) Netherlands and, therefore, the NLR has been
+doing research on TPR around airports and developed a TPR model for conventional aircraft. This
+model is neither suited for PAV and UAV aircraft, nor for the associated operating modes for
+these aircraft.
+Description of work
+A conceptual third party risk model is developed, implemented, and tested to demonstrate the
+capability of determining the risk to the population in a metropolitan city exposed to personal
+aerial vehicles and unmanned aerial vehicles traffic operations. The conceptual model that is
+primarily based on the methodology and experience of risk modelling for conventional aircraft is
+modified and the parameters are adjusted suitable for a determination of risk in the arrival,
+departure and cruise phase of flight for those new aircraft types.
+Results and conclusions
+For a demonstration of the conceptual risk model, simulation tracks from the Metropolis project
+(Sunil, Hoekstra, Ellerbroek, Bussink, Vidosavljevic, & Kern, 2015) are used as inputs. In this 7th
+framework project of the European Union, four different concepts for airspace organization are
+evaluated for PAV and UAV traffic. The experiment area is a metropolitan city of the size of Paris
+in the year 2050. For the purpose of comparison of different future operation concepts and
+different scenarios in a metropolitan area the model suffices the need. Two examples of
+operation concepts and traffic scenarios for PAV and UAV aircraft movements, respectively, are
+demonstrated.
+However, validation of the conceptual model, without the availability of the empirical accident
+data of UAVs and PAVs, is not possible. To further improve the model, more research can be
+performed in collecting relevant accident data of UAVs and PAVs. Another approach to improve
+the model is to make use of simulation platforms to simulate failures of these vehicles and their
+impact on populated area.
+Applicability
+This conceptual TPR model suffices the need of comparison of different future operation
+concepts and different scenarios in a metropolitan area. Another opportunity that this research
+has shown is the systematic approach to analyze TPR for PAVs and UAVs. It helps with identifying
+the areas of existing research that can be applied for these calculations, but equally important, it
+shows the areas that still requires additional research. To further improve the model, more
+research can be performed in collecting relevant accident data of UAVs and PAVs.
+National Aerospace Laboratory NLR
+Anthony Fokkerweg 2, 1059 CM Amsterdam,
+P.O. Box 90502, 1006 BM Amsterdam, The Netherlands
+Telephone +31 (0)88 511 31 13, Fax +31 (0)88 511 32 10, www.nlr.nl UNCLASSIFIED
+
+--- Page 5 ---
+
+A conceptual third party risk model
+for personal and unmanned aerial
+vehicles
+R. Aalmoes, Y.S. Cheung, E. Sunil1, J.M. Hoekstra1 and
+F.J.L. Bussink
+1 TU Delft
+Customer
+National Aerospace Laboratory NLR
+September 2015
+
+--- Page 6 ---
+
+A conceptual third party risk model for personal and unmanned aerial vehicles
+This paper is published in an IEEE publication of the 2015 International Conference on Unmanned Aircraft
+Systems, June 9-12, 2015, Denver, Colorado, USA.
+http://ieeexplore.ieee.org/xpl/articleDetails.jsp?arnumber=7152424&searchWithin%3Daalmoes%26filter%3
+DAND%28p_IS_Number%3A7152267%29
+The contents of this report may be cited on condition that full credit is given to NLR and the authors.
+Customer National Aerospace Laboratory NLR
+Contract number -----
+Owner NLR
+Division NLR Air Transport
+Distribution Unlimited
+Classification of title Unclassified
+Date September 2015
+Approved by:
+Author Reviewer Managing department
+R. Aalmoes Y.S. Cheung A.D.J. Rutten
+Date Date Date
+2 | NLR-TP-2015-367
+
+--- Page 7 ---
+
+Summary
+A conceptual third party risk (TPR) model is developed, implemented, and tested
+to demonstrate the capability of determining the risk to the population in a
+metropolitan city exposed to personal aerial vehicles (PAVs) and unmanned
+aerial vehicles (UAVs) traffic operations. The conceptual model that is primarily
+based on the methodology and experience of risk modelling for conventional
+aircraft is modified and the parameters are adjusted suitable for a determination
+of risk in the arrival, departure and cruise phase of flight for those new aircraft
+types. Without the availability of the empirical accident data of these aircraft,
+however, a validation of the conceptual model is not possible. For the purpose of
+comparison of different future operation concepts and different scenarios in a
+metropolitan area the model suffices the need. Two examples of operation
+concepts and traffic scenarios for PAV and UAV aircraft movements, respectively,
+are demonstrated.
+NLR-TP-2015-367 | 3
+
+--- Page 8 ---
+
+A conceptual third party risk model for personal and unmanned aerial vehicles
+Content
+1 Introduction 5
+2 A conceptual third party risk model 7
+3 Third party risk for PAVs and UAVs 8
+3.1 Assumptions and considerations for TPR model 8
+3.2 Model restrictions 10
+4 Conceptual TPR model design 12
+4.1 Probability of an accident 12
+4.1.1 Take-off and landing phases 12
+4.1.2 Cruise phase 13
+4.1.3 Mid-air collision risk 14
+4.2 Potential impact area 14
+4.2.1 Bivariate normal distributed potential impact area 15
+4.2.2 Consequence area 16
+4.2.2.1 Consequence area for aircraft ≥ 500kg 16
+4.2.2.2 Consequence area for aircraft < 500 kg 17
+4.3 Lethality 18
+5 Model implementation 19
+6 Results 20
+6.1 PAV third party risk example 20
+6.2 UAV third party risk example 24
+7 Conclusions 27
+Acknowledgement 28
+References 29
+4 | NLR-TP-2015-367
+
+--- Page 9 ---
+
+1 Introduction
+The impact of aircraft on the environment has always played an important role in the acceptance
+of new airports, air routes, and aircraft types. With the current development of personal aerial
+vehicles (PAVs) and unmanned aerial vehicles (UAVs), new aerial transportation concepts will
+arise that will only succeed to be implemented if the environmental impact is accepted by the
+public. Considering the rapid developments of both unmanned and personal aerial
+transportation, research for this future operation may help address the environmental concerns
+that would become more topical.
+When new aerospace concepts are developed, including those for these new classes of PAV and
+UAV aircraft, their environmental impact should be assessed as well. For important economic
+areas, such as a densely populated area of the Netherlands, this impact cannot be neglected. In
+Figure 1, an overview is given of some of the most important concerns with respect to PAV and
+UAV operations within a city. These impacts can be split into two categories. The first category
+includes the main environmental concerns that are known for conventional aircraft, such as
+emissions/pollution, noise pollution, and third party risk (TPR). Emissions may be of less concern
+as the vehicles are smaller than conventional aircraft, and the progress in sustainable energy
+sources may resolve emission issues in the future. The topic of noise pollution has been
+addressed at NLR (Arntzen & Aalmoes, 2015). Third party risk concerns the safety (risk) for the
+people on the ground, who are involuntarily exposed to an aircraft accident. By definition, people
+who are on board of an aircraft (air crew and passengers) and people who work within an airfield
+are considered as first party and second party, respectively.
+Figure 1: Environmental concerns related to personal and unmanned aerial vehicles
+The second category relates to concerns that may gradually become important such as shadow
+flickering (similar to wind turbines) or light pollution in case of night operations, privacy,
+NLR-TP-2015-367 | 5
+
+--- Page 10 ---
+
+A conceptual third party risk model for personal and unmanned aerial vehicles
+distraction, and effects on the biotope. It is noteworthy that the impact on the society is still not
+clear and requires further analysis to study the real impact. For these reasons, the focus here is
+on the third party risk.
+The TPR is important in the (densely populated) Netherlands and, therefore, the NLR has been
+doing research on TPR around airports (Ale & Piers, 2000) (Weijts, Vercammen, Vijver, &
+Smeltink, 2004) and developed a TPR model for conventional aircraft. As one of the few countries
+in the world, it is now part of Dutch law to determine safety zones around airports in the
+Netherlands (Weijts, Vercammen, Vijver, & Smeltink, 2004). This model is neither suited for PAV
+and UAV aircraft, nor for the associated operating modes for these aircraft. A good analysis of the
+safety risk of UAVs is done by Lum and Waggoner (Weibel & Hansman, 2005). Important work
+has also been done by Dalamagkidis et al. (Dalamagkidis, Valavanis, & Piegl, 2008), who predicts
+ground risk for aircraft types in relation to population density, but this work does not take
+(simulated) traffic tracks into account, which is needed for the comparison of different concepts.
+Other relevant work is done by Clothier et al (Clothier R. , Walker, Fulton, & Campbell, 2007)
+(Clothier & Walker, 2006), and also Lum et al. (Lum, Gauksheim, Kosel, & McGeer, 2011) who
+examine the risk during cruise phase of a UAV and do take traffic tracks into account. Moreover,
+the increased risk of both take-off and landing phases is not part of these studies.
+6 | NLR-TP-2015-367
+
+--- Page 11 ---
+
+2 A conceptual third party risk model
+A conceptual TPR model can be developed and used to evaluate and compare concepts or
+scenarios, but it is not meant for finding absolute risk values. As the development of PAVs and
+UAVs is still in early stages, there are not enough operational information and accident data of
+these vehicles available to develop a risk model with absolute values. By making assumptions
+based on existing model knowledge of TPR, a comparison can be made between concepts or
+scenarios with the model. It is expected when empirical data becomes more available with the
+introduction and use of this new class of aircraft, this conceptual model can be refined for actual
+TPR calculations.
+NLR-TP-2015-367 | 7
+
+--- Page 12 ---
+
+A conceptual third party risk model for personal and unmanned aerial vehicles
+3 Third party risk for PAVs and UAVs
+The introduction of PAVs and UAVs may lead to a different use case compared with conventional
+aircraft: instead of concentrations of aircraft around airports and air routes, these smaller sized
+aerial vehicles, with their capabilities to operate within confined air space, will operate in or in
+the close proximity of built-up areas. It is also envisioned that the amount of traffic can be
+significant. In order to understand the magnitude of risk that people on the ground are exposed
+to, there is a need to quantify the third party risk due to the traffic of those aerial vehicles.
+The framework of the NLR TPR model is applied here in the development of a conceptual model
+for UAVs and PAVs. However, the specific procedures of this future concept must be considered,
+and in particular the cruise phase of flight: for a TPR model around an airport, this phase is
+exempted from consideration. PAV and UAV operations are expected above a (densely)
+populated area. Therefore, this risk cannot be ignored and should be taken into account as well.
+3.1 Assumptions and considerations for TPR model
+Risk factor related to (human introduced) hazards depends on the compensating benefit (Starr,
+Rudman, & Whipple, 1976): the higher the societal benefit, the higher the risk that is accepted
+for a lethal accident. At this moment the benefit of using drones or personal air vehicles is low
+and not considered beneficial, so the safety criteria for these vehicles will be high. Perception of
+safety plays an important role for UAV operations (Clothier & Walker, 2013). It could be expected
+that when the benefits of improved delivery times or reduced travel times become more obvious,
+the safety criteria may be re-evaluated.
+Future aircraft types that are foreseen will also differ from the current fixed-wing and rotorcraft
+aircraft types. Tilt-rotorcraft can operate both as rotorcraft (for take-off and landing) and as
+fixed-wing (during cruise phase), thereby benefiting from both the advantages of rotorcraft
+(capable of performing vertical take-offs and landings) and fixed-wing aircraft (more efficient and
+faster cruise phase). Furthermore, the smaller unmanned aircraft can have a quad-copter (four
+engine) to octa-copter (eight engine) configuration suitable for services like package delivery or
+surveillance missions. These aircraft will operate with similar characteristics as rotorcraft.
+The following factors have influence on the TPR model:
+ Probability of an accident during landing or take-off. This probability is expressed per
+flight stage.
+ Probability of an accident during cruise. This probability is expressed per flight hour.
+8 | NLR-TP-2015-367
+
+--- Page 13 ---
+
+ Location of the crash area after malfunction (it depends on whether the aircraft is
+fixed wing or not). There should be some estimation of the location of the crash area.
+Also the chance that an aircraft crashes into a building and leads to casualties in the
+building or on the ground underneath should be taken into account.
+Secondary effects caused by accidents such as an aircraft crashing into a gas station causing huge
+fire or explosion shall not be taken into account in this model. Only the risk of direct causalities
+on ground caused by aircraft crashes is considered relevant.
+For risk in cruise phase, the following kind of hazards can be discerned (Clothier R. , Walker,
+Fulton, & Campbell, 2007):
+ Mid-air collision with other aircraft;
+ Other hazards, such as system failure, weather, bird strike, terrorism, and human
+error.
+To calculate the probability of mid-air collision for a new airspace concept, a detailed analysis for
+this concept should be performed. This requires an extensive research of the possible failures in
+systems that are used in these concepts (both ground and airborne systems), and the
+consequences for the total risk of mid-air collisions. A systematic approach can be taken based
+upon the type of concept that is being used. For instance, for a free flight airspace (Hoekstra,
+Ruigrok, & Gent, 2000), the concept is based upon a Sense & Avoid system. The failure of this
+S&A system leads to the probability of a mid-air collision. For other concepts, such as a layered
+concept, collisions are reduced by separating aircraft vertically, based upon the direction they fly
+to. The mechanism that is used to make sure the aircraft fly within the designated layer should be
+used as estimation of a possible mid-air collision. This estimation should be made with
+engineering judgment if empirical data are not available. If the probability can be determined
+that an UAV avoids another UAV or another aircraft, the total mid-air collision probability can be
+determined, as explained in (Lum & Waggoner, 2010). For the conceptual TPR model, an estimate
+shall be used for the average mid-air collision risk, which is based upon flight hours per aircraft.
+The routes that the aircraft take are influenced by:
+ The airspace concept used and associated routing scheme.
+ The take-off and landing zones.
+ The scenario in which traffic demand appears.
+NLR-TP-2015-367 | 9
+
+--- Page 14 ---
+
+A conceptual third party risk model for personal and unmanned aerial vehicles
+For the impact of the crash, the following factors play a role:
+ Consequence area in terms of aircraft size expressed in maximum take-off weight.
+This is the area in which the people on ground could receive fatal injury should an
+aircraft accident occur.
+ Density of the population.
+ Shielding of population by buildings (Melnyk, Schrage, Volovoi, & Jimenez, 2014).
+ Commuters/traffic on the street.
+ The time of day in relation of the number of people in the area.
+The model should include the lethality of a crash, which is determined as the ratio of the number
+of people affected in the crash area and the number of people present in that area. A separate
+method can be used to determine the number of people in the crash area at a certain time of
+day.
+A summation of all traffic shall be provided, but it is expected that in scenarios where both small
+and large aircraft operate together, the TPR of the smallest aircraft type (an unmanned quad-
+copter) will have a negligent impact on the resulting, total TPR, because of relative small impact
+of a crash caused by a small aircraft. However, for the calculation of mid-air collision, these
+aircraft may have an influence on the TPR risk for the larger aircraft.
+Aircraft movements over the lower density areas of the evaluated area will also have a relative
+small contribution to the total risk.
+3.2 Model restrictions
+The third party risk model presumably can make use of values or model parameters that are
+derived from existing risk models and methodologies known to third party risk experts and
+literature study. This approach may not be entirely representative for operations of PAVs/UAVs
+in a dense city as there are no data available for accidents of this kind. Thus, the results should
+only be used in the comparison between the different scenarios.
+The results of a TPR calculation are also deemed to be useful in the determination of the target
+level of safety for future PAV/UAV operations.
+The TPR model implementation can be computational intensive due to the number of tracks that
+are being processed, the length of the simulation, and/or the chosen model parameters. For this
+reason, further simplifications to the calculation may need to be chosen, so a representative
+value for the TPR can still be calculated. Examples of simplification can be:
+10 | NLR-TP-2015-367
+
+--- Page 15 ---
+
+ Reduction of interpolation of the tracks or grid size or density or size of the simulation
+area.
+ Reduction of number of tracks or simulation time.
+ Reduction of the number of aircraft types, so only those aircraft types that have a
+significant influence on the TPR are taken into account.
+NLR-TP-2015-367 | 11
+
+--- Page 16 ---
+
+A conceptual third party risk model for personal and unmanned aerial vehicles
+4 Conceptual TPR model design
+The schematic to calculate the TPR is presented in figure 2. The model shall make use of aircraft
+tracks and iterate over the given tracks. For each of the aircraft tracks, the risk is calculated by
+the combination of:
+A. The probability of an accident of the aircraft.
+B. The potential impact area (the location of the crash area, in case of an accident).
+C. The lethality probability.
+Probability Consequence
+Mo A v ir e T m r e a n ff t ic s Accident and Location Probability Poten A tia re l a Impact Lethality Risk
+Figure 2: Schematic of the Third party Risk model
+4.1 Probability of an accident
+To calculate the probability of an accident of one flight, each flight will be split up into a take-off
+phase, a cruise phase, and a landing phase. For each of these phases, accident probabilities of
+previous research exist. The values are based on accident data and statistics. With this, a model
+can be developed that is able to calculate the risk on the ground for the take-off, cruise, and
+landing phases. After that, these risks can be summed up for the whole flight.
+4.1.1 Take-off and landing phases
+For the take-off and landing phases, the probability of an accident is ideally calculated based
+upon prior research of similar aircraft types. An extensive data set should be available that
+includes both the aircraft utilization in terms of number of movements, and the number of
+accidents during take-off or landing phase of flight. However, such approach in data research is
+not feasible for the given aircraft types and operating procedures for the given concept for PAVs
+and UAVs, as it is impossible to obtain reliable historic data at this moment. Therefore, current
+aircraft types must be used, such as other rotor-based aircraft, which are deemed comparable to
+the PAVs and UAVs considered here. The probability that a landing or a take-off results in an
+accident is a parameter in the model.
+For describing the aircraft accident locations, a Weibull distribution (Runger, 1994) as used in the
+NLR TPR model (Weijts, Vercammen, Vijver, & Smeltink, 2004) is chosen here to determine where
+the accident likely occurs. The specific parameters of the Weibull distribution are based on data
+research.
+12 | NLR-TP-2015-367
+
+--- Page 17 ---
+
+Specific take-off and landing failure rates for rotor-craft aircraft can be found in (Cheung, Haij,
+Smeltink, & Stevens, 2007), but they explicitly exclude data from tilt-rotor aircraft. However, a
+Congressional study indicates that a typical tilt-rotor aircraft such as the V-22 Osprey has similar
+failure rates (Bolkcom, 2004). In (Cheung, Haij, Smeltink, & Stevens, 2007), a distinction is made
+between single (or piston) and twin turbine engines, where the failure rate of twin turbine
+engines is lower due to the redundancy of the propulsion. Therefore, in this TPR model, the
+failure rate depends on the aircraft type and the number of engines. For a tilt-rotor aircraft, the
+twin turbine engine failure rate is taken. For a quad-copter aircraft type, where it is assumed that
+it cannot perform a safe landing if one of the four engine fails, the worst-case value (single
+turbine) is taken. It is noteworthy that accident rate (failure rate) applied here is higher than that
+presented by (Dalamagkidis, Valavanis, & Piegl, 2008), in which the accident rate of 10-7 per year
+is proposed. Therefore, the conceptual TPR model presented here could be considered
+conservative.
+To determine the probability of accident location during take-off or landing, the flight track needs
+to be available from take-off to a certain distance where the Weibull distribution can be
+considered 1 (one). For landing, the track should be reversed from touch-down back to the point
+where the Weibull distribution is valid for this phase of flight. For these calculations, iteration
+along the route should take place based on fixed distance steps.
+Two other modifications are proposed compared to the NLR TPR model. First, in the NLR TPR
+model for helicopters, an aircraft is considered to be in cruise over 500 feet (Cheung, Haij,
+Smeltink, & Stevens, 2007). For a scenario in a metropolitan area, it can be expected that some
+aircraft, in particular UAVs, will have a more vertical than horizontal flight path. For this reason,
+instead of using the height of 500 feet as cut-off, the total flown distance of 1000 metres of the
+flight path is taken as limit for which part is considered as take-off or landing. Second, the
+Weibull curve that is used for start-and landing risk will reach a probability value close to 1, but
+not exactly 1 after a distance of 1000 metres. Therefore, the residual risk that is normally
+neglected for an airport-based TPR model, shall be distributed over the trajectory in which the
+aircraft is within this distance of 1000 metres.
+4.1.2 Cruise phase
+For the cruise-phase, the probability of an accident is based on number of accidents per flight-
+hour. In (Clothier & Walker, 2006), an accident rate of 5.6x10-5 per flight hour is given. This is
+derived from empirical data from the National Transportation Safety Board (NTSB), which leads
+to an accident resulting in a fatality on the ground to 1.48x10-7. For PAVs and UAVs, no
+NLR-TP-2015-367 | 13
+
+--- Page 18 ---
+
+A conceptual third party risk model for personal and unmanned aerial vehicles
+comparable empirical data are available. Therefore, similar accident rates are assumed. Also it is
+assumed that the risks in the different flight phases (starting, cruising, and landing) are similar for
+PAVs and UAVs as for conventional aircraft.
+As the accident probability for cruise is based upon flight-hours, the speed of the aircraft shall be
+taken into account. To determine the risk for the cruise-phase, the model needs to iterate
+through the given route, and calculate the risk for each iteration step. The time step (in seconds)
+of this iteration speed will be a parameter in the model.
+If the aircraft route is given as a list of waypoints, an approximation must be made for the
+iteration step between the waypoints. It is expected that subsequent waypoints are not too far
+away and the iteration can be considered to be a straight line. Alternative methods are the use of
+interpolation techniques like splines (Schoenberg, 1988), but these methods are more
+computational intensive and are not needed for a simple model set-up described in this context.
+It is also assumed that the aircraft speed is known for each of the given waypoints, and therefore,
+the average speed between the previous and next waypoint is used to calculate the aircraft
+speed during the interpolation.
+4.1.3 Mid-air collision risk
+The risk of mid-air collisions for a specific number of aircraft movements within a volume of
+airspace can be translated into certain chance on a mid-air collision per flight hour (Weibel &
+Hansman, 2005). For this reason, an additional factor can be added to the risk that is found in
+cruise-phase.
+4.2 Potential impact area
+A grid will be defined that will contain the operating area of the aircraft. Each grid cell will receive
+a risk value based upon the offered number of tracks and the model that calculates the risk of
+this cell. For the sake of simplicity and consistency, the shape of the grid cells is considered to be
+square. The number of grid cells and the size of a grid cell will be a parameter in the model. The
+smaller the grid size, the more precise the Third Party risk can be calculated, but then the more
+complex the calculation that must be done. The same holds for the previously mentioned
+iteration speed.
+In case of an accident, a potential impact area on the ground (footprint) can be calculated based
+upon aircraft type, aircraft weight, speed, direction, etc. This footprint, as displayed in yellow in
+Figure 3, will cover one or more grid cells on the ground. For each of the grid cells, the probability
+14 | NLR-TP-2015-367
+
+--- Page 19 ---
+
+is calculated for the aircraft impact in this cell. In this figure, a hypothetical ellipse is used as
+potential impact area.
+Figure 3: Accident location probability and impact area of a single aircraft track
+An estimate must be made about which grid cells will be taken into account and what kind of
+probability distribution is used for the potential impact area. For instance, cells on the outside
+the potential impact area could have a considerably smaller probability of impact than the cells
+lying more towards the centre of the impact area.
+The size of the potential impact area in this TPR model depends on the flight and accident
+characteristics of the aircraft. The glide angle of the aircraft involved is a parameter to determine
+the outer limits of this area. For two new types of aircraft that are later used in this article, NLR
+experts have estimated their glide angles, see Table I.
+Table I: Glide angles and consequence area (CA) of some PAV and UAV airacraft types
+Aircraft type MTOW Start/landing Cruise CA [m2]
+[kg] configuration configuration
+Medium-sized tilt- 7620 1:5 1:10 797
+rotor (PAV)
+Quad-copter (UAV) 15 1:2 1:2 42
+4.2.1 Bivariate normal distributed potential impact area
+According to (Clothier R. , Walker, Fulton, & Campbell, 2007), a bivariate (2D) normal distribution
+is proposed for the potential impact area, where 99% of the impacts will occur within the
+maximum glide distance. The variance orthogonal to the track heading is considered half that of
+NLR-TP-2015-367 | 15
+
+--- Page 20 ---
+
+A conceptual third party risk model for personal and unmanned aerial vehicles
+the variance in the heading of the track. An exception is made for aircraft similar to quad-copters
+that do not have a dedicated flying direction, so the variance of the width is considered the same
+as the length.
+Discrimination between mid-air collision risk and system failure risk is not made for the potential
+impact area in this model, as it is assumed that this distribution functions applies for both types
+of accidents.
+4.2.2 Consequence area
+The consequence area is the size of the affected area if a crash happens at that location. Within
+this area a third party could be fatally injured due to this crash. The consequence area can either
+be:
+1. smaller than (or equal to?) the cell size, and thus only affect this cell; or
+2. larger than this cell, and that other adjacent cells are affected as well.
+For simplicity of the model, the distribution of the accident consequence due to aircraft crash is
+considered uniform within the consequence area. If part of a cell (or part of a neighboring cell) is
+affected, the percentage of overlap is used to determine the lethality of the cell. This will be
+discussed further in the next paragraphs.
+If the consequence area for all the different aircraft types and routes is smaller than the cell size,
+then the model can be made simpler: the consequence of an impact on neighboring cells can be
+considered zero and the consequence area need not be distributed to neighboring cells, as is
+done in the original NLR TPR model (Weijts, Vercammen, Vijver, & Smeltink, 2004). This
+simplification requires that the grid size is not chosen too small, and at least larger than size of
+the impact area of the aircraft with largest impact area size.
+4.2.2.1 Consequence area for aircraft ≥ 500kg
+According to NLR’s research on helicopter crashes and third party risk for inland heliports
+(Cheung, Haij, Smeltink, & Stevens, 2007), the consequence area can be determined by the
+following empirical relation:
+CA(x) = 230 ln(x) + 330 (1)
+Equation (1) gives the size of the consequence area of a helicopter crash, where x represents the
+helicopter MTOW given in metric tons (1000kg) and CA the consequence area given in square
+metres. This relation is valid for a range from 500 to 12,000 kg.
+16 | NLR-TP-2015-367
+
+--- Page 21 ---
+
+4.2.2.2 Consequence area for aircraft < 500 kg
+The quad-copter UAV cannot use this formula as its mass is well below the minimum of 500kg
+required by (1).
+A = (ω + 2R )(L + H /(tan γ) + 2R ) (2)
+LHp ua p ua p p
+As an alternative, Equation (2) in (Lum & Waggoner, 2010) represents the worst-case
+consequence area of an aircraft in horizontal glide. Equation (2) gives the size of the consequence
+area based upon an aircraft gliding horizontally. It will be applied with the following values:
+ Height of the person (H ) of 2.0 metres and radius (R ) of 0.5 metres
+p p
+ Dimensions of a quad-copter aircraft of length (L ) = 2 metres and width (ωua) of
+ua
+2 metres
+ Glide angle according to 1:2 glide ratio (Table I)
+This leads to a consequence area of 21 m2 for vehicle with the diameter of the quad-copter. But
+this vehicle has moving rotor blades and it may cause harm beyond the projected diameter/area.
+For this reason, a more conservative consequence area is suggested for this type of vehicle.
+Therefore, the calculated consequence area is doubled and a value of 42 m2 is used in the model.
+According to Table I, a grid size of at least 30 by 30 metres (equals 900 m2) will fit the
+consequence area for these aircraft types.
+Another simplification made in the model is by not rotating the grid cells for which the impact
+probability is calculated, see Figure 4. By not rotating the cell, the calculation of the impact
+probability for that cell can be calculated easier, and thus reducing processing time. Analysis for
+this approach has shown that the deviation from the actual value is small, as the area surface for
+the impact is still the same.
+Figure 4: The green box demonstrates the simplification in the model by not rotating the affected grid cell
+NLR-TP-2015-367 | 17
+
+--- Page 22 ---
+
+A conceptual third party risk model for personal and unmanned aerial vehicles
+4.3 Lethality
+In the determination of the lethal effects within an impact area, the probability of not surviving
+an aircraft crash must be known. This chance is called lethality. The lethality could be influenced
+by, amongst others, the energy of aircraft impact, the density of the population in the area and
+the shielding of building, vehicles, etc. in that area.
+As an alternative for using the energy level to calculate the lethality, in (Cheung, Haij, Smeltink, &
+Stevens, 2007) an estimate is made. The estimated value is 17% chance that a third party could
+be lethally affected in a helicopter crash within the consequence area, as defined by (1). It should
+be noted that this value was based on the empirical data available for helicopter crashes
+investigated. So it is conjectured that the use of this value for lethality is appropriate for the
+aircraft types used for other rotorcraft aircraft like tilt-rotorcraft. For much smaller aircraft like
+quad-copter, there are again not enough empirical data on lethality available for an expected
+lower value. For this reason, the ‘worst-case’ value of 17% is applied here as well. This value is
+provided to the model as parameter and can be adjusted if new research proves otherwise.
+By combining the model components, accident probability, accident location and accident
+consequences with the traffic operations (aircraft movements), the Individual Risk be
+determined. The individual risk (IR) due to all aircraft movements in point (x,y) is determined by
+(3) and is simplified from the risk calculation formulae as derived in (Weijts, Vercammen, Vijver,
+& Smeltink, 2004).
+IR(x,y) = N *AR*P(x,y)*CA*Let (3)
+mov
+N represents the number of take-offs and landings (movements) per aircraft type regarded per
+mov
+year, AR the accident rates (probabilities) per aircraft type differentiated in take-off and landing,
+P(x,y) the probability of accident at location (x,y), CA the extent of consequence area and Let the
+lethality.
+18 | NLR-TP-2015-367
+
+--- Page 23 ---
+
+5 Model implementation
+The conceptual model has been implemented using the python programming language, and it
+runs on different operating systems (MS-Windows, Linux). The python language allows for quick
+prototyping, but provides enough structure in the language for a structured, object-oriented
+architecture. By making use of specific libraries, such as scientific and plotting libraries, the model
+could be implemented in a short time and results can be produced that can demonstrate the
+results in a graphical way.
+The implementation has been focused on developing the functionality of the described TPR
+model, and is therefore not optimized for the calculation performance. If more aircraft
+movements and/or a larger experiment area are required for TPR calculations, a higher
+performance may be required. In (Aalmoes, Erkamp, Cheung, & Nieuwport, 2013), it has been
+demonstrated that for a similar a high-performance implementation for TPR calculation is
+possible.
+NLR-TP-2015-367 | 19
+
+--- Page 24 ---
+
+A conceptual third party risk model for personal and unmanned aerial vehicles
+6 Results
+For a demonstration of the conceptual risk model, simulation tracks from the Metropolis project
+(Sunil, Hoekstra, Ellerbroek, Bussink, Vidosavljevic, & Kern, 2015) are used as inputs. In this 7th
+framework project of the European Union, four different concepts for airspace organization are
+evaluated for PAV and UAV traffic. The experiment area is a metropolitan city of the size of Paris
+in the year 2050. Because of uncertainty in the growth of the city, use is made of four different
+city growth scenarios. Traffic is simulated for the whole city, but data logging has been done in a
+smaller, trapezoidal shaped area. Population density varied depending on the distance from the
+city center (origin) (Sunil, Hoekstra, Ellerbroek, Bussink, Vidosavljevic, & Kern, 2015).
+A description and explanation of the four different concepts (Full Mix, Layers, Zones, and Tubes)
+is described in detail in (Sunil, Hoekstra, Ellerbroek, Bussink, Vidosavljevic, & Kern, 2015). For the
+evaluation described in this document it should be known that the traffic demand for each of the
+concepts is the same, but the actual aircraft movement will be different based on the rules within
+the concept that is used. In this article, only gathered data from the Full Mix and Zones concepts
+are presented.
+To examine the results of the TPR model, two traffic scenarios are defined. Both of the
+simulations, multiple aircraft movements are accumulated to create a –so called–multi-event
+calculation. The scenarios are:
+A. A total of 50 movements of a heavy (bus-like) tilt-rotor PAVs, to act as a flying
+alternative to a bus.
+B. A total of 40 movements of a small-sized quad-copter UAVs, for surveillance or package
+delivery purposes.
+These aircraft movements are selected from one of the scenarios in Metropolis. These
+movements are not representative for a scenario in the Metropolis project, but are just selected
+to demonstrate the capabilities of the TPR model. However, the TPR model is equipped to do
+calculations of multi-event traffic from multiple aircraft types.
+6.1 PAV third party risk example
+In figures 5 and 6, the PAV tracks created by the Full Mix concept are displayed, whereas in
+figures 7 and 8, the tracks of the Zones concept are shown. As can be observed, even though the
+same traffic demand is handled, the tracks are different. The other two concepts (not displayed)
+also show a different pattern of flight tracks. The displayed tracks do not immediately indicate
+that there is a difference in TPR.
+20 | NLR-TP-2015-367
+
+--- Page 25 ---
+
+Figure 5: PAV movements in the Full Mix concept (lateral view)
+Figure 6: The 50 PAV movements in the Full Mix concept (vertical View)
+NLR-TP-2015-367 | 21
+
+--- Page 26 ---
+
+A conceptual third party risk model for personal and unmanned aerial vehicles
+Figure 7: The 50 PAV movements in the Zones concept (lateral view)
+Figure 8: The 50 PAV movements in the Zones concept (vertical view)
+A risk calculation with the conceptual TPR model is executed on the Full Mix and Zones concepts.
+To make a fair comparison, the absolute population risk is calculated for the Full Mix concept and
+the results are divided by this value. So a normalized result is obtained. This result represents the
+risk distribution in the event of one lethality. The value that is used to normalize the Full Mix
+concept is also used for the other concepts, so the probabilities of the concepts can be
+compared. The result for the Full Mix and Zones concept can be found in figure 9 and 10,
+22 | NLR-TP-2015-367
+
+--- Page 27 ---
+
+respectively. The higher risk to the population for both concepts is clearly visible for the inner city
+(within 4 km from the origin), and to a lesser extent for the inner ring (within 12km from the
+origin).
+Figure 9: The Full Mix concept normalized population risk for the
+50 PAV movements. This represents the risk distribution if there
+is a probability of one lethality within this traffic and concept
+Figure 10: The Zones-concept population risk for the 50 PAV movements
+based upon the normalized risk of the Full Mix concept.
+It can therefore be compared with the values given in figure 9
+A comparison between the Full Mix and Zones concept for these tracks results in a value of 56%
+higher risk in the Zones concept than in the Full Mix concept.
+NLR-TP-2015-367 | 23
+
+--- Page 28 ---
+
+A conceptual third party risk model for personal and unmanned aerial vehicles
+6.2 UAV third party risk example
+For the UAV example, two scenarios are compared that differ in traffic density. In figures 11 and
+12, the UAV tracks created by the high density traffic scenario are displayed. In figures 13 and 14,
+the UAV tracks of the low density traffic scenario are displayed. Compared to the PAV example,
+the UAV tracks are concentrated near the center of the city, so the evaluation area is reduced in
+size. A close examination of the vertical views (figures 12 and 14) shows that while the number of
+tracks is the same, the average distance of the UAV tracks in the low density traffic scenario is
+significantly shorter.
+Figure 11: The 40 UAV movements with high density traffic (lateral view)
+Figure 12: The 40 UAV movements with high density traffic (vertical view)
+24 | NLR-TP-2015-367
+
+--- Page 29 ---
+
+Figure 13: The 40 UAV movements with low density traffic (lateral view)
+Figure 14: The 40 UAV movements with low density traffic (vertical view)
+The same normalization step is done for the UAV risk as was done for the PAV risk (the
+probability of one lethality), which results in figures 15 and 16. Also clearly visible here is the
+higher population in the inner city (4km around the origin). A comparison between the two
+scenarios results in a value of 32% lower risk in the low traffic scenario than in the high traffic
+concept.
+NLR-TP-2015-367 | 25
+
+--- Page 30 ---
+
+A conceptual third party risk model for personal and unmanned aerial vehicles
+Figure 15: The high density traffic scenario normalized population risk
+for the 40 UAV movements. This represents the risk distribution if
+there is a probability of one lethality within this traffic scenario
+Figure 16: The low density traffic scenario population risk for the 40 UAV
+movements based upon the normalized risk of the high density traffic
+26 | NLR-TP-2015-367
+
+--- Page 31 ---
+
+7 Conclusions
+A conceptual third party risk model is developed, implemented, and tested to demonstrate the
+capability in determining TPR that involves PAV and UAV operations. Without sufficient empirical
+data about accidents of these aircraft, this conceptual model can be used to compare different
+concepts. The relation between the arrival, departure, and cruise risk is based on the risk
+modelling experience of conventional aircraft. The model parameters are modified and based
+upon improved insight on TPR of these new types of aircraft and their expected operating
+procedures.
+Another opportunity that this research has shown is the systematic approach to analyze TPR for
+PAVs and UAVs. It helps with identifying the areas of existing research that can be applied for
+these calculations, but equally important, it shows the areas that still requires additional
+research. To further improve the model, more research can be performed in collecting relevant
+accident data of UAVs and PAVs. Another approach to improve the model is to make use of
+simulation platforms to simulate failures of these vehicles and their impact on populated area. A
+topic that needs to be addressed by further research is the mid-air collision that can take place
+with new concepts. Finally, an important field of further research is to find target levels of safety
+for UAV and PAV operations: these targets can be compared with safety levels found in other
+forms of transportation. A conceptual model as presented here can help in this field of research.
+NLR-TP-2015-367 | 27
+
+--- Page 32 ---
+
+A conceptual third party risk model for personal and unmanned aerial vehicles
+Acknowledgement
+The authors would like to thank Alfred Roelen, Jos Stevens, and Joost Vreeken (all NLR) for their
+input on third party risk and their knowledge on operations of PAVs and UAVs. From the
+Metropolis project, the authors would like to thank Oliver Schneider, and Stefan Kern (both DLR),
+professor Daniel Delahaye, Georges Mykoniatis, and Andrija Vidosavljevic (all from ENAC), Joost
+Ellerbroek (TU Delft), and Dennis Nieuwenhuisen, Marieke Suijkerbuijk, and Pim van Leeuwen (all
+NLR) for their contribution for concept and scenario definition, and the simulation tracks that are
+used in the risk calculations.
+28 | NLR-TP-2015-367
+
+--- Page 33 ---
+
+References
+1. M. Arntzen and R. Aalmoes, "Calculation of futuristic metropolitan noise due to aircraft,"
+in Internoise 2015, San Francisco, 2015.
+2. B. Ale and M. Piers, "The assessment and management of third party risk around a major
+airport," Journal of Hazardous Materials, vol. 71, no. 1-3, pp. 1-16, 2000.
+3. J. Weijts, R. Vercammen, Y. Vijver and J. Smeltink, "Voorschrift en procedure voor de
+berekening van Externe Veiligheid rond luchthavens," NLR, 2004.
+4. R. Weibel and R. J. Hansman, "Safety considerations for operation of unmanned aerial
+vehiciles in the national airspace system," Cambridge, Massachusetts, USA, 2005.
+5. K. Dalamagkidis, K. P. Valavanis and L. A. Piegl, "Evaluating the Risk of Unmanned Aircraft
+Ground Impacts," in 16th Mediterranean Conference on Control and Automation, Ajaccio,
+France, 2008.
+6. R. Clothier, R. Walker, N. Fulton and D. Campbell, "A casuality risk analysis for unmanned
+aerial system (UAS) operations over inhabited areas," in AIAC12 - Twelfth Australian
+International Aerospace Congress, 2nd Australasian Unmanned Vehicles Conference, 2007.
+7. R. Clothier and R. Walker, "Determination and evaluation of UAV Safety Objectives," in
+Proceedings 21st International Unmanned Air Vehicle Systems Conference, Bristol, United
+Kingdom, 2006.
+8. C. W. Lum, K. Gauksheim, T. Kosel and T. McGeer, "Assessing and Estimating Risk of
+Operating Unmanned Aerial Systems in Populated Areas," in 11th AIAA Avioation
+Technology, Integration, and Operations (ATIO) Conference, Virginia Beach, VA, United
+States, 2011.
+9. C. Starr, R. Rudman and C. Whipple, "Philosophical basis for risk analysis," Annual review
+of energy, vol. 1, no. 1, pp. 629-662, 1976.
+10. R. A. Clothier and R. Walker, "The Safety Risk Management of Unmanned Aircraft
+Systems," in Handbook of Unmanned Aerial Vehicles, Dordrecht, Netherlands, Springer
+Science + Business Media B.V., 2013.
+11. J. Hoekstra, R. Ruigrok and R. v. Gent, "Free Flight in a Crowded Airspace?," in 3rd
+USA/Europe Air Traffic Management R&D Seminar, Napoli, 2000.
+NLR-TP-2015-367 | 29
+
+--- Page 34 ---
+
+A conceptual third party risk model for personal and unmanned aerial vehicles
+12. C. Lum and B. Waggoner, "A Risk Based Paradigm and Model for Unmanned Aerial
+Systems in the National Airspace," Seattle, WA, USA, 2010.
+13. R. Melnyk, D. Schrage, V. Volovoi and H. Jimenez, "A third-party casuality risk model for
+unmanned aircraft system operations," Reliability Engineering and System Safety, no. 124,
+pp. 105-116, 2014.
+14. D. C. M. a. G. C. Runger, Applied statistics and probability for engineers, John Wiley &
+Sons, Inc., 1994.
+15. Y. Cheung, d. L. Haij, J. Smeltink and J. Stevens, "A model to calculate third party risk due
+to civil helicopter traffic," NLR, 2007.
+16. C. Bolkcom, "CRS Report for Congress. V-22 Osprey Tilt-Rotor Aircraft," Congressional
+Research Service, Fort Belvoir, VA, United States of America, 2004.
+17. I. Schoenberg, Selected papers, Birkhäuser Boston Inc., 1988.
+18. R. Aalmoes, R. Erkamp, Y. Cheung and R. v. Nieuwport, "Performance improvements for
+calculations of third party risk around airports," in Proceedings of SAFE 2013 - Safety and
+Security Engineering V, Rome, 2013.
+19. E. Sunil, J. Hoekstra, J. Ellerbroek, F. N. Bussink, A. Vidosavljevic and S. Kern, "Metropolis:
+Relating Airspace Structure and Capacity for Extreme Traffic Densities," in paper submitted
+to Eleventh USA/Europe Air Traffic Management Research and Development Seminar
+(ATM2015), Lisbon, 2015.
+30 | NLR-TP-2015-367
+
+--- Page 35 ---
+
+WHAT IS NLR?
+The NLR is a Dutch organisation that identifies, develops and applies high-tech knowledge in the
+aerospace sector. The NLR’s activities are socially relevant, market-orientated, and conducted
+not-for-profit. In this, the NLR serves to bolster the government’s innovative capabilities, while
+also promoting the innovative and competitive capacities of its partner companies.
+The NLR, renowned for its leading expertise, professional approach and independent consultancy, is
+staffed by client-orientated personnel who are not only highly skilled and educated, but also
+continuously strive to develop and improve their competencies. The NLR moreover possesses an
+impressive array of high quality research facilities.
+
+--- Page 36 ---
+

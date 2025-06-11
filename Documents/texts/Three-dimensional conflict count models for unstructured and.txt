@@ -1,0 +1,1737 @@
+
+
+--- Page 1 ---
+
+Transportation Research Part C 95 (2018) 295–319
+ContentslistsavailableatScienceDirect
+Transportation Research Part C
+journal homepage: www.elsevier.com/locate/trc
+fl
+Three-dimensional con ict count models for unstructured and
+layered airspace designs
+T
+⁎
+Emmanuel Sunil , Joost Ellerbroek, Jacco M. Hoekstra, Jerom Maas
+FacultyofAerospaceEngineering,DelftUniversityofTechnology,Kluyverweg1,2629HSDelft,TheNetherlands
+ARTICLE INFO ABSTRACT
+Keywords: Thispaperpresentsanalyticalmodelsthatdescribethesafetyofunstructuredandlayereden
+Airspacesafety routeairspacedesigns.Here,‘unstructuredairspace’referstoairspacedesignsthatofferopera-
+Airspacedesign torscompletefreedominpathplanning,whereas‘layeredairspace’referstoairspaceconcepts
+Conflictprobability
+thatutilizeheading-altitude rules tovertically separate cruising aircraftbased ontheirtravel
+Conflictrate
+directions.Withafocusontheintrinsicsafetyprovidedbyanairspacedesign,themodelscom-
+AirTrafficManagement(ATM)
+pute instantaneous conflict counts as a function of traffic demand and airspace design para-
+meters,suchastrafficseparationrequirementsandthepermittedheadingrangeperflightlevel.
+Whilepreviousstudieshavefocusedprimarilyonconflictsbetweencruisingaircraft,themodels
+presentedherealsotakeintoaccountconflictsinvolvingclimbinganddescendingtraffic.Fast-
+timesimulationexperimentsusedtovalidatethemodelingapproachindicatethatthemodels
+estimateinstantaneousconflictcountswithhighaccuracyforbothairspacedesigns.Thesimu-
+lationresultsalsoshowthatclimbinganddescendingtrafficcausedthemajorityofconflictsfor
+layeredairspaceswithanarrowheadingrangeperflightlevel,highlightingtheimportanceof
+includingallaircraftflightphasesforacomprehensivesafetyanalysis.Becausesuchtrendscould
+beaccuratelypredictedbythethree-dimensionalmodelsderivedhere,theseanalyticalmodels
+canbeusedastoolsforairspacedesignapplicationsastheyprovideadetailedunderstandingof
+therelationshipsbetweentheparametersthatinfluencethesafetyofunstructuredandlayered
+airspacedesigns.
+1. Introduction
+ThesustainedgrowthofairtrafficinrecentyearshasstressedseveralcomponentsofthecurrentAirTrafficManagement(ATM)
+systemtonearsaturationlevels.Thisisparticularlytrueforenrouteairspacedesignwherecontinuedrelianceonthefixedairway
+networkhassignificantly reducedflightefficiencies(Dobleetal.,2008).Thisisbecauseairway navigationoftenforceaircraftto
+deviatefromdirecttrajectories,whichduringpeakdemandperiodscantriggerartificialtrafficconcentrationsandincreaseddelays
+(Magilletal.,1998;Dell’OlmoandLulli,2003).TheiruseinEurope,forinstance,hasbeenlinkedtothe20%increaseinenroute
+delays in 2016, even though traffic demand grew by only 2.4% during the same time period (Performance Review Commission,
+2016).Similarstatisticsreportedinmanyotherpartsoftheworldhavemotivatedseveralstudiestoexplorealternateoptionsfor
+organizing en route traffic (Rebollo and Balakrishnan, 2014; SESAR Consortium, 2007; Joint Planning and Development Office,
+2007).
+Toovercomethecapacitylimitationsposedbyairwayrouting,someresearchershaveproposedatransitiontolessrigidroute
+⁎Correspondingauthor.
+E-mailaddress:e.sunil@tudleft.nl(E.Sunil).
+https://doi.org/10.1016/j.trc.2018.05.031
+Received23December2017;Receivedinrevisedform24April2018;Accepted30May2018
+0968-090X/ © 2018 Elsevier Ltd. All rights reserved.
+
+--- Page 2 ---
+
+E.Suniletal.
+Transportation Research Part C 95 (2018) 295–319
+Nomenclature S horizontalseparationrequirement[NM]
+h
+S verticalseparationrequirement[ft]
+v
+Greekletters t conflictlook-aheadtime[mins]
+l
+V aircraftvelocity[kts]
+α headingrangeperflightlevel[°] V relativevelocity[kts]
+r
+β no.offlightlevelsin1layerset Z altitude[ft]
+γ flightpathangle[°]
+κ numberoflayersets Subscripts
+ψ aircraftheading[°]
+ρ density[ac/NM2] h horizontal
+ε proportionofcruisingaircraft i aircrafti
+ζ verticalspacingbetweenlayers[ft] j flightlevelj
+v vertical
+Romanletters 2d twodimensional
+3d threedimensional
+A airspacearea[NM2] cd climbing/descendingaircraft
+B airspacevolume[NM2·ft] cruise cruisingaircraft
+C no.ofinstantaneousconflicts layeredairspace
+lay
+D tripdistance[NM] max maximum
+k modelaccuracyparameter min minimum
+L totalno.offlightlevels total total
+N no.ofinstantaneousaircraft ua unstructuredairspace
+p averageconflictprobabilitybetweenanytwoair-
+craft
+structuresforenrouteairspace(Hoekstraetal.,2002;Greenetal.,2001;Bilimoriaetal.,2000;Krozeletal.,2001;Barnett,2000).
+Thisapproachhasbeenadoptedinsomelow-densityareasofEuropewiththecreationofsocalled‘FreeRouteAirspaces’(FRAs)
+since2008(NMD/NSDOperationsRoadmapTeam,2015).FRAsaimtoemulatetherouteselectionflexibilityofferedtoaircraftflying
+in unmanaged airspace, while continuing to provide air traffic controllers with control of the traffic within them. Analysis by
+EurocontrolhasshownthatthelimiteduseofFRAsthusfarhasyieldedanaveragerouteefficiencyincreaseof1.6%perflight,with
+gainsofupto4%insomeareas(PerformanceReviewCommission,2016).FurtherextendingFRAsintomoredenseairspacesectors
+could, therefore, lead to substantial reductions in total delay, fuel consumption and emissions. As such, FRAs demonstrate the
+potentialofutilizingproceduralmechanismstoreorganizeandimprovetheperformanceofenrouteairspaceoperations,without
+largecapitalinvestmentsinnewhardware.
+Whilereducingstructuralconstraintscanincreaseenrouteairspacecapacityrelativetoairwayroutingforcurrenttrafficdemand
+levels,arecentstudyhasfoundthatofferingoperatorscompletefreedominpathplanningisnotoptimalintermsofsafetyforhigher
+densities(Suniletal.,2017).Inthatstudy,severalunmanagedenrouteairspaceconcepts,whichvariedintermsofthenumberof
+constraineddegreesofmotion,werecomparedqualitativelyusingsimulationexperiments.Theresultsclearlyshowedthatalayered
+airspaceconcept,whichusedaverticalsegmentationofairspacetoseparatetrafficwithdifferenttraveldirectionsatdifferentflight
+levels,ledtothehighestsafety.Theincreasedsafetyfor‘layers’wasfoundtobearesultofthereductionofrelativevelocitiesbetween
+cruisingaircraftatthesamealtitude,whichinturnreducedthenumberofconflictswhencomparedtoacompletelyunstructured
+airspacedesign.
+Using the qualitative understanding gained from Sunil et al. (2017) as a starting point, the current paper aims to develop
+quantitativemodelsthatdescribetheintrinsicsafetyprovidedbyunstructuredandlayeredenrouteairspacedesigns.Herethenotion
+ofintrinsicsafetyreferstotheabilityofanairspacedesigntoreducetheoccurrenceofconflictsduetotheconstraintsthatitimposes
+ontrafficmotion.Assuch,theintrinsicsafetyprovidedbyanairspacedesignisirrespectiveofwhetherornotconflictsareactually
+detectedbyaircraft;insteadthisaspectofsafetyconsiderstheeffectoftheroutestructureimposedbyaparticulardesignonthe
+numberof‘trulyoccurring’conflicts. Consequently, intrinsic safety isdirectly proportional to theworkload experienced bypilots
+and/orairtrafficcontrollersinresolvinganyremainingconflictsthatcouldnotbepreventedbyaparticularairspacedesign.
+Themodelingapproachusedinthisworktreatsaircraftconflictssimilartothecollisionsthatoccurbetweenidealgasparticlesto
+determineinstantaneoussystem-wideconflictcountsasameasureofintrinsicsafety.Incomparisontopreviousstudies,themodels
+consideredheretakeintoaccounttheeffectofthehorizontalandtheverticalmotionofaircraftonconflictcounts.Thisisdoneby
+groupingtheconsideredaircraftaccordingtoflightphase,whilealsoconsideringtheproportionofaircraftindifferentflightphases.
+Thisapproachallowsconflictsinvolvingclimbinganddescendingtraffic,aswellasthosebetweenaircraft,tobetakenintoaccount.
+Becausetheresultingthree-dimensionalanalytical modelsusemeasurableairspacecharacteristics, suchastrafficdemandandse-
+parationrequirements,asinputs,theylendthemselveswellforairspacedesignapplicationsastheinteractionsbetweenthefactors
+affectingsafetycanbedirectlyunderstoodfromthestructureofthemodels.Moreover,theiranalyticalnaturemakesitpossibleto
+easilycomparedifferentairspaceconcepts,andtoalsofine-tunetheparametersoftheselectedairspacedesign.
+To assess the accuracy of the derived models, three separate fast-time simulation experiments have been performed, encom-
+passingalmostthreemillionflights.Thefirstexperimentmeasurestheaccuracyofthemodelsunderidealconditions,andanalyzes
+296
+
+--- Page 3 ---
+
+E.Suniletal.
+Transportation Research Part C 95 (2018) 295–319
+theeffectoftheallowedheadingrangeperflightlevelontheintrinsicsafetyoflayeredairspaceconcepts.Thesecondexperiment
+studiestheeffectoftheproportionofaircraftindifferentflightphasesonsafetyandonmodelaccuracy.Thefinalexperimentfocuses
+onthesensitivityofthemodelstoasimplificationmadeduringthederivationprocessregardingthespeeddistributionsofaircraft.
+ThispaperbeginswithanoutlineoftherelevantbackgroundmaterialandanoverviewofpreviousresearchinSection2.Next,in
+Sections3and4,thederivationofthemodelsispresented.Thisisfollowedbythedesignofthesimulationexperimentsusedtoassess
+modelaccuracyinSection5.SimulationresultsarepresentedinSection6,anddiscussedinSection7.Finally,asummaryofthemain
+conclusionsisgiveninSection8.
+2. Background
+Thissectionsummarizesthebackgroundmaterialneededtofollowtheconflictcountmodelderivationsdevelopedinthispaper.
+Thesectionsbeginsbydiscussingtherelationshipbetweenconflictsandintrinsicairspacesafety.Additionally,descriptionsofthe
+conceptualdesignofunstructuredandlayeredairspaceconcepts,aswellasareviewofpreviousstudiesthathaveusedanalytical
+modelstomeasureintrinsicairspacesafety,areprovided.
+2.1. Conflicts,intrusionsandintrinsicairspacesafety
+Safety in ATM is often measured interms ofthe number of intrusions and conflicts. Here, intrusions, also known as losses of
+separation, occur when minimum separation requirements are violated. Conflicts, on the other hand, are defined as predicted in-
+trusions;theyoccurwhenthehorizontalandverticaldistancesbetweenaircraftareexpectedtobelessthantheprescribedseparation
+standardswithinapredetermined‘look-ahead’time.Therefore,whenaconflictoccurs,someactionneedstobetakenbypilotsand/
+orairtrafficcontrollerstopreventthatconflictfromturningintoanintrusioninthefuture.Thedistinctionbetweenintrusionsand
+conflictsisillustratedinFig.1.
+Althoughaconflictisstrictlyspeakingonlydefinedbetweentwoaircraft,theycanalsooccurbetweenwithmoreaircraftatthe
+same time. Such ‘multi-aircraft’ conflicts can still be treated as several two-aircraft conflicts and are included in the number of
+combinationsbasedonlyonpairsofaircraft.Forexample,amulti-aircraftconflictinvolvingfouraircraftcanresultinuptosixunique
+two-aircraftconflicts;seeFig.2.Thiscombinatorialpropertyisusedbythemodelingapproachdescribedinthiswork,seeSection
+2.4.
+As mentioned earlier, this work focuses on modeling the intrinsic safety of unstructured and layered airspaces. The notion of
+intrinsicsafetyfocusesexclusivelyonthesafetythatisprovidedbytheconstraintsimposedonaircraftmotionbyanairspacedesign.
+Sincethetypeandnumberofconstraintsimposeddirectlyaffectstheprobabilityofintersectingtrajectories,theintrinsicsafetyofan
+airspacedesigncanbemeasuredintermsofthenumberofconflictsthatoccuratanygivenmomentintime,i.e.,bythenumberof
+instantaneousconflicts.Althoughmeasurementandcommunicationuncertaintiescanaffectthenumberofobserved,orperceived,
+conflictsforparticularaaircraft,suchuncertaintiesareunrelatedtothedesignofanairspace.Assuch,theintrinsicsafetyprovided
+byanairspacedesignisonlyconcernedwiththe‘trulyoccurring’conflictsinanairspace.
+Becauseintrinsicsafetyconsidersthesituationwithouttacticalconflictresolution,itcanbeusedasanindicationoftheworkload
+thatisexperiencedbypilotsand/orairtrafficcontrollersinsolvingconflictsundertheconsideredairspaceconcept.Itcanalsobe
+used to analyze the frequency of conflicts that any future automated conflict resolution system should be able to handle. This
+flexibilityallowsthemethodsdiscussedinthispapertobeappliedtocurrentcommercialairtrafficoperations,aswellasforfuture
+operationsintegratingunmannedaircraftwithautomateddetect-and-avoidsystems.
+Fig.1.Thedifferencebetweenintrusionsandconflicts,displayedhereforthehorizontalplane.Intrusionsareviolationsofseparationrequirements,
+whereasconflictsarepredictedintrusions.Here,Shisthehorizontalseparationrequirement.
+297
+
+--- Page 4 ---
+
+E.Suniletal.
+Transportation Research Part C 95 (2018) 295–319
+1
+4 5 6 2
+3
+Fig.2.Amulti-aircraftconflictcanbedecomposedintoseveraltwo-aircraftconflicts.Forexample,amulti-aircraftconflictbetweenfouraircraftcan
+resultinuptosixuniquetwo-aircraftconflicts.
+2.2. Unstructuredairspace
+Asthenamesuggests,noconstraintsareimposedonaircraftmotioninUnstructuredAirspace(UA).Instead,thissimplestformof
+airspacedesignfocusesonmaximizingoverallsystemefficiency.Therefore,aircraftarefreetousedirecthorizontalroutes,aslongas
+suchroutingisnotobstructedbyweatherorstaticobstacles.Similarly,aircraftcanalsoflywithpreferredspeedsandatoptimum
+altitudes,basedontheirperformancecapabilitiesandtripdistances.Byofferinggreaterfreedomtoaircraftoperators,UAhasbeen
+foundtoresultinamoreuniformdistributionoftraffic,bothhorizontallyandvertically,reducingtrafficconcentrationsandensuing
+delays(Hoekstraetal.,2002;Jardin,2005).
+2.3. Layeredairspace
+Severaldifferentlayeredairspaceconceptshavebeendiscussedinliterature(IrvineandHering,2007;Leidenetal.,2009;Paielli,
+2000Paielli).Thespecificvariation underconsideration inthisworkwasdeveloped inourpriorwork(Suniletal.,2017),andis
+knownasthe‘Layers’concept.
+TheLayersconceptcanbeseenasanextensiontothehemispheric/semicircularrule(InternationalCivilAviationOrganization,
+2005).Inthisconcept,theairspaceissegmentedintoverticallystackedbands,andheading-altituderulesareusedtolimittherange
+oftraveldirectionsallowedineachaltitudelayer.AlthoughtheLayersconceptdictatestheverticalprofileofaflight,operatorsare
+freetoselectdirecthorizontalrouteswhenpossible.Moreover,climbinganddescendingaircraftareexemptedfromtheheading-
+altituderules,andcanviolatethemtoreachtheircruisingaltitudeordestination.Thisexceptionavoidsinefficient‘spirals’when
+climbing/descending.
+AnexampleLayersconceptisshowninFig.3.TwoparametersdefinethetopologyoftheLayersconcept.Thefirstparameteris
+the spacing between altitude bands, ζ. An important design requirement is that ζ is at least equal to the vertical separation re-
+quirementtopreventconflictsbetweenaircraftcruisinginadjacentflightlevels.Inthiswork,averticalseparationrequirementof
+1000ftisused.Therefore,thealtitudebandsoftheLayersconceptsconsideredhereareseparatedbyζ=1100ft;theextra100ftis
+usedtopreventsocalled‘false’conflictsthatcansometimesoccurduetoanyslightovershootingofaltitudewhenaircraftlevel-offat
+theirdesiredflightlevel.Suchanoffsetisalsonecessarytoaccountforanyheight-keepingerrors,andbecauseofturbulence.
+0
+Fig.3.IsometricviewofanexampleLayersconcept,withanallowedheadingrangeofα=45°perflightlevel,andaverticalspacingofζ=1100ft
+betweenflightlevels.
+298
+
+--- Page 5 ---
+
+E.Suniletal.
+Transportation Research Part C 95 (2018) 295–319
+TheseconddesignparameteroftheLayersconceptistheheadingrangeallowedperaltitudeband,α.Forthelayeredairspace
+showninFig.3,α=45°,andthuseightflightlevelsareneededtodefineonecomplete‘set’oflayers.Correspondingly,foralayered
+design withα=90°, only four flight levels would be needed to specify all possible travel directions. Therefore, forα=90°, two
+complete‘sets’oflayerswouldfitwithinthevolumeofairspaceneededforα=45°.Whenmultiplesetsoflayersareavailable,the
+totaltripdistanceofanaircraftisusedinadditiontoitsheadingtodetermineitscruisingaltitude.Inthisway,shortflightscanuse
+lower layer sets, and longer flights can use higher layer sets, to reduce the negative effect of predetermined altitudes on flight
+efficiencies.
+2.4. Previousresearchonconflictcountmodeling
+Tomodelthetotalnumberofinstantaneousconflictsinagivenvolumeofairspace,itisnecessarytotakeintoaccountthetotal
+numberofpossibleinteractionsbetweenaircraftinthatairspace,i.e.,themaximumnumberofunique,two-aircraftcombinations.
+Sinceanyconflictcanbedecomposedintoaseriesofoneormoretwo-aircraftconflicts,seeSection2.1,themaximumnumberof
+instantaneousconflictspossibleisequaltothetotalnumberofuniquetwo-aircraftcombinations.However,inpractice,notallaircraft
+arelikelytobeinconflictatthesametimebecausethedistancebetweencorrespondingaircraftsmaybetoolarge,orbecausethe
+constraints imposed by a particular airspace design may prevent the trajectories of two specific aircraft from ever intersecting.
+Consequently,thetotalnumberofinstantaneousconflictscanbeestimatedbyscalingthenumberofcombinationsoftwoaircraftwith
+theaverageprobabilityofconflictbetweenanytwoaircraft.Thiscanbeexpressedinwordsas:
+No. of Combinations of Two Aircraft
+No. Instantaneous Conflicts= ×
+Average Conflict Probability Between Any Two Aircraft (1)
+Here, different airspace designs can influence both the number of possible combinations of aircraft and the average conflict
+probabilitybetweenanytwoaircraft.
+Inpreviousliterature,thiscombinatorialcharacteristic,whichisinherenttoanysystemwhereallmovingparticlesareequally
+likelytomeeteachother,hasoftenbeenreferredtoasthe‘gasmodel’sincecollisionsbetweenmoleculesinanidealgasadheretothe
+same principle (Norman Davidson, 2003). In the field of ATM, such models were first used to analyze the collision risk between
+adjacent routes of the North Atlantic track system (Marks, 1963; Reich, 1966a,b). Subsequently, they have also been used to in-
+vestigate the safety ofa wide variety ofairspace types, including high altitude enroute airways (Brooker, 2002; Netjasov, 2012;
+NetjasovandBabić,2013),lowaltitudeterminalairspaces(Endohetal.,1982;GrahamandOrr,1969;FlanaganandWillis,1969;
+DattaandOliver,1991),andforconceptsthatcloselyresembleunstructuredandlayeredairspaceconcepts(RatcliffeandFord,1982;
+Ford,1983;Hoekstraetal.,2016).
+Animportantstepinthederivationofaconflictmodelforaspecificairspacedesignisthemodelingoftheexpectedrelativevelocity
+betweenaircraft,asthisisneededtocomputetheaverageconflictprobabilitybetweenaircraft.Sinceaircraftmoverelativetoeach
+other in three-dimensional space, it is necessary to consider both the horizontal and vertical components of the relative velocity
+between aircraft. However, as most previous studies have only considered interactions between cruising aircraft, they have only
+presentedmodelsforthehorizontalcomponentoftheexpectedrelativevelocity.Althoughafewstudieshaveincludedclimbing/
+descendingtraffic,theyhavedonesobyassumingauniformdistributionofflight-pathangles,withoutadequateexplanationsforthe
+distributionshapeortherangeofvaluesselected(RatcliffeandFord,1982;Endohetal.,1982).Moreover,auniformdistributionof
+flight-pathanglesisnotareasonableassumptionforenrouteairspacedesign,thefocusofthecurrentpaper.Thisisparticularlythe
+caseforlayeredairspacedesignswhichrequireaircrafttomaintainfixedaltitudeswhilecruising,seeSection2.3.Consequently,the
+distributionofflight-pathanglescanbeskewed,anddependsontheproportionofaircraftindifferentflightphases.
+Building on our earlier work (Hoekstra et al., 2016), this paper extends previous research on conflict count modeling, by de-
+velopinganalyticalmodelsforboththehorizontalandverticalcomponentsoftheexpectedrelativevelocity.Whilethederivationof
+theformeriscomparabletothatinpreviousliterature,agroupingofaircraftflightsegmentsintoclimbing,cruisinganddescending
+phasesisusedinthispaperfortheverticaldirection.Consequently,themodelsderivedherecomputethetotalthree-dimensional
+conflict probability as a function of the proportion of aircraft in different flight phases. This makes it possible to study how the
+proportionofcruisingaircraftaffectssafety,orequallyhowtheproportionofclimbing/descendingtrafficaffectssafety.Conflicts
+involvingclimbing/descendingaircraftareofparticularinteresttolayeredairspacedesigns,whereconstraintsareimposedtoonly
+reduceconflictsbetweencruisingaircraft.
+Inadditiontoextendingthemodelstothree-dimensions,thispaperalsopresentsextensivefast-timesimulationexperimentsto
+testmodelaccuracyforawidevarietyofconditions.Thisincludesaninvestigationofanassumptionmadeduringthederivation
+processregardingthespeeddistributionofaircraft.Additionally,itisalsoshownhowanumericalmethodcanbeusedtoaugment
+theanalyticalmodelstofurtherimproveaccuracyforcaseswherethespeeddistributionofaircraftviolatesmodelingsimplifications.
+3. Modelingconflictprobability
+Thegoalofthissectionistoderiveconflictprobabilityexpressionsfordirect-routingairspaceconcepts,suchasunstructuredand
+layeredairspacedesigns,asafunctionofconflictdetectionparameters.Here,theconflictprobabilityofanairspacedesignisdefined
+asthelikelihoodthattworandomlyselectedaircraftareinconflict,i.e.,thelikelihoodthatthetrajectoriesoftwoarbitraryaircraft
+arepredictedtobecloserthantheprescribedseparationrequirementswithintheconflictdetectionlook-aheadtime.Althoughthe
+299
+
+--- Page 6 ---
+
+E.Suniletal.
+Transportation Research Part C 95 (2018) 295–319
+maincontributionofthisstudyisonthedevelopmentof3Dconflictprobabilitymodels,thissectionbeginsbyconsideringthe2D
+case.Thisisbecausethe2Dmodelisdirectlyrequiredtoestimateconflictcountsbetweencruisingaircraftinlayeredairspaces.The
+3Dmodelissubsequentlyderivedasanextensionofthe2Dcase.
+3.1. Conflictprobabilityfor2Dairspace
+In2Dairspace,aircraftmotionisrestrictedtothehorizontalplane.Thus,aircraftvelocitiesarepurelyhorizontal,andallconflicts
+arebetweencruisingaircraft.
+Previousstudieshaveproposedthattheconflictprobabilitybetweenanytwoaircraftin2Dairspace, p ,canbecomputedby
+2d
+comparingtheinstantaneousareasearchedforconflictsbyanaircraft, A ,tothetotalairspaceareaunderconsideration, A ;see
+c total
+Fig. 4. Here it can be seen that A is approximated as a rectangular ‘conflict search area’, and its size is defined by the conflict
+c
+detectionlook-aheadtime,t,thehorizontalseparationrequirement,S ,andtheexpectedhorizontalrelativevelocitybetweenair-
+l h
+craft,E(V ).SinceaconflictisdetectedifthetrajectoryofanotheraircraftispredictedtopassthroughA ,p canbeexpressedas
+r,h c 2d
+(Endohetal.,1982;GrahamandOrr,1969;DattaandOliver,1991):
+p = A c = 2S h E(V r,h )t l
+2d A A (2)
+total total
+Toarriveatafullyanalyticalexpressionforp ,itisnecessarytoquantifyE(V ).Becausethegoalofthederivationprocessisto
+2d r,h
+determinetheaverageconflictprobabilitybetweenapopulationofaircraftforagivenairspacedesign,andnotjustbetweentwo
+specificflights,theexpectedhorizontalrelativevelocityisused.Morespecifically,E(V )canbethoughtofastheweightedaverageof
+r,h
+the horizontal relative velocities between all aircraft pairs (not just the conflicting pairs), given the aircraft speed and heading
+differencedistributionsintheairspaceareaofinterest.
+Nonetheless,tocomputeE(V ),itisstillusefultofirstconsiderthemagnitudeofthehorizontal relativevelocitybetweenan
+r,h
+arbitrarypairofaircraft,V ;seeFig.5.Usingthecosinerule,V canbecomputedas:
+r,h r,h
+V r,h=(V 1 2+V 2 2−2V 1 V 2 cos(∆ψ))1/2 (3)
+Here,V andV arethevelocitymagnitudesofthetwoaircraftpicturedinFig.5,and∆ψistheheadingdifferencebetweenthese
+1 2
+twoarbitraryaircraft.Becausethevaluesofthesevariablescanbedifferentforeveryaircraftpairintheairspace,itisnecessaryto
+integrate Eq. (3) over all possible values of velocity and heading difference to compute E(V ), while taking into account the
+r,h
+probabilitydensityfunctionsofvelocitymagnitudesandheadingdifferences,P(V),P(V)andP(∆ψ):
+1 2
+E(V
+r,h
+)=∫
+V1
+∫
+V2
+∫
+0
+α (V
+1
+2+V
+2
+2−2V
+1
+V
+2
+cos(∆ψ))1/2P(∆ψ)P(V
+1
+)P(V
+2
+)d∆ψdV
+1
+dV
+2 (4)
+In the above equation, α represents the maximum possible heading difference between any two cruising aircraft. Due to the
+complexityofEq.(4),itcanonlybesolvednumerically(Endohetal.,1982).However,ananalyticalsolutionispossibleifallaircraft
+areassumedtohaveequalvelocitymagnitudes,i.e.,ifV
+1
+=V
+2
+=V
+o
+.Underthisassumption,thegeometrybetweenV
+1
+,V
+2
+andV
+r,h
+in
+Fig.5becomesanisoscelestriangle.Thus,itispossibletorewriteEq.(3)as:
+|∆ψ|
+V r,h=2V
+o
+sin⎛
+⎝ 2
+⎞
+⎠ (5)
+SinceV isassumedtobeaconstant,theabovesimplifiedequationshowsthatV isonlydependentontheabsoluteheading
+o r,h
+differencebetweentwoaircraft,|∆ψ|.ThereforeasimplifiedanalyticalexpressionforE(V )canbederivedbyintegratingEq.(5)for
+r,h
+allpossible|∆ψ|,whiletakingintoaccountitsprobabilitydensity.Inordertohighlightthesafetydifferencesbetweenunstructured
+andlayeredairspaces,trafficscenarioswithauniformdistributionofaircraftheadingsbetween0andαareusedinthiswork,since
+suchscenarioshavebeenshowninliteraturetomaximizeconflictcounts(Endohetal.,1982).Forthistypeofscenario,theprob-
+abilitydensityfunctionoftheabsoluteheadingdifference,P(|∆ψ|),takesonatriangularshapebetween0andα (Milios,2009):
+Fig.4.Areasearchedforconflicts,Ac,in2Dairspace.Here,Atotalisthetotalairspaceareaunderconsideration.
+300
+
+--- Page 7 ---
+
+E.Suniletal.
+Transportation Research Part C 95 (2018) 295–319
+Fig.5.Thegeometricrelationshipsbetweenvelocity,V,relativevelocity,Vr,andheadingdifference∆ψfortwoarbitraryaircraft.
+2 |∆ψ|
+P(|∆ψ|)= ⎛1− ⎞
+α⎝ α ⎠ (6)
+UsingEqs.(5)and(6),asimplifiedexpressionforE(V )canbedeterminedas(Hoekstraetal.,2016):
+r,h
+E(V
+r,h
+)=∫
+0
+α 2V
+o
+sin⎛
+⎝
+|∆
+2
+ψ| ⎞
+⎠
+·
+α
+2 ⎛
+⎝
+1− |∆
+α
+ψ| ⎞
+⎠
+d|∆ψ|= 8
+α
+V o⎛
+⎝
+1−
+α
+2 sin α
+2
+⎞
+⎠ (7)
+Itshouldbenotedthattheaboveexpressionisonlyvalidifallaircraftareassumedtohaveequalvelocities.Thisassumptionis
+used for all the analytical models derived in this paper, and by all previous studies that have developed analytical conflict count
+modelstoanalyzethesafetyofaparticularairspacedesign,seeSection2.4.Nevertheless,thesensitivityofthisassumptiononmodel
+accuracyisspecificallyanalyzedbyoneofthefast-timesimulationexperimentsperformedinthiswork,seeSection6.3.
+3.2. Conflictprobabilityfor3Dairspace
+In3Denrouteairspace,cruisingaircraftsharetheairspacewithclimbinganddescendingaircraft.Thereforein3D,conflictscan
+occurbetweenaircraftindifferentflightphases.Moreover,aircraftcanhavehorizontal,aswellasverticalvelocitycomponents.
+Fig.6.Volumesearchedforconflictsbyanaircraft,Bc,in3Dairspace.Here,Btotal isthetotalvolumeoftheairspaceconsideration.Notethat
+Bc=Bc,h+Bc,v.
+301
+
+--- Page 8 ---
+
+E.Suniletal.
+Transportation Research Part C 95 (2018) 295–319
+Analogoustothetwo-dimensionalcase,for3Dairspace,conflictprobabilitycanbedefinedastheratiobetweentheinstantaneous
+volumeofairspacesearchedforconflicts,B c,andthetotalairspacevolumeunderconsiderationB total;seeFig.6(a).Furthermore,a
+conflictisdefinedtooccurwhenthetrajectoryofanotheraircraftispredictedtopassthroughB c,anditssizeisdependentonthe
+conflict detection look-ahead time, t, the horizontal and vertical separation requirements, S and S , and the expected relative
+l h v
+velocity,E(V).
+r
+ItcanbeshownthatvolumeB c canbedecomposedintotwoorthogonalcomponents:
+1. Ahorizontalcuboid,B ,generatedbythehorizontalcomponentoftheexpectedrelativevelocity,E(V )
+c,h r,h
+2. Averticalcylinder,B ,generatedbytheverticalcomponentoftheexpectedrelativevelocity,E(V )
+c,v r,v
+The horizontal and vertical components of B c can be visualized in Fig. 6(b). Because B c=B c,h+B c,v , the total 3D conflict
+probability, p ,canbemodeledasasummationofthehorizontalandvertical‘volumesearched’ratios:
+3d
+p = B c = B c,h+B c,v = 4S h S v E(V r,h )t l+πS h 2E(V r,v )t l
+3d B B B (8)
+total total total
+Tofullyquantifyp ,itisnecessarytodevelopanalyticalformulationsfortheexpectedhorizontalandverticalrelativevelocities.
+3d
+Thisisdoneinthefollowingparagraphs.
+3.2.1. Expectedhorizontalrelativevelocity
+Tomodeltheexpectedhorizontalrelativevelocityinanairspace,E(V ),itisfirstnecessarytoproperlydefinewhatismeantas
+r,h
+the‘horizontalvelocity’ofanaircraft,V;seeFig.7.ThisfigureshowsthatV isafunctionofthetotalvelocityofanaircraft,V,andits
+h h
+flight-pathangle,γ:
+V h=Vcos(γ) (9)
+Asindicatedpreviously,thispaperisconcernedwithmodelingconflictcountsforenrouteairspace.Inenrouteairspace,aircraft
+generallyclimb/descendwithflight-pathangleslessthansixdegrees.Basedontheaboveequation,forsuchsmallangles,V h≈V.
+Therefore γ does not significantly affectV in en route airspace. For this reason,V andE(V ) can also be considered to be in-
+h r,h r,h
+dependentofγinenrouteairspace.Thus,theexpressionforE(V )developedearlierfor2Denrouteairspace,givenbyEq.(7),can
+r,h
+alsobeusedfor3Denrouteairspace.
+ItisimportanttonotethattheapproachpresentedheretomodelE(V )isonlyapplicableforsmallflight-pathangles,asisthe
+r,h
+caseinenrouteairspaces.Fortherarecaseswhereγ≫10°,itwouldbenecessarytotakeγ intoaccountwhencomputingE(V ).
+r,h
+ThiswouldrequirearewritingofEqs.(4)and(7)toincludeanadditionalintegralthatconsiderstheprobabilitydensityofγ when
+modelingE(V ).However,asshownbythehighmodelaccuracyresultsinSection6,thisaddedcomplexityisgenerallynotrequired.
+r,h
+3.2.2. Expectedverticalrelativevelocity
+Followingasimilarproceduretothehorizontaldirection,itisusefultofirstdefinetheverticalvelocityofanindividualaircraft,
+V.UsingFig.7,V canbecomputedas:
+v v
+V v=Vsin(γ) (10)
+Forsmallvaluesofγ,asforenrouteairspace,theaboveequationcanbesimplifiedasV v≈Vγ.Therefore,unlikethehorizontal
+case,V
+v
+isdependentonγ.Ifallaircraftareassumedtohaveequaltotalvelocities,i.e.,ifV=V
+o
+,thenthemagnitudeofthevertical
+relativevelocitybetweentwoarbitraryaircraft,V ,isdependentontheflightpathanglesofeachaircraft,γ andγ:
+r,v 1 2
+V r,v=|V o sin(γ 2 )−V o sin(γ 1 )| (11)
+Becausethevaluesofγ andγ canbedifferentforeveryaircraftpair,tocomputetheexpectedverticalrelativevelocity,E(V ),it
+1 2 r,v
+isnecessarytointegrateEq.(11)forallpossiblevaluesofγ andγ,whiletakingintoaccounttheprobabilitydensityfunctionofthe
+1 2
+flightpathanglesofeachaircraft,P(γ)andP(γ):
+1 2
+E(V
+r,v
+)=∫
+γ1
+∫
+γ2
+|V
+o
+sin(γ
+2
+)−V
+o
+sin(γ
+1
+)|P(γ
+1
+)P(γ
+2
+)dγ
+1
+dγ
+2 (12)
+TodevelopananalyticalmodelforE(V ),thefollowingsimplificationismadeinthispaper.Inenrouteairspace,anaircraftcan
+r,v
+be considered to be either cruising or climbing or descending. Cruising aircraft generally fly with γ ≈0°. Furthermore, it is
+cruise
+reasonabletoassumeaconstantandequal|γ|forallclimbinganddescendingaircraft.Therefore,itisassumedthatγtakesoneofthe
+Fig.7.Theflightpathangleofanaircraft,γ,isdefinedintermsofitshorizontalvelocity,Vh,anditsverticalvelocity,Vv.
+302
+
+--- Page 9 ---
+
+E.Suniletal.
+Transportation Research Part C 95 (2018) 295–319
+followingthreevaluesinenrouteairspace:
+0 for cruising aircraft
+⎧
+γ= +γ for climbing aircraft
+⎨ cd
+⎩ −γ cd for descending aircraft (13)
+Usingtheabovesimplification,itispossibletorewriteEq.(12)intoitsdiscretizedform:
+E(V
+r,v
+)=∑ ∑ |V
+o
+sin(γ
+2
+)−V
+o
+sin(γ
+1
+)|P(γ
+1
+)P(γ
+2
+)
+γ1 γ2 (14)
+ToutilizeEq.(14),itisnecessarytodeterminediscretizedvaluesforV andP(γ)·P(γ).DiscretizedvaluesofV canbecomputed
+r,v 1 2 r,v
+byevaluatingEq.(11)forallflightphasecombinationsoftwoarbitraryaircraft,seeTable1.ThistableshowsthatV iszerowhen
+r,v
+bothaircrafthavethesameflightpathangle,andthatV ishighestwhenthetwoaircraftareflyingwithoppositeflightpathangles,
+r,v
+asexpected.
+DiscretizedvaluesforP(γ)·P(γ)canbecomputedbynotingthatthediscretizedprobabilitydistributionofγisequivalenttothe
+1 2
+proportionofaircraftincursing,climbinganddescendingflightphases.Tothisend,letε betheproportionofcruisingaircraft:
+N
+ε= cruise
+N total (15)
+Here,N cruiseisthenumberofinstantaneouscruisingaircraft,andN totalisthetotalnumberofinstantaneousaircraft.Usingε,the
+proportionofclimbingordescendingaircraftcancalculatedbeas1−ε,andtheprobabilityofselectingtwocruisingaircraftatrandom
+isε2.Usingthisapproach,thediscretizedvaluesforP(γ)·P(γ)canbecomputedforallflightphasecombinationsoftwoarbitrary
+1 2
+aircraft,seeTable2.Becausethistablerepresentsadiscreteprobabilitydensityfunction,summationofthecellsleadtoavalueof1.
+Moreover,thetableissymmetricalongtheleadingdiagonalasitassumesequalnumbersofclimbinganddescendingaircraft,which
+wasinturnusedtosimplifythedesignofthesimulationexperiments,seeSection5.However,themethoddescribedherecanalsobe
+appliedwhenthisassumptionisnottrue,aslongastheproportionofaircraftindifferentflightphasesareknown.
+Using Eq. (14) and the discretized values forV and P(γ)·P(γ) in Tables 1 and 2, respectively,E(V ) can be computed. In
+r,v 1 2 r,v
+essence, this involves an element-wise multiplication of the appropriate cells of Tables 1 and 2, followed by a summation of the
+resultingexpressions.Sincethisprocesshastotakeintoaccounttheallowedflightphasecombinationsofinteractingaircraft,the
+resultingE(V )expressionsaredifferentforunstructuredandlayeredairspacedesigns;thecorrespondingequationsarederivedin
+r,v
+Sections4.1and4.2,respectively.
+4. Modelingconflictcounts
+Thissectionpresentsthederivationofconflictcountmodelsforunstructuredandlayeredairspaceconcepts.Thesederivations
+makeuseofthe2Dand3Dconflictprobabilitymodelsdevelopedintheprevioussection,andareadaptationsofthegenericconflict
+countmodelgivenbyEq.(1).
+4.1. Unstructuredairspace
+AsindicatedbyEq.(1),thenumberofinstantaneousconflictsforUnstructuredAirspace(UA),C ,canbemodeledastheproduct
+ua
+oftwo factors, namely the number of combinations oftwo aircraft,and the conflict probability between any two aircraft.Because UA
+imposesnoconstraintsonaircraftmotion,anaircraftcanconflictwithanyotheraircraftintheairspace,regardlessoftheflightphase
+ofeitheraircraft.Therefore,thetotalnumberofcombinationsoftwoaircraftcanbeexpressedusingthebinomialcoefficient,⎛ N total⎞,
+⎝ 2 ⎠
+leadingtothefollowingmodelstructureforC :
+ua
+C ua=⎛
+⎝
+N t
+2
+otal⎞
+⎠
+p
+ua
+= N total (N
+2
+total−1) p
+ua (16)
+Here, N total is the total number of instantaneous aircraft present in the volume of airspace under consideration. The conflict
+probabilitybetweenanytwoaircraft, p ,scalesthenumberofcombinationsoftwoaircraftsuchthatonlyaircraftpairsthathave
+ua
+Table1
+Discretizedverticalrelativevelocity,Vr,v.
+AC2
+AC1 Cruising Climbing Descending
+Cruising 0 Vosin(γcd) Vosin(γcd)
+Climbing Vosin(γcd) 0 2Vosin(γcd)
+Descending Vosin(γcd) 2Vosin(γcd) 0
+303
+
+--- Page 10 ---
+
+E.Suniletal.
+Transportation Research Part C 95 (2018) 295–319
+Table2
+Discretizedflight-pathangleprobabilitydensitydistribution,P(γ)·P(γ).
+1 2
+AC2
+AC1 Cruising Climbing Descending
+Cruising ε2 ε−ε2 ε−ε2
+2 2
+Climbing ε−ε2 (1−ε)2 (1−ε)2
+2 4 4
+Descending ε−ε2 (1−ε)2 (1−ε)2
+2 4 4
+intersectingtrajectorieswithindetectionrangearecountedasconflicts.Amodelforconflictprobabilityin3Dairspaceshasbeen
+derivedinSection3.2.Itisrepeatedbelowforconvenience,andusesthegeometricalparametersdefinedinFig.6:
+p =
+4S
+h
+S
+v
+E(V
+r,h
+)t l+πS
+h
+2E(V
+r,v
+)t
+l
+ua B (8)
+total
+Toevaluatetheaboveequation,expressionsfortheexpectedhorizontalandverticalrelativevelocitiesbetweenaircraftinUA,
+E(V ) andE(V ) ,areneeded.Eq.(7)showsthatE(V ) isdependentonα,themaximumpossibleheadingdifferencebetween
+r,h ua r,v ua r,h ua
+twoarbitraryaircraft.SinceaircrafthavecompleterouteselectionfreedominUA,conflictscanoccurbetweenaircraftflyinginany
+direction.ThusforUA,α=360°=2π.SubstitutionofthisvalueintoEq.(7)yieldsthefollowingexpressionforE(V ) :
+r,h ua
+4V
+E(V r,h ) ua= π o (17)
+Here,V istheassumedequalvelocityofallaircraftintheairspace.Asmentionedbefore,theeffectofthisassumptiononmodel
+o
+accuracyisanalyzedusingfast-timesimulations,seeSection6.3.
+Intheverticaldirection,Eq.(14)canbeusedtocomputeE(V ) .TouseEq.(14),expressionsforthediscretizedverticalrelative
+r,v ua
+velocity,andthediscretizedflight-pathangleprobabilitydensitydistribution,listedinTables1and2,respectively,areneeded.Since
+theprobabilityofconflictisindependentofflightphaseinUA,theexpressionsforallflightphasesinTables1and2shouldbeused
+whenevaluatingEq.(14).ThisresultsinthefollowingforUA:
+ε−ε2 (1−ε)2
+E(V
+r,v
+) ua=4⎛
+⎝ ⎜
+V
+o
+sin(γ
+cd
+)
+2
+⎞
+⎠ ⎟
++2⎛
+⎝ ⎜
+2V
+o
+sin(γ
+cd
+)
+4
+⎞
+⎠ ⎟
+=V
+o
+sin(γ
+cd
+)(1−ε2)
+(18)
+Here,γ istheflight-pathangleofclimbing/descendingtraffic,andεistheproportionofcruisingaircraftintheairspace.Finally,
+cd
+thenumberofinstantaneousconflictsforUAcanbeobtainedbysubstitutingEqs.(17)and(18)intoEq.(8),andthensubstitutingthe
+resultintoEq.(16):
+C ua,3d= N total (N
+2
+total−1)⎛
+⎝ ⎜
+16S h S v V o t l+π
+π
+2S
+B
+h 2
+to
+V
+ta
+o
+l
+t l sin(γ cd )(1−ε2)
+⎟
+⎞
+⎠ (19)
+4.2. Layeredairspace
+ThestructureoftheLayersconceptreducesthenumberofconflictsbetweencruisingaircraft.However,therearenoprocedural
+mechanisms to separate cruising aircraft from climbing and descending traffic. Therefore, the conflict count model for layered
+airspacesneedstobesplitintothreedistinctpartsbasedontheflightphasecombinationsofinteractingaircraft:
+C lay=C cruise+C cruise−cd+C cd (20)
+Here,C cruiseisthenumberofconflictsbetweencruisingaircraft,C
+cruise−cd
+isthenumberofconflictsbetweencruisingandclimbing/
+descendingaircraft,andC isthenumberofconflictsbetweenclimbing/descendingtraffic.Eachofthesethreeconflicttypesare
+cd
+discussedintheparagraphsthatfollow.
+4.2.1. Conflictsbetweencruisingaircraft
+ThenumberofinstantaneousconflictsbetweencruisingaircraftintheLayersconceptcanbemodeledbytakingintoaccountthe
+twoaspectsthatdifferentiatelayeredairspacesfromUA;thereductionofthenumberofpossibleconflictpairs,andthereductionof
+therelativevelocitybetweencruisingaircraft.
+Conflictpairreduction
+SincetheverticalspacingbetweenthepredefinedflightlevelsoftheLayersconceptisbydefinitionatleastequaltothevertical
+separationrequirement,cruisingaircraftatdifferentaltitudebandscannotconflictwitheachother.Thisinturnreducesthenumber
+ofpossibleconflictpairsforcruisingaircraft.Italsomeansthattheconflictprobabilitybetweencruisingaircraft,p ,isequalforall
+cruise
+cruisingflightlevels.Thus,inasingleflightlevelj,thenumberofconflictsbetweencruisingaircraft,C ,canbeexpressedas:
+cruise,j
+304
+
+--- Page 11 ---
+
+E.Suniletal.
+Transportation Research Part C 95 (2018) 295–319
+C cruise,j=
+N
+cruise,j
+(N
+2
+cruise,j−1)
+p
+cruise (21)
+Here,N isthenumberofcruisingaircraftinflightlevelj.BysummingEq.(21)overallavailableflightlevels,L,thetotal
+cruise,j
+numberofinstantaneouscruisingconflictscanbecomputedas:
+C cruise=∑
+L N
+cruise,j
+(N
+2
+cruise,j−1)
+p
+cruise
+j (22)
+Ifcruisingaircraftareuniformlydistributedoverallaltitudebands,thenN cruise,j=N
+cruise
+/L.Thiswouldbethecaseforlayered
+airspacesifaircraftheadingsarealsouniformlydistributed,asforthetrafficpatternsconsideredinthiswork.Incaseofanuneven
+distributionofaircraftheadings,auniformverticaldistributionoftrafficcanstillbeachievedbyassigningmultipleflightlevelsfor
+theheadingrangeswithhighdemand.Usingthisassumption,Eq.(22)canbesimplifiedto:
+C cruise=
+N
+cruise
+(N
+2
+cr
+L
+uise−1 )
+p
+cruise (23)
+From the above equation, it can be concluded that increasing L increases the intrinsic safety offered by layered concepts to
+cruisingaircraft.ThisisbecausehighervaluesofLreducethenumberofpossiblecombinationsofcruisingaircraftpairsthatcan
+interactwitheachother.
+Relativevelocityreduction
+AsaircraftintheLayersconceptare‘sorted’intodifferentaltitudebandsbasedontheirheading,thesecondbeneficialeffectofthe
+Layersconceptisthereductionoftheexpectedhorizontalrelativevelocitiesbetweencruisingaircraft,E(V ) .Areductionof
+r,h cruise
+E(V ) leadstoareductionofp ,whichinturnincreasessafety.Sincecruisingaircraftareconstrainedtothehorizontalplane,
+r,h cruise cruise
+the 2D conflict probability model derived in Section 3.1 can be used for p and E(V ) . They are restated below for con-
+cruise r,h cruise
+venience,andusethegeometricalparametersdefinedinFig.4:
+2S E(V ) t
+p = h r,h cruisel
+cruise A (2)
+total
+8V 2 α
+E(V r,h ) cruise= α o⎛ ⎝ 1− α sin 2 ⎞ ⎠ (7)
+Eq.(7)showsthatE(V ) isafunctionoftheheadingrangepermittedperaltitudeband,α.AsindicatedinSection2.3,αisa
+r,h cruise
+designparameterforlayeredairspaces.TogainasenseoftheeffectofαonthesafetyoftheLayersconcept,Eq.(7)isplottedinFig.8.
+Hereitcanbeseenthatthehorizontalrelativevelocityvariesnon-linearlywithαduetothesinα terminEq.(7).Furthermore,the
+2
+figure shows that E(V ) is lower for layered concepts with smaller values of α. Since reducing E(V ) decreases p ,
+r,h cruise r,h cruise cruise
+reducingα ishypothesizedtoincreasetheintrinsicsafetyoflayeredconcepts.
+SubstitutingEqs.(2)and(7)intoEq.(23)leadstothefollowingexpressionforthenumberofinstantaneousconflictsbetween
+cruisingaircraftinlayeredairspaces:
+C cruise=N
+cruise
+⎛
+⎝
+N c
+L
+ruise−1⎞
+⎠ ⎜
+⎛
+⎝
+8
+α
+S
+A
+h
+t
+V
+ot
+o
+a
+t
+l
+l
+⎟
+⎞
+⎠
+⎛
+⎝
+1−
+α
+2 sin α
+2
+⎞
+⎠ (24)
+4.2.2. Conflictsbetweencruisingandclimbing/descendingaircraft
+Because the Layers concept imposes no procedural constraints to prevent conflicts between cruising and climbing/descending
+traffic,themodelforC isverysimilartothemodeldevelopedforUA,exceptfortwominordifferences:
+cruise−cd
+1. The number of combinations of cruising and climbing/descending aircraft is N cruise N cd. This is because an aircraft cannot be
+Fig.8.Hypothesizedrelationshipbetweentheexpectedhorizontalrelativevelocity,E(Vr,h),andheadingrangeperflightlevel,α.
+305
+
+--- Page 12 ---
+
+E.Suniletal.
+Transportation Research Part C 95 (2018) 295–319
+cruisingandclimbing/descendingatthesametime.
+2. Since only cruising-climbing/descending conflicts are considered, the calculation of the expected vertical relative velocity,
+E(V ) , should only consider cases where one aircraft is cruising, while the other is climbing/descending. This can be
+r,v cruise−cd
+achievedbyevaluatingEq.(14)forthefourcasesinTables1and2whereoneaircraftiscruising,andtheotherisclimbing/
+descending.
+ApplicationofthesechangestotheUAmodelleadstothefollowingexpressionsforC .Theseequationsmakeuseofthe
+cruise−cd
+geometricalparametersdisplayedinFig.6:
+C cruise−cd=N cruise N cd p cruise−cd (25a)
+p =
+4S
+h
+S
+v
+E(V
+r,h
+)
+cruise−cd
+t l+πS
+h
+2E(V
+r,v
+)
+cruise−cd
+t
+l
+cruise−cd B (25b)
+total
+4V
+E(V r,h ) cruise−cd= π o (25c)
+ε−ε2
+E(V
+r,v
+) cruise−cd=4⎛
+⎝ ⎜
+V
+o
+sin(γ
+cd
+)
+2
+⎞
+⎠ ⎟
+=2V
+o
+sin(γ
+cd
+)(ε−ε2)
+(25d)
+4.2.3. Conflictsbetweenclimbing/descendingaircraft
+Themodeldescribingthenumberofinstantaneousconflictsbetweenclimbing/descendingtraffic,C ,isalsoremarkablysimilar
+cd
+tothatderivedearlierforUA.Inthiscase,theonlydifferenceisinthecomputationoftheexpectedverticalrelativevelocitybetween
+climbing/descendingaircraft,E(V ) .AnexpressionforE(V ) canbeobtainedbyapplyingEq.(14)forthefourcasesinTables1
+r,v cd r,v cd
+and2wherebothinteractingaircraftareclimbing/descending.ThisapproachleadstothefollowingforexpressionsforC .These
+cd
+equationsmakeuseofthegeometricalparametersdisplayedinFig.6:
+C cd=
+N
+cd
+(N
+2
+cd−1)
+p
+cd (26a)
+p =
+4S
+h
+S
+v
+E(V
+r,h
+)
+cd
+t l+πS
+h
+2E(V
+r,v
+)
+cd
+t
+l
+cd B (26b)
+total
+4V
+E(V r,h ) cd= π o (26c)
+(1−ε)2
+E(V
+r,v
+) cd=2⎛
+⎝ ⎜
+2V
+o
+sin(γ
+cd
+)
+4
+⎞
+⎠ ⎟
+=V
+o
+sin(γ
+cd
+)(1−ε)2
+(26d)
+5. Fast-timesimulationdesign
+To test the accuracy of the conflict count models developed in this work, three fast-time simulation experiments, named the
+‘primaryexperiment’the‘flight-pathangleexperiment’andthe‘groundspeedexperiment’,wereperformed.Thissectiondescribes
+thedesignofthesethreeexperiments.
+5.1. Simulationdevelopment
+5.1.1. Simulationplatform
+The BlueSky open-source ATM simulator was used as the simulation platform in this research. It was developed at the Delft
+UniversityofTechnology(TUDelft)usingthePythonprogramminglanguage.1BlueSkyhasnumerousfeaturesincludingtheability
+tosimulatemorethan5000aircraftsimultaneously,asuiteofconflictdetectionandresolutionalgorithms,andextensivedatalogging
+functions.AcompleteoverviewofBlueSkyisprovidedinHoekstraandEllerbroek(2016).
+Inordertosimulateaircraftperformancedynamics,BlueSkyusespoint-massAircraftPerformanceModels(APMs)thataresimilar
+instructuretoEurocontrol’swellknownBaseofAircraftData(BADA)models.Themaindifferencebetweenthesetwoapproachesis
+thatBlueSkyusesopenlyavailabledatatoquantifytheAPMS.Tosimplifythesimulations,alltrafficwassimulatedusingaBoeing
+744model.AfulldescriptionoftheBlueSkyAPMs,includingtheirvalidation,canbefoundinMetzetal.(2016).
+BlueSkyusesasimulatedFlightManagementSystem(FMS)toprovidehorizontalandverticalnavigationcapabilities,aswellas
+foraircraftspeedcontrol.Similartorealaircraft,thesimulatedFMStriestoflyanaircraftattherequestedCalibratedAirspeed(CAS)
+orMachnumber,ifthatiswithintheperformancecapabilitiesoftheaircrafttype,whichisinturnspecifiedintheAPMsfordifferent
+partsoftheflightenvelope.Additionally,speed/headingchangesoccurwhilerespectingtheaccelerationcapabilitiesofaircraft.
+1BlueSkycanbedownloadedfromhttps://github.com/ProfHoekstra/blueksy.
+306
+
+--- Page 13 ---
+
+E.Suniletal.
+Transportation Research Part C 95 (2018) 295–319
+5.1.2. Conflictdetection
+Inthisstudy,thesocalled‘state-based’conflictdetectionmethodwasused.Thismethodpredictsseparationviolationsbylinearly
+extrapolating aircraft positions over a predefined look-ahead time. Here, a look-ahead time of 5min, as well as separation re-
+quirementsof5nauticalmileshorizontallyand1000ftvertically,wereused.
+AsmentionedinSection2.4,themodelsderivedinthispaperareconcernedwiththeintrinsicsafetyprovidedbyunstructured
+andlayeredairspacedesigns.Sincethenotionofintrinsicsafetyfocusesonthenumberoftrulyoccurringconflictsasafunctionof
+airspacedesign,conflictdetectionwasperformedassumingperfectknowledgeofaircraftstates.Forthesamereason,thesimulations
+wereperformedwithouttacticalconflictresolutions.
+5.1.3. Airspaceconceptsandconceptimplementation
+UnstructuredAirspace(UA)andfourlayeredairspaceconcepts,eachwithadifferentallowedheadingrangeperflightlevel,α,
+wereusedinthefast-timesimulations.Table3displaysthepropertiesoftheconsideredairspaceconcepts,andalsoindicateswhich
+conceptswereusedineachofthethreeexperimentsperformedinthisstudy.
+The airspace concepts were implemented into BlueSky by modifying its trajectory planning functions. While direct horizontal
+routeswereusedinbothunstructuredandlayeredairspaces,themethodusedtodeterminethecruisingaltitudeofanaircraftdiffered
+betweenthetwoairspacedesigns.ForUA,thecruisingaltitudeofanaircraft,Z ,wasdirectlyproportionaltoitstripdistance,D:
+ua,i i
+Z ua,i=Z min+ D Z m m a a x x− − Z D m m i i n n (D i−D min ) (27)
+Here,Z
+min
+andZ
+max
+aretheminimumandmaximumaltitudesallowedforcruisingaircraftinthesimulation.Comparably,D
+min
+and D are the minimum and maximum trip distances of aircraft in the simulation. Since traffic scenarios with a uniform dis-
+max
+tributionoftripdistanceswereused,Eq.(27)resultedinauniformverticaldistributionoftraffic.
+Ontheotherhand,fortheLayersconcept,thecruisingaltitudeofanaircraft,Z ,dependsonbothitsheading,ψ,anditstrip
+lay,i i
+distance,D,asindicatedbythefollowingheading-altituderule:
+i
+Z lay,i=Z min+ζ⎡
+⎣ ⎢
+⎢
+⎣ ⎢D
+D
+m
+i
+a
+−
+x−
+D
+D
+m
+m
+in
+in
+κ ⎥
+⎦ ⎥
+β+ ⎢
+⎣ ⎢
+ψ
+α
+i⎥
+⎦ ⎥
+⎤
+⎦ ⎥ (28)
+Here,βisthenumberofflightlevelsneededtodefineonecompletesetoflayers,andκisthenumberofcompletelayersets.These
+twoparametersaredefinedasβ=360°/α andκ=L/β,whereListhetotalnumberofavailableflightlevels.Notethatthesecond
+termofEq.(28)computesthecruisingaltitudeofanaircraftasanintegermultipleoftheverticalspacingbetweenflightlevels,ζ,using
+ttheflooroperator(‘⌊⌋’).Foralllayeredconceptsinthisstudy,ζ=1100ftand L=8.Correspondingly,formostlayeredconcepts,
+κ>1,seelastcolumnofTable3.Forlayeredconceptswithκ>1,Eq.(28)usestripdistancestodeterminecruisingaltitudessuch
+thatshortflightsremainatloweraltitudes,whilelongerflightsusehigherlayersets.Thisproperty,combinedwithtrafficscenarios
+withauniformdistributionoftripdistancesandtraveldirections,resultedinauniformofdistributionofcruisingaircraftoverthe
+eightpredefinedflightlevelsusedbyalllayeredconcepts.
+ItshouldbenotedthattheonlydifferencebetweentheUAandL360conceptsistheuseofpredefinedflightlevelsforcruising
+aircraftinL360,whileanyaltitudecouldbeselectedbyaircraftinUA.Infact,theL360conceptwasspecificallyincludedinthe
+simulationstoinvestigatetheeffectofusingfixedcruisingflightlevelswhilesimultaneouslyallowingallpossibleheadingsineach
+flightlevelonintrinsicairspacesafety.
+5.2. Trafficscenarios
+5.2.1. Testingregionandflightprofiles
+Alargethree-dimensionalenroutesectorwasusedasthephysicalenvironmentfortrafficsimulations;seeFig.9.Inthevertical
+dimension,thesectorisdividedintotwoparts;a‘transitionzone’withaheightof4000ftforclimbinganddescendingtraffic,anda
+‘cruisingzone’withaheightof7700ft.Theeightpredefinedcruisingflightlevelsforlayeredairspaceconceptswerewithinthelatter
+zone(notshown).
+Inthehorizontalplane,thesectorhadasquare-shapedcross-sectionof400×400NM,andwasdividedintoseparate‘simulation’
+and‘experiment’regions;seeFig.9.Asnotrafficwassimulatedoutsidethesquaresector,aircraftneartheedgesofthe‘simulation
+Table3
+Propertiesoftheairspaceconceptsusedinthethreesimulationexperiments.
+Symbol Name HeadingRange Numberof Primary Flight-Path Ground
+PerLayer,α LayerSets,κ Expt. AngleExpt. SpeedExpt.
+UA UnstructuredAirspace – –
+L360 Layers360 360° 8 – –
+L180 Layers180 180° 4 – –
+L90 Layers90 90° 2 – –
+L45 Layers45 45° 1
+307
+
+--- Page 14 ---
+
+Top View Side View
+Cruising
+Altitudes
+Transition
+Altitudes
+400 NM
+region’wereunlikelytointeractwithothertrafficcomparedtoflightsnearthecenterofthesector.Tosolvethisissue,followingthe
+simulationdesigninKrozeletal.(2001),asmallercylindrical‘experimentregion’,withadiameterof300NM,wasdefinedatthe
+center of the simulation region. The resulting gap between the experiment and simulation regions, which was sized such that it
+closelymatchedthelengthofthehorizontalvolumeofairspacesearchedforconflictsbyaircraft,seeFig.6(b),ensuresthataircraftinthe
+experimentregionaresurroundedbytrafficinalldirections.Correspondingly,onlyaircraftwithintheexperimentregion,andonly
+conflictswithclosestpointsofapproachwiththeexperimentregion,wereusedtoassesstheaccuracyofthemodels.Theparameters
+oftheexperimentregionneededtoevaluatethemodels,aswellasotherparameterscommontoallthreeexperiments,arelistedin
+Table4.
+Fig.9alsoshowsthehorizontalandverticalprofilesofanexampleflight.Becausethefocusofthisstudyisonen-routeairspace
+design,take-offandlandingflightphaseswerenotconsidered.Instead,aircraftenteredthesimulationatrandomsectorentry-points
+locatedonthelowerboundaryofthe‘transitionzone’.Subsequently,theyclimbedtotheirassignedaltitudeinthe‘cruisingzone’.
+Thespecificcruisingaltitudeofanaircraftdependedontheairspaceconcept,andcanbecalculatedusingEqs.(27)and(28)for
+unstructuredandlayeredairspaces,respectively.Atapredetermineddistancefromtheirdestination(whichdependedonthecruising
+altitude), aircraft began their descent. As aircraft descended through arbitrary sector exit-points on the lower boundary of the
+transitionzone,theyweredeletedfromthesimulation.
+It should be noted that all aircraft climbed/descended with equal flight-path angles, see Table 5 for the values used for each
+experiment.Furthermore,eachaircraftmaintainedaconstantgroundspeedduringitsflight.Thespeeddistributionofaircraftforthe
+threeexperimentsislistedinTable6.
+5.2.2. Scenariogeneration
+Ascenariogeneratorwascreatedtoproducetrafficscenarioswithadesiredandconstanttrafficdensity.Constantdensitysce-
+narioswereusedsothatthenumberofinstantaneousconflictsloggedduringasimulationruncouldbeattributedtoaparticular
+trafficdensity.Sinceaircraftweredeletedfromthesimulationastheyexitedthesector,torealizeconstantdensityscenarios,aircraft
+wereintroducedintothesimulationataconstantspawnrateequaltoVN,whereV istheaveragespeedofaircraft,D istheaverage
+D
+tripdistanceofaircraft,andNisthedesirednumberofinstantaneousaircraft.Usingthisapproach,tentrafficdemandscenariosof
+increasingdensityweredefined,rangingbetween5and100aircraftper10,000NM2inthesimulationregion;seeTable7.Notethat
+thistabledisplaysthenumberofinstantaneousaircraftinboththe‘simulation’and‘experiment’regions.
+In addition to constant densities, scenarios had a uniform distribution of trip distances and aircraft headings. As explained
+previously,uniform distance distributions wererequired to ensureauniform vertical distribution oftraffic.Uniform heading dis-
+tributionswereusedtomaximizethenumberofinstantaneousconflicts(Endohetal.,1982),therebymakingiteasiertounderstand
+ft
+0077
+ft
+0004
+Simulation
+Region
+Experiment
+Region
+300 NM
+MN
+004
+E.Suniletal.
+Transportation Research Part C 95 (2018) 295–319
+B
+A
+Fig.9.Topandsideviewsofthesimulation’sphysicalenvironment.Thetrajectoryofanexampleflightisshown.
+Table4
+Commonsimulationparametersforallthreeexperiments.
+Parameter Value Description
+Atotal 7.0685·104NM2 Areaof‘experimentregion’
+Btotal 3.0533·1016ft3 Volumeof‘experimentregion’
+Dmin 200NM Minimumtripdistance
+Dmax 250NM Maximumtripdistance
+D 225NM Averagetripdistance
+tl 5min Conflictdetectionlook-aheadtime
+Sh 5NM Horizontalseparationrequirement
+Sv 1000ft Verticalseparationrequirement
+L 8 Numberofflightlevelsforlayeredairspaces
+V 400kts Averagegroundspeedofaircraft
+308
+
+--- Page 15 ---
+
+E.Suniletal.
+Transportation Research Part C 95 (2018) 295–319
+Table5
+Flight-pathangleofclimbing/descendingaircraft(γ )andproportionofcruising
+cd
+aircraft(ε)forthethreeexperiments.
+Experiment γcd[°] ε
+Primary 2.8 0.82
+Flight-PathAngle 1.4 0.60
+2.8 0.82
+5.6 0.92
+GroundSpeed 2.8 0.82
+Table6
+Aircraftgroundspeeddistributionsforthethreeexperiments.
+Experiment Distribution Value[kts]
+Primary Equal 400.0
+Flight-PathAngle Equal 400.0
+GroundSpeed Equal 400.0
+Normal N(400.0,16.72)
+Uniform U(350.0,450.0)
+Table7
+Trafficdemandscenarios.
+# No.ofInst.AC No.ofInst.AC
+(SimulationRegion) (ExperimentRegion)
+1 80.0 58.3
+2 111.6 81.5
+3 155.7 112.2
+4 217.2 158.7
+5 302.9 218.4
+6 422.6 304.9
+7 589.4 422.3
+8 822.2 588.1
+9 1147.0 810.1
+10 1600.0 1116.8
+thesafetydifferencesbetweenunstructuredandlayeredairspaces.
+The horizontal routes for aircraft were selected such that these two requirements were met. This process began by randomly
+selectingthesectorentry-pointofanaircraftasanylatitude-longitudecombinationwithinthesimulationregion.Subsequently,two
+uniformrandomnumbergeneratorsareusedtooutputrandomvaluesfortheheading,ψ,andtripdistance,D,ofanaircraft.The
+i i
+sectorexit-pointofthataircraftisthendeterminedastheend-pointofastraightlinewithlengthD andabearingψ fromtheentry-
+i i
+point.Ifthecorresponding exit-pointisoutsidethesimulationregion,itisdiscarded,andtheaboveprocess isrepeateduntilthe
+entry-andexit-pointsforallaircraftareinsidethesimulationregion.
+Itshouldbenotedthatallscenariosweregeneratedoff-linepriortothesimulations.Thisensuredthatallairspaceconceptscould
+besubjectedtothesametrafficdemandsandhorizontaltrafficpatterns.Additionally,scenarioshadadurationof2h,consistingofa
+1htrafficvolumebuildupperiod,anda1hloggingperiodduringwhichthetrafficdensitywaskeptconstant.
+5.3. Independentvariables
+Threeseparateexperimentswereperformed.Theindependentvariablesofeachexperimentarediscussedbelow.
+5.3.1. Primaryexperiment
+Thefocusoftheprimaryexperimentwastovalidatetheconflictcountmodelsforunderidealconditions,andtoinvestigatethe
+effectoftheallowedheadingrangeperaltitudebandonthesafetyoflayeredconcepts.Theindependentvariablesofthisexperiment
+were:
+1. 5airspaceconcepts,seeTable3
+2. 10trafficdemandscenarios,seeTable7
+For each traffic demand scenario, ten repetitions were performed using different traffic realizations (i.e., different initial con-
+ditions).Thisresultedinatotalof500simulationruns,involvingover950,000flights.
+309
+
+--- Page 16 ---
+
+E.Suniletal.
+Transportation Research Part C 95 (2018) 295–319
+5.3.2. Flight-pathangleexperiment
+Theflight-pathangleofclimbinganddescendingtraffic,γ ,isanimportantparameterthataffectstheproportionofaircraftin
+cd
+different flight phases, see Section 3.2.Hence, an experiment was performed to test conflict count model accuracies for different
+valuesofγ .Theindependentvariablesofthisexperimentwere:
+cd
+1. 2airspaceconcepts,namelyUAandL45,seeTable3
+2. 10trafficdemandscenarios,seeTable7
+3. 3γ settings,seeTable5
+cd
+Tenrepetitionswereperformedforeachtrafficdemandcondition.Therefore,atotalof600simulationsrunswereperformedfor
+thisexperiment,usingover1.15millionflights.
+5.3.3. Groundspeedexperiment
+Sinceallaircraftwereassumedtoflywithequalgroundspeedsbythemodelderivations,thisfinalexperimentconsideredthe
+sensitivityofthemodelstothisassumption.Theindependentvariablesofthisexperimentwere:
+1. 2airspaceconcepts,namelyUAandL45,seeTable3
+2. 10trafficdemandscenarios,seeTable7
+3. 3groundspeeddistributions,seeTable6
+Asbefore,tenrepetitionswereperformedforeachtrafficdemandcondition,resultinginatotalof600simulationrunsforthis
+experiment,involvingover1.15millionflights.
+5.4. Dependentvariables
+Todeterminetheaccuracyoftheconflictcountmodelsderivedinthispaper,modelpredictionswerecomparedtoactualconflict
+countsloggedduringthesimulations.Modelaccuracywasquantifiedbyintroducingamodelaccuracyparameter,k,asillustrated
+belowforthebasicconflictcountmodel:
+No. of inst. conflicts= No. of combinations of two aircraft×Conflict probability ×k
+
+Basic conflict count model
+Inessence,kisaconstantmodeltermthataccountsforanyfactorthatwasnotconsideredduringmodelderivations.Thevalueof
+kisdeterminedbyfittingthemodel(rightsideofaboveequation)totheconflictcountdataloggedduringthesimulations(leftsideof
+aboveequation)inaleast-squaresense.Ifk=1,thenthemodels,asderived,areabletopredictconflictcountswith100%accuracy.
+Ontheotherhand,ifk<1,thenmodeloutputneedstobescaleddowntofitthesimulation data,andthusthemodelsareover-
+estimatingthemeasuredconflictcount.Conversely,ifk>1,thenmodeloutputneedstobescaleduptofitthesimulationdata,and
+thusthemodelsareunder-estimatingthemeasuredconflictcount.
+Sincetheconflictcountmodelforlayeredairspacesconsistsofthreeterms,seeEq.(20),threemodelaccuracyparametersare
+usedforlayeredairspaces,namely,k ,k andk .Theseparametersrepresentmodelaccuracyforconflictsbetweencruising
+cruise cruise−cd cd
+aircraft, for conflicts between cruising and climbing/descending aircraft, and for conflicts between climbing/descending aircraft,
+respectively.ForUA,onlyonemodelaccuracyparameter,k ,isusedbecausenodistinctionsaremadebetweenaircraftindifferent
+ua
+flightphasesbythecorrespondingconflictcountmodel,seeEq.(19).
+Todeterminethevalueofkusingleast-squares,duringthesimulations,thenumberofinstantaneousconflicts,andthenumberof
+instantaneousaircraftwereloggedperiodicallyevery15s.Additionallyonlyaircraftwithintheexperimentregion,andonlyconflicts
+withclosestpointsofapproachwithintheexperimentregion,wereusedtoassessmodelaccuracy.Asmentionedearlier,thismethod
+forcountingaircraftandconflictsisusedbecausethescenariosusedforthesimulationshadatrafficdensityofzeroneartheedgesof
+thesimulationregion.AsimilarapproachtoanalyzingsimulationdatawasusedinRatcliffeandFord(1982).
+6. Results
+Inthissection,theresultsofthethreesimulationexperimentsarepresentedseparately.Theanalysisconsiderstheaccuracyofthe
+models,andtheintrinsicsafetyofunstructuredandlayeredairspaces.
+6.1. Primaryexperiment
+Asstatedpreviously, thegoaloftheprimaryexperimentistomeasuretheaccuracyoftheconflictcountmodelsforbothun-
+structuredandlayeredairspacedesigns.Additionally,thisexperimentalsoinvestigatedtheeffectofheadingrangeperaltitudeband
+ontheintrinsicsafetyoflayeredconcepts.Theseaspectsareconsideredbelow.
+6.1.1. Validationofmodelstructure
+Beforetheabsoluteaccuracyofthemodelscanbeevaluated,itisfirstnecessarytoexaminewhetherthebasicstructureofthe
+310
+
+--- Page 17 ---
+
+E.Suniletal.
+Transportation Research Part C 95 (2018) 295–319
+conflictcountmodelsderivedinthiswork,describedbyEq.(1),issound.Inessence,thisaspectconsiderswhetherthemodelsare
+abletocorrectlypredicttheshapeoftherelationshipbetweenthenumberofinstantaneousaircraftandthenumberofinstantaneous
+conflicts. Based on the structure of Eq. (1), it can be seen that the ability of the models to correctly describe the shape of the
+relationshipbetweenthesetwovariablesisentirelydependentonthecombinatorialcomponentofthemodels,whichis,bydefinition,
+quadratic in nature; see for example Eq. (16). Therefore, the validity of the structure of the models can be analyzed by fitting
+simulationloggedinstantaneousconflictcounts,C,toasimplequadraticequationoftheformC=aN2,whereNisthenumberof
+instantaneousaircraft,andaisthequadraticcoefficientthatrelatesNtoC.
+ThisprocessisshowninFig.10forUnstructuredAirspace(UA),andinFig.11forLayers45(L45).Inthesefigures,thescatter
+pointsrepresenttherawsimulationdata,whilethesolidlinesrepresenttheleastsquarefitoftheaforementionedquadraticcurveto
+thesimulationdata.Notethattherawdataappearsin10clusterssince10trafficdemandscenarioswereusedinthesimulations,with
+eachclusterrepresentingdatacollectedfromallrepetitionsofaparticulardemandcondition;seeTable7.Inadditiontothetotal
+conflictcount,Fig.11alsoshowstheconflictcountresultsforallflightphasecombinations,asrequiredbythemodelforlayered
+airspaces.Accordingly,thexandyaxesofthefourgraphsinFig.11varyaccordingtoflightphase;forexample,forconflictsbetween
+cruisingaircraft(top-right),theaxesconsiderthenumberofinstantaneouscruisingaircraftandcruisingconflictsintheairspace.
+FromFigs.10and11,itcanbeclearlyseenthatthenumberofconflictsdoesindeedincreasequadraticallywiththenumberof
+aircraftintheairspace,confirmingthecombinatorialcomponentofthemodels.Thisconclusionisequallytrueofthetotalconflict
+countsforUAandL45,asitisforthedifferentconflicttypesofL45.Thislaterresultisparticularlyrelevantforlayeredairspaces,
+sincethe corresponding model requires conflicts between aircraft indifferent flight phases to be treated separately; see Eq.(20).
+Because similar trends were found for the other layered airspace concepts, as well as for the flight-path angle and ground speed
+experiments(notshown),itcanbeconcludedthattheoverallstructureofthemodelsderivedinthisworkissound.
+6.1.2. Modelaccuracy
+Since this paper proposes analytical conflict count models, in addition to checking the overall structure of the models, it is
+necessary to analyze the absolute accuracy of the models, i.e., the ability of the models to correctly estimate the number of in-
+stantaneous conflicts for a given number of instantaneous aircraft and known airspace design parameters (e.g. traffic separation
+requirements).Whilevalidationofthemodelstructurefocusedonthecombinatorialcomponentofthemodels,seeSection6.1.1,the
+absoluteaccuracyofthemodelsisinfluencedbyboththenumberofcombinationsoftwoaircraft,andtheaverageconflictprob-
+abilitybetweenanytwoaircraft.Absoluteaccuracycanbequantifiedusingthemodelaccuracyparameter,k.AsdescribedinSection
+5.4,these‘k-constants’canbethoughtofasascalingfactor,andthusavaluecloseto1indicateshighmodelaccuracy,whilek<1
+andk>1indicatesover-andunder-estimationofconflictcounts,respectively.
+ThevaluesofkfortheprimaryexperimentaregiveninTable8alongwiththecorrespondingpercentageaccuracyresults.Hereit
+canbeseenthattheoverallaccuracyofthemodelsishigh.Forexample,forUA(k ),andforconflictsbetweencruisingaircraftin
+ua
+layered airspaces (k ), model accuracy is greater than 90%. However, the table also indicates a consistent over-estimation of
+cruise
+conflictcountsforinteractionsinvolvingclimbing/descendingaircraft,seek andk rowsofTable8.Thisover-estimationis
+cruise−cd cd
+relatedtothedesignofthesimulation experiments;amoredetailedexplanationisgivenwith theresultsofthe flight-path angle
+experiment.
+6.1.3. Effectofheadingrangeperflightlevelonintrinsicairspacesafety
+Inadditiontotestingtheaccuracyofthemodels,datacollectedduringtheprimaryexperimentwasusedtoanalyzetheeffectof
+theallowedheadingrangeperflightlevel,α,onintrinsicairspacesafety;seeFig.12.Inthisfigure,conflictsarecategorizedaccording
+to the flight phases of interacting aircraft. Furthermore, for each airspace concept, the figure displays the means and the 95%
+confidenceintervalsofthenumberofinstantaneousconflictsforallrepetitionsperformedatthehighestsimulatedtrafficdensity.It
+shouldbenotedthatthesametrendswereobservedforalltrafficdensities(otherdensitiesnotshown).
+Fig.12showsthatadecreaseofαfromL360toL45lowersthetotalconflictcount(redline).Additionally,itcanbeseenthatthis
+safetyimprovementisentirelyduetothereductionofconflictsbetweencruisingaircraftwhenαisdecreased(greenline).Becauseall
+layeredconceptsusedthesamenumberofflightlevels,basedontheconflictcountmodelforcruisingaircraftinlayeredairspaces,
+Fig.10.TotalconflictcountforUnstructuredAirspace(UA),primaryexperiment.
+311
+
+--- Page 18 ---
+
+E.Suniletal.
+Transportation Research Part C 95 (2018) 295–319
+Fig.11.ConflictcountperconflicttypeforLayers45(L45),primaryexperiment.
+Table8
+Modelaccuracy,primaryexperiment.
+UA L360 L180 L90 L45
+kua 1.003 – – – –
+(99.7%)
+kcruise – 0.986 0.977 0.909 1.006
+(98.6%) (97.7%) (90.0%) (99.4%)
+kcruise−cd – 0.884 0.882 0.881 0.867
+(86.9%) (86.6%) (86.5%) (84.7%)
+kcd – 0.796 0.795 0.791 0.776
+(74.4%) (74.1%) (73.6%) (71.1%)
+Fig.12.Meansand95%confidenceintervalsoftheconflictcountperconflicttypeatthehighesttrafficdensity,primaryexperiment.
+givenbyEq.(24),thisincreasedsafetycanbeexplainedbythereductionofhorizontalrelativevelocitieswhenα isdecreased.
+Interestingly,Fig.12alsoshowsthatthenumberofconflictsinvolvingclimbinganddescendingtrafficisinvariantwithα(blue
+andvioletlines).Thisisbecausenoneoftheairspaceconceptsconsideredhereapplyanyconstraintsonthepathsofclimbingand
+descendingtraffic.Whiletheabsolutenumberofconflictswithclimbing/descendingaircraftremainsconstant,theproportionofsuch
+conflictsincreasesasαisdecreased.ThiscanbeseenclearlyfortheL45concept,forwhich77.8%ofthetotalconflictsiscausedby
+climbing/descendingtraffic.Thissuggeststhatclimbing/descendingaircrafthaveagreaterinfluenceontheoverallintrinsicsafetyof
+layeredconceptswithanarrowheadingrangeperflightlevel.
+312
+
+--- Page 19 ---
+
+E.Suniletal.
+Transportation Research Part C 95 (2018) 295–319
+Table9
+Effectofheadingrangeperflightlevelonpredictedandactualconflictcountreductions.
+HeadingRange Model Simulation
+PerLayer,α Prediction Results
+360° 0% 0%
+180° 27.3% 27.9%
+90° 60.1% 63.3%
+45° 79.6% 79.2%
+Sinceα onlyaffectsthenumberofcruisingconflicts,thecorrespondingconflictmodelforcruisingaircraft,seeEq.(24),canbe
+usedtopredictthebeneficialeffectofreducingαontheintrinsicsafetyoflayeredconcepts;seeTable9.Notethatthistableshows
+thepercentagereductionofconflictsrelativetothecasewiththehighesthorizontalrelativevelocities,i.e.,relativetoα=360°.Here
+itcanbeseenthatlinearlydecreasingαresultsinanon-lineardecreaseinthenumberofconflicts.Furthermore,thistablealsoshows
+thatthemodelpredictedreductionsarecloselymatchedbythesimulationloggedconflictreductions.Thisonceagaindemonstrates
+thehighaccuracyofthemodels,andalsoillustrateshowthemodelscanbeusedtounderstandtheeffectsofotherairspacedesign
+parameters,suchasseparationrequirements,onintrinsicsafety.
+Althoughtheanalysisthusfarhasfocusedonlayeredairspaces,Fig.12canalsobeusedtocomparethesafetyofUAwiththatof
+layeredconcepts.Inrelationtothisaspect,Fig.12showsthatUAresultsinsignificantlymore(total)conflictsthanforanyofthe
+layeredconcepts. Thisisalso truewhencomparing UAto theL360 concept. Since thereareno heading-altitude constraints, and
+thereforenoreductionsinrelativevelocities,foreitherofthesetwoconcepts,theincreasedsafetyofL360canbeattributedtothe
+only other difference between UA and layered concepts, i.e., the use of predefined flight levels for cruising aircraft in layered
+concepts.Asaresultofthesepredefinedflightlevels,themodelforlayeredairspacespredictsa30.9%reductionofthetotalconflicts
+forL360whencomparedtoUAatthehighest trafficdemand(thismatcheswelltothe35.5% reductionloggedduringthesimu-
+lations).
+6.2. Flight-pathangleexperiment
+Foragivensetoforigins,destinationsandcruisingaltitudes,theflightpathangleofclimbinganddescendingtraffic,γ ,affects
+cd
+the ratio between the number of instantaneous of cruising vs. climbing/descending aircraft. This is because a higher value of γ
+cd
+causesanaircrafttoclimbfastertoitscruisingaltitude,leadingtoahigherproportionofcruisingaircraft.Sincetheproportionof
+aircraftindifferentflightphasesinfluencesboththeexpectedverticalrelativevelocityandtheaverageconflictprobabilitybetween
+aircraft, the effect of γ on the intrinsic safety of the UA and L45 concepts has been analyzed in this experiment. To this end,
+cd
+simulationswererepeatedforγ ={1.4°,2.8°,5.6°}.
+cd
+6.2.1. Effectofflight-pathangleonintrinsicairspacesafety
+Totalconflictcountresultsfortheflight-pathangleexperimentaredisplayedinFig.13.ForUA,Fig.13(a)showsthatanincrease
+ofγ increasesthenumberofconflictsbetweencruisingaircraft(greenline).Thistrendisexpectedsincethenumberofcruising
+cd
+aircraft increases with γ . Additionally, an increase of γ reduces the proportion of climbing/descending aircraft, leading to a
+cd cd
+correspondingdecreaseofsuchconflicts(blueandvioletlines).Becausethesetwoeffectsare(nearly)equal,butoppositeinmag-
+nitude,changestoγ onlyhaveaminoreffectonthetotalconflictcountforUA(redline).
+cd
+Incontrast,Fig.13(b)showsthatγ hasasubstantialeffectonthetotalconflictcountforL45(red2line),withsafetyincreasing
+cd
+forhigherγ .AlthoughthenumberofconflictsinvolvingcruisingaircraftincreasesforL45(greenline),itdoessoatalowerpace
+cd
+than for UA. In fact, the total conflict count for L45 is mainly influenced by conflicts between cruising and climbing/descending
+aircraft(blueline).Thismatchesthetrendfoundfortheprimaryexperiment,wherethemajorityofconflictsforlayeredairspaces
+withanarrowheadingrangeperflightlevelinvolveclimbing/descendingaircraft.
+6.2.2. Effectofflight-pathangleonmodelaccuracy
+Theeffectofγ onmodelaccuracyisdisplayedinTable10.AsexemplifiedbythetotalconflictcountinFig.13,Table10shows
+cd
+onlyaminoreffectofγ onmodelaccuracyforUA,andforconflictsbetweencruisingaircraftinlayeredairspaces(seek andk
+cd ua cruise
+rows). However, accuracy for conflicts involving climbing/descending aircraft in layered airspaces appears to be significantly af-
+fectedbyγ .Asnotedfortheresultsoftheprimaryexperiment,themodelsshowatendencytoover-estimatethenumberofsuch
+cd
+conflicts.Furthermore,thedegreeofthisoverestimationworsensasγ increases.
+cd
+Anexplanationforthistrendcanbefoundbyconsideringthedesignofthesimulationexperiments,andtherelationshipbetween
+γ andthevolumeofairspacesearchedforconflictsduringconflictdetection.Sinceγ affectsthemagnitudeoftheverticalrelative
+cd cd
+velocity,italsoaffectsthesizeoftheverticalvolumeofairspacesearchedforconflictsbyaircraft;seeFig.6(b).Furthermore,notraffic
+wassimulatedaboveandbelowthe‘simulation’and‘experiment’regions;seeFig.9.Therefore,climbing/descendingaircraft,with
+verticalconflictsearchvolumesthatextendoutsidethesimulatedsector,arelesslikelytodetectconflictswhencomparedtosimilar
+2ForinterpretationofcolorinFigs.12–14,thereaderisreferredtothewebversionofthisarticle.
+313
+
+--- Page 20 ---
+
+E.Suniletal.
+Transportation Research Part C 95 (2018) 295–319
+Fig.13.Meansand95%confidenceintervalsoftheconflictcountperconflicttypeforUnstructuredAirspaceandLayers45atthehighesttraffic
+density,flight-pathangleexperiment.
+Table10
+Modelaccuracy,flight-pathangleexperiment.
+γcd=1.4° γcd=2.8° γcd=5.6°
+UA kua 0.973 1.003 1.003
+(97.2%) (99.7%) (99.7%)
+kcruise 1.081 1.006 0.991
+(92.5%) (99.4%) (99.1%)
+L45 kcruise−cd 1.030 0.867 0.589
+(97.1%) (84.7%) (30.1%)
+kcd 0.916 0.776 0.681
+(90.9%) (71.1%) (53.2%)
+aircraftinthemiddlealtitudesofthesimulation.Becauseanincreaseinγ increasesthesizeoftheverticalconflictsearchvolume,
+cd
+thenumberofclimbing/descendingaircraftthatarenegativelyaffectedbythiseffectincreaseswithγ ,leadingtoagreaterover-
+cd
+estimationbytheconflictcountmodels.
+Itshouldbenotedthat,unliketheverticaldirection,themodelaccuracyresultsforcruisingconflictsisnotaffectedbythefact
+thatnotrafficwassimulatedoutsidethesimulatedsector.Althoughcruisingconflictcountsareaffectedbythehorizontalvolumeof
+airspacesearchedforconflictsinUA,andthehorizontal areaofairspaceinlayeredconcepts, only conflictswith closest pointsof
+approachwithinthe‘experiment’regionwereconsideredformodelaccuracyanalysis,asexplainedinSection5.4.Therefore,evenif
+thehorizontalconflictsearchvolume/areaextendsbeyondthe‘experimentregion’,thegapbetweenthe‘experiment’and‘simulation’
+regions;seeFig.9,compensatesforthisunrealisticaspectofthesimulation’sdesign.
+However,asimilardistinctionbetween‘experiment’and‘simulation’regionsisnotfeasibleintheverticaldirectionsincedata
+fromallcruisingflightlevelsisneededtoevaluatemodelaccuraciesforlayeredairspaces.Moreover,asuddendropindensitiesis
+more realistic in the vertical direction; for example, commercial aircraft do not usually fly above 45,000ft. On the other hand,
+314
+
+--- Page 21 ---
+
+E.Suniletal.
+Transportation Research Part C 95 (2018) 295–319
+changesintrafficdensitytendtobelessabruptinthehorizontaldirectionforrealoperations(exceptnearandoveroceans),thus
+justifyingthedistinctionbetweenexperimentandsimulationregionsusedhereinthehorizontalplane.
+6.3. Groundspeedexperiment
+The analytical conflict count models derived in this paper assume equal ground speeds for all aircraft. This assumption was
+requiredtosimplifyacomplexexpressionthatisusedtocomputetheexpectedhorizontalrelativevelocitybetweenaircraft,seeEq.
+(4).However,thisassumptionisnotrepresentativeofcurrentdayenrouteoperationsbecauseoptimumcruisingspeedsvarywith
+aircrafttype,andbecausewinddirectionandspeed,whichaffectsgroundspeedcalculation,canvarysignificantlyoverlargeareasof
+airspace.Additionally,theequalgroundspeedassumptiondoesnotallowforthepossibilityofovertakingconflictsbetweenaircraft.
+Consequently,toassessthesensitivityofthemodelstotheequalgroundspeedassumption,simulationswererepeatedforcaseswhere
+thegroundsspeedsofaircraftwerenormallyanduniformlydistributedfortheUAandL45concepts.
+6.3.1. Effectofgroundspeeddistributiononintrinsicairspacesafety
+Fig.14showsthatspeeddistributionhasanegligibleeffectonconflictcountsforUA.ThisisalsolargelytrueforL45,exceptfor
+theslightincreaseinconflictsbetweencruisingaircraftwhenthespeeddistributionchangesfrom‘equal’to‘uniform’(greenline).
+Thisinvarianceofconflictcountswithspeeddistributioncanbeexplainedbythefactthatthesameaveragegroundspeedisusedby
+allthreedistributions(toenableafaircomparison).Therefore,whilethespeeddistributionofaircraftmayhaveaneffectataper
+aircraftlevel,theoverallintrinsicsafetyprovidedunstructuredandlayeredairspacesislargelyunaffectedbytheshapeoftheground
+speeddistribution,andisonlydependentonthemagnitudeoftheaveragespeedofallaircraftintheairspace.
+6.3.2. Effectofgroundspeeddistributiononmodelaccuracy
+ThemodelaccuracyresultsforthegroundspeedexperimentaredisplayedinTable11.Hereitshouldbenotedthatthemodelwas
+evaluatedassumingequalgroundspeedsforallaircraft,regardlessoftheactualgroundspeeddistributionsusedinthesimulations.
+ThetableshowsthatmodelaccuracyforUAisnotdependentongroundspeeddistribution.Similarly,forL45,modelaccuracyfor
+Fig.14.Meansand95%confidenceintervalsoftheconflictcountperconflicttypeforUnstructuredAirspaceandLayers45atthehighesttraffic
+density,groundspeedexperiment.
+315
+
+--- Page 22 ---
+
+E.Suniletal.
+Transportation Research Part C 95 (2018) 295–319
+Table11
+Modelaccuracy,groundspeedexperiment.
+Equal Normal Uniform
+UA kua 1.003 1.006 1.006
+(99.7%) (99.4%) (99.4%)
+kcruise 1.006 1.053 1.118
+(99.4%) (95.0%) (89.4%)
+L45 kcruise−cd 0.867 0.873 0.866
+(84.7%) (85.4%) (84.5%)
+kcd 0.776 0.799 0.809
+(71.1%) (74.8%) (76.4%)
+conflictsinvolvingclimbinganddescendingaircraftisnotsignificantlydifferenttotheconditionwithequalgroundspeeds.Onthe
+otherhand,accuracyforconflictsbetweencruisingaircraftdecreaseswithincreasingvariationinaircraftgroundspeedsforL45.This
+suggeststhatrestrictingtheheadingrangeperaltitudelevelnegativelyaffectstheaccuracyofthemodelsforlayeredconcepts.
+As mentioned above, the equal ground speed assumption affects the calculation of the expected horizontal relative velocity
+betweenaircraft,E(v ).TogainabettersenseontheeffectofthisassumptiononE(v ),Eq.(4)isevaluatednumericallyforallthree
+r,h r,h
+speeddistributionsfortheUAandL45concepts,seeTable12.Thistableshowsthatchangingthespeeddistributionhasamuch
+greatereffectonE(v ) forL45;a10.3%increaseoccurswhenthespeeddistributionischangedfrom‘equal’to‘uniform’forL45,
+r,h
+whileasimilarchangeofspeeddistributiononlyresultsina0.5%increaseforUA.SinceE(v ) directlyaffectstheconflictcount
+r,h
+modelforcruisingaircraftinlayeredairspaces,thetrendsshowninTable12explainthemodelaccuracyresultsnotedaboveforthis
+experiment.
+Althoughthisworkfocusesondevelopingfullyanalyticalmodels,thenumericalE(v ) valueslistedinTable12canbeusedto
+r,h
+increase model accuracy for cruising conflicts in layered concepts. To this end, Table 13 displays accuracy results for k for
+cruise
+analytically and numerically computed E(v ) for L45. Here it can be seen that accuracy for the normal and the uniform speed
+r,h
+distributionsincreasestothelevelreportedfortheequalspeedcasewhennumericalvaluesofE(v )areused.ButforUA,aswellas
+r,h
+for conflicts involving climbing/descending aircraft in L45, using numerical values of E(v ) does not significantly affect model
+r,h
+accuracy(notshown).Therefore,basedontheresultsshowninFig.14,itcanbeconcludedthattheanalyticalmodelsderivedusing
+theequal speedassumption canbeusedtounderstand andexplainthefactorsthataffect theintrinsic safety ofunstructured and
+layeredairspaces.
+7. Discussion
+Inthispaper,analyticalconflictcountmodelsweredevelopedtoanalyzetheintrinsicsafetyofunstructuredandlayeredairspace
+designs. The models focused on quantifying the effect of airspace design parameters and traffic demand on the number of in-
+stantaneoussystem-wideconflicts.Themodelswerevalidatedusingextensivefast-timesimulationexperimentsthatinvolvedover
+three million flights. This section reflects on the intrinsic safety offered by unstructured and layered airspaces, and discusses the
+accuracyofthemodels.Additionally,importantaspectsrelatedtomodelusagearealsoconsidered.
+7.1. Intrinsicsafetyofunstructuredandlayeredairspacedesigns
+Theresultsofallsimulationexperimentsperformedinthisstudyshowedthataircraftinunstructuredairspacearesubjecttomore
+conflictsthanaircraftinlayeredairspaces.Thehigherintrinsicsafetyoflayeredairspacescanbeattributedtotwofactorsthatreduce
+thenumberofconflictsbetweencruisingaircraft.
+Thefirstfactorisrelatedtotheallowedheadingrangeperflightlevel.Forlayeredconceptsthatreducetheallowedheadingrange
+perflightlevel,relativevelocitiesbetweencruisingaircraftarereducedcomparedtounstructuredairspace.Thisreductioninrelative
+velocities, which stems from a greater alignment of cruising traffic in each flight level, reduces conflict probabilities between
+neighboringaircraft.Whilethiseffectwasalreadyhypothesizedinourpriorwork(Suniletal.,2017),thecurrentstudyquantifies
+thiseffect,andshowsthatthecorrespondingsafetybenefitsarenonlinearwiththeallowedheadingrange.Forexample,loweringthe
+heading range perflightlevel from 360° to 90° reduces the number ofconflicts between cruising aircraftby approximately 60%.
+However,furtherhalvingtheheadingrangeperflightlevelto45°onlyprovidesanadditional20%reductioninconflicts.
+Table12
+NumericallycomputedvaluesoftheexpectedhorizontalrelativevelocitiesforUnstructuredAirspace(UA)and
+Layers45(L45).
+Equal Normal Uniform
+UA[kts] 509.30 507.42 511.66
+L45[kts] 103.92 107.46 114.66
+316
+
+--- Page 23 ---
+
+E.Suniletal.
+Transportation Research Part C 95 (2018) 295–319
+Table13
+Effectofanalyticalandnumericalmethodsofestimatingtheexpectedhorizontalrelativevelocityonmodelaccuracyfor
+Layers45.
+Equal Normal Uniform
+kcruiseAnalytical 1.006 1.053 1.118
+(99.4%) (95.0%) (89.4%)
+kcruiseNumerical 1.006 1.018 1.013
+(99.4%) (98.2%) (98.7%)
+The second factor that improves the safety performance of layered airspaces is the use of predefined flight levels for cruising
+aircraft.Usingpredefinedflightlevelsnotonlyreducesthenumberofcombinationsofaircraftthatcanconflictwitheachother,it
+alsoreducestheconflictprobabilitybetweenaircraft.Thisisbecauseinlayeredairspaces,conflictscanonlyoccurbetweencruising
+aircraftifbothaircraftareatthesameflightlevel.Consequently,inlayeredconcepts,conflictprobabilityforcruisingaircraftisa
+functionoftheareasearchedforconflicts.Ontheotherhand,conflictprobabilityisdirectlyproportionaltothevolumesearchedfor
+conflictsinunstructuredairspace,sincetherearenoverticalconstraintsonaircraftmotion.Thelargerregionofairspacesearchedfor
+conflicts in unstructured airspace, therefore, increases conflict probability and the number of conflicts encountered by cruising
+aircraft.
+Althoughlayereddesignsimprovetheoverallsafetyofenrouteairspacesbyreducingconflictsbetweencruisingaircraft,itis
+worthnotingthatnodifferenceswereobservedbetweenunstructuredandlayeredconceptsinrelationtothenumberofconflicts
+involvingclimbing/descending aircraft.In fact,thesimulation resultsclearly showed thatastheheading rangeperflightlevelis
+decreased,theproportionofconflictsinvolvingclimbing/descendingaircraftisincreased.Therefore,suchconflictscanbecomemore
+influentialthanconflictsbetweencruisingaircraft,particularlyforlayeredairspaceswithanarrowheadingrangeperflightlevel.
+Whilethemagnitudeofthistrendisaffectedbytheratioofcruisingvs.climbing/descendingaircraft,whichisinturninfluencedby
+theflightpathanglesofclimbinganddescendingtraffic,thisresultdoesemphasizetheneedtotakeintoaccountconflictsbetween
+aircraftindifferentphaseswhenassessingtheoverallintrinsicsafetyofanairspacedesign.
+7.2. Conflictcountmodelvalidation
+Bycomparingsimulationresultstomodelpredictions,modelaccuracywasdeterminedtobehighforbothairspacedesigns.For
+example,inadditiontocorrectlypredictingtheshapeoftherelationshipbetweenthenumbersofinstantaneousaircraftsandcon-
+flicts, themodels couldalsoestimate theeffect oftheallowedheading range perflightlevel onconflict countswith an accuracy
+greaterthan90%themodelscouldalsocalculatetheeffectofusingpredefinedcruisingaltitudesonsafetywithasimilarlevelof
+accuracy.
+Theaccuracyofallmodelsis,tosomedegree,affectedbytheassumptionsuponwhichtheyarederived.Themodelsderivedhere
+arenoexceptiontothisrule,andtwoassumptionsnegativelyaffectedconflictcountestimation.Thefirstassumptionwasthatall
+aircrafthaveequalgroundspeeds,anditwasrequiredtoderivepurelyanalyticalconflictcountmodels.Becausethisassumptiondoes
+notconsidertheoccurrenceofover-takingconflicts,andbecausesuchconflictsaremorelikelytooccurastheheadingrangeper
+altitudebandisdecreased,modelaccuracyforlayeredairspaceswasnegativelyaffectedbythisassumption.Nevertheless,accuracy
+was shown to be increased to the level found for the equal speed assumption when the analytical models were augmented with
+numericallycomputedvaluesoftheexpectedhorizontalrelativevelocity.Itishypothesizedthattheeffectofothertrafficscenario
+related assumptions, such as the uniformly distributed heading distributions used in this work, can also be compensated for in a
+similarmanner.Suchchangescouldbeusedtoexpandthemodelstoaccountforthetrafficflowanddemanddistributionsofcurrent-
+dayoperations.
+Model accuracy was also affected by the fact that the models assume airspace to be infinite in extent, both horizontally and
+vertically. While this assumption is convenient for modeling purposes, it is an obvious deviation from reality. Therefore, the si-
+mulationsperformedtovalidate themodelsusedafinitevolumeofairspace.Althoughthisapproachmadethesimulations more
+realistic,italsocausedtrafficdensitytodroptozeroattheboundariestothesimulatedsector.Sincetrafficdensityrarelydropsso
+drastically in the horizontal direction for real operations, the models were only validated for data logged within a horizontally
+definedexperimentregionatthecenterofthesimulatedsector.However,asimilarapproachintheverticaldirectionwasdeemedto
+beunrealistic,giventhealtituderelatedflightenvelopelimitationsofaircraft.Therefore,theaccuracyresultspresentedinthispaper
+arerepresentativeoftherangeofvaluesthatcouldbeobtainedusingthemodelsforrealoperations,ifsuchdataweretobecome
+availableinthefutureforunstructuredandlayeredenrouteairspaces.
+Despitetheselimitations,asnotedabove,modelaccuracywasgenerallyquitehigh.Thishighaccuracyallowsthemodelstobe
+used as tools to compare unstructured and layered airspaces, as well as to evaluate the effects of a number of safety relevant
+parameters,suchasconflictdetectionlook-aheadtimeandtrafficseparationrequirements.Additionally,sincethemodelsderived
+here take into account the proportion of aircraft in different flight phases when computing conflict counts, they provide a more
+comprehensiveunderstanding ontheoverallintrinsicsafety providedbyaparticularairspacedesignwhencomparedtoprevious
+studiesthathaveonlyconsideredcruisingaircraft.Thisaspectisparticularlyimportantduringthedesignoflayeredairspaceswhere,
+asnotedabove,climbing/descendingtrafficcancausethemajorityofconflictsundercertaindesignchoices.
+317
+
+--- Page 24 ---
+
+E.Suniletal.
+Transportation Research Part C 95 (2018) 295–319
+7.3. Additionalconsiderations
+Althoughthemodelsweretestedwithinthecontextofhigh-altitudecommercialoperations,theycanalsobeappliedtothedesign
+and analysis of unstructured and layered airspace concepts for low-altitude unmanned aircraft ops. This is possible because the
+generic,analyticalnatureofthemodelsallowsageneralizationoftheresultsbeyondthespecificconditionsthathavebeensimulated
+inthisstudy,forinstanceforthelowerspeedsanticipatedforunmannedtraffic.Onasimilarnote,theunderlyingapproachusedhere
+tomodelsystem-wideconflictcountscould,withsomeadditions,alsobeexpandedtootherairspacedesigns,includingforconcepts
+thatclosertotoday’smodeofoperations.Anyadaptationsalongtheselineswouldrequireananalysisofhowtheconstraintsimposed
+byaparticularairspacedesignaffectthenumberofcombinationsoftwoaircraft,andtheaverage(horizontalandvertical)relative
+velocitiesbetweenaircraft.
+Itisimportanttorealizethattheconflictcountmodelsconsideredheremeasuresafetyasafunctionofairspacedesignonly.Other
+factorsthataffectsafety,including uncertainties related toaircraftstatemeasurement/communication, arenotconsideredbythe
+modelssincetheseaspectsarenotdirectlyaffectedbythedesignofanairspace.Nevertheless,arecentstudyhasconcludedthatthe
+characteristicsoftheAutomaticDependentSurveillance-Broadcast(ADS-B)system,whichisthesystemthatispromotedbymany
+ATMorganizationstosupplement,andeventuallyreplace,radar-basedsurveillance,haslittleeffectontheperformanceofthestate-
+basedconflictdetectionmethodusedhere(Langejanetal.,2016).Therefore,uncertaintiesrelatedtoaircraftstatemeasurement/
+communicationarenotexpectedtosignificantlyaffecttheresultspresentedhere,particularlyforfutureoperationswithADS-B.
+Anotherfactorthatisnotconsideredbythenotionofintrinsicsafety,andbythemodelspresentedhere,istheeffectoftactical
+conflictresolutionsonairspacesafety.Infact,theoverallsafetyofoperationsisaffectedbyboththeselectedairspacedesignandthe
+selected conflict resolution approach. This is particularly the case at high traffic densities because the scarcity of airspace could
+triggerconflictchainreactionswhenconflictresolutionactionsaretaken.Foramoredetailedanalysisontheeffectonconflictchain
+reactionsonsafety,thereaderisreferredtoJardin(2005).
+ManyATMstudiesinterrelateairspacesafetyandcapacity.Althoughthesetwometricsarecloselyconnected,airspaceconcepts
+thatmaximizesafetyneednotbetheoptimumintermsofotherrelevantperformancemetrics,mostnotablyairspaceefficiency.The
+balancebetweensafetyandefficiencyshouldbeanimportantconsiderationwhenarguingfororagainstaparticularairspacedesign,
+orwhenfine-tuningtheparametersoftheselectedairspacedesign.Thisnotioncanbeillustratedforthelayersconcept;although
+decreasing the heading range per flight level improves safety, it also increases the number of flight levels needed to specify all
+possibletraveldirections.Therefore,foragivenvolumeofairspace,itmaybemoreefficienttouseavaluefortheheadingrangeper
+flight level that allows multiple complete layer sets to be defined, since this approach could minimize the fuel penalty of using
+predefinedcruisingaltitudesinlayeredairspaces.Tosummarize,whenevaluatingthecapacityofanairspacedesign,itisnecessaryto
+considertheeffectofadesignonmultipleairspaceperformancemetricsinunison,includingsafetyandefficiency.Theapproachused
+tomodelintrinsicairspacesafetyinthispaperisagoodstartingpointtodevelopananalyticalcapacityassessmentmethodalong
+theselines.
+8. Conclusions
+Thispaperpresentedanalyticalconflictcountmodelstomeasuretheintrinsicsafetyofunstructuredandlayereden-routeairspace
+designs. The models take into account the three-dimensional motion of aircraft, and therefore improve upon previous studies by
+considering conflicts between aircraft in different flight phases. Fast-time simulation experiments were performed to validate the
+models,andcompareunstructuredandlayeredairspacesintermsoftheintrinsicsafetytheyprovide.Thefollowingconclusionscan
+bedrawn:
+1. Layeredairspaceconceptswerefoundtobesaferthanunstructuredairspace.Thisisbecauselayeredairspacesrestricttheheading
+rangeallowedperflightlevel,andbecausetheyusepredefinedflightlevelstoreducethenumberofpossibleconflictpairs.
+2. The safety performance of layered airspaces increases as the heading range per flight level is reduced. This can be explained by the
+reduction of relative velocities between cruising aircraft as the heading range per flight level is decreased. The relationship
+betweenthenumberofinstantaneousconflictsandtheheadingrangeperflightlevelisnonlinear.
+3. The safety benefits of layered airspaces only apply to cruising aircraft, and no differences were found between unstructured and
+layeredairspaceswithrespecttothenumberofconflictsinvolvingclimbing/descendingaircraft.Forthisreason,thesafetyof
+layeredairspacesismoresensitivetotheproportionofcruisingaircraft.Thisresultalsoemphasizestheneedtoconsideraircraft
+indifferentflightphaseswhenevaluatingtheoverallsafetyofanairspacedesign.
+4. The3Danalyticalconflictcountmodelsderivedherewereabletoestimateconflictcountsforbothunstructuredandlayeredconceptswith
+high accuracy, and were able to predict the aforementioned benefits of layered airspaces. Consequently, they can be used to
+understandtherelationshipsbetweentheparametersthataffectsafetyforboththeseairspaceconcepts,includingtheeffectofthe
+proportionofaircraftindifferentflightphasesoninstantaneousconflictcounts.
+5. Augmentingtheanalyticalmodelswithnumericallycomputedvaluesoftheexpectedrelativevelocitybetweenaircraftwasshowntofurther
+increasemodelaccuracy.Thisapproachcanbeusedtotakeintoaccounttheeffectsofothertrafficdemandandflowconditionsthat
+havenotbeenconsideredinthisstudy.
+318
+
+--- Page 25 ---
+
+E.Suniletal.
+Transportation Research Part C 95 (2018) 295–319
+Acknowledgments
+TheauthorswouldliketothankÓlafurÞðarson(MScstudentTUDelft)forhisassistanceinnumericallycomputingtheexpected
+relativevelocity.Needlesstoadd,thisresearchwouldnothavebeenpossiblewithouttheeffortsoftheopen-sourcecommunitythat
+continually contributes to the development of the BlueSky ATM simulator. This research did not receive any specific grant from
+fundingagenciesinthepublic,commercial,ornot-for-profitsectors.
+References
+Barnett,A.,2000.Free-flightandenrouteairsafety:afirst-orderanalysis.Oper.Res.48(6),833–845.https://doi.org/10.1287/opre.48.6.833.12394. <http://
+pubsonline.informs.org/doi/citedby/10.1287/opre.48.6.833.12394>.
+Bilimoria,K.,Sheth,K.,Lee,H.,Grabbe,S.,2000.Performanceevaluationofairborneseparationassuranceforfreeflight.In:AIAAGuidance,NavigationandControl
+Conference,AIAA-2000-4269.https://doi.org/10.2514/6.2000-4269.<http://arc.aiaa.org/doi/abs/10.2514/6.2000-4269>.
+Brooker,P.,2002.Futureairtrafficmanagement:quantitativeenroutesafetyassessmentpart2–newapproaches.J.Navig.55(3),363–379.https://doi.org/10.
+1017/S037346330200187X.
+Datta,K.,Oliver,R.M.,1991.Predictingriskofnearmidaircollisionsincontrolledairspace.Transp.Res.PartB:Methodol.25(4),237–252.https://doi.org/10.1016/
+0191-2615(91)90006-5. <http://www.sciencedirect.com/science/article/pii/0191261591900065>.
+Dell’Olmo,P.,Lulli,G.,2003.Anewhierarchicalarchitectureforairtrafficmanagement:optimisationofairwaycapacityinafreeflightscenario.Eur.J.Oper.Res.
+144(1),179–193.https://doi.org/10.1016/S0377-2217(01)00394-0. <http://www.sciencedirect.com/science/article/pii/S0377221701003940>.
+Doble,N.A.,Hoffman,R.,Lee,P.U.,Mercer,J.,Gore,B.,Smith,N.,Lee,K.,2008.Currentairspaceconfigurationpracticesandtheirimplicationsforfutureairspace
+concepts.In:AIAAAviationTechnology,IntegrationandOperations(ATIO)Conference,AIAA-2008-8936,Anchorage.https://doi.org/10.2514/6.2008-8936.
+<http://arc.aiaa.org/doi/pdf/10.2514/6.2008-8936>.
+Endoh,S.,1982.AircraftCollisionModels(Ph.D.thesis).MassachusettsInstituteofTechnology,FlightTransportationLaboratory.<http://dspace.mit.edu/handle/
+1721.1/68072>.
+Flanagan,P.D.,Willis,K.E.,1969.FrequencyofAirspaceConflictsintheMixedTerminalEnvironment.Tech.rep.USDepartmentofTransportation–AirTraffic
+ControlAdvisoryCommittee.
+Ford,R.L.,1983.Ontheuseofheightrulesinoff-routeairspace.J.Navig.36(02),269–287.https://doi.org/10.1017/S037346330002498X. <http://journals.
+cambridge.org/article_S037346330002498X>.
+Graham,W.,Orr,R.H.,1969.TerminalAirTrafficModelwithNearMidairCollisionandMidairCollisionComparison.Tech.rep.USDepartmentofTransportation-Air
+TrafficControlAdvisoryCommittee.
+Green,S.M.,Bilimoria,K.D.,Ballin,M.G.,2001.Distributedair/groundtrafficmanagementforenrouteflightoperations.AirTrafficControlQuart.9(4),259–285..
+<https://arc.aiaa.org/doi/abs/10.2514/atcq.9.4.259>.
+Hoekstra,J.,Ellerbroek,J.,2016.BlueSkyATCsimulatorproject:anopendataandopensourceapproach.In:Proceedingsofthe7thInternationalConferenceon
+ResearchinAirTransportation.
+Hoekstra,J.M.,vanGent,R.N.H.W.,Ruigrok,R.C.J.,2002.Designingforsafety:the‘freeflight’airtrafficmanagementconcept.Reliab.Eng.Syst.Saf.75(2),215–232.
+https://doi.org/10.1016/S0951-8320(01)00096-5. <http://www.sciencedirect.com/science/article/pii/S0951832001000965>.
+Hoekstra,J.,Maas,J.,Tra,M.,Sunil,E.,2016.Howdolayeredairspacedesignparametersaffectairspacecapacityandsafety?.In:Proceedingsofthe7thInternational
+ConferenceonResearchinAirTransportation.
+InternationalCivilAviationOrganization,2005.Annex2.RulesoftheAir.Tech.rep.
+Irvine,R.,Hering,H.,2007.Towardssystematicairtrafficmanagementinaregularlattice.In:7thAIAAATIOConf,2ndCEIATInt’lConfonInnovandIntegrinAero
+Sciences,17thLTASystemsTechConf;followedby2ndTEOSForum,pp.7780.<http://arc.aiaa.org/doi/pdf/10.2514/6.2007-7780>.
+Jardin,M.R.,2005.Analyticalrelationshipsbetweenconflictcountsandair-trafficdensity.J.Guid.ControlDyn.28(6),1150–1156.https://doi.org/10.2514/1.
+12758.
+JointPlanningandDevelopmentOffice,2007.ConceptofOperationsfortheNextGenerationAirTransportationSystem.Tech.rep.FAA.
+Krozel,J.,Peters,M.,Bilimoria,K.,Lee,C.,Mitchell,J.,2001.Systemperformancecharacterisitcsofcentralizedanddecentralizedairtrafficseparationstrategies.In:
+USA/EuropeAirTrafficManagementR&DSeminar.
+Langejan,T.,Sunil,E.,Ellerbroek,J.,Hoekstra,J.,2016.EffectofADS-Bcharacteristicsonairborneconflictdetectionandresolution.In:Proceedingsofthe6thSesar
+InnovationDays.
+Leiden,K.,Peters,S.,Quesada,S.,2009.Flightlevel-baseddynamicairspaceconfiguration.In:Proceedingsofthe9thAIAAAviationTechnology,Integrationand
+Operations(ATIO)Forum.AmericanInstituteofAeronauticsandAstronautics.<http://arc.aiaa.org/doi/pdf/10.2514/6.2009-7104>.
+Magill,S.A.N.,1998.EffectofdirectroutingonATCcapacity.In:USA/EuropeAirTrafficManagementR&DSeminar,Orlando.<http://www.atmseminar.org/
+seminarContent/seminar2/papers/p_022_APMMA.pdf>.
+Marks,B.L.,1963.AirTrafficControlSeparationStandardsandCollisionRisk.Tech.Rep.MATH91.<https://trid.trb.org/view.aspx?id=618712>.
+Metz,I.,Hoekstra,J.,Ellerbroek,J.,Kugler,D.,2016.Aircraftperformanceforopenairtrafficsimulations.In:AIAAModelingandSimulationTechnologies
+Conference.
+Milios,Dimitrios,2009.ProbabilityDistributionsasProgramVariables(Master’sthesis).UniversityofEdinburgh.<http://www.inf.ed.ac.uk/publications/thesis/
+online/IM090722.pdf>.
+Netjasov,F.,2012.Frameworkforairspaceplanninganddesignbasedonconflictriskassessment:Part1:conflictriskassessmentmodelforairspacestrategicplanning.
+Transp.Res.PartC:Emerg.Technol.24,190–212.https://doi.org/10.1016/j.trc.2012.03.002. <http://www.sciencedirect.com/science/article/pii/
+S0968090X12000435>.
+Netjasov,F.,Babić,O.,2013.Frameworkforairspaceplanninganddesignbasedonconflictriskassessment:Part3:conflictriskassessmentmodelforairspace
+operationalandcurrentdayplanning.Transp.Res.PartC:Emerg.Technol.32,31–47.https://doi.org/10.1016/j.trc.2013.04.002. <http://www.sciencedirect.
+com/science/article/pii/S0968090X13000752>.
+NMD/NSDOperationsRoadmapTeam,2015.EuropeanFreeRouteAirspaceDevelopments.Tech.rep.Eurocontrol.
+NormanDavidson,2003.StatisticalMechanics.DoverPublications.
+Paielli,R.A.,2000.Alinearaltituderuleforsaferandmoreefficientenrouteairtraffic,AirTrafficControlQuart.8(3).<http://www.aviationsystemsdivision.arc.
+nasa.gov/publications/2000/Paielli_ATCQ_Alt-Rules_2000.pdf>.
+PerformanceReviewCommission,2016.EurocontrolPerformanceReviewReport2016.Tech.Rep.PRR2016.Eurocontrol.<http://www.eurocontrol.int/news/
+performance-review-report-2016>.
+Ratcliffe,S.,Ford,R.L.,1982.Conflictsbetweenrandomflightsinagivenarea.J.Navig.35(01),47–74.https://doi.org/10.1017/S0373463300043101. <http://
+journals.cambridge.org/article_S0373463300043101>.
+Rebollo,J.J.,Balakrishnan,H.,2014.Characterizationandpredictionofairtrafficdelays.Transp.Res.PartC:Emerg.Technol.44(SupplementC),231–241.https://
+doi.org/10.1016/j.trc.2014.04.007. <http://www.sciencedirect.com/science/article/pii/S0968090X14001041>.
+Reich,P.G.,1966a.Analysisoflong-rangeairtrafficsystems:separationstandards–I.J.Navig.19(01),88–98.https://doi.org/10.1017/S037346330004056X.
+Reich,P.G.,1966b.Analysisoflong-rangeairtrafficsystems:separationstandards–III.J.Navig.19(3),331–347.https://doi.org/10.1017/S0373463300047445.
+<https://www.cambridge.org/core/journals/journal-of-navigation/article/analysis-of-longrange-air-traffic-systems-separation-standardsiii/
+F66DD3220162FC9B49774AA13DC0ED07>.
+SESARConsortium,2007.TheConceptofOperationsataglance.Tech.rep.SingleEuropeanSky.
+Sunil,E.,Ellerbroek,J.,Hoekstra,J.,Vidosavljevic,A.,Arntzen,M.,Bussink,F.,Nieuwenhuisen,D.,2017.Analysisofairspacestructureandcapacityfordecentralized
+separationusingfast-timesimulations.J.Guid.ControlDyn.40(1),38–51.https://doi.org/10.2514/1.G000528.
+319

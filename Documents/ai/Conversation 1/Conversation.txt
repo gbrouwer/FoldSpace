@@ -1,0 +1,24 @@
+
+Bananas and Black Boxes – Conversations in Complexity
+
+This is a brainstorm between a visionary solo researcher and their AI assistant. It covers ideas around simulating aviation failures using ML-Agents, interpreting those failures with LLMs, and understanding complexity through emergent behavior.
+
+Key discussion topics include:
+- Air France 447 and Tenerife as examples of complex system failures
+- The idea that emergent failures are often due to mismatches in perception, not simple mistakes
+- How ML-Agents can be trained to fail in simulation environments to help us understand real-world failure patterns
+- Using LLMs as interpreters or narrators of agent cognition — black boxes learning to read other black boxes
+- The dangers of linguistic misalignment (e.g., Dutch-English translation issues in pilot communication)
+- The importance of system design that embraces ambiguity and simulates breakdown, not just success
+
+This conversation is passionate, quirky, and deeply curious — ranging from swarming drones and vertiports to poetic riffs about talking to your own digital cockpit voice recorder.
+
+Core Quotes:
+- “Stand back! I have a GPU and I’m not afraid to use it.”
+- “We don’t want to prevent failure — we want to understand it.”
+- “They were flying their beliefs, not the plane.”
+- “One dudette and a GPU, seconds from discovery.”
+
+Perfect for NotebookLM podcast synthesis.
+
+(Note: technical architecture for Unity/ML-Agents was excluded from this file.)

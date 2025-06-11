@@ -1,0 +1,452 @@
+
+
+--- Page 1 ---
+
+Metropolis II: Investigating the Future Shape of Air
+Traﬀic Control in Highly Dense Urban Airspace
+Niki Patrinopoulou, Ioannis Daramouskas, Vaios Lappas, V. Kostopoulos,
+Andres Morfin Veytia, Calin Andrei Badea, Joost Ellerbroek, Jacco Hoekstra,
+V. de Vries, Jacomijn van Ham, et al.
+To cite this version:
+Niki Patrinopoulou, Ioannis Daramouskas, Vaios Lappas, V. Kostopoulos, Andres Morfin Veytia, et
+al.. Metropolis II: Investigating the Future Shape of Air Traﬀic Control in Highly Dense Urban
+Airspace. 30th Mediterranean Conference on Control and Automation (MED), Jun 2022, Athenes,
+Greece. pp.649-655, ￿10.1109/MED54222.2022.9837201￿. ￿hal-03827242￿
+HAL Id: hal-03827242
+https://enac.hal.science/hal-03827242v1
+Submitted on 3 Apr 2023
+HAL is a multi-disciplinary open access L’archive ouverte pluridisciplinaire HAL, est
+archive for the deposit and dissemination of sci- destinée au dépôt et à la diffusion de documents
+entific research documents, whether they are pub- scientifiques de niveau recherche, publiés ou non,
+lished or not. The documents may come from émanant des établissements d’enseignement et de
+teaching and research institutions in France or recherche français ou étrangers, des laboratoires
+abroad, or from public or private research centers. publics ou privés.
+
+--- Page 2 ---
+
+Metropolis II: Investigating the Future Shape of
+Air Traffic Control in Highly Dense Urban
+Airspace
+N. Patrinopoulou, I. Daramouskas, V. Lappas, V. Kostopoulos
+University of Patras, 26504 Patras, Greece
+A. M. Veytia, C. A. Badea, J. Ellerbroek, J. Hoekstra
+Delft University of Technology, 2629HS Delft, The Netherlands
+V. de Vries, J. van Ham, E. Sunil
+NLR - Royal Netherlands Aerospace Centre, 1059CM Amsterdam, The Netherlands
+P. Menendez Ponte Alonso, J. Pedrero Gonzalez
+NTT DATA Spain, 28050 Madrid, Spain
+D. Bereziat, A. Vidosavljevic
+ENAC, Université de Toulouse, France
+L. Sedov
+Linköping University, SE-581 83 Linköping, Sweden
+Abstract—Metropolis II aims to provide insights in what project [2], which looked at airspace structuring when
+is needed to enable high-density urban air operations. It aircraft would fly above all buildings in a city. However,
+does this by investigating the foundation for U-space U3/U4
+thatmightnotbefeasibleincitieswithverytallbuildings
+services. The final goal is to provide a unified approach for
+(e.g. New York). On top of that, flying above streets can
+strategicdeconfliction,tacticaldeconfliction,anddynamicca-
+pacity management. Highly-dense operations in constrained increase the societal acceptability by lowering the impact
+urbanairspacewilllikelyrequireadegreeofcomplexitythat on noise, privacy and perceived third party risk, when not
+does not exist in modern-day air traffic management. The part of the traffic.
+expected high traffic demand will require a shared use of
+Thus, the scope of Metropolis II [3] is to study and
+the airspace instead of assigning exclusive use of blocks of
+develop methodologies to provide an Unmanned Traffic
+the airspace to some flights. A unified approach for traffic
+management is needed because at high-densities, airspace Management (UTM) solution for mixed airspace (open
+design, flight planning, and separation management become and constrained), which includes airspace design, flight
+increasingly interdependent. Metropolis II builds upon the planning, and separation management. The main research
+results of the first Metropolis project. Three concepts with
+question of Metropolis II may be summed up as; How
+a varying degree of centralisation will be compared using
+does the degree of centralisation of an Unmanned Traf-
+simulations. (1) The centralised concept will take a global
+approach for separation management. (2) The decentralised fic Management system including airspace design, flight
+conceptaimstogivetheindividualagentsseparationrespon- planning,andseparationmanagementaffectsthesystem’s
+sibility.(3)Thehybridconcepttriestocombineacentralised performance? To answer that question three individual
+strategic planning agent with a robust tactical separation
+concepts have been designed; centralised, hybrid and de-
+strategy.
+centralised, each with a different degree of centralisation.
+Keywords—Separation management, Flight planning, U-
+Space, Unmanned Traffic Management (UTM), BlueSky The three concepts are presented in sections II, III, and
+ATC Simulator, Urban Airspace, Degree of Centralisation IV, respectively.
+In high traffic densities, we believe that the design
+of the airspace, the flight planning, and the separation
+I. INTRODUCTION
+management should not be treated as separate problems.
+Theoverloadofgroundtransportationinurbanenviron- Such a system should include a concurrent design of the
+ments has created the need for research on urban aerial three subsystems. Thus, each concept was independently
+transportation,whichshouldbedesignedtoaccommodate designed from each other, ensuring that the subsystems
+anincreasingamountofairtraffic.Parceldeliverydemand were best suited to each design philosophy.
+is expected to rise in the future to millions of flights per All concepts were designed considering a set of com-
+year[1].Researchhasbeenperformedinpreviousprojects mon elements and requirements, such that the experi-
+for urban airspace navigation, most notably the CORUS mental results may be comparable. The concepts were
+
+--- Page 3 ---
+
+providedwiththebasicairspacerulesforwhichtodesign.
+The airspace was designed suitable for a realistic city
+structure and was separated into a constrained area, in
+which the aircraft were confined to flying above the
+existing street network, and an open area, in which the
+aircraft do not need to follow predetermined paths. The
+concepts are evaluated using the same traffic scenarios.
+The experimental method employed in Metropolis II is
+presented in section V.
+II. THECENTRALISEDCONCEPT
+The centralised concept focuses on strategic deconflic-
+tionandflightplanning,whichareconductedpre-flightby
+acentralentity.Thecentralentityhasaccesstoglobaldata
+concerning the information about the requested flights,
+the planned flights, and the real-time tracking data of en-
+routeaircraft.Forthatpurpose,acentraliseddeconfliction
+algorithm was developed, responsible for producing flight
+plansbasedontherequesteddeparturetimeandtheorigin
+and destination coordinates. In this concept, a flight plan
+Fig. 1: Centralised concept airspace structure, with hexagonal
+is a 4-dimensional trajectory describing the longitude,
+cells in open airspace. The red polygons are geofences areas of
+latitude and altitude and time. Each of the produced flight
+open airspace.
+plans has a fixed altitude, with the exception of the take-
+off and landing segments.
+Within the centralised concept, the designed airspace remaining conflicts. For the aircraft, for which a solution
+structure may be described as a bi-directional graph. For was not found, the algorithm searches for the optimal
+the constrained airspace the geometry of the graph is set path based on the availability of the airspace. A time-
+by the street network while for the open airspace the expanded network (TEN) [8] is created for each layer,
+area is divided into hexagonal tiles, each representing one where each possible aircraft movement is represented by
+node of the graph, as shown in Fig. 1. Turning costs are an edge. Having removed the edges that would lead to a
+addedtotheproducedgraphwiththemethoddescribedin conflict, the shortest path in the graph may be found. The
+[4]. The whole airspace (open and constrained) is divided Dijkstraalgorithmisusedforthegraphsearchinthetime-
+into 16 flight layers, following the recommendations of expanded network. After a flight plan has been produced,
+the Metropolis project [5]. Each aircraft is assigned to it does not incur any changes and it is considered as an
+one of the layers for the entirety of its flight depending obstacle for later-planned flight plans.
+on its origin and destination (based on the bearing of In nominal conditions, a centralised concept, as the
+the 2-dimensional vector connecting the origin to the one presented here, does not need to contain a tacti-
+destination) or a layer selected from the deconfliction cal separation management system, since all conflicts
+algorithm presented below. have been resolved pre-flight. However, different types
+Flight planning and strategic deconfliction are con- of uncertainties could cause the aircraft to deviate from
+ducted using two different methodologies depending on their designed paths and create a possible conflict. For
+the demand. For low demand, the flight plan for every this reason, a centralised tactical deconfliction system is
+aircraftiscomputedinitiallywithoutconsideringtheother included and has the responsibility to detect conflicts and
+aircraft, using the A* algorithm. Then, flight plans are recompute aircraft trajectories to resolve them.
+checked for conflicts using a quick simulation. The de-
+tected aircraft pairs causing a conflict are used to create a
+III. THEHYBRIDCONCEPT
+conflict graph, with the aircraft as vertices and the edges The hybrid concept combines centralised and decen-
+representingthedetectedconflictbetweentwoaircraft.To tralised components to achieve separation management.
+resolvetheconflicts,someaircraftareassignedtodifferent The development of the hybrid concept was conducted in
+layers, by formulating the problem as a graph colouring three stages: (1) the design of the airspace structure, (2)
+problem [6], [7]. thedesignofthecentralisedpre-flightstrategicseparation
+The high demand methodology is utilised for aircraft management, and (3) the design of the during flight
+densitiesinwhichthelowdemandapproachfailstoreach tacticalseparation.Inidealconditions,thefirsttwostages
+asolution.Thehighdemandmethodologyisanadditionto should be able to provide a safe and efficient solution
+thelowdemandmethodologyanditiscalledtoresolvethe for the requested flights. However, due to uncertainties,
+
+--- Page 4 ---
+
+optimising for the length of the path and it obeys to
+rulesimposedfromtheabovepresentedairspacestructure.
+Since it is centralised, the central entity computing the
+initial flight plans has access to information concerning
+all flights to be planned. The strategic conflict resolution
+algorithm in use is time-based (i.e. the edges and nodes
+ofthegraphwillappearasoccupiedforcertaintimesteps
+if they are in use from previously computed flight plans)
+and contains four steps:
+1) Flight plans with earlier desired departure time
+are prioritised and computed first.("First come, first
+served")
+2) For each aircraft the shortest route is found using
+the Dijkstra search algorithm.
+3) Search for a conflict-free flight plan in the lowest
+layer and if that fails repeat the process for higher
+layers. The length of the route computed at step 2
+is used as a baseline to compare the optimality of
+the solution found.
+4) Fortheaircraftthatasolutionwasnotfound,adelay
+Fig. 2: The radial network used within the hybrid concept for
+in their departure time is imposed.
+open airspace navigation.
+The decentralised tactical separation management acts
+during flight and acts in two levels: the conflict detection,
+resolution and trajectory recovery level and the route
+replanning level. The conflict detection, resolution and
+trajectory recovery level is responsible for detecting near-
+future conflicts, designing a manoeuvre for the aircraft to
+resolvetheconflictandaftertheconflicthasbeenaverted,
+Fig. 3: The layered airspace structure used within the hybrid initialises the trajectory recovery sequence to return the
+concept for constrained airspace navigation, with cruise layers aircraft to its initial trajectory in a safe manner. The
+(green) and deconfliction layers (yellow).
+resolution layers may be used for the conflict resolution
+manoeuvres. The route replanning level is requested to
+recompute a flight plan in case the corresponding flight
+the aircraft may not be able to follow the designed route
+plan becomes impractical due to airspace closures or
+in the exact computed time, causing conflicts, which are
+changes.
+resolved in the third stage. In order to prevent the tactical
+separation management from having a negative effect on IV. THEDECENTRALISEDCONCEPT
+the efficiency and safety of the flights computed from the In the decentralised concept the responsibility of de-
+strategic plan, the two act on different dimensions; strate- signing the flight plan and taking the actions to maintain
+gic uses horizontal resolution and tactical uses vertical the separation distance lies to each individual agent. The
+resolution. agents do not have any information about the flight plans
+The developed airspace structure is described as a 3- of other agents and they are not able to include strategic
+dimensionaldirectionalgraph.Inconstrainedairspace,the separation techniques while designing their flight plans,
+graphfollowsthestreetnetwork,whileinopenairspacea very similar to road traffic.
+radial grid is created, as shown in Figure 2. The vertical Thedecentralisedconceptmaybebrokendownintothe
+axisisseparatedintolayers.Twotypesoflayersareused: development of four subsystems: airspace structure, flight
+cruising layers (mostly used for the strategic separation planning, flow control (traffic control from central entity)
+management) and resolution layers (mostly used for the and tactical separation management.
+tactical separation management). The two types of layers The airspace structure was developed in the scope of
+alternate and create a stack of layers, as presented in minimising the probability of conflicts. In the design of
+Figure 3. The direction of cruising layers alternates as theairspacestructurefortheconstrainedairspaceanaddi-
+the altitude increases. The vertical edges of the graph are tional objective was considered; a turning aircraft should
+bi-directional, allowing ascending and descending. not have a major impact on the cruise flow. To respect
+The centralised pre-flight strategic separation manage- bothobjectivestheconstrainedairspacestructurecontains
+mentisresponsibleforcomputingconflict-freepathswhile onlyone-waystreetswiththetrafficbeingdistributedinto
+
+--- Page 5 ---
+
+Fig. 4: The layered airspace structure used by the decentralised
+conceptinconstrainedairspacetominimisetheconflictsbetween
+cruising aircraft at intersections.
+Fig. 5: Overview of the constrained airspace structure used
+withinthedecentralisedconcept,withredandbluestreetshaving
+different cruise layer height allocations.
+layers. The design contains cruise layers, turn layers and
+empty layers, the types of the layers alternate while the
+altitude increases, as shown in Figure 4. Under nominal
+circumstances the aircraft cruise along a street using a
+cruiselayeranduseturnlayersonlyforturning(changing
+streets). Cruise layers of intersecting streets should not be
+allocated in the same altitude, which created the need for
+theexistenceoftheemptylayers.Thestreetsweregrouped
+intotwocategoriesbasedontheirbearing,creatinggroups
+of semi-parallel streets, in order to allocate the altitude of
+the cruise layers in each street, seen in Figure 5. After
+that, the directionality of each street was selected using a
+geneticalgorithmtooptimisethegraph’sconnectivity.The
+Fig. 6: A section of the open airspace with the cells used from
+airspace structure for the open airspace utilises the results
+the decentralised concept. The no fly zones are the filled in
+from the first Metropolis project [5] and it vertically
+blue polygons. The cells are delineated with black edges and
+separates traffic based on the heading of the aircraft. the centre points of the cells are represented with red dots.
+For the decentralised concept, the calculation of the
+flight plans can be described as a path planning problem
+with known and static obstacles and dynamic costs. To Thedecentralisedconceptalsocontainsacentralentity,
+solve the path planning problem, we created a graph which gathers the aircraft’s position data and computes
+describingthewholeairspace.Fortheconstrainedairspace the traffic densities in the traffic groups. Depending on
+thegraphdesignwasobviousandwasbasedonthestreets’ the computed traffic density, the central entity applies
+structure, while for the open airspace a graph was created geovectors [11] in the traffic groups in the form of speed
+using cell decomposition techniques [9]. The outcome of limits. In a real world implementation the central entity
+the cell decomposition algorithm is presented in Figure would also be responsible for the authorisation process
+6. The D* Lite algorithm [10] was selected as the path and for approving a requested flight plan with the agent
+planning algorithm to compute the shortest path on the providing the flight start time, origin and destination
+designed graph. The main reason D* Lite was selected coordinates.
+is the algorithm’s ability to recompute the path on-line, As stated at the beginning of the section, the de-
+which offers a significant advantage for the decentralised centralised concept relies only on tactical separation to
+concept as the aircraft replan every time a new geovector resolveconflicts,whichsignifiestheimportanceoftactical
+isimposedfromthecentralentityasdescribedinthenext separation in this case. The proposed tactical separation
+paragraph. algorithm is speed-based and allows only for vertical
+
+--- Page 6 ---
+
+manoeuvres. The conflict resolution algorithm is called
+from a conflict detection algorithm which detects the
+conflicts and classifies them as one of the following three
+types: overtake, horizontal and vertical.
+The main attributes of each concept and the and differ-
+ences between them are summarised in Table I.
+TABLE I: Overview of the main difference between the three
+concepts and their properties.
+Features Centralised Hybrid Decentralised
+OpenAirspace Hexagonalcells Radialgrid Polygonalcells
+Strategic Yes Yes No
+separation
+Main Strategic Strategic and Tactical
+separation Tactical
+management
+method
+Centralentity Flightplanning, Flight planning Traffic density
+responsibility strategic sepa- and strategic measurement Fig. 7: BlueSky showing simulated traffic in Vienna.
+rationandtacti- separation and imposing
+calseparation geovectors
+Global knowl- Yes Yes No
+edgeofflights permits the open publication of source code and results.
+It was essential that the selected simulation software for
+V. EXPERIMENTALMETHOD Metropolis II is open source, to enable project-specific
+additions and modifications. Therefore, an important part
+The Metropolis II project aims at studying the perfor-
+ofMetropolisIIwastoextendBlueSkyforurbanairtraffic
+mance of different centralisation levels on flight manage-
+simulations. The major developments from Metropolis II
+ment and separation management in the urban airspace.
+are:
+To conduct that study three different concepts have been
+developed, as presented in the above sections. The three 1) Autopilot modifications to ensure aircraft closely
+concepts were designed to abide to a set of commonly follow their intended path between buildings and
+definedrequirements,whichremainsconstantforalltested perform turns safely.
+scenario. 2) Inclusion of building polygons as geofences.
+3) Bulk waypoint processing.
+• Cylindrical airspace volume (8 kilometre radius, 500
+4) Visualisation of urban maps (Fig. 7).
+feet height)
+• Constrained airspace street network and buildings. Eachconcepthasdevelopedtheirownpluginstoensure
+• Open airspace with geofenced areas. that the simulations follow the rules set by the specific
+• Traffic pattern and density including priority and concept.
+loitering missions.
+B. Traffic scenarios
+• Two types of vertical take-off and landing (VTOL)
+vehicleswith20and30knotscruisingspeedsrespec- The selected simulation environment is based on the
+tively. city map of Vienna and is a mixture of two types of
+• Uncertainties (wind and rogue aircraft, not adhering airspace: constrained airspace and open airspace, creating
+to the rules). an overall cylindrical experimental area with a radius of
+Theyaretestedinasetofscenariosviasimulationusing 8 kilometres and a height of 500 feet. The constrained
+the BlueSky Open Air Traffic Simulator [12] and their airspacerepresentsthecitycentreandwhileflyinginitthe
+performanceisevaluatedusingasetofpredefinedmetrics. aircraft should follow the street network of the city. The
+The following subsections provide an introduction to the open (unconstrained) airspace surrounds the constrained
+simulation software in use and present the scenarios used airspaceandrepresentstheouterpartofthecity.Theopen
+for the experiment, as well as the experiment variables. airspaceincludessomenoflyzones,whichtheaircraftare
+The performance of each concept is evaluated using as not allowed to use during their flight. Aircraft in the open
+set of 35 metrics across 5 categories: access and equity, airspacemayflyinanytrajectorythatdoesnotviolatethe
+capacity, efficiency, environment, safety and priority. no fly zones. In order to create a variety of experimental
+setups, a set of traffic scenarios has been created. These
+A. Simulation software
+seek to simulate various types of missions (e.g., point to
+The simulations will be performed with BlueSky [12], point,hubandspoke),severaltrafficdensitylevels,aswell
+an open air traffic control simulator, available on GitHub as vehicles with different cruise velocities. Two vertical
+[13]. BlueSky is an open source simulator originally take-offandlanding(VTOL)aircraftwereincluded,based
+developed for conventional air traffic simulations, and on the DJI Matrice 600: one with a cruise speed of 20
+
+--- Page 7 ---
+
+knots, and another with a cruise speed of 30 knots. The Another interesting discussion is about how the con-
+producedtrafficscenariosdifferentiateintheexperimental cepts will respond to the uncertainties of wind and rogue
+variables described in the next subsection. aircraft. Wind uncertainties are expected to disturb the
+strategicplanofthecentralisedandhybridconcepts.Wind
+C. Experiment variables
+uncertainty will slow and speed up drones across the
+Four experimental variables were selected: traffic de- airspace and potentially create conflicts that the strategic
+mand level, mission mix, wind and rogue aircraft. Each planning did not foresee. The wind will stress the tactical
+traffic scenario is created by selecting a value for each of separations solutions of the centralised and hybrid con-
+the experimental variables. cepts. For the decentralised concept, the wind is expected
+The traffic demand level indicates the number of re- tohaveasmallereffectonthenumberofconflictsbecause
+quested flights and may take one of the five different thetaskofsolvingconflictsisdesignedtobeoriginallyin
+values, each representing a different percentage of the the tactical side. Rogue aircraft may have similar effects
+maximum estimated demand. The number of requested onthesafetyofalltheconcepts.Also,rogueaircrafthave
+flights corresponding to each of the values was calculated the potential to create head-on conflicts that the concepts
+based on the estimated yearly demand of Vienna using a try to avoid with their airspace structure.
+regressionandaninterpolationanalysiswithinputdatafor The last remark to mention is the time and memory
+the area, the population, the average annual gross salary complexity required for each concept implementation. To
+and parcel market data [14], [1]. start with the decentralised concept, the concept was
+Themissionmixdescribestheallocationofthemission designed to allocate most of the computational load to
+types as a percentage of the overall flight number of the separate agents according to common decentralised archi-
+scenario. The main mission types considered are parcel tectures. In order to evaluate the concept, it had to be
+delivery and food delivery. Food delivery missions have tested in simulation, which runs using one core of one
+a higher variety of origins and destinations, while parcel computer. It quickly become clear that testing an initially
+deliveries tend to origin from a smaller set of distribution designeddistributedsysteminonecomputationalunitasa
+centres. In every mission mix a small number of loitering singlethreadprogramrequiresagreatamountoftimeand
+and emergency missions are added. The particularity of memoryoptimisation.Toresolvethatproblem,thedecen-
+theloiteringmissionisthattheyapplydynamicgeofences tralisedconcept’scodewasgreatlyoptimisedandapartof
+(no fly zones) around their area of mission, while the the data required as simulation input was pre-computed.
+emergency missions are announced shortly before the Whilethecomputationalcostofthedecentralisedconcept
+requested departure time. wasahurdletoovercomeforthesimulationrequirements,
+The wind and rogue aircraft variables are described as it would not be presented while designing for a real-
+uncertainties,astheyaretheonesgeneratingnon-nominal world system in which the computational load could
+conditions. These experimental variables have two values actually be allocated among agents. So, reduction of the
+ON or OFF. computational load might not be of the same importance
+for the decentralised concept as it is for the centralised
+VI. DISCUSSION and hybrid. Both of the later concepts when applied to
+Metropolis II is currently ongoing, however, some a real-world situation, they would be required to conduct
+pointsofinteresthavealreadyappearedfromourresearch the total of the flight planning and strategic separation
+so far. Here we intend to present the main challenges we management in one central entity. When designing such a
+encounteredwhiledevelopingthethreeconceptsandsome system, someone should consider the time limitations set
+remarks generated from the progress of our research. from the system requirements and the memory limitation
+Constrained airspace poses challenges not present in set from the computational unit in use and the effect on
+open airspace. It severely limits the total airspace volume the capacity of the system.
+since aircraft must fly between streets to avoid buildings.
+VII. CONCLUSION
+This severely reduces the total capacity as compared to
+open airspace. One goal of the simulations is to create The use of the urban airspace for transportation pur-
+traffic densities that stress the capacity to their limit. poses is anticipated to be in high demand in the near
+This is meant to stress the strategic planning capacity of future. Operational concepts and airspace configurations
+both the centralised and hybrid concepts. Moreover, the needtoberesearched,inordertodesignsafeandefficient
+limited vertical space makes tactical conflict resolution urban UTM systems. Metropolis II seeks to contribute to
+more difficult because of the reduced space. This will theresearchforU-spaceU3/U4servicesthatarecrucialto
+stress the tactical separation solutions of the hybrid and supporthighurbanairtrafficdensities.Thispaperpresents
+decentralised concepts. However, it is expected to affect the main research goals of the Metropolis II project
+the decentralised concept more as aircraft do not have a and the experimental methodology followed to achieve
+globally deconflicted path. them. Three concepts with varying levels of centralisation
+
+--- Page 8 ---
+
+regardingflightplanningandseparationmanagementhave [11] J. Hoekstra, J. Ellerbroek, E. Sunil, and J. B. Maas, “Geovec-
+been designed as part of the project. The concepts have toring: Reducing Traffic Complexity to Increase the Capacity of
+UAVairspace,”2018InternationalConferenceonResearchinAir
+beenintroducedinsectionsII,III,andIVandeachofthem
+Transportation,2018.
+includes an airspace structure design, flight planning and [12] J.HoekstraandJ.Ellerbroek,“BlueskyATCsimulatorproject:an
+separation management (strategic and/or tactical depend- opendataandopensourceapproach,”inConference:International
+ConferenceforResearchonAirTransportation,2016.
+ingonthetypeofconcept).Theconceptsweredeveloped
+[13] TUDelft-CNS-ATM, “Bluesky: The open source air traffic sim-
+for a city which contained open and constrained airspace. ulator.” https://github.com/TUDelft-CNS-ATM/bluesky, Accessed
+The evaluation of the performance of the concepts will 18-Feb-2022.
+[14] P. Bowes, “ 2.0 Shaping our next century of growth ,”
+be conducted with simulations on a variety of traffic
+2020. https://www.pitneybowes.com/us/our-company/annual-
+scenarios, as explained in section V. report.html,Accessed8-Feb-2022.
+As described in this paper, several lessons have been
+learnt already from designing, implementing and proto-
+typing the concepts. The simulations planned are likely
+to generate a great amount of measurements, which will
+be used to create the data for around 35 metrics. These
+will be used in a trade-off analysis to select the most
+promising of the three concepts. As the final part of the
+project, the selected concept will be presented in a real-
+world demonstration.
+The final results of the simulations conducted for the
+project are still under the processing stage and will
+be uploaded at https://doi.org/10.4121/19700002 when fi-
+nalised.
+ACKNOWLEDGEMENTS
+This research has received funding from the SESAR
+Joint Undertaking under the European Union’s Horizon
+2020 research and innovation programme under grant
+agreement No 892928 (Metropolis II).
+REFERENCES
+[1] M.Doole,J.Ellerbroek,andJ.Hoekstra,“Estimationoftrafficden-
+sity from drone-based delivery in very low level urban airspace,”
+JournalofAirTransportManagement,2020.
+[2] CORUS consortium, “U-space Concept of Operations,” Edition
+03.00.02,SESARJointUndertaking,Vol2.,2019.
+[3] Metropolis II Consortium, “Metropolis II,” 2022.
+https://metropolis2.eu,Accessed8-Feb-2022.
+[4] S. Winter, “Modeling Costs of Turns in Route Planning,” GeoIn-
+formatica,vol.6,pp.345–361,Dec.2002.
+[5] E.Sunil,J.Hoekstra,J.Ellerbroek,F.Bussink,D.Nieuwenhuisen,
+A. Vidosavljevic, and S. Kern, “Metropolis: Relating Airspace
+Structure and Capacity for Extreme Traffic Densities,” in ATM
+seminar 2015, 11th USA/EUROPE Air Traffic Management R&D
+Seminar,2015.
+[6] V.Duchamp,B.Josefsson,T.Polishchuk,V.Polishchuk,R.Sáez,
+and R. Wiren, “Air traffic deconfliction using sum coloring,”
+in 2019 IEEE/AIAA 38th Digital Avionics Systems Conference
+(DASC),2019.
+[7] V. Duchamp, L. Sedov, and V. Polishchuk, “Density-Adapting
+Layers towards PBN for UTM,” in ATM 2019, 13th USA/Europe
+AirTrafficManagementResearchandDevelopmentSeminar,ATM
+Seminar2019,(Vienne,Austria),June2019.
+[8] M. R. Silver and O. L. de Weck, “Time-expanded decision net-
+works: A framework for designing evolvable complex systems,”
+SystemsEngineering,vol.10,no.2,pp.167–188,2007.
+[9] M. C. E. G. Galceran, “A survey on coverage path planning for
+robotics,” Robotics and Autonomous Systems, vol. 61, no. 12,
+pp.1258–1276,2013.
+[10] S. Koenig and M. Likhachev, “D*lite,” in Eighteenth National
+Conference on Artificial Intelligence, p. 476–483, American As-
+sociationforArtificialIntelligence,2002.

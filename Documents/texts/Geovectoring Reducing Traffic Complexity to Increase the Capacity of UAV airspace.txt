@@ -1,0 +1,559 @@
+
+
+--- Page 1 ---
+
+Delft University of Technology
+Geovectoring: Reducing Traffic Complexity to Increase the Capacity of UAV airspace
+Hoekstra, Jacco; Ellerbroek, Joost; Sunil, Emmanuel; Maas, Jerom
+Publication date
+2018
+Document Version
+Accepted author manuscript
+Published in
+2018 International Conference on Research in Air Transportation
+Citation (APA)
+Hoekstra, J., Ellerbroek, J., Sunil, E., & Maas, J. (2018). Geovectoring: Reducing Traffic Complexity to
+Increase the Capacity of UAV airspace. In 2018 International Conference on Research in Air Transportation:
+Barcelona, Spain, 2018
+Important note
+To cite this publication, please use the final published version (if applicable).
+Please check the document version above.
+Copyright
+Other than for strictly personal use, it is not permitted to download, forward or distribute the text or part of it, without the consent
+of the author(s) and/or copyright holder(s), unless the work is under an open content license such as Creative Commons.
+Takedown policy
+Please contact us and provide details if you believe this document breaches copyrights.
+We will remove access to the work immediately and investigate your claim.
+This work is downloaded from Delft University of Technology.
+For technical reasons the number of authors shown on this cover page is limited to a maximum of 10.
+
+--- Page 2 ---
+
+ICRAT 2018
+Geovectoring: Reducing Traffic Complexity to Increase
+the Capacity of UAV airspace
+Jacco M. Hoekstra, Joost Ellerbroek, Emmanuel Sunil, Jerom Maas
+Faculty of Aerospace Engineering, TU Delft,
+Delft, Netherlands
+Abstract—Both U-space in Europe, as well as UTM in the USA, SESAR’s U-space program in Europe as well as FAA’s
+develop concepts and tools for UAV airspace. Enabling high- UTM program in the USA are in the process of developing
+density operations is one of the goals of these studies. Past and concepts for updating regulations and airspace organisation for
+recent studies have analysed which factors affect the capacity of these applications in a safe and efficient way [2]. For U-space
+a UAV airspace. An improved understanding of this can lead to the deployment of services is divided into four steps[3]
+control methods for capacity management. Two general
+principles for capacity management can be distinguished: • U1: U-space foundation services: e-registration, e-
+controlling the traffic density, and controlling the traffic identification and geofencing
+complexity. The first approach can be achieved using geofencing
+• U2: U-space initial services: flight planning, approval,
+or geocaging, which is foreseen for UAV airspace. The second
+tracking, information & procedures
+approach is hardly addressed in the planned concepts. In this
+paper a new, general concept, called geovectoring, is proposed
+• U3: U-space advanced services: complex ops in dense
+which could increase the capacity by reducing the traffic
+areas, capacity management, conflict detection &
+complexity for U-Space and UTM. This paper therefore proposes
+resolution
+to add geovectoring as a third service to the already planned
+concepts of geofencing and geocaging. • U4: U-space full services: fully interfaced with
+manned aviation, highly automated
+Keywords: UAVs; drones; RPAS; U-space; UTM; airspace;
+capacity; geofencing; geocaging; geovectoring Enabling high-density operations with multiple automated
+drones under the supervision of drone operators is one of the
+I. INTRODUCTION key principles of U-space. Currently foreseen enablers for this
+are a combination of (dynamic) geofencing, to confine UAVs
+The technology of UAS or drones, here referred to as
+to allowed airspace, and capacity management strategies from
+UAVs, is advancing fast. This technological development
+manned aviation might be adapted for this airspace. However,
+opens up many new potential applications. Examples are
+recent studies [4] have indicated that, with their focus on
+inspection tasks for energy and agriculture, surveillance for
+(static) traffic density, such strategies will not be sufficient to
+public safety and security as well as package deliveries for
+cater the envisioned unmanned traffic densities, nor the
+emergency or premium services. By not requiring a pilot and
+heterogeneity of flights/missions. This can only be achieved if
+due to the smaller size, for the same application, autonomous
+management of traffic complexity is taken into account. This
+drones are generally cheaper, faster, cleaner and more energy
+paper proposes a potential solution to improve the efficiency,
+efficient than their manned flying and non-flying counterparts.
+safety and capacity of very low-level airspace, which may
+As a result UAVs or drones have the potential to deliver a
+provide a key component for capacity management in U3.
+significant contribution to society in terms of economy,
+sustainability and safety. Using the results from a study which simulated extreme
+traffic densities [4], an analysis will be made of what affects
+A drone outlook study by SESAR [1] expects, next to the
+the capacity of airspace in general. From this, two options to
+seven million leisure drones, a fleet of 400,000 drones for
+control the airspace capacity are presented. One is well known
+commercial and government missions by 2050. The fastest
+and in line with current developments. The second option is
+growth is expected for the period from 2025 to 2035. While the
+new and will be discussed more extensively using some
+largest economic impact is expected for agriculture, urban
+examples. After a description of how this could be
+applications such as delivery and surveillance pose the largest
+implemented, the paper ends with conclusions and
+challenge for airspace organisation due to the high
+recommendations.
+concentration of vehicles flying at very low levels, over
+densely populated areas.
+
+--- Page 3 ---
+
+ICRAT 2018
+II. CAPACITY OF AN AIRSPACE STRUCTURE This concept uses two methods to reduce the conflict rate:
+segmentation and relative speed reduction. Segmentation
+The capacity of an airspace is limited by safety and
+reduces the number of possible combinations of potentially
+efficiency. When drones have a higher collision probability
+conflicting aircraft. The faster an aircraft flies, the more
+this affects the third-party risk as well as the economic
+airspace is crossed. Hence, on average more aircraft will be
+viability. When too many conflict resolution manoeuvres are
+encountered. However, the relative speed is the speed at which
+required to avoid intrusions of the protected zones of UAVs,
+an aircraft is encountered and it therefore scales directly with
+this can lead to an inefficient flight or even lead to airspace
+the conflict rate. These principles can be generalized for any
+instability due to domino effects. In both cases, the capacity is
+control method used in UAV airspace capacity management.
+limited by the conflict rate, so how often an intrusion is
+To define these control methods, the next section analyses the
+predicted per time unit. Therefore, the conflict rate, which is
+general principles before defining the control methods in
+equivalent to the conflict probability, is a useful metric for both
+section IV.
+efficiency and safety and can hence be used as an indicator for
+capacity: The capacity of an airspace can be expressed in terms
+of a maximum conflict rate. III. CONFLICT RATE, TRAFFIC DENSITY AND SPEED
+It has been acknowledged that airspace structure and the Conflicts are defined as predicted, not actual, losses of
+resulting conflict rate, or demand for service, plays a role in separation. When detected in time, they are solved by what is
+airspace capacity [5]. In a centrally controlled airspace this called conflict resolution, an avoidance manoeuvre. Conflict
+maximum demand for service is determined by the workload detection and resolution (CD&R) have been studied for many
+of a controller. In future concepts, higher levels of automation years in the context of free flight and airborne separation
+and higher traffic densities will require a different approach to assurance systems. Nowadays for UAVs specifically, CD&R is
+separation assurance. Nevertheless, the conflict rate is still an often referred to as ‘detect and avoid’ (DAA), but the same
+important limiting factor, albeit in a different way. principles apply.
+How an urban airspace should be organized to maximize Intrusions are prevented in different phases, depending on
+capacity was investigated experimentally with massive traffic the time to the predicted intrusion:
+simulations in the Metropolis project [4]. The key question was
+1. Intrinsic prevention: Airspace design or dynamic
+whether more or less structure would benefit the capacity of
+airspace (re)configuration to prevent conflicts
+the airspace. Four concepts with an increasing level of
+structure (see Figure 1) were tested under extreme traffic 2. Strategic resolution: Planning of trajectories
+densities using batch simulations while measuring conflict rate,
+3. Tactical resolution: Detect and resolve conflicts
+domino effects, intrusions and inefficiencies.
+When intrusions cannot be prevented, an additional, last
+minute collision avoidance safety net can be added, analogue
+to TCAS for manned flight.
+As the first phase of the prevention of intrusions, airspace
+design generally aims at preventing conflicts by lowering the
+average conflict rate. Properties of both the traffic pattern and
+the airspace structure drive this conflict rate, and influence the
+capacity.
+Two types of conflict rate should be distinguished:
+• global conflict rate: the total number of conflicts in
+Figure 1 Metropolis airspace concepts
+an airspace for all vehicles together per unit of time
+simulated with 9.5 million flights in total
+• local conflict rate: the number of conflicts as
+The Metropolis results showed that the so-called “Layers- experienced by one vehicle per unit of time
+concept” was the most successful in preventing a high global
+When there is no domino effect, which is to be prevented
+conflict rate with a minimum impact on the flight efficiency. In
+by limiting the conflict rate, the probability of a conflict of any
+the Layers-concept the heading range, or heading span,
+pair of aircraft is generally independent of the number of
+determines in which layer a level flight is conducted to reach
+vehicles in the airspace. If we name this probability p and we
+speed alignment within specified margins. Both when flying 2
+call the number of aircraft in an airspace N, then the local
+level in compliance with this rule or when changing altitude,
+conflict rate CR , i.e. per flight, is given by the product of
+the conflict detection and resolution was still active, using local
+this probability with the number of other aircraft (list of
+lateral manoeuvres to avoid having to leave the Layer when
+symbols can also be found at the end of this paper):
+resolving conflicts.
+
+--- Page 4 ---
+
+ICRAT 2018
+CR =(N −1)p (1)
+local 2
+The global conflict rate CR is the product of the
+global
+number of possible combinations of two aircraft with the
+conflict probability of one pair of aircraft , which multiplies
+equation (1) with the number of vehicles N as well as with ½ to
+avoid counting every pair twice (so conflict A-B and B-A are
+counted as one conflict) [6][7] :
+(cid:167)N(cid:183) 1
+CR = (cid:168) (cid:184) p = N(N −1)p (2)
+global (cid:169) 2 (cid:185) 2 2 2
+The mathematical truth is that the global conflict rate Figure 2 Converging aircraft with similar speed
+increases squared with the number of aircraft as opposed to the
+linear increase for the local conflict rate. The local conflict rate
+is per vehicle, so this is what is experienced on the airborne From Figure 2, it can be seen that the relative speed is a
+side. function of the heading difference:
+It can be seen that lowering p , the probability for any pair (cid:167)1 (cid:183)
+2
+of aircraft to have a conflict, will have positive effect on the V =2Vsin (cid:168) ∆hdg (cid:184) (4a)
+rel (cid:169)2 (cid:185)
+capacity under both centralized (e.g. strategic) and
+decentralized (e.g. tactical) control. By looking at which
+Two simplifications are used here: the conflict-as-a-point,
+factors influence the conflict rate, Jardin [8] has expanded this
+while with a minimum distance larger than zero, the geometry
+into an expression which includes the average ground speed V,
+changes and the aforementioned equal speeds assumption. The
+the horizontal separation distance R, the airspace area A and
+effect of the conflict geometry can be ignored as long as the
+observation interval T :
+separation minima are small compared to the distances flown
+during the observation period and/or lookahead time
+VR N VR
+N = k ⇔ CR = conf = k (3) (prediction horizon). When the two speeds are not equal,
+conf AT global T A equation 4a becomes slightly more complex:
+The average ground speed can be seen as the clock or pace V = V2 +V2 −2VV cos(∆hdg) (4b)
+of the conflict situation: when all aircraft fly twice as fast, the rel 1 2 1 2
+conflict rate will be doubled.
+For equal speeds this reduces to equation 4a, by using the
+However, it can be shown that the factor that drives the following standard substitution:
+conflict rate is not the absolute speed, but the relative speed or
+closure speed [9]. This relative speed is proportional to the cos(∆hdg)=1−2sin2 (cid:167) (cid:168) 1 ∆hdg (cid:183) (cid:184) (4c)
+ground speed, but can be lowered independently by not just (cid:169)2 (cid:185)
+limiting the magnitude but also the direction of the ground
+Using a uniform heading distribution over a heading range
+speed vector. This principle explains the result of the layers
+α, a probability distribution of the heading difference can be
+concept coming out best in the study mentioned before: it
+used for the simplified equation 4a, resulting in an integral
+reduces the relative speed without concentrating traffic or
+which can be solved analytically. Comparable with throwing
+reducing the route efficiency.
+two dice, where 7 is a more likely outcome than 2 or 12, for a
+An analysis of the effect of the heading range can be made uniform heading range, the distribution of the heading
+with some assumptions. When assuming both aircraft have a difference is a triangle as shown in Figure 3 [10].
+similar speed V, the relative speed can be expressed as
+function of
+
+--- Page 5 ---
+
+ICRAT 2018
+shows the effect on the capacity when this reduced conflict rate
+is used for a increase in capacity, using the inverse of equation
+2 for large values of N.
+The capacity analysis method has been further developed
+and validated experimentally [11]. A large Monte-Carlo study
+using the Open ATM simulator BlueSky was ran for different
+concepts and different types of aircraft. It tested the influence
+of the assumptions and simplifications like equal speed and the
+conflict-as-a-point geometry. The results showed a good match
+between what is predicted by the mathematical model and the
+experimental results. An example is shown in Figure 4.
+Figure 3 Distribution of heading difference when allowed
+heading is limited by α degrees
+Averaging the combination of equation (4a) with Figure 3
+results in the predicted global conflict rate [10] :
+(cid:167)1 (cid:183)2R⋅t
+CR = N(N −1) lookahead ⋅E(V )
+(cid:168) (cid:184)
+global (cid:169)2 (cid:185) A rel
+(5)
+with E(V )=
+(cid:167)
+(cid:168)
+8V (cid:167)
+(cid:168) 1−
+2
+sin
+(cid:167)
+(cid:168)
+1
+a
+(cid:183)
+(cid:184)
+(cid:183)
+(cid:184)
+(cid:183)
+(cid:184)
+rel (cid:169) a(cid:169) a (cid:169)2 (cid:185)(cid:185)(cid:185) Figure 4 Experimental validations of mathematical
+conflict count model for different α’s (line is analytical
+The factor which is expanded on the second line shows the
+prediction, points in clouds are experimental results)
+effect of limiting the heading range to a span of α degrees. A
+further detailed explanation as well as the inclusion of the
+vertical dimension can be found in Sunil et al [9].
+IV. FROM ANALYSIS TO CONTROL
+TABLE I. CONFLICT RATE CHANGE AND CAPACITY CHANGE A. Segmentation
+AS A FUNCTION OF HEADING INTERVAL SIZE
+Airspace structures are often used to separate different
+Heading range α Conflict rate change Capacity change traffic flows, and in this way clustering similar traffic. This can
+360° 0 % 0% be beneficial but it can also artificially concentrate traffic,
+creating high densities, which has an adverse effect on safety.
+180° -27 % +17%
+A positive effect of dividing an airspace into different sectors,
+90° -60 % +58% is that the global conflict rate will be reduced due to the so-
+called segmentation effect. For instance, in the Layers concept
+45° -80 % +121%
+mentioned in section II, the effect of creating L layers, with
+30° -86 % +171% uniformly distributed the traffic over the L layers, can be
+illustrated by rewriting equation 2. The global conflict rate then
+15° -93 % +282%
+becomes L times the conflict rate per layer, where the number
+10° -95 % +368% of aircraft has been reduced by the same factor L:
+1 N (cid:167) N (cid:183) N (cid:167) N (cid:183)
+For this paper the relevance is the principle applied here: CR global = L⋅ 2 L (cid:168) (cid:169) L −1 (cid:184) (cid:185) p 2 = 2 (cid:168) (cid:169) L −1 (cid:184) (cid:185) p 2 (6)
+the effect of limiting the heading range on the conflict rate, as
+shown in the table above, which is results from equation 5. The
+1
+table clearly shows the large effect of some alignment of the N (cid:21) L ⇒ CR (L)≈ CR (L=1) (7)
+speeds to reduce the relative speed and hence the conflict rate, global L global
+without changing the absolute value of the speed, which is
+assumed to be equal or similar in this table. The last column
+
+--- Page 6 ---
+
+ICRAT 2018
+The segmentation effect, due to the squared nature of V. GEOVECTORING DEFINITION
+equation 2, effectively divides the conflict rate by the number
+A geovector consists of two parts: the definition of an area
+of groups L for high traffic densities.
+and the definition of the allowed intervals of the speed
+Geofencing and geocaging restrict the position of UAVs. components. The area for which the geovector is applicable
+While geofencing is used mainly to define no-go areas for can be defined as a series of (lat, lon) positions with a lower
+UAVs, geocaging can be used to keep a group of UAVs in a and upper altitude (prism). The area definition format can be
+part of the airspace. Geocaging can exploit the segmentation the same as used for geofencing and geocaging. The only
+effect to control and reduce the global conflict rate and thus difference is the type and the extra information: the geovector
+increase the overall capacity. intervals.
+For practical purposes, the geovector components are polar
+B. Relative speed reduction
+for the horizontal speed vector, complemented by a vertical
+Table I in section II shows an example of how a heading speed for the vertical dimension:
+range reduction can lowering the conflict rate by limiting the
+relative speed. It show that lowering of the conflict rate has the (cid:167)GSinterval(cid:183)
+potential to realize a large increase in airspace capacity. There V = (cid:168) cinterval (cid:184) =
+geo (cid:168) (cid:184)
+are other ways than layering the airspace to limit the relative (cid:168) (cid:184) (8)
+(cid:169)VSinterval (cid:185)
+speed: in general, putting limitations on any of the 3D speed
+vector’s components of UAVs in a part of the airspace can be (cid:167)[Groundspeed ,Groundspeed ](cid:183)
+min max
+used to dynamically optimize convergence speeds and hence (cid:168) [Course ,Course ] (cid:184) = f(lat,lon,altitude)
+(cid:168) min max (cid:184)
+conflict probabilities in an airspace. These limits can add extra (cid:168)[VerticalSpeed ,VerticalSpeed ](cid:184)
+safety and capacity on top of the segmentation effect. (cid:169) min max (cid:185)
+As a symbolic notation, for example on a map or when
+As currently geofencing and geocaging only limit the 3D
+describing an airspace design, it could be presented graphically
+position, this paper proposes to add a limitation the 3D speed
+for example with a format like in Figure 6.
+vector components as a function of the geographical position.
+This principle is called geovectoring, to indicate it is a third
+component which logically fits in the sequence as indicated in
+Figure 5.
+Figure 6 Symbolic representation of a geovector e.g. on a
+map (green zones indicate allowed ranges)
+Many current airspace designs or rules can be expressed
+with this definition. Together with the expected demand
+distributions, this definition provides a baseline input needed to
+Figure 5 U-space elements for capacity management
+compare conflict rates mathematically with the analysis
+methods mentioned above, allowing the selection of an
+Geovectoring differs from the normal ‘vectoring’ as airspace design in a way that optimises safety and capacity.
+currently used in ATC. The normal vectoring, assumes a form
+When studying the capacity of an airspace there are
+of direct control of the speed vector by ATC of an individual
+basically two important aspects: the traffic density (or static
+vehicle. In the geovectoring concept vectoring becomes a
+density) and the traffic complexity (dynamic density) [13][14].
+function of the airspace, i.e. the position, (‘geo’) and only an
+Using this distinction, it can be stated that geocaging &
+interval is specified for one or more components of the 3D
+geofencing regulate the (static) traffic density, while
+speed vector, and vehicles are free to choose a velocity vector
+geovectoring controls the traffic complexity, schematically it is
+within that interval. This interval vector then applies to all
+shown in Figure 7.
+vehicles in that sector.
+
+--- Page 7 ---
+
+ICRAT 2018
+In general, the geovector would be specified independent
+per area, not with formulae but with actual numbers. First a
+definition of the area and then three intervals. A layers concept
+would thus be a series with a geovector for each layer,
+allowing different and less regular divisions based on demand.
+Geovectors can be used to define anything ranging from tubes,
+departing/arriving zones to layers. It is a generic format, which
+can therefore be implemented to be used in an automated way
+by UAVs control software in a similar fashion as geofencing.
+Geovectors are applicable as long as the mission allows
+setting limits on the speed vector. A loitering surveillance or
+observations mission, will not allow limits on for the heading
+component of the geovector for instance. Similarly, there might
+be missions for which the required speed vector is even
+Figure 7 Geovectoring is a way to control the traffic unpredictable, where only setting a vertical speed limit will be
+possible. Delivery drones are typically flying missions for
+complexity
+which the heading component of geovector will be very useful
+VI. EXAMPLES OF GEOVECTORS AS AIRSPACE DESIGN to reduce the relative speeds.
+SPECIFICATION
+The semi-circular or hemispherical rule as used for IFR VII. IMPLEMENTING GEOVECTORING FOR U-SPACE AND
+traffic below FL290 or under Reduced Vertical Separation UTM
+Minima (RVSM), specifies a flight level as function of Using a list of geovectoring definitions for different areas,
+magnetic track angle: Eastbound traffic (magnetic track 000 to complex airspace designs with corridors, flow patterns, zones
+179°) should use the odd thousands (FL 250, 270, etc.) while and layers can be defined to facilitate local circumstances or
+westbound traffic (magnetic track 180 to 359°) should use the specific missions.
+even thousands (FL 260, 280, etc.). Many other already
+existing airspace regulations can also be defined using the Two types of geovectors can be distinguished (Figure 8):
+geovector format, such as speed restrictions as function of
+• Static geovectors - defined as part of a navigation
+altitude h , Some examples are given below
+database, fixed over a longer time
+Semi-circular rule:
+• Dynamic geovectors - may vary over time, need to be
+(cid:167) [0,→) (cid:183) broadcasted
+(cid:168) (cid:184) (9)
+V geo (h[FL])= (cid:168) (cid:168)(cid:171) (cid:170) (cid:172) 180°⋅mod(cid:168) (cid:167) (cid:169) h 1 − 0 10 ,2(cid:184) (cid:183) (cid:185) ,359°−180°mod(cid:168) (cid:167) (cid:169)1 h 0 ,2(cid:184) (cid:183) (cid:185) (cid:187) (cid:186) (cid:188) (cid:184) (cid:184) D tim yn e a , m th i i c s h g a e s o v im ec p t l o i r c i a n t g io n is s f a o r g t e h o e v i e m ct p o l r e m w e h n i t c a h ti o c n h , a n n o g t e s fo r o v th e e r
+(cid:168) (cid:184)
+(cid:168) (cid:169) [0,0] (cid:184) (cid:185) algebraic definition. The data format simply then also needs a
+time interval
+Maximum speed of 250 kts below FL100 (but then as a
+ground speed limit!):
+(cid:167)[0,250kts](cid:183) (cid:167)
+(cid:168)
+[Groundspeed
+min
+,Groundspeed
+max
+](cid:183)
+(cid:184) (12)
+(cid:168) (cid:184) V = [Course ,Course ] = f(lat,lon,altitude,time)
+V (h<FL100)= [0°,360°] (10) geo (cid:168) min max (cid:184)
+geo (cid:168) (cid:184) (cid:168)[VerticalSpeed ,VerticalSpeed ](cid:184)
+(cid:168) (cid:184) (cid:169) min max (cid:185)
+[0,0]
+(cid:169) (cid:185)
+A evenly distributed layers concept with L layers with is a
+variation on the semi-circular rule.
+For layer i:
+(cid:167) [0,→) (cid:183)
+(cid:168) (cid:184)
+V geo (i)= (cid:168) (cid:168) (cid:170) (cid:171) (cid:172) mod (cid:167) (cid:168) (cid:169) 36 L 0° i,360° (cid:183) (cid:184) (cid:185) ,mod (cid:167) (cid:168) (cid:169) 36 L 0° (i+1),360° (cid:183) (cid:184) (cid:185) (cid:187) (cid:188) (cid:186)(cid:184) (cid:184) (11)
+(cid:168) (cid:184)
+(cid:168) [0,0] (cid:184)
+(cid:169) (cid:185)
+
+--- Page 8 ---
+
+ICRAT 2018
+Geovectoring can be used to reduce the airspace
+complexity. It allows controlling the relative speed by
+specifying intervals as restrictions on the absolute 3D ground
+speed vector components. The geovectoring service can greatly
+increase the airspace capacity and improve the safety and
+efficiency of UAV airspace. Therefore it is important to further
+investigate how geovectoring protocol can be utilized in UAV
+airspace concepts.
+IX. REFERENCES
+[1] SESAR JU, “European Drones Outlook Study – Unlocking the value for
+Europe”, SESAR, November 2016
+Figure 8 Geovectors can be static (navigation database)
+[2] P. Kopardekar, S. Bradford, “UAS Traffic Management (UTM)
+or dynamic (real-time broadcast/network service) Research Transition team (RTT) p”, NASA/FAA, January 2017
+[3] SESAR JU, “U-Space Blueprint”, SESAR, 2017
+[4] E. Sunil, J.M. Hoekstra et al., “Metropolis: Relating Airspace Structure
+Dynamic geovectors require a data link protocol, which
+and Capacity for Extreme Traffic Densities”, Eleventh USA/Europe Air
+allows changing both the area specification, as well as the Traffic Management Research and Development Seminar (ATM2015),
+vector intervals over time. This could be used for Barcelona, 2015
+reconfiguration: to adapt the airspace layout to daily or [5] M. Janic and V. Tosic, "En route sector capacity model," Transportation
+seasonal patterns, to varying densities or specific gained Science, vol. 25, no. 4, 1991
+insights on how to optimize the airspace utilization. [6] J.M. Hoekstra, R.C.J. Ruigrok, R.N.H.W. van Gent, “ Free Flight in
+Crowded Airspace”, FAA/Eurocontrol 3rd USA/Europe Air Traffic
+Implementing a datalink protocol or a message format Management R&D Seminar,Naples, June 2000
+requires a lead time of several years, so the introduction of a [7] J. M. Hoekstra, R. N. H. W. van Gent, and R. C. J. Ruigrok, “Designing
+dynamic geovectoring concept in e.g. the U-Space concept for safety: the free flight air traffic management concept,” Reliability
+phase U3 needs to be prepared well in advance. Similarly, the Engineering & System Safety, vol. 75, no. 2, pp. 215–232, Feb. 2002
+implementation on the airborne side where this might need to [8] M. R. Jardin, “Analytical Relationships Between Conflict Counts and
+Air-Traffic Density,” Journal of Guidance, Control, and Dynamics, vol.
+be automated takes time. This increases the urgency of
+28, no. 6, pp. 1150–1156, 2005. [Online]. Available:
+adopting geovectoring as a standard concept for UAV airspace.
+http://dx.doi.org/10.2514/1.12758
+[9] E. Sunil, Ellerbroek, J.M. Hoekstra, J. Maas, “Three-Dimensional
+VIII. CONCLUSION AND RECOMMENDATIONS Conflict Count Models fot Unstructured and Layered Airspace
+Designs,” submitted to Transportation Research Part C: Emerging
+Both experimental as well as analytical work on airborne Technologies, Dec 2017
+separation assurance and on urban airspaces with extreme [10] J.M.Hoekstra, J. Maas, M. Tra, E. Sunil, “How Do Layered Airspace
+densities, have contributed to our understanding of the relation Design Parameters Affect Airspace Capacity and Safety?”, International
+between heading, speed, vertical speed, the relative speed, the Conference for Research of Air Transport (ICRAT 2016), Philadelphia,
+2016
+conflict rate, the conflict probability and the airspace capacity.
+[11] E. Sunil, J. Ellerbroek, J.M. Hoekstra – “CAMDA: Capacity
+It is now the time to research how this knowledge from the Assessment Method for Decentralized Air Traffic Control”, submitted to
+analysis can be used to control the airspace capacity where International Conference for Research of Air Transport (ICRAT 2018),
+Barcelona, 2018
+extreme densities are expected in the near future: the UAV
+[12] J.M. Hoekstra, Ellerbroek, J. – “BlueSky ATC Simulator Project: an
+airspace.
+Open Data and Open Source Approach”, International Conference for
+Currently, studies on UAV airspace design and regulations Research of Air Transport (ICRAT 2016), Philadelphia, 2016
+in both U-Space and UTM have been focused on capacity [13] Laudeman, L.G.,Shelden, S.G., Branstrom, R., Brasil, C.L., “Dynamic
+Density: An Air Traffic Management Metric”, NASA/TM-1998-112226
+management by position, hence by traffic (static) density only,
+– April 1998
+using concepts such as geofencing and geocaging.
+[14] Puechmorel, S., Delahaye, D., New trends in air traffic complexity.
+To benefit from the potential applications of UAVs, EIWAC 2009, ENRI International Workshop on ATM/CNS, Mar 2009,
+Tokyo, Japan. pp 55-60, 2009
+geovectoring show promising possibilities for the capacity
+management of UAV airspace. A geovector is a three-
+component speed vector interval specified for a given area.
+Two types of geovectoring can be distinguished: static
+geovectoring, as part of a navigation database, and dynamic
+geovectoring available as real-time service via a network or
+broadcast system.
+
+--- Page 9 ---
+
+ICRAT 2018
+List of used symbols
+A Area of the airspace
+CR Conflict rate
+E(x) Expected value of x
+GS Ground speed (scalar)
+FL Flight Level
+L Number of layers or subgroups in an airspace
+N Total number of aircraft in an airspace/sector
+N Number of conflicts over a given time T
+conf
+R Horizontal separation minimum, i.e. radius of
+protected zone
+T Total observation duration
+V Speed, speed vector
+V Geovector, gives three intervals for an area
+geo
+VS Vertical speed
+h Altitude
+hdg Heading
+i Iterator, counter
+k Constant
+lat Latitude
+lon Longitude
+p Probability to have a conflict per pair of aircraft
+2
+t Lookahead time of conflict detection
+lookahead
+α Heading span, or allowed range of headings
+χ Track angle, course
+VViieeww ppuubblliiccaattiioonn ssttaattss

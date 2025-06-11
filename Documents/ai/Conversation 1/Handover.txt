@@ -1,0 +1,146 @@
+**FoldSpace: Successor Briefing for ChatGPT**
+
+---
+
+## Project Name
+
+**FoldSpace**
+
+## Owner
+
+Gijs Umoja (@gbrouwer on GitHub)
+
+## Purpose
+
+FoldSpace is a Unity-based simulation project designed to explore and prototype next-generation concepts in autonomous drone traffic management. It blends real-world aviation principles (e.g., UTM/ATC) with emerging system design ideas (distributed control, agent-based negotiation, multi-agent reinforcement learning).
+
+The ultimate aim is to evolve the simulation into a testbed that demonstrates:
+
+* The limits of centralized UTM logic
+* The feasibility of distributed volume-based control
+* The emergence of complex behaviors from local negotiation
+* ML-Agent integration to explore adaptive autonomy
+
+The project draws inspiration from real systems (NASA UTM), sci-fi (Dune’s Guild Navigators), and abstract modeling (volume agents negotiating 4D flight space).
+
+---
+
+## Current Architecture
+
+### Key Components:
+
+* `DroneAgent.cs`: follows a path of waypoints; will eventually be replaced by ML-Agents.
+* `LandingPad.cs`: physical location for takeoff/landing, uses trigger colliders.
+* `ATCController.cs`: manages local operations (takeoff, landing queue).
+* `UNetController.cs`: central authority for now (formerly UTM), allocates paths through space-time.
+* `VolumeAgent.cs`: pure data structure for now; each is a spatial-temporal cell in a 4D grid.
+* `SimulationManager.cs`: top-level controller that spawns everything, sets up world state.
+
+### Status
+
+* Flat Unity terrain (1024x1024) with two vertiports (central hub and one spoke)
+* Drone model: EHang 216 with separate rotors and light meshes
+* All foundational scripts implemented and connected
+* Drones follow pre-planned paths from origin to destination
+* ATC handles pad occupancy
+* Volumes exist but are not yet dynamic agents
+
+---
+
+## Roadmap
+
+### Phase 1: Basic Simulation
+
+* ✅ Create terrain and landing pads
+* ✅ EHang 216 model and placeholder movement
+* ✅ DroneAgent with waypoint-following
+* ✅ UNetController assigns static paths
+* ✅ ATCController manages pad state
+* ✅ LandingPad trigger zones
+* ⬜ Instantiate and visualize 4D volume grid
+* ⬜ Connect volumes into spatial-temporal graphs
+
+### Phase 2: Path Planning & Extension
+
+* ⬜ Implement A\* over 4D volume graph
+* ⬜ Add `FlightIntent` class to encode flight origin/destination/timing
+* ⬜ UTM plans and reserves full drone path
+* ⬜ Drones check in/out of volumes as they move
+
+### Phase 3: ML & Curriculum
+
+* ⬜ Swap DroneAgent logic for ML-Agents
+* ⬜ Add ray-based sensors
+* ⬜ Define discrete actions
+* ⬜ Shape rewards: accuracy, safety, efficiency
+* ⬜ Train simple routing agents
+
+---
+
+## Future Vision (Post-Roadmap)
+
+### Distributed Architecture
+
+* Each `VolumeAgent` becomes a local negotiator
+* Drones are sensors/actuators — not thinkers
+* Volumes form a mesh network of negotiation
+* Adjacent volumes share local state
+* Routing becomes a bottom-up process
+
+### Emergent Simulation
+
+* Add jitter, delay, noise
+* Simulate mismatched protocols between drones
+* Observe jam-like emergent phenomena (phantom congestion)
+
+### ML Extensions
+
+* Train VolumeAgents instead of Drones
+* Local learning: adjust acceptance rules based on traffic
+* Emergent cooperation between volumes
+
+---
+
+## Documentation
+
+All markdown documentation is being transitioned to:
+[https://github.com/gbrouwer/FoldSpace](https://github.com/gbrouwer/FoldSpace)
+
+Includes:
+
+* `README.md` (overview and index)
+* `roadmap.md` (current + extended roadmap)
+* `architecture.md`, `installation.md`, `scripts.md`, etc.
+
+---
+
+## Immediate Next Steps
+
+1. Finalize and visualize volume grid (VolumeAgent instances with 4D coords)
+2. Add `FlightIntent.cs` class to hold flight requests
+3. Connect `SimulationManager` to ATC and UTM
+4. Allow UNetController to compute and assign a path
+5. Render path in scene for debug
+6. Begin thinking about curriculum scenarios for ML training
+
+---
+
+## Meta
+
+Project was originally called **ShirleySimian**. The rename to **FoldSpace** reflects the shift to a more elegant, expansive, and speculative framing.
+
+The tone is serious but exploratory. Pretentious is okay, as long as it's earned by the sophistication of the architecture.
+
+This is not just a sim. It’s a speculative model of distributed cognition under constraint.
+
+---
+
+## Notes for Successor
+
+* Gijs prefers minimal emojis, clear structure, JSON and readable data formats.
+* Think in clean, composable modules — Unity-side and logic-side.
+* Don’t rush to ML. Use it when it reveals something *non-obvious*.
+* Always respect the core metaphor: **drones are limbs; volumes are minds.**
+* If it feels bananas, it’s probably on the right track.
+
+Onward.

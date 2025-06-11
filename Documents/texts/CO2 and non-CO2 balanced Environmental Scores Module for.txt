@@ -1,0 +1,393 @@
+
+
+--- Page 1 ---
+
+Journal of Physics:
+Conference Series
+PAPER • OPEN ACCESS You may also like
+CO and non-CO balanced Environmental Scores -Correlation of Electrochemical Effects and
+2 2 Resistive Switching in TiO 2 Thin Films
+Wanheng Lu, Lai-Mun Wong, Shijie Wang
+Module for flight performance evaluation and
+et al.
+optimisation -A facile one-step strategy for development
+of a double network fibrous scaffold for
+nerve tissue engineering
+Nasim Golafshan, Hamidreza Gharibi,
+To cite this article: Jan Middel et al 2023 J. Phys.: Conf. Ser. 2526 012013 Mahshid Kharaziha et al.
+-Dynamic mechanical control of local
+vacancies in NiO thin films
+Daehee Seol, Sang Mo Yang, Stephen
+Jesse et al.
+View the article online for updates and enhancements.
+This content was downloaded from IP address 217.123.12.96 on 07/06/2025 at 11:43
+
+--- Page 2 ---
+
+EASN-2022 IOP Publishing
+Journal of Physics: Conference Series 2526 (2023) 012013 doi:10.1088/1742-6596/2526/1/012013
+CO and non-CO balanced Environmental Scores Module for
+2 2
+flight performance evaluation and optimisation
+Jan Middel[1], Kinanthi Sutopo[1], Bart Heesbeen[1], René Verbeek[1], Nick van den Dungen[1],
+Raúl Sáez[2,3], Xavier Prats[2], Angelo Riccio[4]
+[1] Royal Netherlands Aerospace Centre (NLR), Amsterdam, Netherlands
+[2] Universitat Politècnica de Catalunya - Barcelona Tech (UPC), Barcelona, Spain
+[3] International Centre for Numerical Methods in Engineering (CIMNE), Barcelona, Spain
+[4] Università degli Studi di Napoli Parthenope (UNIPARTH), Naples, Italy
+E-mail: nick.van.den.dungen@nlr.nl
+Abstract. The SESAR2020 exploratory research (ER4) programme CREATE (Grant 890898)
+developed a climate and weather aware Concept of Operations (ConOps) which encompasses a
+multi-aircraft 4D trajectory optimisation framework, which utilises a CO and non-CO balanced
+2 2
+Environmental Scores Module (ESM) for the en-route flight phase. The ESM provides a
+computational method to evaluate the “greenness” of aircraft trajectories. Some components
+related to the internal ESM scoring are based on expert judgement, which is in line with the
+technology readiness level (TRL) 1 of the solution. Fast-time simulations were performed to
+demonstrate the proof-of-concept of the ESM in a multi-aircraft tactical optimisation scenario in
+the North-Atlantic region. The results show that, because of the simplicity of the metric, the ESM
+could be well used for trajectory optimisation and tactical replanning, and most likely as well as
+flight and ATC sector environmental performance evaluations.
+1. Introduction
+Aviation has a responsibility to mitigate its climate impact to improve the long-term sustainability of its
+operations and to contribute to the global effort towards reduction of human impact on climate changes.
+Although much research is ongoing towards the understanding of CO and non-CO impacts of aviation,
+2 2
+key stakeholders such as airlines, service providers, and regulators are struggling to translate this
+knowledge into pragmatic metrics which can be used to incentivise reduced climate-impact flight
+operations.
+In the context of CREATE, a SESAR 2020 exploratory research project, a potential SESAR solution
+was proposed aiming at the revision and update process of the reference business trajectory in the
+particular case of scenarios disrupted by severe weather conditions, and taking into account the
+environmental impact of the operations (CREATE-SOL-2). In this context, an air traffic control (ATC)
+decision support tool (DST) was proposed in line with the SESAR extended ATC planning (EAP) and
+integrated network for (extended) ATC planning (INAP) concepts. The basic idea behind CREATE-
+SOL-2 is that, during the execution of a flight, several alternative trajectories might be proposed by the
+airspace user in order to avoid weather hazards or climate sensitive volumes using the most up-to-date
+weather and environmental impact information available. Then, for each alternative trajectory, an
+environmental score is computed and used by the DST to inform ATC and to support the selection of
+the best avoidance trajectory for each concerned flight to find a system-wide optimum [1].
+Hence, the Environmental Scores Module (ESM) was proposed and identified as a candidate SESAR
+solution by itself (CREATE-SOL-3), since it might be embedded in other air traffic management (ATM)
+systems and/or be used with other trajectory look-ahead times (such as for instance for flight dispatching
+or air traffic flow management purposes). The ESM specifically addresses the CO and non-CO effects
+2 2
+during the en-route flight phase. The solution is used to evaluate the “green” performance of aircraft
+ContentfromthisworkmaybeusedunderthetermsoftheCreativeCommonsAttribution3.0licence.Anyfurtherdistribution
+ofthisworkmustmaintainattributiontotheauthor(s)andthetitleofthework,journalcitationandDOI.
+PublishedunderlicencebyIOPPublishingLtd 1
+
+--- Page 3 ---
+
+EASN-2022 IOP Publishing
+Journal of Physics: Conference Series 2526 (2023) 012013 doi:10.1088/1742-6596/2526/1/012013
+trajectories related to flight and ATC sector environmental performance which is useful in performance
+dashboards for airlines and ATC service providers. In the CREATE fast-time simulation experiment the
+ESM was used within the trajectory optimisation framework to rank the candidate flight trajectories
+which are then used by a trajectory selector module to select the overall solution, depending on the user-
+based decisions between operational cost and delays vs environmental performance in the decision
+support tool module.
+The ESM is the core of this solution and it assigns scores to each candidate trajectory. It considers non-
+CO emissions, which are dependent of location and time, and CO emissions, which are independent of
+2 2
+location and time. Therefore, CO and non-CO emissions are treated differently in the ESM. This paper
+2 2
+focuses in the ESM and explains the methodology followed and rationale behind to build these
+environmental scores. Some illustrative examples are also given corresponding to fast-time simulations
+of flights crossing the North-Atlantic, which were used to demonstrate the proof-of-concept of the ESM.
+2. The CREATE SOL-2 framework
+Figure 1 shows the different modules that compose the CREATE SOL-2 concept, along with their high-
+level interactions. The Meteorological data provider (MDP) and the Thunderstorm and contrail-
+zone predictor (TCP) are external providers to the proposed Decision Support system. The active
+reference business trajectories (aRBTs) (i.e., the last update of the RBT for each flight), which
+basically represents the traffic demand, the sector definition (SD) and the sector capacities (SC) are
+available on ground and transferred to the airspace users (AUs) if required.
+After these first modules, which aim at providing the initial input data, the next module is the Aircraft
+Filtering Process (ADP), in charge of filtering the flights of the indicated area of interest (AoI) and also
+the flights which cross any thunderstorm or contrail area. All flights included in the AoI will be
+considered, but the alternative trajectories will be requested only for the flights crossing some weather
+conflicting area.
+The Trajectory Optimisation (TO) module aims at simulating the AUs behaviour when they have to
+provide alternative trajectories. The main goal of this module is to provide the alternative
+trajectories that avoid the thunderstorm and contrails while minimising the impact to the airspace users.
+Within CREATE, these alternative trajectories are modelled considering BADA4 and BADA 3.9 for
+the Aircraft Performance Model (APM). The output of this module is the set of all alternative
+trajectories of all flights crossing the area of interest. These trajectories are supposed to be sent to the
+ground-based ATC DST in from of extended flight plan, i.e., list of waypoints with an associated time
+of arrival.
+Once all trajectories (in from of flight plan) are available, they are shared with the Trajectory
+performance reconstruction (TPR). The purposes of this TPR are to reconstruct the full trajectory
+from the flight plan, the creation of the trajectory sector list (TSL) that each trajectory is crossing and
+to estimate the required performance data in order to be able to estimate the emissions of the indicated
+trajectories (initial and alternative) in a later module. This module is called Trajectory Emissions
+Calculator (TEC), which uses the available data of the engines for the estimation of the emissions.
+Then, the Environmental Scores Method (ESM) module translates those emissions into
+environmental scores which allows us to consider the environmental impact of all trajectories.
+Once all the initial/alternative trajectories are available together with their environmental score, their
+sector crossing list and the sector capacities are given, the Trajectory Selector (TS) is deployed. This
+module aims at choosing one trajectory for each flight at the same time it ensures that the demand is
+below the capacity for all the available sectors and contrail zones in the area of interest. Note that the
+contrail zone is considered as an artificial sector with a given capacity in order to limit the amount of
+flight in the region.
+2
+
+--- Page 4 ---
+
+EASN-2022 IOP Publishing
+Journal of Physics: Conference Series 2526 (2023) 012013 doi:10.1088/1742-6596/2526/1/012013
+Finally, there is the Decision Making and Pareto Analysis (DMPA). It is possible to run the TS many
+times considering different objectives and then evaluate the cross impact between different KPA/KPIs.
+Thus, a Pareto analysis can be conducted in order to take conclusions and make decisions. The final
+trajectories, along with the allocated delays, are supposed to be communicated to the AUs.
+Figure 1: CREATE-SOL-2 framework, principal modules and their interactions. The ESM (CREATE-SOL-3) is embedded
+in the CREATE-SOL-2 framework.
+3. Methodology to compute the ESM
+The ESM for the en-route use-case relies on scoring the candidate trajectories (CT) from the TO module,
+based on the expected CO , non-CO emissions and contrail formation potential.
+2 2
+3.1. Concept
+The CO and NO emissions along the (full) flight trajectory of each CT are determined using local
+2 x
+atmospheric properties, aircraft speed and fuel flow. Weather predictions are used to identify
+temporarily contrail sensitive areas. For those parts of the flight trajectory that overlap with
+contrail/climate sensitive areas, the likelihood of contrail formation is assessed. Trailing behind the
+aircraft engine exhaust is a plume with a cross section that increases by distance to the aircraft. Inside
+the plume, the water vapor emissions are diluted, while the temperature decreases due to mixing with
+the outer atmosphere. Because flight corridors might be fairly busy, it is also checked whether local
+relative humidity (at the aircraft position) is increased by the plumes of aircraft flying nearby. If this
+happens, the preceding aircraft engine emissions concentrations are added to the local atmospheric
+conditions.
+The prediction of persistence of contrails is based on the Schmidt–Appleman criterion, adapted by
+Schumann [4], which translates the engine partial conversion of combustion heat into kinetic energy and
+resulting higher temperatures in the aircraft plume. The formation of contrails is then predicted by the
+dilution process in the plume and the local atmospheric conditions, including relative humidity, local
+3
+
+--- Page 5 ---
+
+EASN-2022 IOP Publishing
+Journal of Physics: Conference Series 2526 (2023) 012013 doi:10.1088/1742-6596/2526/1/012013
+temperature, freezing and dew point temperatures. This criterion predicts whether a contrail will form
+and, if formed, will be persistent or short-lived. Subsequently, the candidate trajectories are scored and
+this information is forwarded to the next modules. This is schematically depicted in Figure 2.
+Figure 2: CREATE-SOL-3 ESM concept schematic
+In the Decision Making and Pareto Frond Analysis (DMPA) module of CREATE-SOL-2 the ESM score
+is used as input for the decision making to select the most optimal trajectory, taking into account
+environmental and capacity conditions and constraints.
+3.2. Scoring rationale
+In terms of non-CO emissions, the ESM considers NO , H O and contrail formation. Figure 3 illustrates
+2 x 2
+how the ESM score is built-up. The following considerations apply:
+• CO : Since CO climate impact is not depending on location or altitude, the performance of a
+2 2
+CT in terms of CO emissions is scored based on total emitted CO and compared to other CTs;
+2 2
+• NO and H O: The climate impact of NO and H O emissions depends on the location,
+x 2 x 2
+geographically and with respect to altitude, and time of emission, and the background
+concentrations present. This however, is subject to many uncertainties. It is known that the
+impact of these emissions increases with emission altitude [2][3]. Therefore, the impact of these
+emissions is related to emission altitude which can be easily obtained from the trajectory data.
+Emissions are assessed per flight segment and heavier weights are assigned to emissions at
+higher altitudes than average cruise altitudes, and lower weights are assigned to emissions at
+lower altitudes. For this assessment altitude bands, expressed in terms of atmospheric pressure,
+have been defined and weights are assigned to each altitude band, see Table 1. The weights are
+used to multiply the emissions per altitude band, which is then further used in the EMS score
+build-up (see Figure 3). At the current stage of the research, i.e. TRL1, it was decided to assign
+the weights per altitude/pressure band based on expert judgement. For higher TRL research it
+should be researched if this approach is sufficient for an aircraft trajectory environmental
+scoring metric.
+Table 1: Altitude pressure bands and weights for NOx and H2O emissions
+Pressure band base value Pressure band top value Weights for the emissions per
+pressure band
+101325 90000 0.5
+90000 80000 0.5
+80000 70000 0.5
+70000 60000 0.5
+60000 50000 0.5
+4
+
+--- Page 6 ---
+
+EASN-2022 IOP Publishing
+Journal of Physics: Conference Series 2526 (2023) 012013 doi:10.1088/1742-6596/2526/1/012013
+50000 40000 0.5
+40000 30000 0.5
+30000 25000 0.8
+25000 20000 1.5
+20000 0 2.5
+The current scope considers Contrail Formation Region (CFR) to be relevant for the definition of CSAs,
+however the solution is sufficiently generic to include other meteorological phenomena as well in future
+developments of the ESM for use in the ATM solution selection and optimization. The ESM score is
+designed in such a way that the contrail formation likelihood is key to the score.
+Figure 3: CREATE-SOL-3 ESM score build-up
+3.3. ESM equation
+The ESM scoring algorithm combines the CO , NOx, water vapor and contrail formation scores into a
+2
+single environmental ESM score. Note that NOx emissions are relatively small to CO and H2O
+2
+emissions and in turn much larger than the contrail score that is expressed in a range from 0 to 1. For
+the purpose of comparison of alternative candidate trajectories for a single flight, the scores are
+normalized to the reference flight, candidate 0 (c0). The impact of CO , NOx and water vapor could be
+2
+assessed using climate specific metrics like Average Temperature Response (ATR) for different time
+horizons, such metrics are computationally intensive and therefore not yet applicable for (tactical) ATM
+flight planning. For the purpose of this study, a simple equal weighting is assumed for the CO , NOx
+2
+and water vapor. The ESM is designed to emphasize contrail formation in climate sensitive areas and
+dominates the score if the likelihood is larger than 50%. The overall ESM score is then defined by
+Equation (1).
+( 𝐶𝑂 2𝑠𝑐𝑜𝑟𝑒 + 𝑁𝑂 𝑥𝑠𝑐𝑜𝑟𝑒, + 𝐻 2 𝑂 𝑠𝑐𝑜𝑟𝑒 ) (1)
+𝐶𝑂 𝑁𝑂 𝐻 𝑂
+2𝑠𝑐𝑜𝑟𝑒,𝑐0 𝑥𝑠𝑐𝑜𝑟𝑒,𝑐0 2 𝑠𝑐𝑜𝑟𝑒,𝑐0
+𝐸𝑆𝑀 = +2∗𝐶𝑜𝑛𝑡𝑟𝑎𝑖𝑙_𝑠𝑐𝑜𝑟𝑒
+3
+Note the contrail score is in many cases not a property of a single flight candidate; the formation of
+contrail likelihood instead depends on the vicinity of neighbouring candidate trajectory by other flights.
+An ESM score is then always depending on one or more related candidate flights.
+5
+
+--- Page 7 ---
+
+EASN-2022 IOP Publishing
+Journal of Physics: Conference Series 2526 (2023) 012013 doi:10.1088/1742-6596/2526/1/012013
+4. Fast-Time Simulation Exercise
+An illustrative example focusing on the North Atlantic air space extending into the European Civil
+Aviation Conference (ECAC) area is shown in this section. The geographical domain and corresponding
+weather and traffic sample was based on the historical data of 27-07-2018. For this specific day, Europe
+experienced a high weather-induced delays, as shown in the EUROCONTROL DDR2 data, with
+considerable thunderstorms and contrail areas present over the North Atlantic area. Figure 4 provides
+an overview of the computational domain including the Climate Sensitive Areas (CSA), related to
+contrail formation; and No Fly Zones (NFZ), related to thunderstorm formation). The following
+considerations should be taken for this use-case: contrail formation near Greenland; thunderstorm
+occurrences near central US and EU; and altitudes: FL285-FL420 (28,500ft to 42,000ft).
+Figure 4: En-route use-case overview from the NEST tool, mapped on the North Atlantic region and Central Europe, based
+on 27-07-2018 historical data. Blue areas are CSAs, green areas are clear air turbulence, red areas are thunderstorm NFZs.
+The flight patterns are derived from EUROCONTROL DDR2 flight plan database. The CSAs and NFZs were acquired from
+the TCP module of the CREATE-SOL-2 framework.
+In order to address the trade-off between environmental impact and cost for the AUs, two objective
+functions are considered in this illustrative example: the environmental contribution of the flights (𝐶𝐸);
+𝑘
+and extra cost for the AU (𝐶𝐴𝑈), accounting for the extra fuel cost and delay induced by the avoidance
+𝑘
+trajectory if compared with the nominal flight plan. Then a compound objective function J is built by
+simply weighting these two objectives.
+(2)
+𝐽 = ∑[𝛼𝐶𝐸 +(1−𝛼)𝐶𝐴𝑈]
+𝑘 𝑘
+𝑘∈𝐾
+where 𝛼 is the weighting parameter (ranging from 0 to 1 and 𝑘 is a trajectory within the set of trajectories
+𝐾 for a specific flight. 𝐶𝐸and 𝐶𝐴𝑈, in turn, are defined as follows:
+𝑘 𝑘
+𝐶𝐸 = 𝑤 ⋅𝐸 ⋅𝑧 , ∀𝑘 ∈𝐾 (3)
+𝑘 𝑒 𝑘 𝑘
+𝐶𝐴𝑈 =𝑤 ·𝐶𝐹 ⋅𝑧 +𝑤 ⋅𝐷 , ∀𝑘 ∈𝐾 (4)
+𝑘 𝑐 𝑘 𝑘 𝑑 𝑘
+where 𝑤 , 𝑤 and 𝑤 are the weighted costs of the ESM, displacement cost and delay, respectively.
+𝑒 𝑐 𝑑
+Currently, these weighted values are used to normalise the input data, so the sum is fair in terms of units.
+𝐷 is the delay allocated to candidate trajectory 𝑘 when it crosses the first encountered sector.
+𝑘
+5. Results
+The output of the simulations results in a Pareto front, which is shown in Figure 5. For different relative
+weights between (𝛼 values), the mean ESM per flight is plotted versus the mean extra cost per flight
+(Figure 5a). The latter is related to the airline operating cost, which involves both fuel consumption and
+extra flight time/delay elements. The decision variable 𝛼 is used to select a solution on the Pareto front.
+6
+
+--- Page 8 ---
+
+EASN-2022 IOP Publishing
+Journal of Physics: Conference Series 2526 (2023) 012013 doi:10.1088/1742-6596/2526/1/012013
+● Higher 𝛼:
+o Lower ESM score, leading to “greener” flight solutions.
+o Higher extra operating cost per flight.
+● Lower 𝛼:
+o Lower extra operating cost, leading to cost-effective solutions.
+o Higher ESM score, leading to higher-environmental-impact solutions.
+a) Extra cost for the Airspace Users vs. ESM b) Delay vs. ESM
+Figure 5: Pareto front analysis for the North-Atlantic case study (27-07-2018). The results show only one iteration of the
+tactical trajectory replanning (30min of flight).
+The decision can also be based on the mean delay assigned per flight. Figure 5Figure 5b represents the
+whole network delay vs. the network environmental score. As aforementioned, for higher 𝛼 values,
+“greener” flights solutions are obtained, which will generally lead to trajectories avoiding contrail areas.
+These “greener” solutions will stretch the flight trajectory paths, generally resulting in a higher global
+delay. In the “greenest” case, a global delay of 17 seconds is obtained. On the other hand, while
+exploring lower alphas (close to 0.0), the delay drops to 11 seconds.
+Bear in mind that in this scenario no-go areas were included, forcing some “candidate zero” flights to
+be unfeasible. For these initial flights crossing, for instance, thunderstorms, the only solution was to
+divert laterally. Thus, leading to an offset into the global network delay and the total extra cost.
+It should also be noted that the results shown above correspond to only one iteration of the tactical
+trajectory replanning algorithm, corresponding to 30 minutes of flight for this particular example. The
+CREATE-SOL-2 concept involves consecutive iterations of the algorithm to continuously adapt the
+trajectories every time a new weather update is received. Hence, the values of ESM and extra cost or
+delay shown above are those that are incurred in those 30 minutes of flight of this first iteration of the
+avoidance trajectory (hence the relatively low values).
+6. Discussion and Recommendations
+The objective of the CREATE-SOL-3 (ESM) was to develop a pragmatic metric which could be easily
+used in tactical trajectory optimisation. The ESM relied on scoring various candidate trajectories to
+select the most suitable option in the trajectory selection process of the ATC DST. The scoring
+weights and scoring equation however are still open for debate with a wider range of stakeholders to
+ensure that a “fair” evaluation is done of the CO and non-CO effects. Currently, the ESM scoring was
+2 2
+done based on internal expert judgement which is in line with the TRL1 maturity of the solution. Yet,
+it would be recommended for future research to involve as well e.g., Air Navigation Service Providers
+(ANSP), airlines, and regulators to discuss the applicability and scoring of the ESM on a higher
+practical level.
+7
+
+--- Page 9 ---
+
+EASN-2022 IOP Publishing
+Journal of Physics: Conference Series 2526 (2023) 012013 doi:10.1088/1742-6596/2526/1/012013
+In the en-route case experiment, many alternative trajectories per flight were generated. The number of
+candidate trajectories escalated quickly with the number of areas crossed by the baseline trajectories,
+due to the fact that there were many strategies that could be chosen to avoid these areas (e.g., divert to
+the left or right, avoid vertically, etc). The more areas to be avoided, the higher the possible
+combinations to avoid these areas, and the more alternative trajectories generated.
+Having a higher number of trajectories led to higher computational times for the ESM module; that is
+one of the reasons why the number of alternative trajectories was limited to 11 in the en-route
+experiment. Furthermore, many trajectories were not operationally feasible, and many of them were
+filtered out. However, both the limitation in the number of trajectories and the filtering were done in
+quite a manual way. In the future, a more “intelligent” system would be needed to limit this number of
+trajectories. Moreover, assuming the computational times for the ESM will be lower, more trajectories
+could be generated for each flight, potentially leading to better results.
+7. Conclusions
+The solution presented in this paper is able to provide an initial quantification of the “greenness” of
+aircraft trajectories, combining both the CO and non-CO effects into a single metric. Because of the
+2 2
+simplicity of the metric (the ESM outputs a single value per trajectory), it can be well used for
+trajectory optimisation and tactical replanning, as well as flight and ATC sector environmental
+performance evaluations (e.g., in performance dashboards for airlines and air navigation service
+providers). The implementation could be universally applied to flight trajectories, given the required
+meteorological information is present to perform the calculations. The current implementation is
+specifically addressing contrail formation, however future research could expand on other non-CO
+2
+phenomena. The current implementation should be further optimised for computational speed in a next
+research phase.
+Within the scope of CREATE it was not decided for which ESM a trajectory is “green”, however it
+did provide insights in how an ESM or similar environmental impact metric could be used the ranking
+of candidate trajectories in the ATM focused decision-making process. In general, it could be stated
+that based on the current mechanism of the CREATE-SOL-3 a greener trajectory has a lower ESM
+compared to a reference flight. The Pareto front analysis shows that trade-offs should be made
+between green flights and operating cost. As such, it could be used in practice that a given ESM
+threshold exists which decreases the selection space for the most cost-effective solution in the DMPA
+module.
+8. References
+[1] van den Dungen N H M, Sutopo K, Prats X, Di Vito V and Riccio R, “Multi-aircraft
+environmentally-scored weather-resilient optimised 4D-trajectories”, in FABEC research
+workshop: Climate Change and the Role of Air Traffic Control, Vilnius, Lithuania, 2021.
+[2] Grewe V, Dameris M, Froemming C and Lee D, “Impact of Aircraft NOx Emissions. Part 2: Effects
+of Lowering the Flight Altitude.”, Meteorologische Zeitschrift, pp. 197-206, 2002.
+[3] Sovde O A, Matthes S, Skowron A, Iachetti D, Lim L, Owen B, Hodnebrog O, Di Genova G, Pitari
+G, Lee D S, Myhre G and Isaksen I S A, “Aircraft emission mitigation by changing route altitude:
+A multi-model estimate of aircraft NOx emission impact on O3 photochemistry,” Atmospheric
+Environment, pp. 468-479, 2014.
+[4] Schumann U, “conditions for contrail formation from aircraft exhausts”, Meteorol Z 1996; 5:4-23.
+Acknowledgments
+The work presented in this paper has received funding from the SESAR Joint Undertaking (JU) under grant agreement No
+890898, corresponding to the project “Innovative Operations and Climate and Weather Models to Improve ATM Resilience
+and Reduce Impacts” (SESAR-H2020-ER4 CREATE) within the European Union's Horizon 2020 research and innovation
+program. The opinions expressed herein reflect the authors view only. Under no circumstances shall the SESAR JU be
+responsible for any use that may be made of the information contained herein.
+8

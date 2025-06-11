@@ -1,0 +1,879 @@
+
+
+--- Page 1 ---
+
+Comparison of Various Guidance Strategies to Achieve Time
+Constraints in Optimal Descents
+RamonDalmau∗andXavierPrats†
+TechnicalUniversityofCatalonia(UPC),08860,Castelldefels,Spain
+RonaldVerhoeven,‡FrankBussink§andBartHeesbeen¶
+NetherlandsAerospaceCentre(NLR),1059CM,Amsterdam,TheNetherlands
+Nomenclature
+D = aerodynamicdrag,N
+E = kineticenergy,J
+k
+E = potentialenergy,J
+p
+E = specificenergy,m
+s
+E = totalenergy,J
+t
+f = fuelflow,kg/s
+f = dynamicsofthesystem
+g = gravityacceleration,m/s
+g = pathconstraints
+h = altitude,m
+K = penaltyforthespeedbrakesdeployment,kg/s
+β
+J = costfunction
+L = aerodynamiclift,N
+L = Lagrangetermofthecostfunction
+m = aircraftmass,kg
+M = Machnumber
+M = maximumoperationalMach
+MO
+n = loadfactor
+p = parametersvector
+s = alongpathdistance,m
+∗PhDStudent,DepartmentofPhysics,C/EsteveTerradas5,BuildingC3,Office121
+†AssociateProfessor,DepartmentofPhysics,C/EsteveTerradas5,BuildingC3,Office104
+‡SeniorResearcher,CockpitandFlightOperationsDivision,P.O.Box90502.
+§MediorResearcher,CockpitandFlightOperationsDivision,P.O.Box90502.
+¶SeniorResearcher,CockpitandFlightOperationsDivision,P.O.Box90502.
+
+--- Page 2 ---
+
+T = enginethrust,N
+u = controlvector
+v = trueairspeed,m/s
+v = calibratedairspeed,m/s
+CAS
+v = maximumoperationalcalibratedairspeed,m/s
+CAS,max
+v = targetspeedwhentheaircraftisinconfiguration1,m/s
+CAS,S
+W = longitudinalwindspeed,m/s
+s
+W = crosswindspeed,m/s
+x
+x = statevector
+β = speedbrakesstatus
+γ = aerodynamicflightpathangle,rad
+π = throttlesetting
+φ = Mayertermofthecostfunction
+ψ = terminalconstraints
+Subscripts
+0 = initial
+f = final
+I.Introduction
+ContinuousDescentOperations(CDOs)havebeensubjectofextensiveresearchinthelastdecades. Evenifproving
+successfulinreducingtheenvironmentalimpact[1],suchoperationssufferfromawell-knowndrawback: thelossof
+predictabilityfromtheAirTrafficControl(ATC)pointofview,intermsofoverfly-timesatcertainfixesalongtheroute.
+Consequently,existingCDOimplementationsrequireATCtointroduceadditionalsequencingbufferstoensuresafe
+separationamongaircraft,thusreducingairportcapacity. Forallthesereasons,inbusyairports,CDOsareonlyfeasible
+inoff-peakhours,whenthetrafficdemandislow[2].
+Inothertofacethisissue,severalAirTrafficManagement(ATM)conceptshavebeenproposedthataimtoenable
+CDOsalsoinhightrafficdemandscenarios. Forinstance,severalworksinvestigatedtheuseoffixedFight-Path-Angle
+(FPA)descentswithtimecontroltoimprovebothspatialandtemporalpredictability[3,4]. Thedisadvantageoffixed
+FPAdescentsisthatpredictabilityisachievedatthecostofthrustsettingsthatmightbedifferentfromidle.
+AnotherpotentialapproachtoenableCDOsindensetrafficscenariosconsistsofassigningcontrolledtimesof
+arrival(CTAs)toeachaircraftatsomestrategicfixesforseparation,sequencingandmergingtasks. Thisconceptof
+flightoperationsassumesanegotiationprocessviadata-linkbetweentheATCandtheon-boardFlightManagement
+2
+
+--- Page 3 ---
+
+Systems(FMSs),typicallybeforetheTopOfDescent(TOD).Thisnegotiationstartswiththeon-boardcomputationof
+theearliestandlatestachievabletimesofarrivalatthemeteringfix,andthesubsequentdown-linkofthisinformationto
+thegroundautomationsystem. BasedonthisfeasibletimewindowandthesurroundingtrafficaCTAiscomputedbya
+ground-basedsupporttool,suchasanarrivalmanager. Then,theincomingCTAisenteredon-boardasaRequiredTime
+ofArrival(RTA)intotheFMS,andtheon-boardtrajectoryplannercomputesanew(optimal)trajectoryplanstartingat
+thecurrentstate,whilesatisfyingtheRTAandotheroperationalconstraints(e.g.,altitudeandspeedconstraints)[5].
+Becauseofmodelingerrorsanduncertaintiesencounteredduringtheexecutionofthedescentplan(e.g.,inaccuracies
+intheweatherforecastoraircraftperformancemodelsusedbytheFMS),aircraftmaydeviatefromthisplannedaltitude
+and/orspeedprofileandmayalsobedelayedoradvancedwithrespecttotheplannedtimeschedule. Variousguidance
+strategiescanbeusedtosafelyexecutethedescentandaccuratelycomplywithRTAs.
+At present, however, 4D capabilities are only available in the most modern FMSs, which essentially predict
+periodicallytheEstimatedTimeofArrival(ETA)atthetargetmeteringfixtodeterminethedeviationbetweenthe
+RTAandtheETA.Ifthisdeviationexceedsapre-definedthreshold,thecruise/descentspeedscheduleismodifiedby
+varyingtheCostIndex(CI)suchthattheETAequalstheRTA[6,7]. AdifferentstrategywasproposedinRef.[8],
+whichcontinuouslyadaptsthegeometricpathtonullifytimedeviationsand,onlyifnecessary,modifiesthespeedplan.
+Moreover,someFMSsusetheelevatorcontrolsurfacetofollowthespeedplan(speed-on-elevator)whilemaintaining
+idlethrust[9]. Inordertofollowthespeedplan,however,theaircraftmightdeviatefromtheplannedpath. Excessive
+altitudedeviationsarecorrectedbyapplyingthrustordeployingspeedbrakes[10]. OthermorebasicFMSsusea
+differentstrategy,whichconsistsofusingtheelevatortofollowtheplannedpath(path-on-elevator)whilemaintaining
+idlethrust. Ifrequired,thrustisaddedorspeedbrakesaredeployedwhenthespeeddeviationexceedsacertainthreshold.
+Anexcellentreviewofstate-of-the-artguidancestrategiesdesignedtocomplywithRTAscanbefoundinRef.[11];
+whileRef.[9]investigatedandcomparedtheimpactonpredictabilityoftheexecutedtrajectoryfordifferentguidance
+strategies,showingthatthespeed-on-elevatorprovidesthemostaccuratetemporalpredictabilityatameteringfixonthe
+descenttrajectory,atthecostofareducedverticalpredictabilityfortheremainderofthedescentandincreasedfuelburn.
+DespitemodernFMSsareabletocomplywithRTAsatthedestinationrunwaywithin15seconds[12],thespeed
+and/orpathadjustmentsusedtocorrecttimedeviationsarenotexplicitlyoptimizedforfuelconsumption. Thismotivates
+theneedofnewguidancestrategiesabletocompute,on-boardandinreal-time,optimalaltitudeand/orspeedadjustments
+tocomplywiththeRTAinpresenceofuncertaintiesinthemostenvironmentallyfriendlyway.
+AsetofadditionalguidancestrategieshavebeenproposedwiththisaimasapartoftheTimeandEnergyManaged
+Operations (TEMO) concept [13, 14]. These methods have in common to manage the total energy of the aircraft
+(altitudeandspeed)suchthattimeconstraintsaresatisfiedwhileminimizingthrottleandspeedbrakesactions. For
+instance,iftheaircraftislatewithrespecttheRTAandatthesametimehasanexcessivepotentialenergy,altitudecould
+beexchangedbyspeedwiththeelevatortosatisfytheRTAatnoextracost.
+3
+
+--- Page 4 ---
+
+Tothebestofourknowledge,acomprehensivecomparisonofguidancestrategiestosatisfyRTAsduringaCDOhas
+notbeenperformedbefore. Thisnoteevaluatestheperformancesoffourguidancestrategies: tactical,strategic,hybrid
+andModelPredictiveControl(MPC),whichworkingprincipleswillbepresentedinSectionII.B.Thecomparisonis
+focusedontheenvironmentalimpactoftheseguidancestrategies,intermsofnoiseandfuelconsumption,alongwith
+theirabilitytosatisfyoperationalconstraints,includingRTAcompliance. Severaldescentsaregeneratedintroducing
+differentweatherforecastandaircraftperformancemodelingerrorsinahigh-fidelity,fast-timeflightsimulator.
+II.Background
+FMSssuitablefortime-constrainedCDOsrequireatrajectoryplannercapableofgenerating,inreal-time,a(optimal)
+plansatisfyingoneorseveralRTAsalongwithtypicaloperationalconstraints. Moreover,aguidancecomponentisalso
+neededinordertoexecutethistrajectoryplanandaccuratelyfulfilltheRTAs.
+A.Optimaltrajectoryplanning
+TheTEMOtrajectoryplannerformulatestheoptimizationoftheaircrafttrajectoryasanoptimalcontrolproblem,
+which goal is to find the optimal time history of the control vector u ∈ Rnu and the time-independent parameters
+p ∈ Rnp ofasystemwithastatevector x ∈ Rnx suchthatacostfunctiondefinedoveraneitherfreeorfixedtime
+(cid:2) (cid:3)
+interval t , t isminimized[15]subjecttoseveralconstraints:
+0 f
+min J := φ (cid:0) x(t ),p (cid:1) +
+∫ tf
+L(x(t),u(t),p)
+f
+u(t)
+t0
+s.t x(t )= x
+0 0
+x(cid:219) = f (x(t),u(t),p) (1)
+g(x(t),u(t),p) ≥ 0
+ψ (cid:0) x(t ),p (cid:1) =0
+f
+Theoptimalcontrolproblemconsistsofacostfunction J ∈ Rnx ×Rnu ×Rnp →Rcomposedbyarunningcost
+orLagrangetermL ∈ Rnx ×Rnu ×Rnp → R,anendcostorMayerterm φ ∈ Rnx ×Rnp → Raswellasdynamic
+constraints f ∈Rnx ×Rnu ×Rnp →Rnx intheformofOrdinaryDifferentialEquations(ODEs)withinitialconditions
+x
+0
+∈Rnx,pathconstraintsg ∈Rnx ×Rnu ×Rnp →Rng andterminalconstraintsψ ∈Rnx ×Rnp →Rnψ.
+Inthisnote,thestatevector x =[v,γ,h,s,m]iscomposedbytheTrueAirspeed(TAS),theaerodynamicflight-path
+angle,thegeometricaltitude,thedistancetogoandthemassoftheaircraft; andthecontrolvector u = [π,β,n]is
+composed,respectively,bythethrottlesetting,thespeedbrakesstatus(eitherretractedordeployed)andtheloadfactor∗.
+Inaddition,time-independentparametershavenotbeenconsidered(i.e., p =[]). Theexpressionsforthecostfunction,
+∗Theloadfactorisdefinedasn=L/mg,whereListheaerodynamicliftforceandgisthelocalgravityacceleration.
+4
+
+--- Page 5 ---
+
+dynamicsofthestatevectorandconstraintswillbeparticularizedinSectionIII.
+Anoptimalcontrolproblemcanbedefinedovermorethanonephase,wherethedynamicsofthestatevector,the
+terminaland/orpathconstraintsmightchange. Formulti-phaseproblems,anewsetofconstraintsisaddedtolink
+certainstatevariablesacrosstwoconsecutivephases,inordertoguaranteesomecontinuityinthesolution[16].
+ThereareseveralwaystosolvetheoptimalcontrolproblemdescribedbyEq.(1). Inthisnote,directcollocation
+methodshavebeenused. Suchdirectcollocationmethodstransformtheoriginalcontinuous(andthusinfinite)optimal
+control problem into a (discrete and finite) Non-Linear Programming (NLP) problem [16]. In this way, the time
+historiesofcontrolandstatevariablesarediscretizedatasetofcollocationpoints,beingthedifferentialequations
+f approximatedbysomecontinuousfunction(suchaspolynomials)overeachcollocationstep. Thevaluesofthese
+discretizedvariables,alongwith p(ifany),becometheunknownsofthenewfinitevariableproblem,whichcanbe
+formulatedasaNLPproblemandsolvedbycommercialoff-the-shelfsolvers.
+Ideally,theNLPoptimizationproblemshouldbesolvedinstantaneously,i.e.,withoutdelay. Inpracticalsituations,
+however,theexecutiontimeisdifficulttopredict. Despitetheexecutiontimefortheimplementationpresentedinthis
+noteistypicallylowerthan5seconds, insomeparticularconditionsitmayberelativelyhigh, leadingtopotential
+stabilityissuesanddegradingtheperformanceforreal-timeapplications. Yet,severaltechniquescanbeusedtosave
+computationaltimeandimproveconvergence. Inthisnote,thewarm-starttechniquehasbeenused,whichconsistsof
+initializingthevariablesoftheNLPoptimizationproblemwithashiftedguessfromthepreviouslycomputedoptimal
+solution.
+B.Timeandenergymanagedguidancestrategies
+Thetotalenergyoftheaircraftiscomposedbythesumofitskineticandpotentialenergy. Thetotalenergyofan
+aircraftcanbeincreasedbyapplyingenginethrust,anddecreasedbyincreasingtheaerodynamicdrag. Inaddition,the
+lawofconservationofenergystatesthatpotentialenergycanbeexchangedforkineticenergyandviceversathrough
+energymodulation. Itiswell-knownthatthrottleandspeedbrakesarethemosteffectivemeanstoincreaseanddecrease
+thetotalenergy,respectively,whereaselevatorcontrolprovidesaneffectivemeantomodulatethisenergy.
+ThecoreprincipleoftheTEMOconceptisthattheenergyoftheaircraftcanbemanagedinsuchawaythatthe
+RTAsarealwayssatisfied: speed-on-elevatorisusedtoexchangepotentialenergy(altitude)andkineticenergy(speed)
+atanappropriaterate, whilethrottleandspeedbrakeareonlyappliedwhenenergyneedstobeaddedorremoved
+from/tothesystem,respectively. ATEMOdescentplan,computedbysolvingEq.(1),canbeexecutedusingseveral
+guidancevariants,dependingonhowtimeandenergyerrorsaremanaged. Thesevariantsaredescribedbelow.
+5
+
+--- Page 6 ---
+
+1. Tacticalguidance
+Thedeviationsfromtheplannedtimeatthecurrentdistancetogoarecontinuouslynullifiedbyusingspeed-on-
+elevator,whilethethrottleandthespeedbrakesacttogethertomaintaintheplannedenergylevel. Usingthisstrategy,
+theaircraftiscontinuouslyfollowingtheinitiallycomputeddescentplanwithminimumenergyandtimedeviations,
+thusthereisnoneedtoupdatetheplanduringthecourseofthedescent,unlessreachingtheoperationallimitsofthe
+guidancelaws. However,thislogictypicallyhasanegativeimpactontheenvironment(andonenginewearandtear)
+becausethecontinuoususageofthrust(andfrequentusageofspeedbrakes)tonullifytheseenergydeviations.
+2. Strategicre-planning
+UsingthisguidancestrategybothCalibratedAirspeed(CAS)andthrustplansarefollowed. Ontheonehand,the
+CASplanisfollowedusingtheelevator(speed-on-elevator);ontheotherhand,thethrustplan(typicallyatidle)is
+followedactingonthethrottle. Differentfromthetacticalstrategy,timeandenergydeviationsareallowedaslongas
+theydonotexceedapredefinedthreshold. Otherwise,thetrajectorypredictoroptimizesagainthetrajectory,enforcing
+theinitialconditions x tothecurrentstateandtime. ThisresultsinanewCASandthrustplanthatminimizesfuel
+0
+consumptionandspeedbrakesusewhilesatisfyingalltheconstraints(includingRTAs).
+Anadvantageofthestrategicguidanceisthattheentireremainingtrajectoryistakenintoaccountwhencorrecting
+deviations. Inaddition,notcontinuouslycorrectingtimeandenergydeviationscouldleadtopositiveeffectsifthe
+errorscausedbydifferentsourcesofuncertaintyarecounteractive. However,onemustbecautiouswhenselectingthe
+energyandtimeerrorthresholds,acriticaltaskthatisnotstraightforward. Ifthethresholdsaretoopermissive,itcould
+betoolatetoreactandsatisfyallapplicableconstraintswhenreachingthetimeandorenergyerrorthreshold.
+Inapreviouswork[17],thisguidancetechniquewascomparedwiththeguidanceimplementationonatypicalFMS
+thatdoesnotcorrecttimeerrors,showingsuperiorperformancesintermsoffuelconsumptionandRTAcompliance.
+3. Hybridguidance
+Thisstrategyisobtainedasaresultofcombiningthetacticalandthestrategicguidancesdescribedabove. Onthe
+onehand,atacticalcontrollernullifiessustainedtimeerrorsusingspeed-on-elevator. Ontheotherhand,thethrottle
+executesthethrustplan(typicallyatidle). Eventualenergydeviationscausedbyuncertaintiesandinaccuraciesinthe
+descentplanarecorrectedbymeansofstrategicre-planningwheneverthepre-definedthresholdisexceeded. Asa
+result,theaircraftisnolongeraffectedbytimeerrors,attheexpenseofbeingmorepronetoenergydeviations.
+4. ModelPredictiveControl(MPC)
+Usingthisguidancestrategy,theremainingdescenttrajectoryisregularlyoptimizedstartingatthecurrentaircraft
+state,withoutwaitingforenergyandtimedeviationstoexceedacertainthreshold. Then,theresultingCASandthrust
+6
+
+--- Page 7 ---
+
+plansareexecutedusingtheelevatorandthrottle,respectively,onlyuntilthenextre-planinstant. Then,theprocessis
+repeatedmovingforwardthetimehorizon[18].
+MPCcouldbeseenasthelimitofthestrategicguidanceapproachwithenergyandtimedeviationthresholdstending
+to zero, in which the optimal plan is updated in a tactical way. Other research [19] has recently demonstrated the
+feasibilityofusingMPCtoachieveprecisespacingbetweenaircraft,theobjectiveofintervalmanagementoperations.
+III.Setupoftheexperiment
+ThisnotecomparestheperformanceofthefourguidancestrategiespresentedinSectionII.B.Thecomparisonhas
+beenperformedforarealisticscenario,andtheeffectsofweatherforecastandaircraftperformancemodelingerrorshave
+beeninvestigatedthroughabatchstudycomposedby492simulations. Fuelconsumption,timeandenergydeviationsat
+ameteringfix,thenumberofspeedbrakesdeployments,andtheareaaffectedbytheaircraftnoisehavebeenselectedas
+metricsforthiscomparison. Aircraftnoisecontourshavebeencalculatedusingthemodeldescribedin[20].
+A.Scenario
+TheexperimenthasbeenperformedsimulatingdescentstoBarcelona-ElPratairport(Spain),usingfourStandard
+TerminalArrivalRoutes(STARs)publishedforrunway25L.TheseSTARs,whichareshowninFig.1,endatoneofthe
+fourInitialApproachFixes(IAF)andthen,alltheapproachesfinallymergeintoasingleintermediatefix(SOTIL).
+Lateron,theInstrumentalLandingSystem(ILS)glideslopeisintercepted4NMlater(atthefinalapproachpoint). For
+thisnote,SOTIL(theintermediatefix)hasbeenselectedasthemeteringfixwhereRTAwillbeassigned.
+Fig.1 STARsforrunway25LofBarcelona-ElPratairport
+AnAirbusA320modelhasbeenusedfortheexperiment. Itshouldbenotedthatevenifbothflightsimulator
+andTEMOtrajectorypredictordrawuponthesameaircrafttype,thedynamicsandperformancemodelusedbythese
+componentsaredifferent: ontheonehand,theflightsimulatorusesahighfidelitysix-degrees-of-freedom(6DoF)
+7
+
+--- Page 8 ---
+
+modeltorepresenttheaircraftdynamics,andveryaccuratelook-uptablesobtainedfromexperimentaltestsforthe
+aircraftperformance. Ontheotherhand,thetrajectorypredictorrepresentstheaircraftasathree-degrees-of-freedom
+(3DoF)point-massmodel,andapproximatestheaircraftperformancetableswithpolynomialfunctions.
+Immediatelyafterinitiatingasimulation,acontroltimeofarrivalatSOTILisreceivedfromanhypotheticalATC,
+andare-planistriggeredtogenerateanoptimaldescentplansatisfyingtheenteredRTAatthiswaypoint.
+ThreedifferentRTAshavebeenconsideredinthisnote,enforcingtoarriveatSOTILafter21,22and23minutesfrom
+thestartofthesimulation,respectively. Itshouldbenotedthatforthisparticularscenario,theearliestenergy-neutral
+trajectory†inInternationalStandardAtmosphere(ISA)conditions,calmwindsandnominalaircraftperformancemodels
+couldbringtheaircrafttothemeteringfixin19minutes,andthelatestenergy-neutraltrajectoryin27minutes.
+Rightafterconfiguringwithflapsatthegreendotspeed‡,thepseudo-pilotimplementedinthefast-timesimulator
+pressestheapproachbutton(thisisachievedfewnauticalmilesbeforeSOTIL),disablingtheTEMOlogicandengaging
+theILSguidancemodes. Consequently,allthesimulationsendwhenSOTILisreachedandallthemetricsusedforthe
+comparison(fuelconsumption,timedeviation,energyerror,etc.) arecomputedatthismeteringfix.
+B.Formulationofthetrajectoryoptimizationproblem
+ThetrajectorypredictoroftheTEMOtrajectorymanagementconceptgeneratestheoptimaldescentplansubjectto
+RTAsbysolvingaconstrainednon-linearoptimalcontrolproblem,asdescribedinSectionII.A.
+All simulations start at a distance to go of 140 NM from the landing runway threshold, cruising at FL360 and
+Mach0.78,andwithamasscorrespondingtothe90%oftheMaximumLandingMass(MLM).Therefore,theinitial
+conditionsoftheoptimalcontrolproblemforthefirsttrajectoryplanare:
+x 0 =[v | M=0.78 , 0, FL360, 140NM, 90%ofMLM]T (2)
+TheTEMOtrajectorypredictorexpressesthedynamicsoftheaircraftwiththefollowingpoint-massmodel:
+   
+v(cid:219)  T(v,h,π)−D(v,h,m,β) −gsinγ 
+   m 
+   
+   
+γ(cid:219)  g (n−cosγ) 
+   v 
+   
+f =  h(cid:219)   =   vsinγ   (3)
+   
+   
+ s(cid:219)     (cid:112) v2cos2γ−W (h,s)2+W (h,s)  
+   x s 
+   
+   
+m(cid:219)  −f (v,h,π) 
+   
+   
+whereT isthetotalthrustforce;Distheaerodynamicdragforce; f isthetotalfuelflow;andW andW are,respectively,
+x s
+†Anenergy-neutraltrajectoryisperformedatidlethrustandwithoutusingspeedbrakesallalongthedescent.Inotherwords,itdoesnotaddnor
+removeenergytothesystembymeansofthrottleorspeedbrakesactions,respectively.
+‡Greendotspeedistheminimumoperatingspeedinmanagedmodeandcleanconfiguration,beingapproximatelythebestlift-to-dragratiospeed.
+8
+
+--- Page 9 ---
+
+thecrossandalongpathwindcomponents. Inthismodel,theeffectsofthebankangleintheaerodynamicdrag,the
+verticalwindcomponentandthewindspeedderivativeshavebeenneglected,aimingtoreducethecomplexityofthe
+mathematicalmodeland,consequently,thecomputationalburdenoftheNLPoptimizationproblem.
+Aimingatreducingtheenvironmentalimpact,thecostfunctionincludesfuelconsumptionandspeedbrakesuse:
+L = f (v,h,π)+K β (4)
+β
+whereK isaweightingfactorthatdeterminesthepenaltyassociatedtothespeedbrakesdeployment,ifcomparedto
+β
+thefuelflow. Inthisnote,K =1. Furthermore,pathconstraintsarespecifiedasfollows:
+β
+   
+ v (v,h)−v  0
+ CAS CAS,S   
+   
+   
+v −v (v,h) 0
+ CAS,max CAS   
+   
+   
+ M −M(v,h)  0
+ MO   
+   
+   
+ π−0  0
+   
+   
+g =   1−π   ≥  0   (5)
+   
+   
+   
+ β−0  0
+   
+   
+   
+ 1−β  0
+   
+   
+   
+ 1.15−n  0
+   
+   
+   
+ n−0.85  0
+   
+   
+whereπ =0andπ =1correspondtoidleandmaximumthrustsettings,respectively; βisabinaryvariablethatcan
+onlytaketwolevels: eitherretracted(0)ordeployed(1);boundsontheloadfactorhavebeenchosentoprovidegood
+passengerscomfort;andv and M are,respectively,themaximumoperationalcalibratedairspeed(v )
+CAS,max MO CAS
+andMachnumber(M).
+ThetrajectoryplanendsatSOTIL(s ),atv § andat3,000ft,beingreadytotransitiontothenextflaps
+SOTIL CAS,S
+setting,intercepttheILSglidepathandland. Therefore,theterminalconstraintsare:
+   
+ s−s  0
+ SOTIL   
+   
+ψ =  v (v,h)−v   =  0   (6)
+ CAS CAS,S  
+   
+   
+ h−3,000ft  0
+   
+   
+§vCAS,Sisthetargetspeedwhentheaircraftisinconfiguration1.
+9
+
+--- Page 10 ---
+
+C.Configurationoftheguidancestrategies
+ThetacticalguidancelogichasbeenconfiguredtocontinuouslyadjustthecommandedCASsuchthattimedeviations
+arenullifiedusingspeed-on-elevator. Regardingthespecificenergy(definedasthetotalenergydividedbytheweight
+oftheaircraft),amaximumalloweddeviationof50fthasbeenset. Inthecaseofbeingabovethisthreshold,speed
+brakesaredeployed;inthecaseoffallingbelow,thethrottleactstorecovertheplannedenergylevelbycommanding
+smallamountsofthrust. Itisimportanttoremarkthatundernocircumstancesthetrajectorywillbeupdatedduringthe
+executionofthedescent. ThisstrategyissimilartothoseusedbymodernFMSswithRTAfunction.
+Thespecificenergydeviationboundsforthestrategicandhybridguidanceshavebeensetto500ftinthecruise
+phaseuntiltheTODand100ftatthemeteringfix,whiletimedeviationboundsforthestrategicguidancehavebeenset
+to10and3secondsatthesetwopoints,respectively. Betweenthesetwopoints,specificenergyandtimedeviation
+boundswerelinearlyinterpolated. Finally,theMPChasbeenconfiguredtoupdatetheplanevery30seconds,regardless
+ofthepresentenergyandtimedeviations. Thisstrategyisactivatedatthebeginningofthedescent,aimingtoavoida
+continuousshiftoftheTOD.
+D.Weatherforecastandperformancemodelingerrors
+ThetrajectorypredictorhasbeenconfiguredtocomputethedescentplanassumingISAconditions,calmwindsand
+nominalaircraftperformancemodels(i.e.,thosecorrespondingtotheflightsimulator). Itshouldbenoted,however,that
+theoptimizationproblempresentedinSectionIII.Bisgenericenoughtoconsiderrealistictemperatureandwinddataby
+approximatingthemwithcontinuousandtwice-differentiablefunctionsofthealtitudeand/ordistancetogo. Inthis
+note,thehigh-fidelityflightsimulatorisconfiguredwithwindand/ornon-standardatmosphericconditionsinorder
+togeneratemismatchesbetweenthetrajectoryprediction(computedassumingISAandcalmwinds)andthereality.
+Similarly,theaircraftperformancemodelsofthehigh-fidelityflightsimulatorhavebeenmodifiedbyaddingvariations
+withrespecttothoseusedbythetrajectorypredictoroftheTEMOalgorithm.
+1. Weatherforecasterrors
+Theaccuracyoftheplancomputedbythetrajectorypredictor,andespeciallythecomputationoftheETAoverthe
+meteringfix,criticallydependsonthequalityoftheweatherforecast. Windandtemperatureaccuracyrequirementsfor
+thefutureairtrafficmanagementsystemhavebeenassessedbefore. Accordingto[21],standarddeviationsof5ktand
+2.5Kforthealongtrackwindandtemperature,respectively,wereconsideredasarequirementtocomputeaccurate
+trajectorypredictions. Inthisnote,positiveandnegativetemperatureerrorsof5and10◦Candwindspeederrorsof5
+and10kthavebeenconsidered,whilepressureerrorsareleftforfuturework.
+ItisimportanttorememberthatthetrajectorypredictorcomputestheplanconsideringISAandcalmwinds. Asa
+result,thetemperatureerrorsaretranslatedtoISAdeviationsduringtheexecutionofthesimulation. Similarly,wind
+10
+
+--- Page 11 ---
+
+speederrorsareaccomplishedbysimplyaddingwindsthatwerenotconsideredduringtheplanningprocess.
+Thetwowindspeedschosenforthisexperimenthavebeencombinedwiththefourclassicalcompasswinddirections,
+leadingtoatotalofeightsimulationswithwinderrorsforeachcombinationofguidancestrategy,lateralrouteandCTA.
+Regardingthetemperatureerrors,asingleSTARhasbeenconsidered,becauseresultsareindependentoftheroute,
+providedthattheISAdeviationisnotafunctionofthedistancetogo.
+2. Aircraftperformancemodelingerrors
+Inaccuracies in the aircraft performance models are also a non-depreciable source of error when predicting
+trajectories. Thesemodelsarecomposedbyasetofparameterizedfunctionsorlook-uptablesthatexpressaircraft
+characteristics(e.g.,dragcoefficient)asafunctionofcertainvariables(e.g.,liftcoefficientandMach).
+Inthisnotetheeffectsoferrorsinthedragcoefficientandidlethrustmodelshavebeenanalyzed. Theseaircraft-
+related performance functions are expected to have the highest impact on the accuracy of the predicted trajectory.
+Overestimationsandunderestimationsof5%inthemagnitudeofthesetwoaircraftfeatureshavebeenconsideredinthis
+experiment. Therefore,atotaloffoursimulationswithaircraftperformancemodelerrorshavebeenexecutedforeach
+combinationofCTAandguidancestrategy. Asforthecasewithtemperatureerrors,asingleSTARhasbeenconsidered
+fortheanalysis,becauseresultsareindependentofthelateralroute.
+IV.Results
+ThissectionshowstheworkingprinciplesofthefourguidancestrategiespresentedinSectionII.Bbymeansofan
+illustrativeexample. Then,theresultsofthebatchstudyarediscussed.
+A.Illustrativeexample
+ThesimulationchosenforthisillustrativeexamplecorrespondstothatexecutedbyfollowingtheBISBA1MSTAR
+(seeFig.1),subjecttoaRTArequiringtoarrive23minutesafterthestartofthesimulation,withapproximately10ktof
+unexpectedheadwind(becausetherouteisnotstraightandthewindfromtheeastisnotcompletelyalignedwiththe
+trackoftheaircraft),inISAconditions,andwithoutaircraftperformancemodelingerrors.
+Figure2shows,foreachguidancestrategy,thetimeandspecificenergydeviations(∆t and∆E ,respectively)along
+s
+withtheirthresholds(ifany),asafunctionofthedistancetogo. Figures3and4showtheplannedandexecutedstates
+andcontrolsforthedifferentguidancestrategies,respectively.
+AccordingtoFig.2(a)and4(a),intacticalguidancethetimeerrorcausedbytheunexpectedheadwindiscontinuously
+nullifiedbyusingspeed-on-elevator,whileenergydeviationsarecorrectedbyeitherdeployingspeedbrakesoradding
+minimumamountsofthrustwheneverthesedeviationsexceed50ft. Figure3(a)illustratesthatusingthismechanism
+theinitialplancomputedbeforetheTODisneverupdated. Figure4(a)showsthatthethrottleactedtwelvetimesto
+11
+
+--- Page 12 ---
+
+600
+400
+200
+0
+200
+−
+400
+−
+600
+− -140 -120 -100 -80 -60 -40 -20
+Distancetogo[NM]
+]tf[noitaivedygrenecfiicepS
+SOTIL
+10
+∆E s ∆t Re-plan
+∆E s,max ∆t max 6
+3
+0
+-3
+-6
+-10
+Timedeviation[s]
+600
+400
+200
+0
+200
+−
+400
+−
+600
+− -140 -120 -100 -80 -60 -40 -20
+Distancetogo[NM]
+(a) Tactical
+]tf[noitaivedygrenecfiicepS
+10
+6
+3
+0
+-3
+-6
+-10
+Timedeviation[s]
+(b) Strategic
+600
+400
+200
+0
+200
+−
+400
+−
+600
+− -140 -120 -100 -80 -60 -40 -20
+Distancetogo[NM]
+]tf[noitaivedygrenecfiicepS
+10
+6
+3
+0
+-3
+-6
+-10
+Timedeviation[s]
+600
+400
+200
+0
+200
+−
+400
+−
+600
+− -140 -120 -100 -80 -60 -40 -20
+Distancetogo[NM]
+(c) Hybrid
+]tf[noitaivedygrenecfiicepS
+10
+6
+3
+0
+-3
+-6
+-10
+Timedeviation[s]
+(d) MPC
+Fig.2 Specificenergyandtimedeviations
+correctanegativeenergydeviation,whilespeedbrakesweredeployedtwiceduetoanexcessofenergy.
+InstrategicguidancetheCASandthrustplansareexecutedusingtheelevatorandthrottle,respectively,andneither
+timenorenergydeviationsarecorrectedaslongastheyremainwithintheallowedthresholds. Iftheenergyand/ortime
+errorexceedthethreshold,thetrajectoryisre-calculated. Fig.2(b)showsthatfivere-plansweretriggeredbyatime
+errorexceedingtheupperthreshold(i.e.,theaircraftwaslatewithrespecttotheRTA).Wheneverare-planistriggered,
+thecurrentstateandtimeareenforcedastheinitialconditionsforthesubsequentoptimalcontrolproblem(x ),thus
+0
+bothenergyandtimedeviationsarenullifiedatthemomentthenewplanbecomesactive.
+AccordingtoFig.3(b),allre-plansrequiredanoticeablefasterspeedprofileifcomparedwithwhatwasinitially
+planned,aimingtocorrecttheaccumulatedtimedeviations,whichcanbeashighasthemaximumallowedthresholdat
+thedistancetogowherethere-planistriggered. Figure4(b)showsthatfornoneofthere-plansenergymodulation
+withtheelevatorwassufficienttocorrecttheaccumulatedtimeandenergydeviations. Allre-plansrequiredtoadda
+relativelysmallamountofenergytothesystembymeansofthrust,aimingtoincreasetheplannedspeedprofile.
+Inhybridguidanceatacticalcontrollernullifiessustainedtimedeviationswiththeelevatorwhilefollowingthe
+thrustplanwiththethrottle,andenergydeviationsarecorrectedbyusingstrategicre-plans.
+12
+
+--- Page 13 ---
+
+(a) Tactical (b) Strategic
+(c) Hybrid (d) MPC
+Fig.3 Plannedandexecutedstates
+AccordingtoFig.3(c),thetacticalcontrollersystematicallyincreasesthespeedabovethatplannedinordertonullify
+thetimedeviationscausedbytheunexpectedwind. Thishigherspeedleadstoanincreaseoftheaerodynamicdragand,
+consequently,totheenergylossrate. Asaresult,threere-plansweretriggeredinthelast40NMbyanexcessiveenergy
+deviationreachingthelowerthreshold(i.e.,theaircraftlackedofenergy). Allre-plansrequiredadditionalthrust. It
+shouldbenotedthat,sincethisguidancestrategydoesnotcorrectenergydeviationsaslongastheyremainwithinthe
+allowedthreshold,themeteringfixisachievedalmost100ftbelowtheplannedspecifictotalenergylevel. Thismissing
+energywillneedtoberecoveredafterwardsbymeansofadditionalthrust,leadingtomorefuelconsumptionandnoise
+nuisanceatlowaltitudesclosetopopulatedareas.
+InMPCguidance,energyandtimedeviationsareneithertacticallynorstrategicallycorrectedduringthecourse
+ofthedescent(seeFig.2(d)). Instead,thetrajectoryisfrequentlyupdatedbysolvingtheopen-loopoptimalcontrol
+problemdescribedbyEq.(1)overtheremainingdescent. Theaimistoobtaintheoptimalcontrolvectoruthat,ateach
+planupdate,correctstheactualdeviationsoptimizingtheremainingdescentforfuelconsumptionandspeedbrakes
+usage. Inthisparticularexample,theplanwasupdated30times,reachingSOTILattheplannedtimeandenergylevel.
+13
+
+--- Page 14 ---
+
+(a) Tactical (b) Strategic
+(c) Hybrid (d) MPC
+Fig.4 Plannedandexecutedcontrols
+AccordingtoFig4(d),energymodulationwassufficienttocorrectenergyandtimedeviationsuntil90NMfromthe
+runwaythreshold. Thereafter,optimalamountsofenergywereaddedtothesystemaftereachre-plan,aimingtocorrect
+energydeviationsandadjustthespeedplan. However,thiscontinuousactionofthrusthavenegativeeffectsincluding
+enginewear. Ifcomparedwiththehybridandstrategicre-plans,MPCre-plansleadtolessmodificationsoftheactive
+plan,thusrequiringlessthrust. Thereasonbehindthisfactisthattimeandenergydeviationsatthemomentthere-plan
+istriggeredaresmaller,becausetheyarecontinuouslycorrectedratherthanwaitingthemtoreachacertainthreshold.
+B.Comparisonofguidancestrategies
+Thecomparisonofguidancestrategiesisillustratedusingspidercharts,whichallowtoeasilyidentifythetrade-offs
+ofeachstrategyrelativetotheothers. Figure5(a)gatherstheaverageresultsfromthe492simulations. Fortheremaining
+subfigures,thesetofsimulationssubjecttoeitherwind,temperatureoraircraftperformancemodelerrorswereselected
+separatelyaimingatisolatingtheireffects.
+AccordingtoFig.5(a),theaveragetimedeviationatthemeteringfixislowerthantwosecondsforalltheguidance
+strategies,andlessthanonesecondforallthosedifferentfromthestrategic. Instrategicguidance,timedeviationsare
+14
+
+--- Page 15 ---
+
+MPC
+T Tactical T
+2 Hybrid 2
+1.6 Strategic 1.6
+N N
+262 1.2 262 1.2
+260 260
+258 0.8 258 0.8
+256 256
+0.4 0.4
+254 254
+175 178 181 184 187 175 178 181 184 187
+F F
+15 15
+2 2
+30 30
+45 4 45 4
+60 60
+75 6 75 6
+E 8 E 8
+10 10
+S S
+(a) Aggregatedresults (b) Windforecasterrors
+T T
+2 2
+1.6 1.6
+N N
+262 1.2 262 1.2
+260 260
+258 0.8 258 0.8
+256 256
+0.4 0.4
+254 254
+175 178 181 184 187 175 178 181 184 187
+F F
+15 15
+2 2
+30 30
+45 4 45 4
+60 60
+75 6 75 6
+E 8 E 8
+10 10
+S S
+(c) Temperatureforecasterrors (d) Aircraftperformancemodellingerrors
+Fig.5 Comparisonofguidancestrategies. E:Specificenergydeviation[ft];F:Fuelconsumption[kg];N:Area
+affectedbyaircraftnoise[NM2];S:Numberofspeedbrakesdeployments;T:Timedeviation[s].
+allowedaslongastheyremainwithintheallowedbounds. Theremainingstrategiesshowbettertimedeviationfigures
+becausetheirlogicscontinuouslycorrectsustainedtimedeviations,eithertactically(inhybridandtactical)orbymeans
+ofacontinuousre-planoftheoptimaldescenttrajectory(inMPC).Theseresultsdemonstratetheexcellentperformance
+ofTEMOtosatisfytimeconstraints.
+Regardingtheenvironmentalimpact,thetacticalstrategyshowstheworstfiguresintermsoffuelconsumptionand
+noisenuisance,duetothecontinuous(andnotoptimal)useofthrottleanddragdevicestocorrectenergydeviations.
+ThemechanismsusedbytheMPCaresimilartothoseusedbythetacticalstrategy: energyandtimedeviations
+arenotmonitored,buttheelevator,throttleandspeedbrakescontinuouslyacttogethertonullifythem. However,the
+15
+
+--- Page 16 ---
+
+correctiveactionsperformedbytheMPCaremathematicallyoptimalandtakeintoaccounttheremainingdescent
+trajectory. Forthisreason,thenoisenuisance,fuelconsumptionandspeedbrakesusearecomparablewiththoseofthe
+strategicandhybridstrategies.
+Thehybridstrategyshowthebestresultsintermsofenvironmentalimpactmitigationandspeedbrakesuse,proving
+toexploittheadvantagesofthestrategicandtacticalmechanisms. However,thedifferenceswithrespecttothestrategic
+andMPCstrategiesarenotsignificantenoughtoconcludethatthehybridguidanceispreferedovertheothers.
+Asexpected,thespecificenergydeviationatthemeteringfixishigherforthestrategicandhybridstrategies,which
+allowdeviationsupto100ftatthisfixbeforetriggeringare-plan. Similarly,thetacticalstrategypermitsspecificenergy
+deviationsupto50ftbeforeapplyingthrottleordeployingspeedbrakes. TheMPCshowsthebestresultsintermsof
+energydeviation,becauseevery30secondstheenergydeviationisnullifiedwhenactivatingthenewlycomputedplan.
+ItshouldbenotedthatthefuelconsumptionshowninFig.5doesnotconsidertheapproachandlandingphasesafter
+themeteringfix. Ifthisfixwerereachedwithacertainenergydeviation,themissingorexcessiveenergywouldneedto
+beaddedbymeansofadditionalthrust(leadingtomorefuelconsumptionandnoise)orreleasedbymeansofspeed
+brakesuse(leadingtomoreairframenoisenuisance),respectively,atlowaltitudesandnearpopulatedareas.
+UsingMPCguidance,theaircrafttypicallyreachesthemeteringfixwithnegligibleenergydeviations. Consequently,
+theMPCguidancedoesnotrequiretheadditionnorsubtractionofenergyafterthemeteringfix.
+Asexpected,andaccordingtoFig.5(b),winderrorshavetheeffectofincreasingbothabsolutetimeandenergy
+deviations. Itisalsoworthtonotethat, inaggregatedresults(andconsideringthesamenumberofscenarioswith
+prevalentheadwindthanwithtailwind),thefuelconsumption,noisenuisanceandspeedbrakesusearesimilartothose
+observedinFig.5(a). Inaddition,Figure5(c)showsthattemperaturedeviationsalsoleadtosignificanttimeandenergy
+deviations. Ontheonehand,alltheguidancestrategiesconsideredhereinexecutetheCASplan,leadingtoTASerrors
+inpresenceoftemperaturedeviations. Ontheotherhand,theaircraftperformance(andspeciallytheaircraftthrust)
+stronglydependsontheairtemperature. Finally,accordingtoFig.5(d),errorsintheaircraftperformancemodelsare
+notpenalizingthecapabilitytosatisfyRTAs,buthaveamajorimpactontheenvironment.
+Figure6shows,foreachguidancestrategy,thedependenceofeachparticularmetricwithrespecttotheaverage
+longitudinalwindspeederrorW¯ . Eachpointinthescatterplotshowstheresultofasinglesimulation. Positive(res.
+s
+negative)valuesofW¯ representunexpectedhead(resp. tail)windencounteredduringtheexecutionofthedescent.
+s
+AccordingtoFig.6,thehighertheunexpectedheadwind,thelargerthefuelconsumptionandnoisenuisance. In
+contrast,thenumberofspeedbrakesdeploymentstypicallyincreaseswiththeunexpectedtailwind. Therationale
+behindtheseresultsisthattheheadwindleadstoanincreaseoftheenergylossrateperunitdistance,whilethetail
+windreducestheamountofenergylostperunitdistance. Duringtheexecutionofthedescent,theguidancesystemwill
+addmoreenergy(directlyrelatedtofuelconsumptionandnoise)orwillreleaseitbymeansofspeedbrakestosafely
+andefficientlyguidetheaircraftalongtheplannedtrajectorysuchthattheRTAissatisfied.
+16
+
+--- Page 17 ---
+
+200
+190
+180
+170
+10 0 10
+  W¯ [kt]
+s
+]gk[
+noitpmusnoC
+leuF
+2
+0
+2
+ 
+10 0 10
+  W¯ [kt]
+s
+(a) Fuelconsumption
+]s[
+noitaiveD
+emiT
+(b) Timedeviation
+100
+0
+100
+ 
+200
+ 
+10 0 10
+  W¯ [kt]
+s
+]tf[
+noitaiveD
+ygrenE
+cfiicepS
+12.5
+10.0
+7.5
+5.0
+2.5
+0.0
+10 0 10
+  W¯ [kt]
+s
+(c) Specificenergydeviation
+]-[
+stnemyolpeD
+sekarb-deepS
+fo
+rebmuN
+MPC
+hybrid
+strategic
+tactical
+(d) speedbrakesuse
+38
+36
+34
+32
+10 5 0 5 10
+    W¯ [kt]
+s
+]2MN[
+esioN
+eht
+yb
+detcefA
+aerA
+30
+25
+20
+15
+10
+5
+0
+10 5 0 5 10
+    W¯ [kt]
+s
+(e) Areaafectedbythenoise
+]-[
+snalpeR
+fo
+rebmuN
+(f) Numberofreplans
+Fig.6 Correlationbetweenmetricsandwindspeederror
+17
+
+--- Page 18 ---
+
+AccordingtoFigs.6(c),forthetacticalandMPCguidancestrategies,theenergydeviationatthemeteringfixis
+alwaysclosetozero,independentlyofthewindspeederror. However,instrategicandhybridguidance(strategicinthe
+energychannel),moredispersionisfoundforlargewinderrors. Thesameconclusionappliesforthetimedeviation(see
+Fig.6(b)). Inthiscase,thetactical,hybridandMPCguidancestrategiesshowexcellentfiguresofRTAadherence,
+whilethetimedeviationinstrategicguidanceshowsalinearcorrelationwiththelongitudinalwindspeederror.
+Figure6(f)showsthatthenumberofre-plansforthestrategicandhybridguidancestrategiesstronglydependsonthe
+absolutevalueofthelongitudinalwinderror. However,thenumberofre-plansoftheseguidancestrategiesisstilllower
+thanthatoftheMPCstrategy,whichgeneratesanewdescentplanstartingatthecurrentaircraftstateevery30seconds.
+V.Conclusions
+ResultsfromthisbatchstudydemonstratedthatalltheTimeandEnergyManagementOperations(TEMO)variants
+cansafelyaccomplishaRequiredTimeofArrival(RTA)duringaContinuousDescentOperation(CDO)withnegligible
+timedeviations,eveninpresenceofwindandtemperatureuncertaintiesandaircraftperformancemodelingerrors.
+Thetacticalstrategypresentedherein,whichissimilartotheguidancestrategiesusedbycurrentFlightManagement
+Systems(FMSs)withtheRTAfunction,requirescontinuousactionsonthethrottleandspeedbrakesdeployments
+toremainonpathandarriveontime,leadingtomorefuelconsumptionandnoisenuisanceifcomparedwithother
+strategies. Thehybridstrategyshowsthebestresultsintermsofenvironmentalimpactmitigation,andalsorequiresless
+pilotactionstodeployspeedbrakes. Yet,duetoitsstrategicbehaviorwithrespecttoenergydeviations,themeteringfix
+isreachedwithhigherenergydeviationsthanforothervariants. TheModelPredictiveControl(MPC)approachproved
+tobethemostrobustvariantregardingenergyandtimedeviations,showingalsogoodenvironmentalimpactfigures.
+It should be noted that all TEMO variants investigated in this note showed very similar results, in terms of
+environmentalimpactmitigationandabilitytosatisfyoperationalconstraints,inpresenceoferrorsinthewindforecast
+andaircraftperformancemodels. However,eventhesesmalldifferencescouldbesignificantataggregatedlevel.
+Alimitationoftheexperimentpresentedhereinisthattheremainingdescentfromthemeteringfixtotherunway
+thresholdhasnotbeentakenintoaccount. Iftheenergyoftheaircraftatthisfixistoolow,additionalthrustwouldbe
+neededafteroverflyingit. Similarly,iftheenergyistoohigh,itwouldberequiredtousespeedbrakesand/ortodeploy
+high-liftingdevicesorthelandinggearearlier.
+Lastbutnotleast,modernavionicsinthemostaircraftdonothavethecomputingpowertorunthe4Dtrajectory
+optimizationalgorithmspresentedinthisnote. ElectronicFlightBag(EFB)devicesfoundinmostcockpitstoday,
+however,mighthavethispotential,butarenotallowedtoconnectdirectlytotheaircraftcontrolsystems. Reference[22]
+showedthatthisgapcouldbeclosedbythepilotoperatingdirectlytheautopilot,throughtheFlightControlUnit(FCU),
+accordingtoguidanceadvisoriesgivenbytheTEMOtrajectorymanagementalgorithmsrunningintheEFB.
+18
+
+--- Page 19 ---
+
+Acknowledgments
+TheauthorsacknowledgethecontributionsduringthepreparationoftheexperimentofMr. JaapGroenewegandMr.
+MichielValensfromNLR.MuchappreciationgoesouttoMr. RoelHogenhuisfromNLRforhisexpertiseandadvice
+duringthenoisecomputationprocess.
+References
+[1] Clarke,J.P.B.,Ho,N.T.,Ren,L.,Brown,J.A.,Elmer,K.R.,Zou,K.F.,Hunting,C.,McGregor,D.L.,Shivashankara,B.N.,
+Tong,K.,Warren,A.W.,andWat,J.K.,“Continuousdescentapproach: DesignandflighttestforLouisvilleinternational
+airport,”JournalofAircraft,Vol.41,No.5,2004,pp.1054–1066. doi:10.2514/1.5572.
+[2] Robinson,J.,andKamgarpour,M.,“BenefitsofContinuousDescentOperationsinHigh-DensityTerminalAirspaceUnder
+Scheduling Constraints,” 10th AIAA Aviation Technology, Integration, and Operations (ATIO), Fort Worth, TX, 2010.
+doi:10.2514/6.2010-9115.
+[3] Itoh, E., Fukushima, S., Hirabayashi, H., Wickramasinghe, N., andToratani, D., “EvaluatingEnergy-SavingArrivalsof
+Wide-BodyPassengerAircraftviaFlight-SimulatorExperiments,”JournalofAircraft,2018,pp.1–17. doi:10.2514/1.C034348.
+[4] G.Wu,M.,andM.Green,S.,“StrategiesforChoosingDescentFlight-PathAnglesforSmallJets,”JournalofAircraft,Vol.52,
+No.3,2012,pp.847–866. doi:10.2514/6.2012-4817.
+[5] DePrins,J.L.,Schippers,F.K.M.,Mulder,M.,VanPaassen,M.M.,In’tVeld,A.C.,andClarke,J.-P.,“EnhancedSelf-Spacing
+AlgorithmforThree-DegreeDeceleratingApproaches,”JournalofGuidance,Control,andDynamics,Vol.30,No.2,2007,pp.
+576–590. doi:10.2514/1.24542.
+[6] Rumbo,J.R.,Jackson,M.R.,andO’Laughlin,B.E.,“AircraftControlSystemforReachingaWaypointatRequiredTimeof
+Arrival,”,2002. PatentNo.EP1800197B1,Dateoffiling: 14/05/2002.
+[7] Garrido-Lopez,D.,andL.DePrins,J.,“MethodsandSystemsforAircraftGuidance,”,2014. PatentNo.US2014/0343795A1,
+Dateoffiling: 16/05/2014.
+[8] Morani,G.,Vito,V.D.,Corraro,F.,Grevtsov,N.,andDymchenko,A.,“AutomaticGuidancethrough4DWaypointswithtime
+andspatialmargins,”AIAAGuidance,NavigationandControlConferenceandExhibit,Guidance,Navigation,andControland
+Co-locatedConferences,Boston,MA,2013. doi:10.2514/6.2013-4892.
+[9] Bronsvoort,J.,Mcdonald,G.,Lopez-leones,J.,Vilaplana,M.,andBesada,J.A.,“UnderstandingTime-DriftforDifferent
+AircraftDescentGuidanceStrategies,”InternationalConferenceonApplicationandTheoryofAutomationinCommandand
+ControlSystems(ATACCS),London,UK,2012,pp.135–145.
+[10] Garrido-López,D.,D’Alto,L.,andGómezLedesma,R.,“Anovelfour-dimensionalguidanceforcontinuousdescentapproaches,”
+AIAA/IEEE28thDigitalAvionicsSystemsConference(DASC),Orlando,FL,2009. doi:10.1109/DASC.2009.5347433.
+19
+
+--- Page 20 ---
+
+[11] DiVito,V.,Corraro,F.,Ciniglio,U.,andVerde,L.,“AnOverviewonSystemsandAlgorithmsforOn-Board3D/4DTrajectory
+Management,”RecentPatentsonEngineering,Vol.3,2009,pp.149–169. doi:10.2174/187221209789117744.
+[12] Klooster,J.,Wichman,K.,,andBleeker,O.,“4DTrajectoryandTime-of-ArrivalControltoEnableContinuousDescent
+Arrivals,”AIAAGuidance,NavigationandControlConferenceandExhibit,Guidance,Navigation,andControlandCo-located
+Conferences,Honolulu,Hawaii,2008. doi:10.2514/6.2008-7402.
+[13] deJong,P.M.A.,Bussink,F.J.L.,Verhoeven,R.,deGelder,N.,Paassen,M.M.V.,andMulder,M.,“TimeandEnergy
+ManagementduringDescentandApproach: ahuman-in-the-loopstudy,”JournalofAircraft,Vol.54,No.1,2017,pp.177–189.
+doi:http://dx.doi.org/10.2514/1.C033741.
+[14] deJong,P.M.A.,deGelder,N.,Verhoeven,R.,Bussink,F.J.L.,Kohrs,R.,vanPaassen,M.M.,andMulder,M.,“Timeand
+EnergyManagementDuringDescentandApproach: BatchSimulationStudy,”JournalofAircraft,Vol.52,No.1,2014,pp.
+1–14. doi:10.2514/1.C032668.
+[15] Bryson,A.E.,andHo,Y.,Appliedoptimalcontrol: optimization,estimation,andcontrol,TaylorandFrancisGroup,NewYork,
+NY,1975.
+[16] Betts,J.T.,“SurveyofNumericalMethodsforTrajectoryOptimization,”JournalofGuidance,Control,andDynamics,Vol.21,
+No.2,1998,pp.193–207. doi:10.2514/2.4231.
+[17] Dalmau,R.,Verhoeven,R.,Gelder,N.D.,andPrats,X.,“PerformancecomparisonbetweenTEMOandatypicalFMSin
+presenceofCTAandwinduncertainties,”IEEE/AIAA35thDigitalAvionicsSystemsConference(DASC),Sacramento,CA,
+2016. doi:10.1109/DASC.2016.7778097.
+[18] Diehl,M.,Bock,H.G.,Schlöder,J.P.,Findeisen,R.,Nagy,Z.,andAllgöwer,F.,“Real-timeoptimizationandnonlinearmodel
+predictivecontrolofprocessesgovernedbydifferential-algebraicequations,”JournalofProcessControl,Vol.12,2002,pp.
+577–585. doi:10.1016/S0959-1524(01)00023-3.
+[19] Weitz,L.A.,andBai,X.,“UsingModelPredictiveControlforTrajectoryOptimizationandtoMeetSpacingObjectives,”AIAA
+SciTechForum.2018AIAAGuidance,Navigation,andControlConference,Kissimmee,FL,2018. doi:10.2514/6.2018-1599.
+[20] VanderWal,H.,Vogel,P.,andWubben,F.,“Voorschriftvoordeberekeningvandeldenenlnightgeluidbelastingindb(a)ten
+gevolgevanvliegverkeervanennaardeluchtaven.”Tech.rep.,NationalAerospaceLaboratorium(NLR),July2001.
+[21] Robert,E.,andSmedt,D.D.,“Comparisonofoperationalwindforecastswithrecordedflightdata,”ATMR&DSeminar(ATM
+2013),2013.
+[22] Prats,X.,Bendris,B.,Dalmau,R.,Montolio,J.,Day,B.,Lenz,H.,andKohrs,R.,“4Dcontinuousdescentoperationssupported
+byanelectronicflightbag: Ahuman-in-the-loopstudy,”2016IEEE/AIAA35thDigitalAvionicsSystemsConference(DASC),
+2016,pp.1–9. doi:10.1109/DASC.2016.7778022.
+20

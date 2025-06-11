@@ -1,0 +1,766 @@
+
+
+--- Page 1 ---
+
+Effect of ADS-B Characteristics on Airborne
+Conflict Detection and Resolution
+Thom Langejan, Emmanuel Sunil, Joost Ellerbroek and Jacco Hoekstra
+Control and Simulation, Faculty of Aerospace Engineering
+Delft University of Technology, 2628 HS Delft, The Netherlands
+Abstract—MostFree-Flightconceptsrelyonself-separationby as system and situation related deficiencies. System related
+means of airborne Conflict Detection and Resolution (CD&R) limitations affect the accuracy of the transmitted state infor-
+algorithms.AkeyenablingtechnologyforairborneCD&Risthe
+mation. This is not only affected by the accuracy of on-board
+Automatic Dependent Surveillance-Broadcast (ADS-B) system,
+sensors, but also by the number of bits available for (digital)
+which is used for direct state information exchange between
+aircraft. Similar to other communication systems, ADS-B is dataencoding.Ontheotherhand,situationrelateddeficiencies
+affected by a number of limitations which can be broadly reduce ADS-B message detect and decode probability due to
+classified as system and situation related deficiencies. This re- the distance between aircraft and due to signal interference
+searchinvestigatestheimpactoftheselimitationsontheviability
+[4]. Previous researchers have modeled these situation related
+of using ADS-B for airborne CD&R within the Free-Flight
+effects, discussed in [4], [5].
+context. Here, ‘state-based’ conflict detection and the modified
+voltagepotentialconflictresolutionalgorithmareusedasacase-
+Despitetheselimitations,muchofthepreviousworkonair-
+study. An ADS-B model is developed, and its effect on the
+aforementioned CD&R method is measured using three fast- borne CD&R, particularly studies related to the development
+time simulation experiments. The experiments studied overall of novel conflict resolution methods [1], [6], have assumed
+safety with ADS-B, as well as the specific effect of situation perfect state information exchange between aircraft. Thus, it
+related characteristics, i.e., transmission range and interference,
+is as yet unknown whether the ADS-B system is actually
+onsafety.TheresultsindicatedthattheoverallsafetywithADS-
+capable of providing usable state information for airborne
+B was comparable to the case where perfect state information
+was assumed. Additionally, it was found that increasing ADS- CD&R purposes. Furthermore, the extent to which the safety
+B transmission range also increased signal interference, which of CD&R methods is affected by ADS-B limitations is also
+in turn lowered safety. This suggests that the degrading effect unknown.
+of ADS-B signal interference should be considered in future
+airborne CD&R research, particularly for high traffic densities. The research that is presented in this paper represents the
+initial work done towards understanding the effect of ADS-B
+Index Terms—ADS-B, Free Flight, Conflict Detection and
+onself-separationsafetybyfocusingononeparticularairborne
+Resolution (CD&R), Modified Voltage Potential (MVP), Air
+CD&R method. Given the plethora of CD&R methods, the
+Traffic Management (ATM), Safety, Self-Separation, BlueSky
+ATM Simulator frequentlyused‘state-based’ConflictDetection(CD)method,
+andtheModifiedVoltagePotential(MVP)ConflictResolution
+I. INTRODUCTION (CR) algorithm, have been selected as a case-study. An ADS-
+B model is developed, and its effect on state-based CD and
+The Free-Flight Air Traffic Management (ATM) concept
+the MVP CR algorithm are measured using three fast-time
+has been proposed as a means of increasing airspace safety,
+simulation experiments. The goal of the first experiment is
+efficiency and capacity by permitting user defined trajectories
+to determine the overall safety with ADS-B. To this end, an
+[1], [2]. Most Free-Flight concepts rely on self-separation
+ABS-B system based on Minimum Operational Performance
+using airborne Conflict Detection and Resolution (CD&R)
+Specifications(MOPS)[7]iscomparedtoonethatisbasedon
+automation. As airborne CD&R requires information sharing
+measuredactualperformance[8],andtothecasewhereperfect
+between aircraft, a system for inter-aircraft communication is
+state information is used. The second and third experiments
+required. In Free-Flight literature, this information sharing is
+focus on the specific effect of situation related characteristics,
+often achieved using the Automatic Dependent Surveillance-
+i.e., transmission range and interference, on safety.
+Broadcast (ADS-B) system. Aircraft equipped with ADS-B
+transmittersperiodicallybroadcasttheirownstateinformation, This paper is organized as follows. An overview of the Au-
+such as position and velocity, using data obtained from on- tomatic Dependent Surveillance-Broadcast (ADS-B) system
+board sensors. Aircraft can also receive this information from and its model derivation is described in Section II. Details
+neighboring traffic, which can in turn be used for detecting of the three experiments used to study the safety impact of
+and resolving conflicts [3]. ADS-B, as well as a description of the Conflict Detection &
+Similar to other data-link systems, ADS-B has a number Resolution (CD&R) method used are presented in Section III.
+of limitations that affect the quality of the transmitted and re- The results are presented and discussed in Section IV. This
+ceivedinformation.Theselimitationscanbebroadlyclassified paper ends with the main conclusions in Section V.
+8-10 November 2016
+Hosted by Technical University of Delft, the Netherlands
+
+--- Page 2 ---
+
+2
+d=R·c (1c)
+II. ADS-BMODEL
+Using the Haversine function and a position described in
+In this research, the focus is on the airborne ADS-B link be- longitude and latitude with a six digit significance level
+tween aircraft, enabled by ADS-B IN/OUT. ADS-B transmits results in a accuracy ranging from 9 to 17 m, depending on
+specificstateinformationinanomnidirectionalmanner,called the location on the earth.
+squitter. The following different type of squitter messages
+exist, with their corresponding transmission rate: State Accuracy:
+• Airborne positions squitter (2 Hz) In addition to the truncation effect, the accuracy of the
+• Surface position squitter (1 Hz) on-board measurement sensors affects the location precision.
+• Airborne velocity squitter (2 Hz) Location is determined using the Global Navigation
+• Aircraft identification squitter (0.2 Hz) Surveillance System (GNSS). In [9] it is found that a GPS
+• Operational Status (0.4 Hz) measurement has an accuracy of ≤7.8 meter with a 95%
+• Target state (0.8 Hz) confidence interval.
+ThemessagesaretransmittedusingPulsePositionModula-
+tion(PPM)onthe1090MHzcarrierfrequency.Eachmessage Latency:
+contains 120 bits and is transmitted at 1 Mbps, resulting in a A latency of 20 milliseconds in the ADS-B system is
+message duration of 120 µs. assumed, resulting in an offset of several meters (4.44 meters
+Two main elements can be identified affecting the ADS-B for an aircraft cruising at 800 km/h). It should be noted
+system performance; system and situational related elements. different delays are not taken into account in this research.
+System related elements affect the accuracy of an ADS-B
+message, while situation related elements mostly affect the Based on the truncation, accuracy and latency evaluation,
+probability of proper detection and decoding of an ADS- the position accuracy of an ADS-B report is modeled as a
+B message. A schematic overview is shown in Figure 1. standard normal distribution with a standard deviation of 30
+Both elements are discussed and modeled in the following meters, selected as a worse case scenario.
+subsections.
+B. Situation Related ADS-B Elements
+The situation related elements affect the detect and decode
+ADS-B
+probability of an ADS-B report, caused by range and
+Elements
+interference. Analytical models for these two aspects are
+System related Situation related discussed below, based on the research performed in [4], [5].
+Accuracy Timing Reception Probability Range:
+State accuracy Update rate Range The derivation of an analytical model between distance and
+Truncation Latency Interference detect/decode probability is based on the 1090 Extended
+Squitter (ES) Minimum Operational Performance Specifica-
+Figure1. SchematicoverviewofelementsdegradingADS-Bperformance. tions (MOPS) [7]. The general approach, described in [5], is
+followed. This derivation consists of 5 steps.
+Step 1: The derivation begins by computing the Free Space
+A. System Related ADS-B Elements
+Path Loss (FSPL) for the 1090 MHz frequency.
+ThequalityofanADS-Bmessageisaffectedbytruncation,
+4πdf2
+state accuracy and latency. FSPL(d)= (2)
+c
+Truncation: In Equation (2) c (speed of light) and f (carrier frequency)
+Thepositionreportscontainlatitudeandlongitudelocations. are constant. The FSPL per Nautical Mile (NM) is shown in
+The latitude an longitude are both transmitted using 6 signif- Equation (3).
+icant digits. The offset caused by truncation is the distance
+dB
+between two locations where the 6th digit is changed. The FSPL (r)=95.55+20·log (r)[ ] (3)
+NM 10 NM
+Haversinefunction,showninEquation(1),isusedtocalculate
+Step 2: The second step is to obtain the relation between
+the great-circle distance between two points in meters, ex-
+distance and received power (S ) for a specific transmit
+pressedinlatitudeandlongitude.Inthisequationφislatitude rec
+power (S ), shown in Equation (4).
+(rad), λ is longitude (rad), and R (m) is the earth radius. trans
+S =S −FSPL −20·log (r) (4a)
+∆φ ∆λ rec trans 1NM 10
+a=sin( )+cos(φ )·cos(φ )·sin2( ) (1a)
+2 1 2 2 S rec =S rec 1NM −20·log 10 (r) (4b)
+√ √
+c=atan2( a, 1−a) (1b)
+8-10 November 2016
+Hosted by Technical University of Delft, the Netherlands
+
+--- Page 3 ---
+
+In Equation (4), (S −FSPL ) equals the received
+trans 1NM
+poweratadistanceof1NauticalMile(NM),calledS , 1) Omni-directional antenna used by transmitting and re-
+rec 1NM
+for a transmitted power of S . Rewriting this equation, ceiving aircraft.
+trans
+a relation between distance and received power is obtained, 2) A constant noise level on the 1090 MHz frequency is
+shown in Section II-B. assumed, based on [7].
+3) No multi-path effects.
+r =10
+−(Srec−S
+20
+rec1NM)
+(5) 4) Weather related effects are not taken into account.
+5) No shielding by aircraft of ADS-B transmitter/receiver
+antenna.
+Step 3: In this step the detect and decode probability of
+an ADS-B report (without interference) is modeled as an
+Interference
+exponential function of received signal power (S ) [5]. At
+rec
+If multiple ADS-B messages are received simultaneously at
+the maximum reception distance, r , the detect and decode
+0
+a receiver, it may not be possible to decode the received
+probability is set to zero. The received power at r is defined
+0
+messages depending on the degree of overlap. This effect is
+as S [7]. The variable k is used to scale the curve of the
+rec0
+called interference, and is visualized in Figure 2.
+reception probability function, resulting in Equation (6).
+To model the effect of interference on detect and decode
+P(S rec
+)=1−10−k(Srec−
+20
+Srec0)
+,S rec ≥S rec0 (6)
+probability, the Poisson distribution, shown in Equation (10),
+has been used. This probability distribution is generally used
+Step 4: The distance between transmitter and receiver for a to calculate the number of events occurring during a specified
+detect and decode probability of zero, as a function of range time interval:
+(instead of received power), can be obtained by substituting
+Section II-B in Equation (6): e−λt
+P[X =k]=(λt)k , k =0,1,2,... (10)
+k!
+Inthisequation,λistheexpectednumberofeventsoccurring
+P(r)=1− (cid:16) r·10−(Srec1N 2 M 0 −Srec0)(cid:17)k ,r ≥r 0 (7) i o n cc u u n r i r t in ti g m i e n , i t n i t s er th va e l in o t f e l r e v n a g l t l h en t, gt a h n , d X P is is th th e e n p u r m ob b a e b r i o li f ty ev o e f n X ts
+The received power S results in a zero detect and decode occurrences in an interval of length t.
+0
+probability with the corresponding distance r . Using Sec- The different ADS-B transmission rates, discussed in the
+0
+tion II-B, r is obtained as shown in Equation (8) previous section for the 6 different ADS-B reports, are con-
+0
+sidered. Each message has a duration of 120µ seconds and a
+r 0 =10 −(Srec0− 2 S 0 rec1NM) (8) totalupdaterateof6.4Hzisobtained.TheeffectoftheTraffic
+CollisionAvoidanceSystem(TCAS),transmittedonthesame
+The inverse of Equation (8) is substituted in Equation (7)
+frequencyisalsoadded.Thefollowingassumptionsaremade:
+to obtain Equation (9).
+1) No de-garbling is used. De-garbling can be modeled by
+r selecting a lower message duration.
+P(r)=1−( )k,r ≥r (9)
+r 0 2) ADS-B message is modeled as 1 message, containing
+0
+all the state information (instead of several different
+Equation(9)isusedtodeterminetheno-interferencereception
+messages).
+probability as a function range, using a fixed transmit power,
+S . λ is calculated by the summation of the message update
+trans
+Step 5: For the final step, the value of the scaling variable frequencies (F update ), multiplied by the number of aircraft
+k is determined. In [7] a minimum triggering level (S MTL ) within range (N ac ), shown in Equation (11).
+of -90 dBm for Class A3 equipped commercial transport is
+defined with the following requirements:
+1) If link margin (S − S ) = 3dB the minimum 1.0
+rec MTL
+reception probability should be ≥ 0.99.
+0.5
+2) If link margin (S − S ) = -3dB the minimum
+rec MTL
+0.0
+reception probability should be ≥ 0.15.
+SubstitutingthesevaluesinEquation(6)resultsinascaling 0.5
+−
+factor k of 6.4314. In this model, it should be noted that the
+1.0
+−
+maximum reception distance, r , is a function of transmit
+0
+0.0 0.5 1.0 1.5 2.0 2.5 3.0
+power (S trans ) and sensor sensitivity (S rec0 ). Time[s] × 10− 6
+The following assumptions are made in the detect and
+decode probability model derived with respect to range:
+]-[edutilpmadezilamroN
+3
+ADS-Bsignal
+Interferringsignal
+Originalsignal
+Figure2. Interferenceeffect;bitsfromtheoriginalsignalcannotbedecoded
+anymoreduetointerference.
+8-10 November 2016
+Hosted by Technical University of Delft, the Netherlands
+
+--- Page 4 ---
+
+4
+independent variables for each experiment are different. But,
+Receptionanddecodingprobability the scenario settings, Conflict Detection (CD) and Conflict
+Resolution (CR) method, and dependent variables are similar
+between the experiments.
+1.0
+0.8 A. Simulation Environment
+0.6
+BlueSky, an open-source Python based Air Traffic Con-
+0.4
+trol (ATC) simulator developed at the Delft University of
+0.2 Technology, is used as simulation environment. Many useful
+0.0 features are already available in the simulator, such as CD
+0 50 100 500 250 0 andCRintheAirborneSeparationAssuranceSystem(ASAS)
+150 750
+Range[NM] 200 1000 Nr AC module. DataLog options, way-point routing and aircraft
+performance limitations (accelerations, bank angles etc.) are
+also implemented. The open-source characters enables easy
+Figure 3. ADS-B detect and decode probability for MOPS specifications,
+implementation of new modules, such as an ADS-B model,
+basedonnumberofinterferringaircraftandrangebetweenaircraft.
+in the simulator. For this research, the simulation update rate
+was set to 10 Hz. Further information regarding the simulator
+can be found in [10].
+λ=N ·F (11)
+ac update
+B. Conflict Detection
+Assume a message is received at t=0. The duration of an
+ADS-B message τ is 120µs, equal to the time variable in In the context of CD&R it is important to distinguish
+Equation (10). between intrusions and conflicts. An intrusion, also known
+To obtain the probability no other messages are received in as Loss Of Separation (LOS), occurs when the following
+this time interval the variable X in Equation (10) is set equal minimum separation requirements are violated [11]:
+to 0, resulting in Equation (12). • 5 Nautical miles in the horizontal plane
+• 1000 feet in the vertical plane
+e−λt
+P[X =0]=(λt)0 (12a) On the other hand, a conflict is a predicted intrusion within a
+0!
+certain look-ahead time; a five minute look-ahead time used
+P[X =0]=e−Nac(·FADS−B·τADS−B+FTCAS·τTCAS) (12b) in this work [11]. To detect conflicts, the simple state-based
+CD method is used. Here, linear extrapolation of aircraft state
+vectors over the look-ahead time is used to detect conflicting
+trajectories.
+C. Situation Related ADS-B Model
+The detect and decode probabilities described in Sec- C. Conflict Resolution - MVP
+tion II-B can be combined. The corresponding detect and The Modified Voltage Potential (MVP) conflict resolution
+decode probability is shown in Equation (13). The probability method is based on modeling aircraft as similarly charged
+P T(i,j) resembles the combined detect and decode probability particles that repel each other as described in [12], [1]. The
+of aircraft i receiving an ADS-B message from aircraft j, determinationoftheMVP-basedresolutionvectorisshownin
+depending on range and interference. P R(i,j) is the detect more detail in Figure 4:
+and decode probability of aircraft i with respect to aircraft
+j due to range between the two aircraft. P I(i,j) (N acscaled ) O(cid:48)
+is the probability due to interference. The number of aircraft O
+(N ) are scaled according to the distance of aircraft j
+acscaled
+at aircraft i. The model is shown in Figure 3.
+C
+Totalprobability Range ScaledInterference A
+Vrel V
+r
+e s
+P (cid:122) (r, (cid:125) N (cid:124) (cid:123) )= (cid:122) P (cid:125)(cid:124) (r (cid:123) )·P (cid:122) (N (cid:125)(cid:124) (cid:123) ) (13) IP Z B
+T(i,j) acscaled R(i,j) I(i,j) acscaled
+III. EXPERIMENTDESIGN
+Inthissectionthedesignofthreeseparatefast-timesimula-
+Figure4. MVP-basedconflictresolutionforaircraftAandBinthehorizontal
+tionexperimentsaredescribed.Thegoalofthefirstexperiment
+plane.Therelativevelocityvector(Vrel)andtheMVP-basedresolution vector
+istoassesstheoverallsafetyoftheADS-Bsystem.Theaimof (Vres)aredisplayed.
+the second experiment is to study the effect of ADS-B range.
+Thegoalofthethirdexperimentistodifferentiatebetweenthe The relative velocity vector with respect to a conflicting
+contribution of the range effect and the interference effect in aircraft (A) is calculated (V ). This relative velocity vector
+rel
+the ADS-B model. Since experiment has a different goal, the results in a loss of separation without any intervention. Using
+8-10 November 2016
+Hosted by Technical University of Delft, the Netherlands
+
+--- Page 5 ---
+
+5
+thisrelativevelocityanddistancebetweenthetwoaircraft,the 135NM
+ClosestPointofApproach(CPA),pointC,canbedetermined.
+SubsequentlytheclosestdistanceoutoftheIntruderProtected Possible
+M
+Zone(IPZ),pointO,isdetermined.Thecorrespondingresolu- N WPlocation
+95
+tion vector CO still results in a LOS. Therefore Equation (14)
+can be used to find the final displacement (V ):
+res Initial
+Heading Test
+|CO(cid:48)| 1 Volume
+= (14)
+|CO| |cos(arcsin( R )−arcsin(AC)| Created
+AB AB AC
+Using the distance vector CO(cid:48), the resolution velocity vector
+Figure 6. Initialization of AC with
+is calculated using Equation (15) [6]. In this equation, t is
+C Figure5. Threeflightlevels 45 ◦ headingcaption.
+thetimerequiredforaircraftBtoreachpointCwhentraveling
+with its pre-resolution velocity. TABLEI
+INDEPENDENTVARIABLES.EXPERIMENT-I
+CO(cid:48)
+V MVP = t +V current (15) ACdensity Low Medium High
+C ADS-B MOPS Realistic Perfect
+After a successful conflict resolution, aircraft are required
+to follow the heading back to their original destination, i.e.,
+aircraft do not recover their original track but fly the heading specifications (MOPS), one on measurements (Realistic) and
+that leads them directly to their destination. Other aircraft one without ADS-B for perfect state information (Perfect).
+The ADS-B performance described in the previous section
+states, such as altitude and velocity, are also restored.
+is based on the MOPS specifications. However, from mea-
+D. Traffic Scenarios surements it is obtained that the ADS-B system has a larger
+range than the MOPS specifications [8]. Also the interference
+Acommonsetoftrafficscenarioswerecreatedforallthree
+effect can be reduced using de-garbling. This can be mod-
+experiments. The testing region is discussed first, followed
+eled by reducing the specific message length in the Poisson
+by the traffic demand.
+distribution. Therefore two ADS-B models are assessed, one
+basedonMOPSspecificationsandoneonmeasurements.The
+Testing Region: A cylindrical region is used, consisting
+parameters to determine the two ADS-B models are shown in
+of an initialization volume and test volume. Aircraft are only
+Table II.
+logged while they are within the experiment area and deleted
+when leaving the experiment area. To maintain a constant air TABLEII
+traffic density the experiment is divided in three phases. PARAMETERSDESCRIBINGADS-BDETECTANDDECODEPROBABILITY,
+BASEDONMOPS[7]ANDMEASUREMENTS[8].
+TotalExperiment
+150minutes ADS-BAssumptionsType
+of B P a u r ir i e c l - d r l a - o u f g t p g i i n o n f g s n im p u h m u a l b a s e t e i r on Logp L e o r g fo g r i m ng an p c h e a m se etrics keep C ai r R r e c u a r t a n i f n - t o g d u a e t i n r p s c i h r t a y a f s t c e t o o nstant R0[km] MO 1 P 7 S 6 [7] Re 3 a 7 li 0 stic
+45minutes 60minutes 45minutes
+R0[NM] 95 200
+Strans [dBm] 51 57
+Post-experimentphase Strans [W] 125 500[8]
+Processdata
+Trafficdemand: Ascenariogeneratorisconstructedtocre- τ ADS-Bµs 120 60
+ate similar air traffic scenarios (with different random number τ TCASµs 64 32
+seeds). Aircraft are created on the edge of the initialization Stateaccuracy(TableIII) MOPS Realistic
+boundary at one of the 40 discrete points. Aircraft are created
+on three different flight levels and will randomly climb or
+The resulting range and interference detect and de code
+descend to a different flight level or continue cruising at the
+probability curves are shown in Figure 8 and Figure 7.
+current flight level. This results in conflicting aircraft from
+ThedifferentsystemrelatedinaccuraciesusedintheMOPS
+all possible directions. Three traffic densities are defined with
+and realistic model are shown in Table III.
+their corresponding steady state number of aircraft, named
+Five repetitions were performed for each independent vari-
+Low (50), Medium (75) and High (100).
+able combination, using a different traffic scenario for each
+repetition. This resulted in 45 separate runs for Experim ent I
+E. Independent Variables - Experiment I
+(3 ADS-B settings x 3 traffic densities x 5 repetitions).
+Thegoalofthisexperimentistoassesstheoverallsafetyof
+F. Independent Variables - Experiment II
+the MVP method using ADS-B based state information. An
+overview of the independent variables is shown in Table I. The goal of the second experiment is to study the effect of
+Three ADS-B models are used; one based on the MOPS changing the maximum reception distance. From Section II
+8-10 November 2016
+Hosted by Technical University of Delft, the Netherlands
+
+--- Page 6 ---
+
+1.0
+0.8
+0.6
+0.4
+0.2
+0.0
+0 50 100 150 200
+Range(NM)
+)-(ytilibaborP
+Non-interferenceprobabilityvsrange 1.0
+0.8
+0.6
+0.4
+MOPS 0.2
+Realistic
+0.0
+0 200 400 600 800 1000
+NrofInterferringAC
+Figure7. MOPSandRealistic.
+Range.
+)-(ytilibaborP
+InterferenceprobabilityvsnrofAC
+NoDe-garbling
+De-garbling
+Figure8. MOPSandRealistic.
+Interference.
+TABLEIII
+SYSTEMRELATEDINACCURACIES
+Systemrelatedinaccuracies
+Cases
+Parameters Distribution Realistic MOPS
+Position[m] Normal µ=0,σ=30 µ=0,σ=50
+Velocity m Normal - µ=0,σ=10
+s
+Heading[ ◦ ] Normal - µ=0,σ=3
+it can be obtained that an increase in range results in a
+strongerinterferenceeffect.ThereforedifferentADS-Branges
+areassessedandcompared.Thesametrafficdensitiesareused.
+TherangeoftheseADS-Bmodels,basedontheMOPSmodel,
+are shown in Table IV. The maximum reception range can be
+modified by adapting the transmit power.
+TABLEIV
+INDEPENDENTVARIABLESEXPERIMENTII(RANGEANALYSIS).
+MOPSfraction 1 1 1 1 2
+8 4 2
+ADS-BRange[NM] 12 24 48 96 192
+ACdensity Low Medium High - -
+The corresponding reception probability curves (defined as
+fractions of the MOPS range) are shown in Figure 9.
+Once again, five repetitions were performed. This resulted
+in 75 separate runs for Experiment II (5 range settings x 3
+traffic densities x 5 repetitions).
+G. Independent Variables - Experiment III
+An experiment is performed to asses the individual con-
+tribution of the two situation related properties; range and
+1.0
+0.8
+0.6
+0.4
+0.2
+0.0
+0 50 100 150 200
+Range(NM)
+)-(ytilibaborP
+6
+interference. Three traffic densities are assessed. An overview
+of the independent variables is shown in Table V.
+TABLEV
+INDEPENDENTVARIABLES.EXPERIMENT-III
+ACdensity Low Medium High
+ADS-B MOPS MOPSinterference MOPSrange
+The following ADS-B settings are used as independent
+variables:
+1) ADS-B MOPS settings, interference and range effect.
+2) MOPS based range effect only.
+3) MOPS based interference effect only.
+For this experiment, five repetitions were also performed.
+This resulted in 45 separate runs for Experiment III (3 ADS-
+B models x 3 traffic densities x 5 repetitions).
+H. Dependent variables
+The conflicts detected, based on ADS-B state information
+are being logged. Additionally the conflicts detected when
+perfect state information would be available are logged. From
+these two metrics the false alerts (false positives) and missed
+conflicts (false negatives) can be obtained. Besides conflicts
+detected, the intrusions are logged.
+Data representation: Each observed dependent variable is
+shown in a figure. The different traffic densities are shown
+on the x-axis, and the dependent variable on the y-axis.
+The legend indicates the ADS-B model. The 95% confidence
+interval is shown with the error bar for the 5 repetitions of
+each experiment setting.
+IV. RESULTSANDDISCUSSION
+In this section the results of the three different experiments
+are presented and discussed.
+A. Results Experiment - I
+The goal of this experiment is to identify the overall effect
+on safety when ADS-B is used for inter-aircraft information
+sharing.Anoverviewofthetypeofdetectedconflictsisshown
+in Table VI.
+TABLEVI
+TYPEOFCONFLICTSDETECTEDASPERCENTAGEOFTOTALCONFLICTS
+FORTHEMOPSANDPERFECTADS-BSETTINGS.
+ADS-Bmodel Conflicttype Trafficdensity Cumulative
+Low Medium High
+1MOPS RealConflict 92 88 89 89
+8
+1MOPS MOPS FalsePositive 8 12 11 11 4 FalseNegative 5 4 5 5
+1
+2
+MOPS
+RealConflict 95 94 94 94
+MOPS Realistic FalsePositive 5 6 6 6
+2 · MOPS FalseNegative 3 3 4 4
+It can be observed that the percentage of false positive
+conflictsincreaseswithtrafficdensity.Thepercentageoffalse
+Figure9. MOPSbasedreceptionmodelsdefinedasfractionofMOPSrange. alerts is larger for the MOPS based ADS-B model than the
+Non-interferenceprobabilityvsrange. Realistic ADS-B model. The detected number of conflicts per
+8-10 November 2016
+Hosted by Technical University of Delft, the Netherlands
+
+--- Page 7 ---
+
+7
+6
+5
+4
+3
+2
+1
+0
+Low Medium High
+]-[CArepdetcetedstciflnoC
+MOPS Realistic Perfect
+Figure10. Numberofdetectedconflictsperaircraft.Experiment-I.
+0.30
+0.25
+0.20
+0.15
+0.10
+0.05
+0.00
+Low Medium High
+]-[CArepsnoisurtnI
+MOPS Realistic Perfect
+Figure11. Numberofintrusionsperaircraft.Experiment-I.
+aircraftareshowninFigure10.Itisshownthatmoreconflicts
+are detected for the ADS-B based state information cases.
+The number of intrusions[6] per aircraft is shown in Fig-
+ure 11. The number of intrusions when perfect state informa-
+tion is used is larger than the case where the ADS-B model
+is used for the medium and high traffic density situation.
+However, no significant differences are observed.
+B. Results Experiment - II
+In addition to the simulations, described in Section IV-A,
+a range analysis is performed. The goal of this analysis is to
+assess the effect of an increase in range, which also results
+in an increasing interference effect. The legend indicates the
+ADS-B model as fraction of the MOPS range. The number of
+detected conflicts [6] for each model are shown in Figure 12.
+The models with
+1th
+and
+1th
+of the MOPS range show a
+8 4
+smaller amount of detected conflicts.
+Figure13showsthenumberofintrusions.Largedifferences
+start to occur between 1th and 1th of the range of the MOPS
+8 4
+performance (12 NM and 24 NM). At 25% of the MOPS
+range, the number of intrusions show about a 50% increase,
+7
+6
+5
+4
+3
+2
+1
+0
+Low Medium High
+carepdetcetedstciflnoC
+0.6
+0.5
+0.4
+0.3
+0.2
+0.1
+0.0
+Low Medium High
+1 1 1 8 4 2 1 2
+Figure12. Numberofdetectedconflictsperaircraft.Experiment-II.
+]-[CArepsnoisurtnI
+1 1 1 8 4 2 1 2
+Figure13. Numberofintrusionsperaircraft.Experiment-II.
+0.90
+0.88
+0.86
+0.84
+0.82
+0.80
+Low Medium High
+]-[ecnerefretnIPR
+7
+1 1 1 8 4 2 1 2
+Figure14. Meaninterferencereceptionprobability.Experiment-II.
+while at 12.5% of the MOPS range the number of intrusions
+increases with 250% for the highest traffic density.
+From the number of intrusions it is found that the per-
+formance difference for the single MOPS model, with a
+range of 96 NM (”1”) is slightly better than the model with
+double the MOPS model, with a range of 190 NM (”2”)
+regardingnumberofintrusions.Withthe5minuteslook-ahead
+time, for both ADS-B models, the range dependent detect
+and decode probabilities are in the linear region, close to 1.
+However, the effect of interference increases. This is clearly
+shown in Figure 14; where the decreased detect and decode
+probability caused by interference is shown. The increased
+range results in a decrease of detect and decode probability
+due to additional interference. Therefore it can be concluded
+that the interference effect should be taken into account in
+extremely high traffic density situations.
+C. Results Experiment - III
+The goal of this final experiment is to differentiate betw een
+the two main situation related effects; interference and range.
+Thenumberofdetectedconflictsare showninFigure15.Itis
+obtained that the number of detected conflicts for the range-
+only model is slightly lower than for the other two.
+The number of intrusions while using the interference-only
+model is higher than the range-only model, especially a t the
+higher traffic densities. The interference effect has a m ore
+negative impact than the range effect, especially at the High
+traffic density.
+D. Discussion
+From the first experiment it can be concluded that the
+effect of ADS-B based state information is small for the
+MVP method for the assessed traffic densities, compared
+8-10 November 2016
+Hosted by Technical University of Delft, the Netherlands
+
+--- Page 8 ---
+
+7
+6
+5
+4
+3
+2
+1
+0
+Low Medium High
+]-[CArepdetcetedstciflnoC
+MOPS Interference Range
+Figure15. Numberofdetectedconflictsperaircraft.Experiment-III.
+0.25
+0.20
+0.15
+0.10
+0.05
+0.00
+Low Medium High
+]-[CArepsnoisurtnI
+8
+• The range analysis showed that the combination of state-
+basedconflictdetectionandMVPisaveryrobustCD&R
+method, even when the maximum range was artificially
+reduced to
+1th
+of the ADS-B minimum ADS-B specifi-
+4
+cations.
+• An increase in maximum reception range (by increasing
+transmission power) decreases the total detect and de-
+code probability. This is because increasing range also
+increases signal interference as additional aircraft are
+detected.
+• The interference effect becomes more dominant than the
+range effect for higher traffic densities.
+MOPS Interference Range
+• The ADS-B system should not be considered as a di-
+rect limiting factor for self-separation or Free Flight.
+However, the interference effect at high traffic densities
+should be taken into account. The use of a single carrier
+frequency, increase in transmit power and high traffic
+density increase the interference effect.
+• Future research will investigate the effect of ADS-B
+characteristics on additional CD&R methods and for
+higher densities.
+Figure16. Numberofintrusionsperaircraft.Experiment-III.
+REFERENCES
+to using perfect state information. This is partly due to [1] M. S. Eby, “A Self-Organizational Approach for resolving Air Traffic
+the look-ahead time of 5 minutes, resulting in a detect and Conflicts,”TheLincolnLaboratoryJournal,vol.7,no.2,pp.239–253,
+1994.
+decode probability close to one. Also the position accuracy
+[2] K. Bilimoria, K. Sheth, H. Lee, and S. Grabbe, “Performance evalua-
+is high with respect to the dimensions of the IPZ. However, tion of airborne separation assurance for free flight,” in 18th Applied
+the interference effect should be taken into account. A larger AerodynamicsConference. AIAA,2000.
+[3] M. Eby and I. Kelly, W.E., “Free flight separation assurance using
+transmit power increases the number of aircraft within range
+distributedalgorithms,”1999IEEEAerospaceConference.Proceedings
+causing interference. Additionally, the impact of each aircraft (Cat.No.99TH8403),vol.2,1999.
+increases, due to the higher transmitted power level. Also [4] R.Barhydt,M.T.Palmer,andN.Langley,“Ads-bwithinamulti-aircraft
+simulationfordistributedair-groundtrafficmanagement,”AIAADigital
+in the sensitivity analysis (Experiment - III) the effect of
+AvionicsSystemsConference,2004.
+interference became larger at higher traffic densities. The [5] W.ChungandR.Staab,“A1090ExtendedSquitterAutomaticDepen-
+detect and decode probability decreases with increasing dentSurveillance-Broadcast(ADS-B)ReceptionModelforAir-Traffic-
+ManagementSimulations,”AIAA2006-6614,ModelingandSimulation
+number of aircraft according to the Poisson distribution.
+TechnologiesConferenceandExhibit,no.August,pp.1–11,2006.
+Additionally an increase in maximum reception range (i.e. [6] J.Maas,E.Sunil,J.Ellerbroek,andJ.Hoekstra,“Theeffectofswarming
+transmit power) decreases the interference probability even onavoltagepotential-basedconflictresolutionalgorithm,”ICRAT,2016.
+[7] RTCA Special Committee 186, “Minimum Aviation System Perfor-
+further. Since significant ATM research efforts are devoted
+mance Standards for Automatic Dependent Surveillance Broadcast
+towards increasing airspace capacity, it is necessary to (ADS-B),”RTCA/Do-242a,2002.
+consider the impact of ADS-B signal interference when these [8] B. S. Y. D. Ali, W. Schuster, W. Ochieng, A. Majumdar, and T. K.
+Chiew,“FrameworkforADS-BPerformanceAssessment:theLondon
+higher densities are realized.
+TMACaseStudy,”AIAA,pp.39–52,2013.
+[9] Global positioning system standard positioning service performance
+standard (2008). [Online]. Available: http://www.gps.gov/technic al/ps/
+2008-SPS-performance-standard.pdf
+[10] J.M.HoekstraandJ.Ellerbroek,“BlueSkyATCSimulatorProject:an
+V. CONCLUSION
+OpenDataandOpenSourceApproach,”ICRAT2016.
+[11] E.Sunil,J.Ellerbroek,andJ.Hoekstra,“Analysisofairspacestructure
+In this paper, an ADS-B model based on system and
+and capacity for decentralized separation using fast-time simulations,”
+situation related characteristics was presented. The effect JournalofGuidanceControlandDynamics,2016.
+of these characteristics on airborne Conflict Detection and [12] J. Hoekstra, R. van Gent, and R. Ruigrok, “Designing for safet y: the
+free flight air traffic management concept,” Reliability Engineering &
+Resolution (CD&R) was studied using fast-time simulation
+SystemSafety75,pp.215–232,2002.
+experiments. Here, state-based conflict detection and
+the Modified Voltage Potential (MVP) conflict resolution
+algorithmwasusedasacase-study.Forthestudiedconditions,
+the following conclusions can be drawn:
+• The difference in safety between using ADS-B based
+stateinformationandperfectstateinformationwassmall.
+8-10 November 2016
+Hosted by Technical University of Delft, the Netherlands

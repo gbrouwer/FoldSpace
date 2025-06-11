@@ -1,0 +1,1120 @@
+
+
+--- Page 1 ---
+
+Delft University of Technology
+Modeling Airspace Stability and Capacity for Decentralized Separation
+Sunil, Emmanuel; Ellerbroek, Joost; Hoekstra, Jacco; Maas, Jerom
+Publication date
+2017
+Document Version
+Final published version
+Published in
+12th Seminar Papers
+Citation (APA)
+Sunil, E., Ellerbroek, J., Hoekstra, J., & Maas, J. (2017). Modeling Airspace Stability and Capacity for
+Decentralized Separation. In 12th Seminar Papers: 12th USA/Europe Air Traffic Management Research and
+Development Seminar
+Important note
+To cite this publication, please use the final published version (if applicable).
+Please check the document version above.
+Copyright
+Other than for strictly personal use, it is not permitted to download, forward or distribute the text or part of it, without the consent
+of the author(s) and/or copyright holder(s), unless the work is under an open content license such as Creative Commons.
+Takedown policy
+Please contact us and provide details if you believe this document breaches copyrights.
+We will remove access to the work immediately and investigate your claim.
+This work is downloaded from Delft University of Technology.
+For technical reasons the number of authors shown on this cover page is limited to a maximum of 10.
+
+--- Page 2 ---
+
+Twelfth USA/Europe Air Traffic Management Research and Development Seminar (ATM2017)
+Modeling Airspace Stability and Capacity for
+Decentralized Separation
+Emmanuel Sunil, Joost Ellerbroek, Jacco Hoekstra and Jerom Maas
+Control and Simulation, Faculty of Aerospace Engineering
+Delft University of Technology (TU Delft)
+Delft, The Netherlands
+Abstract—In the context of decentralized separation, airspace To develop appropriate capacity modeling methods, it is
+stability pertains to the propagation of conflict chain reactions first necessary to establish a commonly accepted definition of
+as a result of tactical conflict resolution maneuvers. This notion capacityfordecentralization.Atafundamentallevel,capacity,
+of airspace stability has been used in previous literature to
+regardless of location or type of separation management, can
+developasemi-empiricalmethodfordeterminingthecapacityof
+a decentralized direct-routing airspace concept in the horizontal be considered equivalent to the density at which the airspace
+plane. The present paper extends this method by explicitly mod- becomes saturated, i.e., the density beyond which no further
+eling: a) the effect of a given Conflict Detection and Resolution demandcanbeaccommodatedwithoutsignificantlydegrading
+(CD&R)strategyonthestabilityoftheairspace;b)theinfluence macroscopic system properties such as safety and efficiency.
+of direct-routing on instantaneous conflict probability; and c)
+In line with this view of capacity, previous research has
+the impact of finite-time measurements on the determination
+of airspace states. To validate the resulting analytical capacity identifiedairspacestability,whichconsidersthepropagationof
+model,fast-timesimulationswereperformed.Theresultsindicate conflicts as a result of tactical conflict resolution maneuvers,
+that the predictions of the analytical model are close to that of as an important metric to determine the saturation density
+theprevioussemi-empiricalapproach.Thus,theanalyticalmodel
+of decentralized airspace [5], [6]. These studies have shown
+can be used to obtain a first-order estimate of the maximum
+that tactical conflict resolutions can destabilize the airspace
+theoretical capacity, as along as simulation settings do not cause
+the ‘local’, or per aircraft, conflict rate to deviate significantly at high traffic densities by triggering conflict chain reactions
+from assumptions made during the model derivation. Future due to the scarcity of airspace and due to the type of CD&R
+work will focus on relaxing model assumptions, and extending algorithm used. Previous work has also presented the Domino
+the modeling approach to three-dimensional airspace.
+Effect Parameter (DEP) as a measure of stability [5], [6], and
+Keywords—ATMperformancemeasurement;airspacecapacity it has been used to develop a semi-empirical model to de-
+models; airspace stability; Domino Effect Parameter (DEP); de-
+termine the capacity of a decentralized direct-routing airspace
+centralized separation; self-separation; BlueSky ATM simulator
+concept in horizontal plane [7]. While this approach provides
+an innovative and practical means of measuring capacity
+for decentralization, it requires time consuming simulations
+NOMENCLATURE
+to asses the factors affecting capacity for different airspace
+C = ConflictCount configurations and/or CD&R strategies.
+N = AircraftCount This paper extends the aforementioned semi-empirical ap-
+p = Instantaneousconflictprobabilitybetweentwoaircraft proach by explicitly modeling the effect of a given CD&R
+2
+p s = Effectofstructureononinstantaneousconflictprobability algorithm on airspace stability, and by taking into account the
+V = TrueAirspeed influenceofdirect-routingoninstantaneousconflictprobability
+t l = ConflictDetectionlook-aheadtime (the later from our prior work). Additionally, the impact of
+D sep = Horizontalseparationminimum finite-time measurements on the determination of airspace
+A = Airspacearea
+stateshasalsobeenconsideredtofurtherimprovetheaccuracy
+T = Analysistime
+of the resulting analytical capacity model. This model is
+L(cid:22) = Averageflightdistance
+parametrized by physical airspace and CD&R parameters,
+k = ExtradistancesearchedforconflictsduetoCD&R
+cdr and it is intended to obtain a first-order estimate of airspace
+r = Rateofconflictperaircraftperunitdistance
+c
+capacity, and to study the factors affecting capacity.
+(cid:26) = Trafficdensity
+Subscripts: To validate the derived model, fast-time simulations of a
+= Withconflictresolution decentralized direct-routing airspace concept in the horizontal
+wr
+= Withoutconflictresolution plane are performed. Simulations are performed for several
+nr
+= SteadyState/Instantaneous traffic demand densities, and for multiple values of model rel-
+ss
+total = Total evant CD&R parameters. Here ‘state-based’ conflict detection
+max = Maximum and the Modified Voltage Potential (MVP) conflict resolution
+algorithms are used as a case-study. The accuracy of the mod-
+eling approach is evaluated by comparing model predictions
+I. INTRODUCTION
+to those determined using the semi-empirical method.
+Decentralization of traffic separation responsibility, from This paper begins with an overview of the most relevant
+groundbasedAirTrafficControllers(ATCo)toeachindividual aspects of prior work in section II. In section III, an analytical
+aircraft,hasbeenproposedasameanstoimproveairspaceca- model of airspace stability and capacity is derived. This is
+pacity[1]–[3].Tosupportdecentralization,significantresearch followed in sections IV and V with the design and results
+effort has been devoted towards the design of novel Conflict of fast-time simulations used to validate the analytical model.
+Detection and Resolution (CD&R) algorithms [4]. However, Finally, the main conclusions are summarized in section VI.
+the extent to which decentralization affects airspace capacity
+is not well understood. Moreover, conventional capacity mod- II. PREVIOUSRESEARCH
+eling methods, such as those related to ATCo workload, are Theanalyticalcapacitymodeldevelopedinthispaperbuilds
+not relevant for decentralized control. on previous research on measuring airspace stability and
+
+--- Page 3 ---
+
+( )
+2(cid:25) 2 (cid:11)
+p = 1(cid:0) sin (4)
+s (cid:11) (cid:11) 2
+Here, (cid:11) is the magnitude of the allowed heading range
+for aircraft cruising at the same flight level (e.g. 180o for
+the hemispheric rule). This expression is valid for the case
+where all aircraft have equal airspeed. For airspace with no
+constraints, i.e., direct-routing airspace, (cid:11) = 360o = 2(cid:25) rad,
+and thus p =1.
+s
+Fig.1. TheDominoEffectParameter(DEP)comparessimulationswithand Sinceamodelforp s hasbeendeveloped,theonlyremaining
+withoutConflictResolution(CR)tomeasureairspacestability term that needs to be modeled to extend the semi-empirical
+method from [7] to an analytical model is k . This is the
+capacity, and on modeling instantaneous conflict probability. cdr
+main contribution of the current paper.
+This section provides an overview of these topics.
+III. DERIVATIONOFANANALYTICALAIRSPACE
+A. Measuring Airspace Stability
+STABILITYANDCAPACITYMODEL
+Airspace stability relates to the occurrence and propagation
+Inthissection,thesemi-empiricalmethodof[7]isextended
+of conflict chain reactions when tactical Conflict Resolution
+to an analytical capacity model for ‘state-based’ Conflict
+(CR) is used. Stability can be measured using the Domino Ef-
+Detection (CD) and the Modified Voltage Potential (MVP)
+fect Parameter (DEP) [5], [6], and can be visualized using the
+Conflict Resolution (CR) algorithms. The goal of the deriva-
+VenndiagraminFig.1.Here,C isthesetofallconflicts
+totalnr tion is to model the DEP in terms of airspace and CD&R
+without CR, and C is the set of all conflicts with CR,
+totalwr parameters.Thus,modelsforthenumberofconflictswithand
+for identical traffic scenarios. Furthermore, three regions can
+without CR, and a model of the explicit effect of CD&R on
+be identified in Fig. 1; R1, R2 and R3. By comparing R3
+stability, are developed.
+with R1, the proportion of ‘destabilizing’ conflicts caused by
+CR can be determined. Thus, the DEP is defined as [5], [6]: A. Modeling the Rate and Number of Conflicts Without
+R3(cid:0)R1 C Conflict Resolution
+DEP = = totalwr (cid:0)1 (1)
+1) Global Instantaneous Conflict Rate
+C C
+totalnr totalnr
+The modeling process begins with the global instantaneous,
+A high DEP value implies high airspace instability. Note or steady-state, conflict rate per unit time for all aircraft
+that conflicts are defined as predicted losses of separation. without CR, C . As aircraft move independently of each
+ssnr
+other without CR, C has been modeled in literature as the
+ssnr
+B. Relating Airspace Stability to Capacity expected value of a binomial random variable model that is
+summed over all aircraft in the airspace [2], [7]:
+Using the DEP, a semi-empirical model to measure the
+capacity of a decentralized direct-routing airspace concept
+in the horizontal plane was developed in [7]. In that paper, 1 ∑Nss N (N (cid:0)1)
+e o x f p a re ir s s s p io ac n e sf p o a r r C am to e ta te ln rs r , a a n n d d C w to e ta r l e wr su w b e s r t e itu fo te r d mu in la t t o ed E i q n . te 1 rm to s C ssnr = 2 (N ss (cid:0)1)p 2 = ss 2 ss p 2 (5)
+i=1
+approximate the DEP as:
+Here, N is the steady-state number of aircraft, and p is
+ss 2
+DEP (cid:25) (cid:26) ac (2) theinstantaneousconflictprobabilitybetweenanytwoaircraft.
+(cid:26) (cid:0)(cid:26) Note that the number of conflicts is divided by 2 in the above
+max ac
+expression so that conflicts between the same two aircraft are
+Here, (cid:26) is traffic density, and the term (cid:26) is defined to
+ac max not counted twice at a given moment in time.
+be the maximum theoretical capacity of the airspace because
+For a conflict to occur between two aircraft, their trajecto-
+the DEP, and therefore the number of conflict chain reactions,
+ries must intersect, and the intersection should occur within
+becomes infinite when (cid:26) approaches (cid:26) . In [7] (cid:26) was
+ac max max the look-ahead time, t , used for CD. Therefore, p can be
+expressed as: l 2
+computedbymultiplyingtheprobabilitiesforthesetwoevents
+1 occurring.
+(cid:26) max = D (cid:1)k (cid:1)p (3) The chance that any two trajectories intersect at some point
+sep cdr s in time, p , depends on the route structure, and it has been
+s
+Where D is the horizontal separation minimum, k modeled in our prior work, see Eq. 4. The chance that this
+sep cdr
+accountsfortheeffectofCD&Ronairspacestability,andp s is intersection occurs within t l depends on the CD method, and
+theeffectoftraffic/routestructureontheinstantaneousconflict thetotalairspaceareaunderconsideration,A.For‘state-based’
+probabilitywithoutCR.Sincenoexplicitanalyticalmodelsfor CD,aircraftdetectconflictswithina‘conflictsearcharea’,A c ,
+k w c a d s r p a r n o d po p s s ed we to re d d e i t s e c r u m ss in e e d i c n ap [ a 7 c ] i , ty a , s i e .e m ., i- b e y mp d i e r t i e c r a m l i a n p i p n r g oa th ch e d ai e r fi cr n a e f d t v b e y lo t c l , ity the wi s t e h pa n r o at r io es n ol m ut i i n o i n mu V(cid:22) m nr , D s s e e e p F a i n g d . 2 th . e C a o v n e fl r i a c g t e s
+(cid:26) that fit the DEP logged during fast-time simulations to are detected if the Closest Point of Approach (CPA) of an
+max
+Eq. 2 in a least-square sense. intruder aircraft is located in A c . Thus p 2 is defined as:
+A 2 D (cid:1)V(cid:22) (cid:1)t
+C. Relating Traffic Structure to Instantaneous Conflict p 2 = A cp s = sep A nr lp s (6)
+Probability Without Conflict Resolution
+As mentioned in section II-C, for direct-routing airspace
+Our prior work on different methods of structuring traffic
+p = 1. Nonetheless, it is left in the subsequent steps for
+s
+revealed that relative velocity played an important role on
+completeness. Substituting Eq. 6 in Eq. 5 yields the following
+the instantaneous conflict probability between two aircraft [8].
+for C :
+This understanding was subsequently used to model the re-
+ssnr
+( )
+lationship between these two variables for motion in the N (N (cid:0)1) D (cid:1)V(cid:22) (cid:1)t
+ss ss sep nr l
+horizontal plane without CR [9]: C ssnr = A p s (7)
+
+--- Page 4 ---
+
+Here, N is the total number of aircraft that flew
+totalnr
+through area A during the analysis time interval T without
+CR. N can be written in terms of known parameters
+totalnr
+by noting that the rate of introduction of aircraft needed to
+maintainaconstanttraffincdensityinareaAmustbeequalto
+N (cid:1)V(cid:22) =L(cid:22) .SinceN =(cid:26) A,N canbeformulated
+ss nr nr ss ac totalnr
+as:
+( )
+N V(cid:22) V(cid:22)
+N = ss nr T +N =(cid:26) A nr T +1 (13)
+Fig. 2. Area searched for conflicts, Ac, for ‘state-based’ conflict detection. totalnr L(cid:22) ss ac L(cid:22)
+HereAisthetotalairspaceareaunderconsideration.Aconflictoccursifthe nr nr
+ClosestPointofApproach(CPA)ofanintruderaircraftisinsideAc. ThefirsttermontherighthandsideofEq.13isthenumber
+of aircraft that started their flights during the analysis time
+interval, and the second term is the number of aircraft which
+are already present in the airspace at the start of the analysis
+time.Thissecondtermwasnotexplicitlymentionedin[7],but
+needs to considered since these aircraft also affect C .
+totalnr
+Using the model of C from Eq. 10, and by substituting
+totalnr
+Eqs. 12 and 13 into Eq. 11, r can be formulated as:
+cnr
+( )
+2 p (cid:1)D (cid:1)V(cid:22) (cid:1)T2 (cid:26) (cid:0) 1
+r = s sep (nr ac )A (14)
+Fig. 3. Conflict duration decreases linearly near the end of a finite analysis cnr (2T (cid:0)t l ) V(cid:22) nr T +L(cid:22) nr
+time interval T, if conflicts are counted at the time of detection. Here t l is
+theCDlook-aheadtime. B. Modeling the Rate and Number of Conflicts With
+Conflict Resolution
+2) Total Number of Conflicts for a Given Time Interval
+The total number of conflicts without CR, C , can be When an aircraft performs a CR maneuver, it deviates from
+totalnr
+computed by integrating the global instantaneous conflict rate, its nominal path, see Fig. 4. This increases the total distance
+C ,overananalysistimeinterval,T,anddividingtheresult flowncomparedtothecasewithoutCR,i.e.,greenrectanglein
+by ss t n h r e average duration of a conflict without CR, t(cid:22) : Fig. 4. Additionally, for each detected conflict, an extra area
+cnr
+∫ of airspace is searched for conflicts, but not flown through,
+1 T C T i.e. red rectangle in Fig. 4. Thus when computing the total
+C totalnr = t(cid:22)
+cnr 0
+C ssnr = s t(cid:22) s
+c
+n
+n
+r
+r
+(8) n
+b
+u
+o
+m
+th
+b
+t
+e
+h
+r
+es
+o
+e
+f c
+p
+o
+ro
+n
+c
+fl
+e
+i
+s
+c
+s
+t
+e
+s
+s
+p
+n
+er
+ee
+u
+d
+ni
+t
+t
+o
+d
+b
+is
+e
+ta
+t
+n
+ak
+ce
+en
+fo
+i
+r
+nt
+a
+o
+s
+a
+i
+c
+n
+c
+g
+o
+le
+un
+fl
+t
+i
+:
+ght, C 1wr ,
+If conflicts are counted at the time of detection, then t(cid:22) is ( )
+equivalent to t l for infinite time horizons. However, for c fi n n r ite C 1wr = L(cid:22) nr +k cdr C 1wr r cwr (15)
+timemeasurements,asduringfast-timesimulations,thelogged
+Here, r is the rate of conflicts per unit distance for a
+duration,orlifetime,ofaconflictdecreaseslinearlyattheend cwr
+single aircraft with CR, and the term in the parenthesis is the
+of the measurement time interval of length T, see Fig. 3, as
+logging stops sharply at a specified time. For such cases, t(cid:22) totaldistancesearchedforconflictsduringonecompleteflight.
+cnr This distance increases linearly with the number of conflicts
+can be calculated as the area of the shape under the graph in
+detected, and the rate of increase of the ‘extra’ distance
+Fig. 3, over the measurement time interval T:
+searched per conflict, k , is dependent on the selected CD
+( ) cdr
+Tt (cid:0) 1t2 t and CR strategy and settings. This parameter is modeled in
+t(cid:22) cnr = l T 2 l =t l 1(cid:0) 2T l (9) section III-C. Solving Eq. 15 for C 1wr gives:
+L(cid:22) (cid:1)r
+Note that the effect of finite time measurements on conflict C 1wr = 1(cid:0) n k r (cid:1) cw r r (16)
+counts were not considered in [7]. Using the fact that N
+ss
+= cdr cwr
+(cid:26)
+by
+ac
+s
+A
+ub
+,
+s
+w
+ti
+h
+tu
+e
+t
+r
+i
+e
+ng
+(cid:26) a
+E
+c
+q
+i
+.
+s
+9
+ai
+i
+r
+n
+s
+t
+p
+o
+ac
+E
+e
+q
+d
+.
+e
+8
+n
+:
+sity,C totalnr canberewritten
+int
+F
+er
+r
+v
+o
+a
+m
+l,
+C
+C
+1wr ,the
+,
+t
+c
+o
+a
+t
+n
+al
+b
+n
+e
+um
+fo
+b
+rm
+er
+u
+o
+la
+f
+t
+c
+e
+o
+d
+n
+a
+fl
+s
+i
+:
+ctsduringtheanalysis
+totalwr
+C =
+2 p
+s
+(cid:1)D
+sep
+(cid:1)V(cid:22)
+nr
+(cid:1)T2(cid:1)(cid:26)
+ac
+(cid:1)A((cid:26)
+ac
+(cid:0)1=A)
+(10)
+C totalwr =C 1wr N totalwr (17)
+totalnr 2T (cid:0)t Here, N is the total number of aircraft that flew
+l totalwr
+though area A during the analysis interval T with CR. Substi-
+3) Local Conflict Rate
+tuting Eq. 16 into Eq. 17 results in:
+Inadditiontotheglobalinstantaneousconflictrate,fordecen-
+tralized traffic it is also necessary to consider the local, or per
+aircraft, conflict rate per unit distance without CR, r . To
+cnr
+this end, r can be expressed as the ratio between the the
+cnr
+total number of conflicts during a single flight without CR, Vnr tl
+C , and the average flight distance of an aircraft through
+ar 1 e n a r A without CR, L(cid:22) :
+nr
+C
+r = 1nr (11)
+cnr L(cid:22)
+nr
+Subsequently, C can be written as a function of C :
+1nr totalnr
+Fig. 4. Resolving conflicts increases the total area of airspace searched for
+C = C totalnr (12) conflictsduetoconflictdetection(red)andconflictresolution(green).Here,
+1nr N anarbitraryresolutionstragetyispictured.
+totalnr
+
+--- Page 5 ---
+
+N (cid:1)L(cid:22) (cid:1)r
+C = totalwr nr cwr (18)
+totalwr 1(cid:0)k (cid:1)r
+cdr cwr
+To continue the derivation of C , [7] uses two assump-
+totalwr
+tions to relate the cases with and without CR:
+1)N (cid:25) N : Although CR increases traffic density
+totalwr totalnr
+duetolongerflights,itisalsoexpectedtoincreasetheaverage
+distance flown by proportional amount. Thus the total number
+ofaircraftisnottoexpectedvarysignificantlywithCR,ascan
+be seen by applying this rationale to Eq. 13.
+2)r (cid:25)r : This assumption stems from the fact that there
+cwr cnr
+are no preferred directions/routes for a decentralized direct- Fig. 5. Left: Parameters used to define a horizontal conflict. Right: Corre-
+routing airspace concept. Hence conflicts are equally likely spondingsolutionfortheMVPCRalgorithm.Adaptedfrom[10]
+in all directions, and performing conflict resolutions is not
+Fig. 5 can be computed for a given conflict angle, (cid:18), and
+expected to change the rate of conflicts per unit distance for
+distance to closest point of approach, D , as well as using
+a single flight compared to the case without CR. This also cpa
+the velocities of the ownship and intruder aircraft (taken to
+implies that the total number of conflicts for a single flight
+be equal in this study). For the situation shown, the relative
+is higher with CR, as resolutions increase the total amount of
+velocity vector of can be calculated as:
+airspace searched for conflicts, as illustrated by Eq. 15.
+These assumptions are also used in this work, and their va- V⃗ =V⃗ (cid:0)V⃗ (23)
+liditywillbeexaminedinsectionV.Usingtheseassumptions, rel o i
+the expression for C totalwr can be rewritted to use N totalnr Here, V⃗ o and V⃗ i are the (conflicting) velocity vectors of
+(Eq. 13) and r cnr (Eq. 14): the ownship and intruder aircraft, receptively. These velocity
+vectors can be written as a function of the (cid:18):
+N (cid:1)L(cid:22) (cid:1)r
+C (cid:25) totalnr nr cnr [ ]
+totalwr 1(cid:0)k cdr (cid:1)r c(nr )
+(19)
+V⃗ o =
+[
+V(cid:22) nr ;0 T
+]
+(24a)
+(cid:25) (cid:26) ac A ( (cid:7) V(cid:22) nr T + ) L(cid:22) nr V⃗ i = V(cid:22) nr cos((cid:0)(cid:18));V(cid:22) nr sin((cid:0)(cid:18)) T (24b)
+(2T (cid:0)t ) V(cid:22) T +L(cid:22) (cid:0)k (cid:7)
+l nr nr cdr
+Here, (cid:7) is defined as: Subsequently, the distance between the ownship and the
+( ) Closes Point of Approach (CPA), D , and the corresponding
+rel
+(cid:7)=2 p (cid:1)D (cid:1)V(cid:22) (cid:1)T2 (cid:26) (cid:0) 1 (20) position vector from the ownship, D⃗ rel , can be calculated as:
+s sep nr ac A
+(cid:12) (cid:12) √
+(cid:12) (cid:12)
+D = t (cid:1)(cid:12)V⃗ (cid:12)+ D2 (cid:0)D2 (25a)
+rel l rel sep cpa
+C. Modeling the Extra Distance Searched Per Conflict Reso-
+lution Maneuver V⃗
+D⃗ = rel D (25b)
+As mentioned earlier, C
+totalwr
+is dependent on k
+cdr
+, which rel jV⃗
+rel
+j rel
+is the extra distance searched for conflicts, per conflict res-
+olution maneuver. From Fig. 4, it can be seen that k is The distance vector between the two aircraft, D⃗, can be
+cdr
+composed of two components; 1) the extra distance searched computed using the property that D⃗, D⃗ and D⃗ form a
+rel cpa
+due to CD, k cd , and 2) the extra distance searched due CR, right angle triangle:
+k cr . Therefore, k cdr can be expressed as: [ ]
+k cdr =k cd +k(cid:22) cr (21) D⃗ = (cid:0) D D r c e p l a D D c r p e a l (cid:1) j V V ⃗ ⃗ rel j (26)
+rel
+Alargevalueofk increasestheamountofextraairspace
+cdr To minimize ownship path deviations, the MVP resolution
+searched for conflicts, and thus also increases the chance of
+conflict chain reactions. Therefore k cdr is strongly related velocity vector, d⃗V mvp , is directed along D⃗ cpa , and is scaled
+to airspace stability, and is dependent on the underlying suchthattheintrusiondistance,D i ,iscoveredwithinthetime
+algorithms and settings used for CD and CR. Below, models to the closest point of approach, t cpa :
+for k and k are developed for ‘state-based’ CD and for
+cd cr D D⃗
+the Modified Voltage Potential (MVP) CR algorithm. d⃗V = i (cid:1) cpa (27)
+mvp t D
+cpa cpa
+1) Extra Distance Searched Due to Conflict Detection
+Foreverydetectedconflict,anextraareaofairspaceissearched Here, D⃗ cpa , t cpa and D i are defined as:
+for conflicts, but not flown through. For ‘state-based’ CD, this
+distance, k cd , corresponds to the length of the red rectangle in D⃗ = D⃗ (cid:0)D⃗ (28a)
+Fig. 4: cpa rel
+D
+k cd =V(cid:22) nr t l (22) t cpa = jV⃗ rel j (28b)
+rel
+2) Extra Distance Searched Due to Conflict Resolution D i = D sep (cid:0)D cpa (28c)
+To determine the extra distance searched for conflicts due to
+one conflict resolution for MVP, k cr , consider the conflict Using d⃗V mvp , the solution velocity vector with which the
+situationandthecorrespondingMVPsolutionshowninFig.5. ownship should fly to resolve the conflict, V⃗ , can be
+o;sol
+MVP uses the conflict geometry to compute an appropriate computed:
+‘shortest-path’ resolution vector that minimizes deviations
+from the nominal track. The conflict parameters shown in V⃗ =V⃗ +d⃗V (29)
+o;sol o mvp
+
+--- Page 6 ---
+
+( )
+(cid:21) = V(cid:22) T +L(cid:22) (2T (cid:0)t ) (33a)
+nr nr l
+(cid:26) (cid:0) 1 1
+(cid:13) = ac A = (33b)
+k (cid:7) 2 k (cid:1)p (cid:1)D (cid:1)V(cid:22) (cid:1)T2
+cdr cdr s sep nr
+Substitution of Eq. 33 into Eq. 32 yields:
+(cid:26) (cid:0) 1
+DEP = a(c A ) (34)
+(cid:21)(cid:13)(cid:0) (cid:26) (cid:0) 1
+ac A
+Fig.6. ExtradistancesearchedduetoconflictresolutionbyMVPforDsep= Since (cid:26) ac >> 1=A for most practical cases, Eq. 34 can be
+2:5nauticalmiles,t
+l
+=5mins,andVnr =500kts approximated as:
+(cid:26)
+Finally,theextradistancesearchedduetooneCRmaneuver DEP (cid:25) ac (35)
+with MVP, k , can be calculated by comparing the distance (cid:21)(cid:13)(cid:0)(cid:26)
+cr ac
+traveled in the time needed to solve the conflict, t , for
+cpa Intheaboveequation,theDEP,andthereforethenumberof
+ownship velocities before and after resolution:
+conflictchainreactions,tendstoinfinityasthe(cid:26) approaches
+ac
+(cid:21) (cid:13). Therefore (cid:21) (cid:13) is defined to be the maximum theoretical
+k ((cid:18);D )=jV⃗ jt (cid:0)jV⃗ jt (30)
+cr cpa o;sol cpa o cpa capacity of the airspace:
+( )
+This approach of calculating k cr implies that aircraft fly V(cid:22) nr T +L(cid:22) nr (2T (cid:0)t l )
+trajectories parallel to their original flight tracks after the (cid:26) =(cid:21)(cid:13) = (36)
+max 2 k (cid:1)p (cid:1)D (cid:1)V(cid:22) (cid:1)T2
+conflictisresolved,i.e.,aircraftdonorecovertheirpre-conflict cdr s sep nr
+flightpaths.ThisisconsideredtobeacceptablesincemostCR
+Here, k and p are modeled with Eqs. 21 and 4, respec-
+cdr s
+maneuvers using MVP result in very small path deviations.
+tively. Note that all terms in Eq. 36 have been fully defined
+Eq. 30 indicates that k cr is dependent on (cid:18) and D cpa . To in the derivation presented in this section. Also, on comparing
+understand this dependence, Eq. 30 is evaluated for the entire Eqs. 3 and 36, the effect of the differences in the derivation
+range of (cid:18) and D cpa , for D sep = 2:5 nautical miles (NM), process compared to that in [7] are evident.
+t = 5 mins, and V = 500 kts (the settings used for the
+l nr
+‘Baseline’ fast-time simulation, see section IV-C), see Fig. 6. IV. FAST-TIMESIMULATIONDESIGN
+Tocalculatek ,itisnecessarytodeterminetheweighted- Fast-time simulations of a 2D decentralized direct routing
+cdr
+average of the extra distance searched during one CR maneu- airspace concept were performed to validate the analytical
+verwithMVP,k(cid:22) .ThiscanbedonebyintegratingEq.30over capacity model derived in this paper. This section describes
+cr
+all (cid:18) and D , taking into account the distributions of (cid:18) and the design of this experiment.
+cpa
+D for a decentralized direct-routing airspace concept:
+cpa A. Simulation Development
+∫ ∫ 1) Simulation Platform
+Dsep (cid:25) k ((cid:18);D )W W d(cid:18)dD The BlueSky open-source ATM simulator, developed at TU
+k(cid:22) cr = 0 ∫ 0 0 Dse c p r∫ 0 (cid:25) W c D p c a pa W (cid:18) (cid:18) d(cid:18) D d cp D a cpa cpa (31) D Bl e u lf e t S , k w y a h s as us n e u d m a e s ro t u h s e f s e i a m tu u r l e a s tio in n cl p u l d a i t n fo g rm the in ab t i h li i t s y r t e o se s a im rc u h - .
+late more than 5000 aircraft simultaneously with CD&R1. For
+Here, W and W are the distributions of D and (cid:18)
+Dcpa (cid:18) cpa more information on BlueSky, the reader is referred to [11].
+respectively.Foradirect-routingairspaceconcept,thereareno
+headinglimitationsonaircraft,andthustheheadingsofaircraft 2) Airborne Self-Separation Automation
+can be expected to follow a uniform distribution. Correspond- As mentioned previously, state-based CD and the Modified
+ingly, W can be modeled as a uniform distribution, and VoltagePotential(MVP)CRalgorithmsareusedinthisstudy,
+W shou D ld cp b a e modeled as a triangular distribution. Due to the seesectionsIII-BandIII-Cformoredetails.Itshouldbenoted
+(cid:18)
+highly nonlinear nature of the integrand of Eq.31, a numerical thatCDwasperformedassumingperfectknowledgeofaircraft
+approach has been used to solve Eq.31 and compute k(cid:22) in states as a recent study concluded that ADS-B characteristics
+cr
+this work. Using a modern computer, this can be done within have little effect on the performance of the CD&R algorithms
+a few minutes for a reasonable discretization of (cid:18) and D . usedhere[12].Sincehorizontalflightisconsidered,combined
+cpa
+heading and speed conflict resolutions are used.
+It should be noted that for the values of V and t used to
+nr l After a conflict was resolved, aircraft recovered their pre-
+compute Fig. 6, k =41:67 NM. Thus k contributes more
+cd cd conflict airspeed and heading, and flew trajectories parallel
+to k than k when using state-based CD and MVP. This is
+cdr cr to their pre-conflict flight paths, i.e., they did not return to
+logicalasMVP,asstatedearlier,usesshortest-pathresolutions.
+their pre-conflict trajectories. This was done to match the
+modeling of the k term of the analytical capacity model,
+cr
+see section III-C2. Nonetheless, as MVP uses minimum-path
+D. Modeling Capacity using the Domino Effect Parameter deviation resolutions, the offset from the planned sector exit
+waypoint is not expected to be significant.
+Using the expressions developed for C and C
+in the previous paragraphs, a model for to D ta E lw P r can no to w tal b nr e B. Traffic Scenarios
+developed by substituting Eqs. 19 and 10 into Eq. 1: 1) Testing Region and Flight Profiles
+A large square en route sector of 500 x 500 NM was used as
+( )
+thephysicalenvironmentfortrafficsimulations.Atotalof396
+V(cid:22) T +L(cid:22) (2T (cid:0)t )
+DEP = ( nr ) nr l (cid:0)1 (32) entry/exit waypoints were defined on the edges of the sector,
+V(cid:22) T +L(cid:22) (2T (cid:0)t )(cid:0)k (cid:7) with a spacing of 5 NM (corner waypoints were intentionally
+nr nr l cdr
+removed). The trajectories of all traffic were required to cross
+To further analyze Eq. 32, (cid:21) and (cid:13) are defined to be equal
+to: 1BlueSkycanbedownloadedfromhttps://github.com/ProfHoekstra/bluesky
+
+--- Page 7 ---
+
+TABLEI
+SIMULATIONPARAMETERS
+Parameter Value Description
+A 250,000 NM2 Simulation area
+V(cid:22) 550 kts Speed when conflict free
+nr
+L(cid:22) 435.5 NM Average flight distance
+nr
+T 1 hr Analysis time duration
+∆t 0.05 s Simulation time-step
+sim
+∆t 1.00 s CD&R time-step
+cdr
+thesquaresectorwithdirectroutesi.e.,foraparticularaircraft, Fig. 7. Heading distribution of representative scenario. Scenarios were
+designedtohaveuniformheadingdistributions.
+the entry and exit waypoint could not be located on the same
+side of the sector. When an aircraft exited the sector, it was
+TABLEIII
+deleted from the simulation. Additionally, all aircraft flew at EXPERIMENTCONDITIONS
+the same speed when conflict-free, see Table I.
+2) Scenario Generation Condition Separation Minimum Look-Ahead
+A scenario generator was created to produce traffic scenarios Name D [NM] t [mins]
+sep l
+with a desired and constant traffic density, and with a uniform Baseline 2.5 5.0
+heading distribution. Constant density scenarios were required
+Half Look-Ahead 2.5 2.5
+sothattotalthenumberofconflictsloggedduringasimulation
+Double Separation 5.0 5.0
+run could be attributed to a particular density, and a uniform
+heading distribution was required to ensure that there were no
+confirmed that the above approach produced uniform heading
+preferred directions in a scenario, as would be the case for
+distributions;D=0.0076,p>0.05forthedistributioninFig.7.
+decentralized direct-routing airspace.
+Since aircraft were deleted from the simulation as they
+C. Independent Variables
+exited the sector, to realize constant density scenarios, aircraft
+Twoindependentvariablesweredefinedfortheexperiment.
+were introduced into the simulation at rate, ! , equal to:
+ac
+The first independent variable was traffic demand density, for
+(cid:26) AV(cid:22) which ten scenarios have been defined, see Table II. The
+! ac = ac L(cid:22) nr (37) second independent variable was concerned with the settings
+nr used for CD&R, namely look-ahead time and horizontal sep-
+Here, (cid:26) ac is the desired traffic density, A is the airspace aration minimum. Using different combinations of these two
+areausedforsimulation,V(cid:22) isaverageaircraftspeedandL(cid:22)
+parameters,threeexperimentconditionshavebeendefined,see
+nr nr
+is average flight distance through the sector. These and other Table III.
+constantsimulationparametersarelistedinTableI.Usingthis For each demand density, ten repetitions were performed
+approach, ten traffic demand scenarios of increasing density using different traffic realizations. Additionally, each scenario
+were defined, see Table II. was simulated with and without CR to compute the DEP.
+To create scenarios with uniform heading distributions, it This resulted in a total of 600 simulation runs (ten demand
+was necessary to ensure that there were no biases in selecting scenarios (cid:2) three CD&R conditions (cid:2) ten repetitions (cid:2) two
+entry and exit waypoints for aircraft. This was achieved in CR settings).
+threesteps.Inthefirststep,thenumberofavailableexitpoints
+per entry point was kept the same for all waypoints. Given D. Dependent Variables
+the constraint that all aircraft routes had to cross the square To validate different components of the analytical capacity
+sector, corner waypoints were removed. In this way, 297 exit model derived in section III, model predictions for the fol-
+points met this constraint for all waypoints. In the second lowing six dependent variables are compared to that of the
+step, the entry point for each aircraft was selected using a previous semi-empirical capacity measurement method:
+uniformly distributed random variable, and a particular entry 1) Globalinstantaneous conflict rate without conflict resolu-
+point could only be selected multiple times if all other entry tion, C , Eq. 5
+points had been selected once before. In the final step, all 2) Total n s u sn m r ber of conflicts without conflict resolution,
+exit points meeting the aforementioned routing constraint for C , Eq. 10
+a particular entry point were assigned an equal probability of 3) To to ta ta l ln n r umber of aircraft with and without conflict reso-
+being selected. Fig. 7 illustrates the heading distribution of a lution, N and N , Eq. 13
+representative simulation scenario. Kolmogorov-Smirnov tests 4) Local con to fl t i a c lw t r rate with tot a a n ln d r without conflict resolution,
+r and r , Eq. 14
+TABLEII
+cwr cnr
+5) Extra distance searched with per conflict resolution ma-
+TRAFFICDEMANDSCENARIOS
+neuver, k , Eq. 21
+cdr
+6) Airspace capacity, (cid:26) , Eq. 36
+Density Number of max
+#
+[ac/10,000 NM2] Instantaneous AC E. Simulation Procedure and Data Logging
+1 1.00 25.00 To minimize unsystematic variation in the results, stan-
+2 1.51 37.67 dardized simulation conditions were used. For a particular
+3 2.27 56.75 repetition of a traffic demand scenario, the creation times
+4 3.42 85.50 of aircraft and entry/exit waypoint combinations were kept
+5 5.15 128.82 constant across all three experiment conditions. Additionally,
+6 7.76 194.08 scenarios had a duration of 2.5 hours, consisting of a 1.5hr
+7 11.70 292.40 traffic volume buildup period and a 1hr logging period.
+Two types of conflict logging were used. Periodic logging
+8 17.62 440.54
+was used to record the number of active conflicts and aircraft
+9 26.55 663.73
+intheairevery15seconds,andwasusedtocomputetheglobal
+10 40.00 1000.00
+instantaneous conflict rate. All other dependent variables were
+
+--- Page 8 ---
+
+(a)BaselineExperiment (b)HalfLook-AheadExperiment (c)DoubleSeparationExperiment
+Fig.8. GlobalinstantaneousconflictratewithoutCR.ExperimentconditionsaredescribedinTableIII.Scatter:simulationdata;Curve:LSFtoEq.5.
+(a)BaselineExperiment (b)HalfLook-AheadExperiment (c)DoubleSeparationExperiment
+Fig.9. TotalnumberofconflictswithoutCR.ExperimentconditionsaredescribedinTableIII.Scatter:simulationdata;Curve:LSFtoEq.10.
+computedusingconflictdatafromevent-drivenlogging,which given by Eq. 5. The accuracy of the model is determined by
+kept track of the properties of conflicts as soon as they comparingtheLSFvalueofthep terminEq.5,whichisthe
+2
+occurred. instantaneous conflict probability between any two aircraft, to
+It should be noted that conflicts with CPAs outside the the p value computed using the model given by Eq. 6.
+2
+simulationareawerenotloggedorresolvedbecausethetraffic From the shape of the curves in Fig. 8, it can be concluded
+density was zero outside the simulation area. On a similar that the general structure of Eq. 5 well represents C for
+ssnr
+note, pop-up conflicts at the start of an aircraft’s flight, with all three experiment conditions, and that changes to the look-
+a look-ahead distance less than V t , were also not logged ahead time and the separation minimum have proportional
+nr l
+or resolved, since these conflicts occurred due to the finite changes to the global conflict rate, as suggested by the ana-
+simulation area used. All other conflicts, including multiple lytical model of p . Moreover, the absolute accuracy of the
+2
+conflicts between the same aircraft pair, were used logged, analytical model for p is found to be quite high for the
+2
+resolved and used in the analysis. ‘Baseline’ and ‘Double Separation’ experiments. On the other
+hand,itislessaccurateforthe‘HalfLook-Ahead’experiment.
+V. RESULTSANDDISCUSSION Thissuggeststhatthe‘conflictsearcharea’forstate-basedCD
+Using data from the fast-time simulations, the absolute in the p 2 model is sensitive to changes to the look-ahead time
+accuracy of the analytical capacity model, (cid:9) , is assessed andmaynotbewellapproximatedbyarectangularshape,see
+model
+by comparing it to the previous semi-empirical method using Fig 2. An explanation for this is given in section V-G.
+the following simple expression:
+B. Total Number of Conflicts Without Conflict Resolution
+j" (cid:0)" j Fig. 9 shows the results for the total number of conflicts
+(cid:9) =100%(cid:0) model fit (38)
+model "
+fit
+without CR, C totalnr . The corresponding model for C totalnr
+isgivenbyEq.10.Modelaccuracyisevaluatedbycomparing
+Here, " is the model prediction, and " is the Least- the LSF value of the p term in Eq. 10, which is the effect of
+model fit s
+Square Fit (LSF) of the semi-empirical method to the sim- traffic structure on instantaneous conflict probability, to the p
+s
+ulation data, for a particular airspace state. Additionally, all value computed analytically using its model in Eq. 4.
+figures display the LSF curve of the appropriate model to ThecurvesinFig.9wellrepresenttherelationshipbetween
+the simulation data (scatter points). Thus, the shape of the C andtrafficdensity,indicatingthattheoverallstructure
+totalnr
+LSF curve relative to the simulation data is an indication of of Eq. 10 is valid. Once again, model accuracy is shown
+overall ‘soundness’ of the modeling approach used by both to be quite high for the ‘Baseline’ and ‘Double Separation’
+theanalyticalandsemi-empiricalmodelingmethods,whilethe experiments, and is the lowest for the ‘Half Look-Ahead’
+absolute accuracy of the analytical model can be evaluated experiment.Nevertheless,incontrasttotheglobalconflictrate
+using the above equation. withoutCR,accuracyisgreaterthan85%forallcases.Thisis
+explainedbyconsideringtheexpressionforC inEq.10.
+A. Global Instantaneous Conflict Rate Without Conflict Reso-
+totalnr
+Here it can be seen that a change in the look-ahead time only
+lution
+affects C if the difference between the total analysis
+totalnr
+Theresultsfortheglobalinstantaneousconflictratewithout time ( during which conflicts are counted) and the look-ahead
+CR, C , are displayed in Fig. 8. The model for C is time is small. This is not the case for the ‘Half Look-Ahead’
+ssnr ssnr
+
+--- Page 9 ---
+
+E. ExtraDistanceSearchedPerConflictResolutionManeuver
+Unlike the other dependent variables, no explicit expression
+fork intermsofCD&Rcharacteristicswasdevelopedinthe
+cdr
+previoussemi-empiricalcapacitymeasurementmethod.Infact,
+the analytical modeling of k is a additional step added to
+cdr
+derivationprocedure of thesemi-empirical method. Therefore,
+to determine the accuracy of the analytical k model, the
+cdr
+averagek loggedforalltheconflictsduringthesimulations
+cdr
+is compared to model predictions, see Table V. Note that the
+analytical model for k is given by Eq. 21, which is in turn
+cdr
+defined in terms of k using Eq. 22 for state-based CD, and
+cd
+k(cid:22) using Eq. 31 for the MVP CR algorithm.
+cr
+Table V indicates that the predictions of the analytical k
+Fig. 10. Total number of aircraft with and without CR for the ‘Baseline’ cdr
+model are very close to the average values logged during the
+experiment.Scatter:simulationdata;Curve:LSFtoEq.13.
+simulations for all three experiment conditions. Since k is
+cdr
+TABLEIV inversely related to airspace stability, the derivation procedure
+ACCURACYOFTHELOCALCONFLICTRATEMODEL described in section III-C can thus be used to understand
+the effect of changes to CD&R parameters on conflict chain
+Baseline HalfLook-Ahead DoubleSeparation reactions.
+"model 1.0 1.0 1.0 It is interesting to note from Table V that a change in
+CROFF "fit 0.973 1.113 0.967 look-ahead time, t l , has a much larger effect on k cdr than
+Accuracy 97.24% 89.82 96.59 an equivalent change to the separation minimum, D sep . This
+is because the MVP CR algorithm used in this work resolved
+"model 1.0 1.0 1.0
+conflicts with minimum path deviations, resulting in low k
+CRON "fit 1.216 1.250 1.303
+for practical values of D and t . On the other hand, t ha
+cr
+s
+Accuracy 82.27% 79.99% 76.75% sep l l
+a direct and proportional influence on CD, and thus also on
+k , see Eq. 22. Thus, for the CD and CR algorithms used in
+experiment, for which the analysis time is 24 times larger cd
+this study, CD has a greater influence on stability than CR.
+than the look-ahead time. This also explains why the ‘Half
+Look-Ahead’ experiment shows no significant differences to F. Airspace Capacity
+the ’Baseline’ experiment in terms of C , see Fig. 9.
+totalnr The final dependent variable to be considered is airspace
+capacity. Airspace capacity, (cid:26) , is determined for the semi-
+max
+C. Total Number of Aircraft with and without Conflict Reso- empirical capacity measurement method by determining the
+lution density at which the Domino Effect Parameter (DEP) model
+of Eq. 34 tends to infinity. For the analytical model, (cid:26) can
+Results for the total number of aircraft simulated during max
+be computed using Eq. 36. Fig. 12 displays the DEP results
+the 1hr logging/analysis period are displayed in Fig. 10 for
+and the accuracy of the analytical capacity model for all three
+the ‘Baseline’ simulation condition. Results for the other
+experiment conditions.
+two conditions are similar, but are not shown because the
+Figs12aand12bindicatethattheanalyticalmodelestimates
+corresponding model is not dependent on CD&R parameters,
+(cid:26) withhighaccuracyforthe‘Baseline’and‘Look-Ahead’
+see Eq. 13. The figure shows that Eq. 13 is very accurate max
+experiments. However the capacity accuracy for the ‘Double-
+in predicting the total number of aircraft for the cases with
+Separation’ experiment is very low, with the model underesti-
+and without CR. Therefore, the first assumption used in the
+mating(cid:26) byalmost53%.Asforthelocalconflictratewith
+derivation of C , which is the total number of conflicts max
+w de i n th si C tie R s , a t n h d at e N x t p o to t e a t r a l i w m lw r r en (cid:25) t c N on to d t i a t l i n o r n , s. is valid for all considered C is R d , u t e he to low the ac b c r u e r a a k c d y ow fo n r t o h f e t ‘ h D e ou r c b n le r S (cid:25) ep r a c r w at r io a n s ’ su ex m p p e t r i i o m n en at t
+highertrafficdensities.Forinstance,ifamodelfitisperformed
+forsimulationdensitieslessthan11.7aircraftper10,000NM2,
+D. Local Conflict Rate With and Without Conflict Resolution i.e., for densities on the left side of the blue dashed line in
+Fig. 12c, where the local conflict rate assumption holds, then
+The results for the local conflict rate per unit distance
+the accuracy for ‘Double Separation’ is 94.61%.
+with and without CR, r and r , are pictured in Fig. 11.
+cwr cnr
+The corresponding model is given by Eq. 14, and the model G. Results Analysis and Discussion
+accuracy results are listed separately for the CR OFF and CR
+From the above results, the following effects were observed:
+ON cases in Table IV.
+The results show that the analytical model is very accurate Model accuracy without CR is affected by look-ahead time
+in predicting the local conflict rate without CR (CR OFF), The model accuracy without Conflict Resolution (CR) was
+r , for all three experiment conditions. However Table IV reduced when the look-ahead time was changed from its
+sh cn o r ws this is not true for the case with CR (CR ON), for baseline value. This could be caused by differences in the
+whichthelowestaccuracyisfoundforthe‘DoubleSeparation’ definitions used for Conflict Detection (CD) by the model and
+experiment. in the simulation. In the model, a conflict is defined to occur
+An important assumption used in the derivation by both at time t cpa when the minimum distance point between two
+the analytical and semi-empirical models, is that r (cid:25)r . conflicting aircraft falls within a rectangular ‘conflict search
+However, Fig. 11 shows that this assumption is cn o r nly c tr w u r e area’, see Fig. 2. However, in the simulation, the first moment
+at relatively ‘low’ densities. For instance, if the model for
+TABLEV
+r is fitted to the simulation data for densities up to 11.7
+ai c r w c r raft per 10,000 NM2, i.e., for densities on the left side ACCURACYOFTHEEXTRADISTANCESEARCHEDMODEL
+of the blue dashed line in Fig. 11c, then the accuracy for
+Baseline HalfLook-Ahead DoubleSeparation
+the ‘Double Separation’ experiment would equal 89.66%.
+Therefore, the low overall accuracy for r can be attributed
+kcdr Model[NM] 46.68 23.78 47.55
+to the breakdown of the aforementioned
+cw
+a
+r
+ssumption at high
+kcdr SimAverage[NM] 46.50 23.63 47.20
+Accuracy 99.61% 99.41% 99.24%
+densities. An explanation for this is given in section V-G.
+
+--- Page 10 ---
+
+(a)BaselineExperiment (b)HalfLook-AheadExperiment (c)DoubleSeparationExperiment
+Fig.11. Localconflictrateperunitdistanceandperflight,withandwithoutCR.ExperimentconditionsaredescribedinTableIII.Modelaccuracyresultsare
+listedinTableIV.Scatter:simulationdata;Curve:LSFtoEq.14.
+(a)BaselineExperiment (b)HalfLook-AheadExperiment (c)DoubleSeparationExperiment
+Fig.12. DominoEffectParameter(DEP)andcapacityestimate.ExperimentconditionsaredescribedinTableIII.Scatter:simulationdata;curve:LSFtoEq.34.
+ofconflictdetectionoccursattimet whentheseparation
+inconf
+requirements are about to be violated. Conflicts are detected
+in the simulation earlier than for the approach used by the
+model,seeFig.13.Asthedifferencebetweent andt
+cpa inconf
+increases for shallow conflict angles, it is hypothesized that a
+trapezoidal conflict search area needs to be used to improve
+model accuracy. This hypothesis will be investigated in future
+research.
+The local conflict rate is dependent on conflict resolution
+One of the main assumptions used by the current analytical
+model, and by the previous semi-empirical method, is that
+the local conflict rate per unit distance with and without
+CR are equal. The current results, however, indicate that this
+assumption is not entirely valid, and CR increased the local
+Fig.13. Differencebetweentcpa,thetimetoClosePointofApproach(CPA),
+conflict rate at higher densities. This in turn reduced the
+andtinconf ,thefirstmomentofapredictedlossofseparation
+accuracy of the capacity model for the ‘Double Separation’
+the rate of growth of the measured DEP, which in turn leads
+experiment.
+to a higher capacity estimate when fitting the DEP model to
+An explanation for the breakdown of this assumption at the simulation data compared the analytical model.
+high densities can be found by comparing the traffic density Thus, the local conflict rates with and without CR are not
+contours for the three experiment conditions, see Fig. 14. equal at high densities due to the strong traffic ‘dispersion’
+This figure shows that CR had no significant effect on the effect caused by conflict chain reactions. To improve the
+density distribution for the ‘Baseline’ and ‘Half Look-Ahead’ accuracy of the model at high densities/separation require-
+experiments. On the other hand, for the Double Separation’ ments,thiseffectneedstobetakenintoaccount.Furthermore,
+experiment, conflict resolution led to fewer density hot-spots. simulations used to validate such models should be designed
+Thisisbecausedoublingtheseparationrequirementimplicitly such that aircraft are not prematurely deleted when they are
+quadruples the traffic density when considering amount of ’bounced’ out of the simulation sector as a result of CR
+airspace occupied by each aircraft, for the same number of maneuvers. Instead, the distance-to-destination can be used to
+instantaneous aircraft as for the other two experiments. This avoid premature deletion of aircraft.
+implicit increase in density leads to an increase in conflicts,
+and conflict chain reactions. For voltage-potential based CR Model can be used to understand the factors influencing
+algorithms,theconsequentincreaseinthenumberofresolution capacity
+maneuversathighdensitiesleadstoa‘spreading-out’oftraffic. Despitethelimitationsdiscussedabove,thecurrentformofthe
+Near the edges of the simulation area, aircraft are therefore analyticalmodelcanbeusedtodetermineafirstordercapacity
+‘bounced’ out of the experiment, at which point they are estimatewhenreducedseparationrequirementscanbeused,as
+deleted. The resulting pre-mature deletion of aircraft reduces would be the case for future urban air transportation systems.
+
+--- Page 11 ---
+
+decentralization, and provides insights on the effect of
+different airspace and CD&R parameters on capacity.
+(cid:15) Thescopeandaccuracyofthemodelcanbeincreasedby
+taking into account the effect of conflict chain reactions
+on the local, or per aircraft, conflict rate. This will be
+consideredinfutureresearch,aswillextendingthemodel
+for three-dimensional airspace.
+REFERENCES
+[1] J.M.Hoekstra,R.N.H.W.vanGent,andR.C.J.Ruigrok,“Designing
+for safety: the free flight air traffic management concept,” Reliability
+Engineering&SystemSafety,vol.75,no.2,pp.215–232,Feb.2002.
+[2] J. M. Hoekstra, R. C. J. Ruigrok, and R. N. H. W. van Gent, “Free
+FlightinaCrowdedAirspace?”inProceedingsofthe3rdUSA/Europe
+AirTrafficManagementR&DSeminar,Naples,Jun.2000.
+[3] M. Ballin, J. Hoekstra, D. Wing, and G. Lohr, “NASA Langley and
+NLRResearchofDistributedAir/GroundTrafficManagement,”inAIAA
+Aircraft Technology, Integration, and Operations (ATIO) Conference,
+AIAA-2002-5826. AmericanInstituteofAeronauticsandAstronautics,
+2002.
+[4] J. K. Kuchar and L. C. Yang, “A Review of Conflict Detection and
+ResolutionModelingMethods,”IEEETransactionsonIntelligentTrans-
+portationSystems,vol.1,pp.179–189,2000.
+[5] J.Krozel,M.Peters,andK.Bilimoria,“Adecentralizedcontrolstrategy
+for distributed air/ground traffic separation,” in AIAA Guidance, Nav-
+Fig. 14. Traffic density contour for the three experiment conditions at the igation, and Control Conference and Exhibit. American Institute of
+sametimeinstantofarepresentativerepetitionofthehighesttrafficdemand, AeronauticsandAstronautics,2000.
+withandwithoutCR [6] K.Bilimoria,K.Sheth,H.Lee,andS.Grabbe,“Performanceevaluation
+of airborne separation assurance for free flight,” in AIAA Guidance,
+Furthermore, the model can be used to understand the factors NavigationandControlConference,AIAA-2000-4269,2000.
+[7] M. R. Jardin, “Analytical Relationships Between Conflict Counts and
+that affect airspace capacity for decentralization. For instance,
+Air-Traffic Density,” Journal of Guidance, Control, and Dynamics,
+the model predicted, and the simulation proved, that ‘state- vol. 28, no. 6, pp. 1150–1156, 2005. [Online]. Available: http:
+based’ CD had a greater effect on stability, and consequently //dx.doi.org/10.2514/1.12758
+[8] E. Sunil, J. Ellerbroek, J. Hoekstra, A. Vidosavljevic, M. Arntzen,
+onairspacecapacity,thantheMVPCRalgorithm.Sincestate-
+F.Bussink,andD.Nieuwenhuisen,“AnalysisofAirspaceStructureand
+basedCDisinfluencedbythelook-aheadtime,anoptimization Capacity for Decentralized Separation Using Fast-Time Simulations,”
+of look-ahead time with traffic density could be performed JournalofGuidance,Control,andDynamics,vol.40,no.1,pp.38–51,
+2017.[Online].Available:http://dx.doi.org/10.2514/1.G000528
+to maximize capacity. In this way, the model can be used to
+[9] Hoekstra, J., Maas, J., Tra, M., and Sunil, E., “How Do Layered
+selectasubsetoftheavailableairspacedesign-spaceforfurther Airspace Design Parameters Affect Airspace Capacity and Safety?” in
+investigation using fast-time simulations. Proceedings of the 7th International Conference on Research in Air
+Transportation,Jun.2016.
+Theoretical vs. practical capacity [10] J. Ellerbroek, “Airborne Conflict Resolution in Three Dimensions,”
+Ph.D.dissertation,DelftUniversityofTechnology,FacultyofAerospace
+While the models addressed here focus on the theoretical
+Engineering, Sep. 2013. [Online]. Available: http://resolver.tudelft.nl/
+capacitylimitofdirect-routingdecentralizedairspace,inprac- uuid:96c65674-06d4-410c-87c2-b981af95211e
+tice, society will not accept an asymptotic limit of airspace [11] J. Hoekstra and J. Ellerbroek, “BlueSky ATC Simulator Project: an
+Open Data and Open Source Approach,” in Proceedings of the 7th
+stabilityasanindicationoftheachievablecapacity.Moreover,
+InternationalConferenceonResearchinAirTransportation,Jun.2016.
+airline economics, which is primarily focused on improving [12] T. Langejan, E. Sunil, J. Ellerbroek, and J. Hoekstra, “Effect of ADS-
+efficiency, and stochastic elements, such as weather, affect B Characteristics on Airborne Conflict Detection and Resolution,” in
+Proccedingsofthe6thSesarInnovationDays,2016.
+the practical airspace capacity. Nevertheless, determining the
+theoretical capacity limit is useful as a metric for comparing AUTHORBIOGRAPHIES
+different forms of decentralization and/or CD&R algorithms. Emmanuel Sunil received the MSc degree in Aerospace Engi-
+neering(cumlaude)fromTUDelftin2014,forhisworkonahaptic
+interface for unmanned aircraft collision avoidance. He is currently
+VI. CONCLUSIONSANDRECOMMENDATIONS
+a PhD candidate at the faculty of Aerospace Engineering, TU Delft.
+His work focuses on airspace design and capacity modeling.
+In this study, an analytical capacity model was derived for
+Joost Ellerbroek received the M.Sc. (2007) and Ph.D. (2013)
+a decentralized direct-routing airspace concept for motion in degrees in aerospace engineering from the Delft University of Tech-
+the horizontal plane. This model is an extension of a semi- nology, The Netherlands, with the Control and Simulation section,
+empirical method reported in literature. Fast-time simulation whereheiscurrentlyworkingasanAssistantProfessor.Hisresearch
+experimentswereconductedtovalidatethederivedmodeland interestslieinthefieldofAirTrafficManagement,andincludetopics
+suchastheanalysisofairspacecomplexityandcapacity,datascience
+its components. The following conclusions can be drawn:
+in ATM, the design and analysis of conflict detection and resolution
+(cid:15) The theoretical capacity limit of decentralized airspace algorithms, and human-automation interaction.
+can be defined as the density at which the Domino Jacco Hoekstra obtained his MSc, PhD and private pilot license
+from TU Delft. He has worked at the Dutch National Aerospace
+Effect Parameter (DEP) , a measure of airspace stability,
+Laboratory(NLR)for16years,andhasco-operatedwithNASA,the
+approaches infinity. At this density, all aircraft in the FAA and many European organizations. He founded the Association
+airspace exist in a state of conflict due to conflict chain for Scientific Development of ATM, was the founding director of
+reactions. AT-One and was the head of NLR’s Air Transport Division. After
+(cid:15) Simulation results showed that the model accurately pre- serving two terms as dean of the Aerospace Engineering faculty of
+TU Delft, he is now a full professor at this faculty, and holds the
+dicts the extra distance searched for conflicts due to
+chair in CNS/ATM. His research topics include 4D trajectory based
+conflict resolution maneuvers. Therefore, the model can ATM, airborne separation assurance and controller-pilot data link
+be used to understand the effect of Conflict Detection communication. Next to research, he teaches courses on CNS/ATM,
+and Resolution (CD&R) parameters on conflict chain programming in Python and aeronautics.
+reactions and airspace stability. Jerom Maas received the MSc degree in Aerospace Engineering
+from TU Delft in 2015, for his work on augmenting swarming logic
+(cid:15) For the conflict detection and conflict resolution algo-
+toavoltagepotential-basedairborneconflictresolutionalgorithm.He
+rithms considered in this study, conflict detection had iscurrentlyaPhDcandidateatthefacultyofAerospaceEngineering,
+greater impact on airspace stability. TUDelft,whereheisdevelopinganobstacledetectionradarsystem
+(cid:15) The accuracy of derived analytical capacity model is to aid general aviation pilots with VFR tasks.
+sufficient to gain a first order estimate of capacity for

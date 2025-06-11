@@ -1,0 +1,754 @@
+
+
+--- Page 1 ---
+
+Metropolis: Relating Airspace Structure and Capacity
+for Extreme Traﬀic Densities
+Emmanuel Sunil, Jacco Hoekstra, Joost Ellerbroek, Frank Bussink, Dennis
+Nieuwenhuisen, Andrija Vidosavljevic, Stefan Kern
+To cite this version:
+Emmanuel Sunil, Jacco Hoekstra, Joost Ellerbroek, Frank Bussink, Dennis Nieuwenhuisen, et al..
+Metropolis: Relating Airspace Structure and Capacity for Extreme Traﬀic Densities. ATM seminar
+2015, 11th USA/EUROPE Air Traﬀic Management R&D Seminar, FAA & Eurocontrol, Jun 2015,
+Lisboa, Portugal. ￿hal-01168662￿
+HAL Id: hal-01168662
+https://enac.hal.science/hal-01168662v1
+Submitted on 26 Jun 2015
+HAL is a multi-disciplinary open access L’archive ouverte pluridisciplinaire HAL, est
+archive for the deposit and dissemination of sci- destinée au dépôt et à la diffusion de documents
+entific research documents, whether they are pub- scientifiques de niveau recherche, publiés ou non,
+lished or not. The documents may come from émanant des établissements d’enseignement et de
+teaching and research institutions in France or recherche français ou étrangers, des laboratoires
+abroad, or from public or private research centers. publics ou privés.
+
+--- Page 2 ---
+
+Eleventh USA/Europe Air Traffic Management Research and Development Seminar (ATM2015)
+Metropolis: Relating Airspace Structure and
+Capacity for Extreme Traffic Densities
+Emmanuel Sunil1, Jacco Hoekstra1, Joost Ellerbroek1, Frank Bussink2,
+Dennis Nieuwenhuisen3, Andrija Vidosavljevic4 and Stefan Kern5
+1Control and Simulation, Faculty of Aerospace Engineering, TU Delft, Delft, The Netherlands
+2Cockpit and Flight Operations, National Aerospace Laboratory (NLR), Amsterdam, The Netherlands
+3ATM and Airports, National Aerospace Laboratory (NLR), Amsterdam, The Netherlands
+4Laboratory of Applied Mathematics, Ecole Nationale de l’Aviation Civile (ENAC), Toulouse, France
+5Institute of Flight Guidance, Deutsches Zentrum für Luft- und Raumfahrt (DLR), Braunschweig, Germany
+Abstract—Personal and unmanned aerial vehicles have automated cargo delivery UAVs [5], [6]. In fact, the rapid
+received increasing media attention over the last decade. As a emergence of PAVs and UAVs over the last decade has led
+result of the growing excitement for these two aircraft types, many within and outside the aerospace industry to view these
+many within and outside the aerospace industry envision a future
+vehicles as important components of a future air transportation
+in which large numbers of small aircraft fly over urban areas.
+system. However, before this vision can materialize, an
+With this vision for the future, the question arises what would be
+airspace system that can safely separate and organize large
+required, in terms of airspace organization, to make this feasible,
+numbers of aircraft is required [7].
+or indeed, if it will be possible at all. In this context, the
+Metropolis project aims to investigate the influence of airspace
+The difficulty of safely separating a large number of
+structure on capacity, complexity, safety, and efficiency for high-
+aircraft can be reduced through careful design of airspace
+density airspace. To this end, four airspace concepts, ranging
+structure. There is, however, no clear consensus yet on how
+from a decentralized direct routing concept, to a highly
+this should be done. There are, for instance, several studies
+structured tube network using 4D trajectory-based operations,
+have been considered. The four concepts were compared by which argue that a well-defined and structured approach is
+means of large-scale simulation experiments, for multiple required to handle high traffic densities [8], [9]. In such an
+scenarios that are extreme when compared to current air traffic approach, pre-planned conflict free routes are negotiated
+densities. This paper presents an overview of the Metropolis between the airspace user and the Air Navigation Service
+project with a focus on the project objectives, design and Provider (ANSP). In addition to the three-dimensional path that
+implementation of airspace concepts, and preliminary simulation
+aircraft are required to follow, the negotiated trajectories
+results.
+include arrival time constraints at waypoints along the route.
+This way, uncertainties regarding the positions of aircraft can
+Keywords - airspace structure, urban airspace design, air traffic be reduced, allowing for closer packing of several trajectories,
+control, free flight, 4D trajectory based operations, Personal Aerial
+and thus, increasing capacity levels over current operations.
+Vehicles (PAVs), Unmanned Aerial Vehicles (UAVs)
+In contrast, Free Flight studies have found evidence of the
+opposite: the Free Flight (or unmanaged airspace) concept has
+been shown to allow for higher traffic densities by reducing
+I. INTRODUCTION
+traffic flow constraints and structure [10], [11]. Here, aircraft
+Since the early days of flight, Personal Aerial Vehicles
+are allowed to fly user-preferred (often direct) routes, while
+(PAVs) have been proposed as an alternative to automobiles to
+separation responsibility is delegated to each individual aircraft
+solve the ever-rising road traffic congestion problems affecting
+by means of airborne Conflict Detection and Resolution
+most urban areas [1]. Despite many failed attempts, recent
+(CD&R) automation. As a result, traffic is more evenly
+successful test flights of road-able aircraft designs, by PAL-V
+distributed over the airspace, thus reducing the number of
+in the Netherlands and by Terrafugia in the United States, have
+potential conflicts, thereby increasing both capacity and safety
+revived interest towards PAVs [2]. Similarly, Unmanned
+[12], [13].
+Aerial Vehicles (UAVs) have become increasingly popular as
+they can be used for a wide variety of applications that The above dichotomy suggests that airspace structure and
+previously required more expensive manned aircraft [3]. At capacity are tied together. What is as yet unknown, however, is
+present, however, large-scale commercial UAV operations are the relationship between these two variables; i.e., does more or
+still limited by most aviation authorities [4]. This is expected to less structuring lead to higher capacity? Or, is there perhaps a
+change in the near future, particularly with companies such as transition point, where a further increase in capacity will
+Amazon and Google pushing towards the introduction of require a switch from one approach to the other? The goal of
+This research received funding from the Seventh Framework Programme of
+the European Commission under grant number 341508 (Metropolis)
+
+--- Page 3 ---
+
+the Metropolis project, a research initiative funded through the (18.2 million), Shanghai (21.7 million) and Delhi (26.7
+Seventh Framework Programme of the European Commission, million) [16].
+is to answer these questions within the context of a future urban
+Assumption 2: Vehicles for personal air transport have become
+air transportation system integrating high volume PAV and
+widely available
+UAV operations. To study how capacity varies along the
+dimension of airspace structure, four concepts, ranging from a As mentioned earlier, several PAV variants are already
+completely unstructured Free-Flight-inspired concept, to a under development, with some models currently undergoing
+highly structured tube network using pre-planned 4D flight-testing and certification [7]. Given the current pace of
+trajectories, have been defined. These concepts were compared development, the technical challenges to realize a viable PAV
+with the aid of large-scale simulation experiments using four are likely to be met within the time frame of the Metropolis
+extreme traffic scenarios that ranged up to a density of 30,000 scenarios (2050+).
+aircraft per 10,000 square nautical miles. Subsequently, the
+capacity-structure relationship was inferred by comparing the Although the current work does not focus on vehicle-
+concepts across the four demand scenarios in terms of safety related technical specifications, it is considered likely that both
+and efficiency metrics. conventional and Vertical Take-Off and Landing (VTOL)
+This paper presents an overview of the ongoing Metropolis PAVs reach the market place. Thus, it is assumed that a small
+project and is structured as follows. In section II, an outline of runway will be required for terminal operations, and more
+the consortium's vision for the future of urban air transportation importantly, horizontal velocity needs to be maintained to stay
+is described. Next, the design and implementation of the four airborne, further constraining airspace design. Due to space
+airspace concepts are discussed in section III and IV restrictions in urban areas, raised platforms above existing
+respectively. In sections V and VI, preliminary simulation streets seem the most feasible solution for these 'PAV-ports',
+results are presented and discussed. Finally, the main and a large number of these will need to be located throughout
+conclusions are listed in section VII. a city to allow near 'door to door' operations.
+For the creation of Metropolis scenarios, accurate market
+II. METROPOLIS SETTING FOR 2050 AND BEYOND
+predictions for PAVs are not required. Since the project centers
+To provide sufficient grounding for the scenarios in this on the influence of airspace structure on capacity, it is only
+project, their definition considered (extrapolations of) current necessary to ensure that sufficient traffic volume is simulated
+trends in aviation technology, demographics, and societal to study this relationship. Nonetheless, it was assumed that one
+demand for PAVs and UAVs. In this section, the main in six cars would be replaced by PAVs. Using the per capita
+assumptions underlining the consortium's expectations for the ownership of cars in Paris [17], and a PAV market penetration
+future, and the resulting influence on simulation scenarios, are of 16.7%, approximately 4.0% of the population is expected to
+discussed. use PAVs by 2050.
+Assumption 1: Continued population growth and urbanization
+leads to the formation of mega-cities Assumption 3: Unmanned aircraft will be used for cargo
+According to the United Nations, the global population is delivery
+expected to increase to over nine billion by 2050 [14].
+Autonomous cargo delivery UAVs are already used within
+Moreover, a greater proportion of the population is expected to
+the militarily domain [18]. Given the public appetite for ever-
+migrate to cities, leading to rapid urbanization of rural areas, as
+shorter order-to-delivery times, commercial introduction of
+well as the merging of towns and cities to form vast
+similar UAVs may occur within the near future. In fact, several
+metropolitan areas. Similar to contemporary cities, these
+companies, including Amazon, Google and DHL, are already
+'mega-cities' of the future will consist of one or more densely
+prototyping quad-copter variants for express delivery of
+populated urban cores that are surrounded by less dense
+lightweight cargo from existing distribution centers. These
+suburban areas, with high levels of commuting traffic and
+UAVs are likely to serve local communities surrounding a
+congestion between these two areas.
+distribution center, and improvements in payload capability
+The Metropolis simulation scenarios use population size may allow for multiple deliveries during a single flight.
+(and per capita demand) as a starting point to estimate traffic
+volumes. To this end, a city the size of Paris, with a projected Future demand for UAV delivered packages is estimated
+population of 14 million in 2050, is used as a baseline scenario for the Metropolis scenarios using current trends in e-
+[15]. Three additional scenarios are defined with population commerce. Literature shows that the average French citizen
+sizes of 18, 22 and 26 million inhabitants, such that the relation orders 13.4 parcels per annum, and 48% of these are
+between airspace structure and capacity can be evaluated by categorized as express deliveries [19]. Additionally, Amazon
+studying multiple traffic demand levels. It should be noted that estimates that 86% of the orders it receives are suitable for
+these population sizes are not chosen to represent predictions UAV delivery [20]. Taking the net effect of these statistics, the
+for a particular city, however, they are nevertheless similar to per capita demand for UAV deliveries is taken as 5.5 packages
+present day populations of the following urban areas: Beijing per annum.
+
+--- Page 4 ---
+
+2) Common Airspace Limits for Concept Design
+Heading Minimum Intruder’s
+change distance protected zone To simplify simulations, and to facilitate comparison
+between concepts, both PAVs and UAVs are assumed to fly
+above buildings. Due to safety and privacy considerations this
+Ownship
+might well turn out to be the case. To separate urban air traffic
+from higher and faster flying commercial aircraft, the lower
+airspace region between 1100 ft and 6500 ft was selected for
+Speed
+change Avoidance designing the airspace concepts. Additionally, the available
+vector
+airspace has been further segmented to separate PAV and
+UAV operations due to the significant performance and
+operational differences between these aircraft types (door-to-
+Intruder
+door vs. local cargo deliveries), as shown in Fig. 2.
+Figure 1: Geometrical conflict resolution approach of the Modified As a result of the airspace segmentation pictured in Fig. 2,
+Voltage Potential (MVP) algorithm [21]
+the take-off and landing phases of flight are expected to be
+common for all concepts, and as such are not expected to
+III. DESIGN OF AIRSPACE CONCEPTS cause significant capacity variations between the concepts.
+The primary goal of this research is to investigate the effect The concept descriptions that follow therefore focus on the
+of airspace structure on capacity. To empirically study this cruise phase of flight.
+relationship, four airspace concepts, named Full Mix, Layers,
+B. Concept 1: Full Mix
+Zones and Tubes, have been defined using increasing levels of
+structure to implicitly separate and organize traffic. This The Full Mix airspace concept can be most aptly described
+section begins by describing some elements that are common as 'unstructured airspace', where traffic is subjected to only
+to all concepts. Subsequently, the conceptual design of each physical constraints, such as weather, static obstacles and
+airspace concept is discussed individually. terrain. As traffic demand is often unstructured, the Full Mix
+concept assumes that any structuring of traffic flows decreases
+A. Common Concept Elements
+overall efficiency of the system, and that safety is actually
+1) Airborne Separation Assurance System: improved by the spreading of traffic that results from self-
+regulation. In the Full Mix concept, aircraft are therefore
+In the Full Mix, Layers and Zones concepts, tactical
+Conflict Detection and Resolution (CD&R) tasks are permitted to use the direct path between origin and
+destination, as well as optimum flight altitudes and velocities,
+delegated to each individual aircraft, where they are handled
+to reduce fuel burn and other related trip costs. Since Full Mix
+by an automated Airborne Separation Assurance System
+imposes no restrictions to the path of aircraft, combined
+(ASAS). The current study employs the ASAS
+implementation as proposed by Hoekstra because of its heading, speed and altitude conflict resolution maneuvers are
+demonstrated resolution capabilities in several complex multi- used to reduce deviations from the optimal route, for all flight
+phases.
+aircraft scenarios [12],[21]. While adaptation (or redesign) of
+an ASAS to make it able to cope with extreme densities would
+be an interesting study in itself, this was not the goal of
+Metropolis, as it is focused on airspace design.
+In this implementation, conflict detection is performed by
+state-based extrapolation of traffic positions, within a
+prescribed ‘look-ahead’ time, using traffic transmitted state
+information (position, speed and heading). The Modified
+Voltage Potential (MVP) algorithm is subsequently used to
+resolve conflicts in a pairwise fashion. This method results in
+implicit cooperative resolution strategies, where the distance
+between the conflicting aircraft at the Closest Point of
+Approach (CPA) is increased to (at least) the minimum
+separation requirements, see Fig.1. Based on initial test runs, a
+look-ahead time of sixty seconds was selected, in addition to
+separation margins of 250 meters horizontally, and 50 meters
+vertically.
+Figure 2: Airspace region available for concept design. PAV and UAV
+The types of resolution maneuvers (heading, altitude and operations are separated by airspace to take into account the performance
+speed) allowed are airspace concept dependent and is differences between these aircraft types.
+discussed in the relevant subsection below.
+
+--- Page 5 ---
+
+C. Concept 2: Layers
+The Layers concept can be seen as an extension of the
+hemispheric rule [22]. Here, the airspace is segmented into
+vertically stacked bands, where each altitude layer limits
+horizontal travel to within an allowed heading range. This
+segmentation of airspace is expected to reduce the probability
+of conflicts by limiting the relative velocities between aircraft
+cruising at the same altitude. However, this increased safety
+comes at the price of efficiency; while direct horizontal routes
+are still possible, the vertical flight profile is dictated by the
+relative bearing between origin and destination and the
+Figure 4: Top down view of the Zones topology, which is designed to
+corresponding altitude band with the required heading range.
+take into account the layout of a city.
+Thus flights might not be able to cruise at their optimal
+altitude, resulting in higher fuel burn. An exception is made A top-down view of the Zones concept is illustrated in Fig.
+for climbing and descending aircraft; these aircraft are allowed 4. Here, two major zone types can be discerned: circular and
+to maintain heading while climbing or descending to their radial zones. Assuming a concentric shape for a Metropolis
+destination altitude. city, the circular zones are used in a similar fashion to ring
+roads in contemporary cities. The radial zones function as
+Fig. 3 displays a schematic view of the Layers concept as
+connections between these concentric zones and facilitate
+implemented in the Metropolis project. It can be seen that that
+traffic towards and away from the city center. Both types of
+each layer corresponds to a heading range of 450 and has a
+zones segment airspace in the horizontal plane, there is no
+height of 300 ft. With these dimensions, two complete sets of
+vertical segmentation. Instead, altitude is selected flexibly,
+layers fit within the Metropolis airspace. This way, short
+based on the planned flight distance between origin and
+flights can stay at low altitudes while longer flights can
+destination, while the horizontal path was computed using the
+improve fuel burn by flying at higher altitudes. This is
+A* shortest path algorithm [23].
+expected to mitigate the efficiency drop of predetermined
+altitudes in this concept. For this concept, MVP is used to separate aircraft flying
+within the same zone, as well as to assist with the merging of
+As mentioned earlier, the Layers concept also uses the
+aircraft between circular and radial zones. Since the zone
+MVP conflict resolution algorithm. While combined heading,
+topology dictates the horizontal path of an aircraft, heading
+speed and altitude resolutions are allowed for climbing and
+resolutions are not allowed for this concept.
+descending traffic, for cruising aircraft, altitude resolutions
+may create new conflicts with traffic in adjacent layers.
+E. Concept 4: Tubes
+Resolutions are therefore limited to combined heading and
+speed maneuvers for cruising aircraft. As a maximum structuring of airspace, the fourth concept
+implements four-dimensional tubes that provide a fixed route
+D. Concept 3: Zones structure in the air. Here, the aim is to increase predictability
+of traffic flows by means of pre-planned conflict free routes.
+Similar to Layers, the Zones concept segments traffic
+based on similarity of travel direction. However, while the The tube topology designed for Metropolis can be thought
+Layers concept structures traffic irrespective of city topology of as a graph with nodes and edges, see Fig. 5. The nodes of
+(and only vertically), the Zones concept takes into account the the graph are connection points for one or more routes. The
+layout of the city in the design of its structure. edges are the tubes connecting two nodes. Tubes at the same
+horizontal level never intersect, except at the nodes, and are
+dimensioned to fit one aircraft in the vertical and horizontal
+plane.
+Figure 3: Schematic view of the Layers concept. Here, each altitude band
+corresponds to a prescribed heading range, reducing the relative velocities Figure 5: An example tube topology with three layers of decreasing
+between aircraft at the same altitude. Two complete layer sets have been granularity. The dashed yellow lines are used to indicate the placement of
+defined within the Metropolis airspace. nodes above each other. Tubes are bi-directional.
+
+--- Page 6 ---
+
+To provide multiple route alternatives, a total of twelve
+tube layers are placed above each other with decreasing
+granularity. Short flights profit from a fine grid at the lowest
+layer, while at the same time, longer flights benefit from
+longer straight tubes in the higher layers. A lateral offset is
+used between layers to allow for smooth climb and descent
+paths. As a result, aircraft are only allowed to climb through
+one layer at a time.
+Unlike the other concepts, the Tubes concept uses time-
+based (4D) separation of aircraft to ensure safety within the
+network. This mode of separation dictates that when an
+aircraft passes a node, it will “occupy” this node for some
+interval. Within this occupancy interval no other aircraft is
+allowed to pass this node. For each node an interval list is
+maintained that keeps track of the times at which a node is
+expected to be occupied. New flights may only pass the node Figure 6: Map of the fictional Metropolis city. Each city block is characterized
+when its necessary interval is completely free. To ensure that as either commercial (blue) or residential (red). The green trapezoid represents
+the experiment area where safety metrics are logged.
+separation at the nodes ensures separation within tubes aswell,
+all aircraft within the same layer are required to fly at the same
+Another important aspect of simulation development was
+velocity, and the prescribed speed increases with the altitude
+the modeling of PAV and UAV vehicle dynamics. For this
+of the layer.
+purpose, parameters of existing vehicle models in TMX were
+adapted to match the performance specifications available for
+For route planning, the A* depth-first search algorithm is
+used to plan the shortest trajectory from origin to destination, several current PAVs and UAVs. Additionally, VTOL aircraft
+prior to departure [23]. To ensure a conflict free trajectory, the were simulated using helicopter dynamics for take-off and
+occupancy of each node along a proposed route is checked. If landing, while fixed-wing models were used for cruising,
+not, the node is discarded and the algorithm backtracks to find climbing and descending flight phases. A total of three VTOL
+another available solution. If no route can be found, a pre- aircraft types, two PAVs and one UAV, and a conventional
+departure delay is applied in multiples of 10 seconds until a PAV were used in the traffic simulations.
+conflict free route is found.
+B. Design of the Fictional Metropolis City
+As the Metropolis scenarios focus on a future urban air
+IV. SIMULATION DEVELOPMENT AND EXPERIMENT DESIGN transportation system, a fictional city was designed to
+represent the simulation physical environment.
+To compare the four airspace concepts in terms of
+capacity, large-scale simulation experiments were performed.
+1) City Map
+This section describes the development effort undertaken to
+implement the concepts onto an existing simulation platform, To accommodate the population sizes of the four scenarios
+(14-26 million, see section II), a large fictional city, similar in
+the generation of high-density traffic scenarios, and the design
+size to present-day Paris, was designed. A 40 x 40 nautical
+of two separate experiments.
+mile portion of the city, representing approximately 50% of
+A. Simulation Platform and Concept Implementation the total city area, was used to simulate traffic, see Fig. 6.
+Similar to other modern cities, the fictional Metropolis city is
+The Traffic Manager (TMX) software, developed by the
+divided into three major districts: city center, inner ring and
+National Aerospace Laboratory of the Netherlands (NLR), is
+outer ring. Moreover, to simulate realistic urban traffic
+used as the simulation platform in this research. TMX is a patterns, city blocks were characterized as either commercial
+medium fidelity desktop simulation application designed for or residential. This way it is possible to, for example, simulate
+the investigation of novel ATM concepts. It is capable of morning rush hour as traffic converging to commercial areas.
+simulating up to 5000 aircraft simultaneously, and has a wide
+While traffic was simulated and performance data was
+range of features including several CD&R algorithms, 4D
+logged throughout the simulation area, safety related metrics
+Flight Management System (FMS) guidance, and extensive
+were only logged within a trapezoidal 'experiment area', see
+data logging functions. For a complete overview of TMX
+Fig. 6. This region, with an area of 448 NM2, has been shaped
+capabilities, the reader is referred to [24].
+and sized such that the area ratio between the three city
+The four airspace concepts were implemented in TMX by districts are the same for the experiment area and the full
+modifying the trajectory planning functions taking into Metropolis city (not shown).
+account the constraints of each concept. For instance, the
+2) Infrastructure
+direct horizontal path and the most fuel efficient altitude were
+selected for the Full Mix concept, while the for the Tubes The only infrastructure considered were PAV and UAV
+concept, the A* algorithm was used to determine the shortest landing strips, as these served as the origin and destination
+conflict free trajectory through a pre-defined tube network. points for traffic. For PAVs, 1600 runways were evenly
+
+--- Page 7 ---
+
+distributed over the simulation area, with half defined as 2) Rogue Aircraft
+VTOL capable. Cargo UAVs originated from dedicated
+Just as with road traffic, it is reasonable to expect some
+distribution centers, and delivered packages to buildings
+aircraft to not conform to airspace routing requirements for a
+within a six nautical mile range. As a result of the airspace wide variety of reasons, including technical failure and/or
+segmentation illustrated in Fig. 2, interaction between PAVs deliberate rule-breaking. To model this effect, for selected
+and UAVs only occurs during the take-off and landing flight scenarios, 'rogue aircraft' were introduced at random time
+phases. Therefore, to study this interaction, two cargo intervals. These aircraft were simulated to be seven times
+distribution centers were defined near the city center. larger than other PAVs, and flew haphazardly through the
+airspace with continuously varying heading and altitude. By
+C. Traffic Scenarios comparing simulations with and without rogue aircraft, it is
+possible to determine the effect of structure on the robustness
+The traffic volumes for four scenarios were computed
+of an airspace concept to non-nominal occurrences.
+using the population growth and per-capita demand
+assumptions stated in section II, as well considering the size of
+E. Simulation Simplifications
+the Metropolis simulation area relative to the total city.
+Subsequently, the instantaneous number of PAVs for each To reduce the complexity of the simulation development
+scenario was determined by setting the average nominal trip effort, two simplifications were made. While these
+time to fifteen minutes, see Table 1. Here, the average hourly simplifications are not expected to affect relative comparisons
+package demand for the two cargo distribution centers under between concepts, they are stated below for completeness.
+consideration is also displayed.
+1) Take-off and Landing Simulation
+In addition to multiple traffic demand volumes, it is also Since take-off and landing procedures were considered to
+necessary to consider different demand patterns when be similar for all concepts, the focus of the simulations was on
+assessing the airspace concepts. Within the context of an the cruise, climb and descend flight phases. Furthermore, due
+urban environment, the morning rush hour is characterized by to the complexity of managing runway capacity, it was
+a high proportion of commuting traffic originating from decided to delete aircraft when they were within a
+residential areas and converging towards commercial regions predetermined distance from the destination runway.
+of a city. On the other hand, during the evening rush hour, the However, to take into account the effect of airspace structure
+opposite is true, and a vast majority of the traffic is of the on approach sequencing, the time interval between two
+commercial-residential type. Therefore, for each traffic successive arrivals was logged for all runways, and analyzed
+volume, scenarios with converging, diverging and 'mixed' for unacceptably short intervals. It should be noted that all
+traffic flows were created. Also, each scenario had a duration other flight phases were simulated.
+of two hours, consisting of a forty-five minute build-up period,
+2) UAV Operations
+a one hour logging period, and a fifteen minute wind-down
+period. As mentioned earlier, UAVs are expected to operate within
+the vicinity of cargo distribution centers. Given the short flight
+D. Simulation of ‘Real-World’ Phenomena
+distances, it was decided to use the Full Mix concept to
+To prevent a deterministic comparison of concepts, wind simulate UAV operations regardless of the airspace concept
+and rogue aircraft were added to the scenarios to improve the used for PAV traffic. Consequently, safety metrics are not
+realism of the simulation results. considered for UAV-UAV incidents. Nonetheless, it should
+be noted that all aspects of PAV-UAV interactions are
+1) Wind simulated and analyzed. In particular, UAVs are expected to
+affect PAV trajectories near the PAV-UAV airspace
+Wind was modeled as a uniform and time-invariant vector
+boundary, as well as entry trajectories into PAV airspace.
+field with random direction and speed. Although predicted
+Moreover, it is reasonable to assume that conclusions drawn
+wind information is often used for trajectory optimization in
+from the PAV results are also applicable for UAVs.
+real-life operations, its effects on aircraft flight paths was
+deliberately omitted from the simulation's trajectory planning
+F. Experiment Matrix
+functions. In fact, wind was added to study how uncertainties
+in aircraft operations, which result in deviations from the Two separate experiments were performed: the nominal
+planned trajectory, affect the safety of a concept. experiment and the non-nominal experiment.
+1) Nominal Experiment
+TABLE 1: INSTANTANEOUS PAV TRAFFIC VOLUME AND AVERAGE
+HOURLY PACKAGE DEMAND FOR THE METROPOLIS SCENARIOS The nominal experiment focused on the impact of airspace
+structure on capacity. For this experiment, four levels of
+Instantaneous PAV Average Hourly UAV
+Scenario airspace structure and four traffic demand scenarios
+Traffic Volume Package Demand
+represented the experiment conditions. Six repetitions were
+Low 2,625 1,380
+performed for each experiment condition (two repetitions for
+Medium 3,375 1,780
+three traffic demand patterns). Furthermore, the scenarios
+High 4,125 2,180
+were simulated with and without conflict resolution, resulting
+Ultra 4,875 2,580
+in a total of 192 runs.
+
+--- Page 8 ---
+
+it should be noted that the figure does not imply that the other
+concepts were able to facilitate the higher volumes safely. For
+instance, if the other concepts resulted in many more
+intrusions that the Tubes, it should still be concluded that
+capacity is less than the Tubes concept. Conclusions with
+regard to capacity will therefore also depend on other metrics
+such as safety and efficiency. Moreover, safety and efficiency
+metrics should be computed relative to the number of flights
+simulated to allow for a fair comparison between concepts.
+To be able to compare the results in Fig. 7 with current-
+day airspace use, some conversions are required. As a unit for
+air traffic density, often the number of aircraft per 100 x 100
+NM (so 10,000 NM2) is used. Our simulation area was only
+1600 NM2. To arrive at comparable density figures the
+number of aircraft would have to be multiplied with 6.25 to
+Figure 7: Means and 95 % confidence intervals of the number of flights per
+arrive at this reference unit. It should be noted, however, that
+simulation run
+the protected zone dimensions have also been reduced, and
+2) Non-nominal Experiment that travel speeds also deviate from current operations. Each
+of these factors complicates comparison of these density
+This experiment is aimed at comparing the relative
+numbers with todays’ airspaces.
+robustness of the concepts to non-nominal situations. For this
+purpose, the four airspace concepts were compared for B. Safety
+simulations with zero, four and eight rogue aircraft introduced The degree of safety of an airspace can be assessed by the
+randomly during the logging hour. Once again, six repetitions number of separation violations. Here, the airspace design can
+were performed, with and without conflict resolution, resulting be seen as a first layer of protection, where structure is used to
+in a total of 144 runs. reduce either the number of conflicts and possibly improve
+conflict geometries (which is the aim of the Layers and Zones
+concepts), or to provide full protection by preventing conflicts
+V. RESULTS
+altogether (the Tubes concept).
+More than six million flights have been simulated, of
+For each of the concepts, the Conflict Resolution (CR)
+which approximately three million flights have been analysed
+function could be either on or off. Here, results with CR on are
+for these results. Although all simulation runs had finished at
+used to indicate the safety of each concept as a whole, whereas
+the time of writing this paper, analysis is not yet complete, and
+the results with CR off show how well each concept is able to
+the results shown here are still preliminary. A selection of the
+prevent conflicts from occurring, i.e., illustrate the primary
+data has been made, of which there is high confidence that
+function of structure.
+they will remain as shown in this paper. Future analysis may,
+however, still have an influence on some of the figures. Safety in terms of the number of separation violations and
+the number of conflicts is illustrated in Figs. 8-10. Fig 8.
+In this paper, the concepts are compared for nominal
+shows the average number of separation violations per flight
+conditions, in terms of capacity, safety, and efficiency metrics.
+for all concepts and densities. To illustrate the influence of the
+In the follow-up study, results from the non-nominal
+conflict resolution function in each concept, Fig. 9 shows the
+experiment as well as further analysis should provide
+average number of intrusions for simulations with and without
+additional insights, on which a final conclusion can be based.
+CR. Finally, Fig. 10 shows the average number of conflict
+alerts per run, for all concept-scenario combinations.
+A. Demand Versus Capacity
+In the simulations, the four concepts were compared in
+four different scenarios, where traffic demand varied between
+Low, Medium, High and Ultra settings, see Table 1. Fig. 7
+shows the number of flights simulated during the logging
+hour, per simulation run, for all combinations of airspace
+concept and traffic demand. It can be seen that the Tubes
+concept deviates from the other concepts for all traffic demand
+conditions, which indicates that traffic demand could not be
+met by the Tubes concept. This can be explained by the fact
+that the Tubes concept has the ability to delay a flight before
+take-off in cases where no conflict free routes could be found
+between an origin and the desired destination.
+The difference in the number of flights simulated for the
+Tubes concept has to be taken into account when considering
+the other metrics. Although Fig. 7 suggests that the Tubes
+Figure 8: Means and 95 % confidence intervals of the number of intrusions
+concept has a lower airspace capacity than the other concepts, per flight (with conflict resolution on)
+
+--- Page 9 ---
+
+Figure 9: Means and 95 % confidence intervals of the number of Figure 10: Means and 95 % confidence intervals of the number of
+intrusions per flight with and without Conflict Resolution (CR) conflict alerts per flight (with conflict resolution on)
+Figure 11: Means and 95 % confidence intervals of the number of Figure 12: Means and 95 % confidence intervals of route efficiency
+intrusions per flight for the Full Mix and Layers concepts (with conflict (with conflict resolution on)
+resolution on)
+As the CD&R implementation was not optimised for these an indicator of the efficiency in terms of fuel used. Fig. 12
+densities and concepts, there were still many conflicts and shows route efficiency for each concept, where efficiency is
+intrusions for all concepts. Despite the goal of de-conflicting defined as the shortest (great circle) distance between origin
+traffic, the resulting high traffic concentrations of the Zones and destination, divided by the actual distance travelled.
+and Tubes concepts apparently has a larger effect than the Therefore, a value high numeric value implies high route
+reduction of relative velocity. Both the Full Mix and Layer efficiency. A similar trend to the previous metrics can be
+concepts distribute traffic over the available airspace, which observed, where the concepts with little structure (Full Mix
+significantly reduced the number of conflicts and intrusions and Layers) clearly outperform the highly-structured concepts
+relative to the more structured concepts. The difference (Zones and Tubes). The largest difference is observed between
+between these two concepts is shown in more detail in Fig. 11. the Full Mix and the Tubes concepts, where the Tubes concept
+Here it can be seen that the Layers concept has the lowest performs 1.5 times worse, compared to the Full Mix concept.
+number of intrusions with increasing traffic density, a trend
+that is also visible in the conflict alert plot. This may be due
+VI. DISCUSSION
+to the lower relative speeds within the Layers as all aircraft fly
+with similar headings at each altitude level. A lower relative In the current work, fast-time simulations of extreme
+velocity lowers the conflict rate, as aircraft will, on average, traffic densities have been performed in an effort to study the
+meet fewer vehicles per unit time. relationship between airspace structure and capacity. In total
+six million flights have been simulated of which about 50%
+C. Efficiency has been used in the data analysis (the remainder consisted of
+background traffic).
+There are many ways to look at the efficiency of each
+concept. One way is to log the amount of distance travelled. The capacity, safety, and efficiency results presented in
+Both resolution manoeuvres as well as rerouting due to the this paper suggests that that a good way to structure high-
+airspace structure will increase the route length, thus providing density traffic would be one that suffices, i.e., one that aids in
+
+--- Page 10 ---
+
+traffic separation, without unduly affecting system efficiency. statements about the applicability of these results to current
+While segmentation into altitude bands with similar headings, operations.
+as seen in the Layers concept, still shows a beneficial effect
+when compared to the unstructured Full Mix concept, the
+strict structuring as employed in the Zones and Tubes concepts VII. CONCLUSIONS
+only reduces performance. For the traffic densities simulated
+The results have shown that extreme traffic densities can
+in this study, no reversal can be observed for this trend.
+be achieved by spreading the traffic over the airspace, while
+keeping structure relatively flexible. As there are still losses of
+When looking at the results for demand versus capacity, it
+separation in all concepts, it cannot yet be concluded that the
+was observed that the pre-planed approach of the Tubes
+densities simulated in this study are feasible. More conclusive
+concept required a lot of airspace to provide separation. A
+results would require an adaptation of the separation assurance
+complete route clearance, free of conflicts, requires a
+system and the flight rules. This was, however, not the focus
+prediction horizon that spans the entire (planned) flight
+of this study.
+duration. Prediction uncertainties further aggravate this. The
+discretized tube topology was therefore easily occupied, with a
+From comparison of the concepts, it can be concluded that
+high frequency of delayed take-offs and a lower airspace
+for the nominal situations of a spread demand such as
+capacity as a result. Because the other concepts did not
+provided by personal air transport or delivery drones, a
+incorporate these pre-takeoff constraints, they do not show this
+layered concept is optimal. For the described scenario, a
+behavior. This difference is further emphasized by the results
+further investigation of this concept is recommended to
+in terms of safety and efficiency. A consistent improvement of
+investigate both the effect of the parameters (like number of
+Full Mix and Layers over Zones and Tubes indicates that
+layers per heading segment) and to investigate how
+capacity at extreme densities benefits from little structuring of
+CD&R/the flight rules should be optimised to function better
+the airspace.
+in this scenario.
+In terms of safety, the number of conflicts and intrusions
+For today’s ATM, especially for a free routing sector, this
+increased proportionally with traffic density, even for the
+extension of the hemisphere rule could be considered as an
+Tubes concept, which aimed to avoid interactions through pre-
+enhancement for safety. This especially applies to concepts
+planned conflict-free routes. A possible reason for this is that
+such as sectorless ATM [25], and delegated separation
+the uncertainty margins were inadequate. Simulated
+assurance. It will, however, also increase the safety of other
+uncertainties such as wind, for instance, could have created
+more traditional concepts. As there are some caveats in
+trajectory offsets large enough to lead to unanticipated
+translating the results of this study to today’s ATM, it is
+conflicts. As tactical resolution algorithms were not used for
+recommended to investigate the effects of applying the Layers
+the Tubes concept, the conflicts also resulted in a large concept on scenarios similar to today’s high density airspaces.
+number of intrusions. Since real-world uncertainties are
+constantly changing and hard to model, this result indicates
+that variations between planned and actual flight trajectories ACKNOWLEDGMENT
+can have a large impact on the safety of highly structured
+The authors would like to thank Pim van Leeuwen (NLR)
+airspace concepts.
+for his valuable contribution to the design of the Tubes
+So from the results of the nominal experiment, the Layers concept, Roalt Aalmoes (NLR) for his work on metrics
+concept was found to result in the best balance between safety definition, Oliver Schneider for his efforts towards the design
+and efficiency metrics. When comparing the concepts with of the Layers concept, professor Daniel Delhaye (ENAC) for
+present day operations, then today’s ATM could be seen as a his insights on air traffic complexity measurement, Georges
+variation of the Zones concept. The future –more trajectory- Mykoniatis (ENAC) for helping with project management
+based– design is similar to the Tubes concept. The Layers tasks and Marieke Suijkerbuijk (NLR) for assisting with the
+concept can essentially be seen as an extension of the implementation and execution of the simulation runs.
+hemisphere rule. Based on the above results, an obvious
+question would be whether they can be translated to today’s
+operations? Next to the lower traffic densities, two other
+REFERENCES
+things need to be noted. First, due to the personal air traffic [1] T. Truman and A. de Graaff, “Out of the box: Ideas about the
+scenario, the traffic demand was almost uniformly distributed future of air transport (Part 2),” European Commission Services,
+except for some daily patterns. Today, there is a clear demand Brussels, 2007.
+beween hubs, resulting in predominant traffic flows with a
+[2] E. Kolawole, “The flying car: are we there yet?,” The
+similar heading, which would, in the layers concept, all be
+Washington Post, 20-Apr-2012. [Online]. Available:
+forced to fly at the same levels. Second, in non-nominal http://www.washingtonpost.com/
+situations, such as a small opening between weather systems,
+[3] Z. Sarris, “Survey of UAV applications in civil markets,” in
+or one between Special-Use Airspaces (SUA), the scarcity of
+Proceedings of the 9th IEEE Mediterranean Conference on
+airspace will be high. The current implementation of the layers
+Control and Automation, 2001.
+concept would, however, still force all traffic that need to go
+through the corridor to fly at the same level, leaving other [4] G. Warwick, “Unmanned Community Making Progress On
+altitudes in the corridor unused. Simulations with more Airspace Access,” Aviation Week and Space Technology, 05-
+comparable properties would be required to make reliable Aug-2013. [Online]. Available: http://www.aviationweek.com.
+
+--- Page 11 ---
+
+[5] C. Arthur and T. Editor, “Amazon seeks US permission to test [23] W. Zeng and R. L. Church, “Finding shortest paths on real road
+Prime Air delivery drones,” The Guardian. 11-July-2014. networks: the case for A*,” International Journal of
+[Online]. Available: http://www.theguardian.com. Geographical Information Science, vol. 23, no. 4, pp. 531–543,
+Apr. 2009.
+[6] J.Stewart, “Google trials drone deliveries,” BBC News. , 28-
+Aug-2014. [Online]. Available: http://www.bbc.com/news. [24] F. Bussink, J. Hoekstra, and B. Heesbeen, “Traffic manager: a
+flexible desktop simulation tool enabling future ATM research,”
+[7] M. Cummings, “A Drone in Every Driveway,” Scientific in Proceedings of the Digital Avionics Systems Conference,
+American, vol. 308, no. 1, pp. 28–29, Jan. 2013. 2005.
+[8] T. Prevot, V. Battiste, E. Palmer, and S. Shelden, “Air Traffic [25] B. Korn, C. Edinger, S. Tittel, D. Kugler, T. Pütz, O. Hassa, and
+Concept Utilizing 4D Trajectories and Airborne Separation B. Mohrhard, “Sectorless ATM; A concept to increase en-route
+Assistance,” in Proceedings of the AIAA Guidance, Navigation, efficiency,” in Proceedings of the Digital Avionics Systems
+and Control Conference and Exhibit, 2003. Conference, 2009
+[9] J. W. Andrews, H. Erzberger, and J. D. Welch, “Safety analysis
+for advanced separation concepts,” Air Traffic Control AUTHOR BIOGRAPHIES
+Quaterly, vol. 14, no. 1, pp. 5–24, 2006.
+Emmanuel Sunil received the MSc degree in Aerospace Engineering
+[10] J. M. Hoekstra, R. N. H. W. van Gent, and R. C. J. Ruigrok, (cum laude) from TU Delft in 2014, for his work on a haptic interface for
+“Designing for safety: the ‘free flight’ air traffic management unmanned aircraft collision avoidance. He is currently working as PhD
+concept,” Reliability Engineering and System Safety, vol. 75, student at the Control and Simulation section of the faculty of Aerospace
+no. 2, pp. 215–232, Feb. 2002. Engineering, TU Delft. His work focuses on airspace design and capacity
+modeling.
+[11] J. Krozel, M. Peters, and K. Bilimoria, “A decentralized control
+Jacco Hoekstra has obtained his MSc, PhD and a private pilot’s
+strategy for distributed air/ground traffic separation,” in AIAA
+license from the TU Delft. He has worked at the Dutch National
+Guidance, Navigation, and Control Conference and Exhibit,
+Aerospace Laboratory NLR for 16 years. He co-operated with NASA, the
+2000.
+FAA and many European organizations. The topics of his ATM research
+[12] J. M. Hoekstra, R. C. J. Ruigrok, and R. N. H. W. van Gent, include 4D Trajectory based ATM, airborne separation assurance and
+“Free Flight in a Crowded Airspace?,” in Proceedings of the 3rd controller-pilot data link communication. He founded the Association for
+USA/Europe Air Traffic Management R&D Seminar, 2000. Scientific Development of ATM, was the founding director of AT-One
+and head of NLR’s Air Transport Division. After serving two terms as
+[13] M. R. Jardin, “Analytical Relationships Between Conflict Dean of the Aerospace Engineering faculty of the TU Delft, he is now a
+Counts and Air-Traffic Density,” Journal of guidance, control, full professor at this faculty and holds a chair in CNS/ATM in the Control
+and dynamics, vol. 28, no. 6, pp. 1150–1156, 2005. & Simulation section. Next to his research, he currently teaches
+CNS/ATM, Programming in Python and Aeronautics.
+[14] Department of Economic and Social Affairs, “The World
+Population Situation in 2014,” United Nations Population Joost Ellerbroek received the MSc (2007) and PhD (2013) degrees
+in Aerospace Engineering from TU Delft, The Netherlands, where he is
+Division, New York, 2014.
+currently working as an Assistant Professor. His research interests lie in
+[15] National Institute of Statistics and Economic Studies (INSEE), the field of Communication, Navigation and Surveillance (CNS) and Air
+“En résumé - Ile-de-France,” Oct-2014. [Online]. Available: Traffic Management (ATM), and in human-automation interaction.
+http://www.insee.fr.
+Frank Bussink started working at NLR in 1999 as an operational
+research engineer. While at NLR he worked on different international
+[16] Department of Economic and Social Affairs, “World
+ATM R&D projects related to airborne self-separation. In January 2002
+Urbanization Prospects,” United Nations Population Division,
+he joined NASA Langley Research Centre as a research scientist to
+New York, 2014.
+support the NASA “Distributed Air/Ground Traffic Management” (DAG
+[17] Service Interdépartemental de la Sécurité et de l’Exploitation de TM) and the Small Aircraft Transportation System (SATS) programs. In
+la Route, “Statistiques de traffic sur le reseau sirius en 2003,” 2007 he re-joined NLR as a subject matter expert on Aircraft Surveillance
+Préfet de la région d’Ile de France, Sep. 2003. Applications Systems (ASAS), which he continued his research on. Mr.
+Bussink holds a BSc in Aeronautical Engineering and a BSc in Computer
+[18] G. Warwick, “Unmanned K-Max Gets Cleverer,” Aviation Engineering.
+Week and Space Technology, 12-Aug-2013. [Online].
+Dennis Nieuwenhuisen completed his MSc degree in Computer
+Available: http://www.aviationweek.com.
+Science (algorithmic design) at Utrecht University in 2002. In 2007, he
+[19] R. Ducret and L. Delaître, “Parcel delivery and urban logistics - received his PhD in Theoretical Robotics at the same university. Since
+changes in urban courier, express and parcel services,” in 2007 he works at NLR as an R&D engineer at the ATM and airports
+Proceedings of the 13th World Conference on Transport department on a range of different topics both as engineer and as project
+Research, 2013. leader.
+Andrija Vidosavljevic graduated from the Faculty of Transport and
+[20] D. Tam, “Amazon drones: Bold experiment or shrewd publicity
+Traffic Engineering, University of Belgrade (UB-FTTE) in 2007 in the
+stunt?,” CNET, 02-Dec-2013. [Online]. Available:
+field of Air Transportation. He received a PhD at the Division of Airports
+http://www.cnet.com.
+and Air Traffic Safety from UB-FTTE in 2014. He is currently post-
+[21] J. M. Hoekstra, “Designing for safety: the free flight air traffic doctoral researcher at ENAC/MAIAA lab.
+management concept,” Ph.D. dissertation, Delft University of Stefan Kern completed his Master degree in Aerospace engineering
+Technology, Delft, 2001. at the Technical University of Berlin. Since 2013 he is working at DLR at
+the Institute of Flight Guidance focusing on analysis of runway capacity
+[22] International Civil Aviation Organization, “Rules of the Air, enhancement measures as well as development and assessment of new air
+Annex 2,” Jul. 2005. traffic concepts.

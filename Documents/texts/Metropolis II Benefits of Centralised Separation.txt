@@ -1,0 +1,499 @@
+
+
+--- Page 1 ---
+
+Metropolis II: Benefits of Centralised Separation
+Management in High-Density Urban Airspace
+Andres Morfin Veytia, Calin Andrei Badea, Joost Ellerbroek, Jacco Hoekstra,
+Niki Patrinopoulou, Ioannis Daramouskas, Vaios Lappas, V. Kostopoulos, V.
+De Vries, Jacomijn van Ham, et al.
+To cite this version:
+Andres Morfin Veytia, Calin Andrei Badea, Joost Ellerbroek, Jacco Hoekstra, Niki Patrinopoulou, et
+al.. Metropolis II: Benefits of Centralised Separation Management in High-Density Urban Airspace.
+12th SESAR Innovation Days, SJU, Dec 2022, Budapest, Hungary. ￿hal-04054006￿
+HAL Id: hal-04054006
+https://enac.hal.science/hal-04054006v1
+Submitted on 31 Mar 2023
+HAL is a multi-disciplinary open access L’archive ouverte pluridisciplinaire HAL, est
+archive for the deposit and dissemination of sci- destinée au dépôt et à la diffusion de documents
+entific research documents, whether they are pub- scientifiques de niveau recherche, publiés ou non,
+lished or not. The documents may come from émanant des établissements d’enseignement et de
+teaching and research institutions in France or recherche français ou étrangers, des laboratoires
+abroad, or from public or private research centers. publics ou privés.
+
+--- Page 2 ---
+
+Metropolis II: Benefits of Centralised Separation
+Management in High-Density Urban Airspace
+A. M. Veytia, C. A. Badea, J. Ellerbroek, J. Hoekstra
+Delft University of Technology, 2629HS Delft, The Netherlands
+N. Patrinopoulou, I. Daramouskas, V. Lappas, V. Kostopoulos
+University of Patras, 26504 Patras, Greece
+V. de Vries, J. van Ham, E. Sunil
+NLR - Royal Netherlands Aerospace Centre, 1059CM Amsterdam, The Netherlands
+P. Menendez Ponte Alonso, J. Rodrigo Villazon Terrazas
+NTT DATA Spain, 28050 Madrid, Spain
+D. Bereziat, A. Vidosavljevic
+ENAC, Universite´ de Toulouse, France
+L. Sedov
+Linko¨ping University, SE-581 83 Linko¨ping, Sweden
+Abstract—TheMetropolisIIprojectaimedtostudytheimpact Furthermore, the question of how to control traffic within
+of centralised separation management for urban aerial mobility. U-space operations still remains. Previous research has em-
+Three concepts were developed in this study: a fully centralised,
+phasised centralised, strategic separation management, with
+strategically separated concept, a hybrid concept featuring cen-
+tactical separation as a potentially federated or distributed
+tralised strategic separation and distributed tactical separation,
+and a fully distributed tactical concept. A comparative simu- fallback.Thequestionremains,however,towhatextent(high-
+lation study was performed, using traffic scenarios based on density) drone traffic will be accurate and predictable enough
+predicted demand in an urban airspace in the city of Vienna. to enable effective strategic separation, and whether proposed
+Simulations were performed with varying traffic densities and
+business models for urban drone applications would be com-
+situations. Results show that the purely strategic and purely
+patible in terms of required planning horizons.The Metropolis
+tactical strategies perform comparably in terms of safety, and
+that further improvements can be achieved with a combination II project aims to investigate the impact of the degree of
+of those strategies. centralisationofaseparationmanagementmethodonresulting
+Keywords—UnmannedTrafficManagement,ConflictDetection traffic safety, efficiency, capacity and equity. n The project
+& Resolution (CD&R), Self-Separation, U-space, UAS, UTM
+developed three separate separation management concepts
+with varying degrees of centralisation; a centralised concept
+I. INTRODUCTION
+including only centralised strategic deconfliction techniques,
+Urbanairtrafficmobilityisasubjectofhighinterestacross a decentralised system including only decentralised tactical
+the research community, as the applications of use of aircraft deconfliction techniques and a hybrid system including both
+in the Very Low Level (VLL) urban airspace are increasing. centralised strategic deconfliction and decentralised tactical
+Theuse of autonomousaircraft fordelivery transportationhas deconfliction.
+been suggested as a measure to combat congestion in high
+density ground vehicle traffic in city centres and excessive
+emissions. Unmanned Traffic Management (UTM) systems This paper presents an overview of the experimental results
+needtobedesignedandtestedtoinvestigatemethodologiesfor of the Metropolis II project, regarding safety, efficiency and
+integrating highly dense air traffic in the urban environment. otherperformancemetricsofthreedifferentconceptsinhighly
+Previous research has been conducted with the scope dense urban airspace. Section II-A presents the design of the
+of shaping future operations of small aircraft within VLL urban airspace, missions and operations used in the project.
+airspace. The CORUS project [1] categorised airspace sec- The three concepts are briefly introduced in Section II-B.
+tions, and defined urban airspace as being above the tallest The experimental and simulation methodology is described
+obstacle in a city. However, that might not be feasible for in Section III, while the metrics used for concept comparison
+missions such as local small package deliveries, as it would andthemostrelevantresultsareshowninSectionIV.Finally,
+be inefficient for small aircraft to travel at such high altitudes the discussion and conclusion are presented in sections V and
+in cities with very tall buildings (e.g., New York). VI, respectively.
+
+--- Page 3 ---
+
+II. METHODS
+The following section presents the background information
+ofurbanairspaceandUTMconceptdesignusedinsimulations
+within the Metropolis II project. More detailed information
+about the developed concept of operations can be found in
+[2].
+A. Urban environment
+It is expected that urban air traffic will be fundamentally
+differentfromconventionalaviationduetotheincreasedpres-
+enceofphysicalobstacles,thehigherexpectedtrafficdensities,
+the different operational characteristics, and the use of small
+unmanned aerial vehicles. Globally, several developments are
+undergoing for creating a concept of operations capable of
+enabling aircraft operations within cities.
+A large volume of these operations is expected to be
+conducted within Very-Low Level (VLL) airspace, defined
+by FAA [3] and EU [1] projects as being below an altitude
+of approximately 500ft. Considering building heights, aircraft Figure 1. Urban airspace structure used within the Metropolis II traffic
+flying at such low altitudes might be required to fly above scenariosimulations.
+the existing street network for safety, efficiency and privacy
+reasons. Thus, the Metropolis II project aims to include both
+centres have a higher number of aircraft taking off from
+constrained(i.e.,aircraftareconstrainedtoflyingabovestreets
+the same location, while vertiports have less demand but are
+and between buildings) and open (i.e., aircraft can fly freely
+more numerous. Within this work, the percentage of traffic
+above obstacles in any direction) airspace within the study.
+originating from vertiports and distribution centres is 40%.
+Furthermore, previous research [4] performed within con-
+strained airspace has used orthogonal street networks, which
+B. Description of concepts
+provide an idealised traffic situation. Within the Metropolis
+II project, a broader scope was taken by also considering In the Metropolis 2 project, three different separation man-
+organically developed street networks, common in cities in agementconceptswerestudied,whichdifferedintermsofthe
+Europe. degree of centralisation of the separation management task:
+For this reason, the city of Vienna was chosen as the a centralised, a hybrid, and a decentralised concept. Table
+basis for the simulation environment, due to the presence I shows an overview of the main differences between the
+of a combination of orthogonal and organic street network concepts, and the following sections present a summary of
+topology, and its relatively low street alignment [5]. Vienna the design choices made within each.
+alsohasalowdisconnectnessindex[6],meaningthatallareas TABLE I. OVERVIEW OF THE MAIN DIFFERENCES BETWEEN THE THREE
+ofthecityarereachablewithoutmuchdetours.Lastly,thecity CONCEPTSANDTHEIRPROPERTIES[2].
+hasagreatamountofopendataavailableforboththebuildings
+Features Centralised Hybrid Decentralised
+[7] and the streets [8], providing the opportunity to create a OpenAirspace Hexagonalcells Radialgrid Polygonal
+more realistic simulation area. cells
+Global knowl- Yes Yes No
+Alongside buildings, urban airspace will have to account
+edgeofflights
+for areas in which flights will not be permitted, such as parks Main Pre-flight Pre-flight Strate- In-flight Tac-
+or other privacy-sensitive locations. Within the Metropolis II separation Strategic gic and In-flight tical
+management Tactical
+project, we chose to enforce these areas using geofencing.
+method
+Within the experiment airspace designed for Vienna, several
+geofenced areas were created within open airspace. Thus, Theopenairspacedesignisdifferentamongconceptsdueto
+although aircraft may freely fly in open airspace, they are not the need for it to be compatible with the concept philosophy:
+allowed to fly within these restricted areas. inadecentralisedconcept,theairspaceislessstructured,while
+Vertiports and distribution centres were placed within open in a more centralised one, structure is beneficial to the global
+and constrained airspace to act as origins and destinations optimisation of trajectories.
+for aircraft, based on the municipal demand expected in the 1) TheCentralisedConcept: TheCentralisedconceptaims
+future. These demands are based on parcel delivery data from to strategically deconflict all aircraft prior to take-off. To do
+[4], [9]. A linear regression is used that takes into account this, the open airspace is structured in hexagonal cells and is
+area, population size, and average annual gross salary per connected to the constrained airspace street network to enable
+municipality. Fig. 1 shows how the city centre contains more use of the A* path-finding algorithm [10], [11]. The airspace
+vertiports as it is expected to have more demand. Distribution isdividedinto16verticallayers,whereeachlayerisassigned
+
+--- Page 4 ---
+
+a heading range, similar to the layers concept created within The decentralised concept does not use any strategic sepa-
+the Metropolis I project [12]. rationduringflightplanning.However,thereisacentralentity
+Flightplanningandstrategicdeconflictionisperformedina that monitors the traffic in constrained airspace and updates
+two-step approach. In the first step, a relaxed graph colouring the cost of travelling through the airspace. Each aircraft then
+model is used to assign flight layers such that the number has the option to replan if the cost has changed due to high
+of unsolved conflicts is minimised. In the second step, the traffic, but also has the option to maintain its current route.
+remaining conflicts are solved by delaying the departure slot
+III. EXPERIMENT
+of flights.
+The Metropolis II simulation experiments were designed to
+In the centralised concept, a single authority is responsible
+seehowthelevelofcentralisationinfluencessafety,efficiency,
+for planning all flights and ensuring that all aircraft maintain
+and other metrics. More detailed information about the exper-
+separation throughout their mission. Flight plans are therefore
+iment set up may be found in the Metropolis II reports [13]
+4-dimensional (latitude, longitude, height tracked in time).
+and in [2].
+UAS agents are responsible for following the flight plan as
+closely as possible considering their performance limitations A. Simulation software
+and uncertainties. The centralised concept does not include a The experiments were simulated through fast-time sim-
+tactical separation component. ulations using BlueSky, an open air traffic simulator [14].
+2) The Hybrid Concept: The Hybrid concept attempts to BlueSky has an extensible plugin system, to which different
+leverage the use of a central entity for flight planning and conflictdetectionandresolution(CD&R)implementationsand
+strategic separation management while letting individual air- other modules can be added, allowing for testing of different
+crafttacticallyseparateifnecessary.Inthehybridconcept,the concepts under similar conditions.
+strategic separation component relies on using horizontal sep-
+B. Simulation Area
+aration while the tactical separation component uses vertical
+TheMetropolisIIsimulationairspaceisan8kilometrewide
+and speed-based manoeuvres to solve conflicts not predicted
+and 500 feet high cylinder centered in the center of Vienna
+bythecentralentity.Inopenairspace,airspaceisstructuredas
+(Fig.1).Itincludesopenandconstrainedairspace.Aircraftare
+a unidirectional radial grid that connects to the street network
+allowedtoflywithoutconstraintsinopenairspaceunlessthere
+in constrained airspace.
+is a geofenced area. In constrained airspace, aircraft must fly
+The hybrid concept adds an extra cost to travelling in
+above streets.
+constrainedairspace,toreducetrafficdensitywithinthecentre
+ofthecity.Thetotalairspaceisrepresentedasagraphandthe C. Aircraft models
+paths are solved using the Dijkstra algorithm. When an edge
+For the Metropolis II project two aircraft types (MP20 and
+isoccupiedbyanaircraftthatedgeisremovedfromthegraph
+MP30) based on a simplified DJI Matrice 600 Pro hexacopter
+for a certain amount of time. This means that if an aircraft is
+drone performance model were used in the simulations. The
+not able to find an adequate solution, it gets delayed.
+difference between the two is that MP20 cruises at a speed of
+This concept also makes use of 16 layers to vertically 20 kts while MP30 at 30 kts.
+separate aircraft. However, there are a reduced number of
+D. Missions
+cruising layers when compared to the Centralised concept in
+ordertoprovideaircraftwiththeoptionofusingdeconfliction Inordertoachieveadiverseandrepresentativesetoftraffic
+layers for tactical conflict resolution maneuvers. patterns, and to provide a means to study the use of mission
+3) The Decentralised Concept: The decentralised concept prioritisation, four mission types were defined:
+only makes use of tactical separation to maintain safe sep- 1) ParcelDeliveries:Thesemissionsstartfromdistribution
+aration between aircraft. The tactical separation algorithm centers and travel to a vertiport, and thus generate
+employsbothspeedandaltitudebasedmanoeuvres.Inthede- converging/diverging traffic patterns;
+centralisedconcept,openairspaceisdiscretisedintopolygonal 2) Food Deliveries: These missions travel from vertiport
+cells in the horizontal plane. In the vertical plane, layers are to vertiport, leading to point to point traffic patterns;
+usedtoseparateaircraftverticallyinfunctionofheadingrange, 3) Loiteringmissions:Pointtopointmissionsthatactivate
+similar to the centralised concept (16 layers). In constrained a dynamic geofence upon arrival;
+airspace, all streets are uni-directional and are assigned a 4) Emergency missions: These missions are similar to
+cruise height allocation and direction. The directions are food deliveries but are announced to the UTM system
+assigned in a way that ensures that the whole airspace is closer to their desired take-off time.
+accessible. The directionality allocation aims to minimise the There are four levels of priority: low, medium, high, and
+probabilityoftwocruisingaircraftintersectingwitheachother. emergency. The parcel, food and loitering traffic is assigned
+However, due to the street network containing non-nominal in equal proportion for the first three levels, with emergency
+intersections (e.g., 3-way intersections), this will not always missions having the highest priority. These levels are taken
+be possible. Aircraft that turn can make use of turn layers, into consideration during tactical and strategic deconfliction
+located between cruising layers. decisions.
+
+--- Page 5 ---
+
+E. Uncertainties and non-nominal situations
+Uncertainties and non-nominal events are introduced in the
+experiments in order to test the robustness of the separation
+management concepts. These are in the form wind, and rogue
+aircraft, respectively. Rogue aircraft are vehicles that do not
+adheretotherulesdevelopedbytheconcept.Theytravelfrom
+outside the airspace through the center and then back outside
+the airspace, ignore traffic rules, and do not respond to the
+presence and actions of other traffic. The number of rogue
+aircraft in the air is kept constant during the simulation. Note
+thatwhilerogueaircraftdonotfollowtherulesoftheconcept,
+they still travel through constrained airspace by following the
+streets. The aircraft also randomly vary altitude at several
+different locations which are not known to the operators.
+Rogue aircraft do not make any attempts to tactically solve
+conflicts, and thus should affect the tactical components of Figure 2. Cumulative density heat map for high density for the Centralised
+the concepts most. concept.
+The experiments also include a limited simulation of the
+effectofwindonUTMoperations.Thegoalofincludingwind
+intheexperimentswastoinducespeedandtiminguncertainty, • Mission duration efficiency,
+which would impact the strategic planning of concepts with a • Mission delay.
+central component. Therefore, a uniform wind field is defined A conflict is counted when there is a predicted intrusion
+overthewholeairspacebutonlythecomponentparalleltothe with a certain look ahead-time. This work uses state-based
+direction of the aircraft affects the speed of the aircraft. This detection, meaning that trajectories are linearly extracted with
+means that the aircraft will only speed up or slow down and a certain look-ahead time. The horizontal and vertical mini-
+not experience cross-winds. mum separation is set to 32 metres and 25 feet, respectively.
+The look-ahead time is 10 seconds.
+F. Independent variables
+H. Simulation time
+The following independent variables were defined for the
+experiments: Dependent variables were measured throughout the entire
+simulation in all scenarios. Each scenario ran until all aircraft
+1) Degree of centralisation: Decentralised, Hybrid, and
+reached their destinations. Although flight departures are only
+Centralised;
+planned within the first hour, the simulation time varied
+2) Traffic density: Very low, low, medium, high, and very
+between 90min and 180min.
+high traffic densities are used (see Table II);
+3) Wind level: The speed of the uniform vector field (0,
+IV. RESULTS
+1, 3, and 5 knots);
+The current section presents the most important results of
+4) Rogue aircraft: The number of rogue aircraft at one
+the Metropolis II project. The calculated metrics results are
+time in the airspace (0, 33, 66, 100).
+presented using boxplot graphs, each boxplot is computed
+TABLEII.NUMBEROFAIRCRAFTCONCURRENTLYIN-FLIGHTFOREACH based on the value of the metrics across the 9 scenario
+TRAFFICDENSITY. repetitions.
+Density Averagenumberofaircraftperscenario
+A. Traffic density
+VeryLow 1660
+Low 3340 Figs. 2, 3, and 4 show the cumulative traffic density heat
+Medium 4990
+maps throughout the simulations with high density traffic and
+High 6650
+VeryHigh 8290 40 percent of traffic coming from distribution centers for the
+centralised, hybrid, and decentralised concepts respectively.
+For each scenario characterised by a choice of independent Here, lighter color indicates denser traffic.
+variables,ninerepetitionswereperformedusingadifferentset AcomparisonofFigs.2,3,and4revealsseveraldifferences
+of randomly-generated traffic. in terms of flight planning. In Fig. 2 the hexagonal grid of
+the Centralised concept is visible in open airspace. Fig. 3
+G. Dependent measures
+shows the radial grid of the hybrid concept. Since there was
+Thedependentmeasuresshowninthisworkareasfollows: a higher cost in travelling through constrained airspace, the
+• Number of pairwise conflicts, traffic tended to form a beltway around the city center. Fig.
+• Number of intrusions, 4 shows the effects of the absence of strategic planning. As
+• Achieved instantaneous traffic density, aircraft tend to use the shortest path though the network in
+
+--- Page 6 ---
+
+Figure 5. Aircraft density in constrained airspace in function of time for a
+Figure3.CumulativedensityheatmapforhighdensityfortheHybridconcept. high-densityscenario.
+concepts both have similar number of conflicts with the
+centralised concept having slightly fewer.
+Fig. 7 shows the total number of intrusions for each of the
+concepts in the vertical axis and the scenario density in the
+horizontal axis. Here it is clear that the hybrid concept has
+the smallest number of intrusions at all traffic densities. The
+decentralised and centralised concepts are more comparable
+in number of intrusions. The levels appear similar at most
+traffic densities, though at the very high traffic density the
+decentralised concept has slightly more intrusions than the
+other concepts.
+As the three concepts achieved different densities within
+constrained airspace, the number of intrusions is not directly
+comparable. Therefore, the intrusion rate was computed in
+function of aircraft density in constrained airspace, presented
+Figure4.CumulativedensityheatmapforhighdensityfortheDecentralised in Fig. 8. The intrusion trend of the centralised and decen-
+concept.
+tralised concepts are nearly identical. Although the hybrid
+concept achieves the fewest intrusions per minute per number
+of aircraft in the air, the difference becomes less pronounced
+constrainedairspace,therearecertainstreetsandintersections
+which are more used than the others. It is also interesting to
+note that the centralised concept tended to spread the traffic
+more evenly in constrained airspace.
+Fig.5showsthatthedecentralisedandcentralisedconcepts
+have very similar instantaneous traffic densities. The peak of
+the hybrid density in constrained airspace is about half of that
+for the decentralised and centralised concept due to the ring-
+roadstrategyusedbytheformer.Itisalsoclearthatthehybrid
+concept took longer to taper off, showing that aircraft were in
+the air for longer as they avoided constrained airspace.
+B. Airspace safety
+Fig. 6 shows the number of conflicts per flight for each
+concept for the different traffic demand scenarios. The effect
+of strategic pre-take-off deconfliction can clearly be seen: the
+decentralised concept has the highest number of conflicts at
+all densities, reaching to an order of magnitude difference at Figure6.Numberofconflictsperflightasafunctionofthescenariodensity
+the high and very high densities. The hybrid and centralised forthethreeconcepts.
+
+--- Page 7 ---
+
+Figure7.Numberofintrusionsasafunctionofthescenariodensityforthe Figure9.Flightdurationefficiencyasafunctionofthetrafficdensityforthe
+threeconcepts. threeconcepts.
+Figure 8. Intrusions per minute as a function of the number of aircraft in Figure10.Averagedemanddelayasafunctionofthetrafficdensityforthe
+constrainedairspaceforthethreeconcepts. threeconcepts.
+when compared to the total number of intrusions presented in
+concept induces notably higher delays for all densities and
+Fig. 7.
+presents a rapid raise in the delays with increasing density.
+Threemainfactorscontributetodemanddelay.Thefirstisthe
+C. Mission efficiency
+departure delay applied by the concepts to the aircraft as an
+The duration efficiency is an estimate of how much longer
+efforttoincreasesafety.Thesecondistheroutelength,asthe
+thesimulatedroutetookversusanidealroute,presentedinFig.
+hybridconceptdiscouragesaircraftfromusingtheconstrained
+9. The centralised and hybrid concepts both have relatively
+airspaceandplanslongerroutestoavoidit.Thelastoneisthe
+constant efficiencies across densities. The hybrid concept
+flight time with lower speed limit or hovering while resolving
+achievedaloweroverallefficiencyduetothebeltwayairspace
+conflicts as a part of the tactical separation.
+structure, which made missions last longer. The decentralised
+concept is similar in magnitude to the centralised concept,
+E. Service access and equity
+however the efficiency tends to decrease with the density due
+to aircraft having to resolve more conflicts tactically. Demand delay dispersion metric is used as an indicator
+of equity and access to UTM services. This metric gives an
+D. Mission delay
+indication of how delay is distributed over airspace partici-
+The average demand delay is measured as the mean of the pants.Alowvalueindicatesthatdelaywasevenlydistributed,
+delay of all the flights in a scenario, presented in Fig. 10. and a higher value means that some aircraft were delayed
+The centralised and decentralised concepts present similarly disproportionately more than others. It is computed as the
+low values of delay, with the decentralised concept showing a standard deviation over the arrival delay of all aircraft which
+slightly increasing pattern with increasing density. The hybrid arrived at their destination, where the arrival delay is the
+
+--- Page 8 ---
+
+Figure 11. Demand dispersion delay as a function of the traffic density for Figure 12. Additional number of intrusions as a function of the wind level
+thethreeconcepts. forthethreeconcepts(1,3,and5ktswindspeed).
+difference between realized arrival time and ideal expected
+arrival time.
+The demand delay dispersion can be seen in Fig. 11. The
+decentralised concept had the lowest demand delay dispersion
+which means that most aircraft were similarly delayed. In the
+very low, low, and medium densities the hybrid concept had a
+lower dispersion delay than the centralised concept. However,
+forthehighandveryhightheeffectisreversedandthehybrid
+conceptachievesvaluesabovethoseofthecentralisedconcept,
+indicating that for those densities the hybrid concept applies
+significantly longer delay to a subset of aircraft.
+F. Effect of uncertainties and non-nominals on safety
+Fig. 12 shows the additional number of intrusions due to
+the presence of wind for all three concepts in a high density
+Figure 13. Additional number of intrusions as a function of the number of
+scenario.Thecentralisedconceptshowsaverylownumberof rogueaircraftforthethreeconcepts(33,66and100aircraft).
+additional intrusions at 1 and 3 knots. However, it is higher
+at 5 knots. For the hybrid concept the additional number of
+intrusions is similar at 1, and 3 knots and then increases at 5 However, when looking at, e.g., flight efficiency and demand
+knots. For the decentralised concept, the number of intrusions delay it can be seen that the safe performance of the hybrid
+is similar across all wind speeds. However, the spread of the concept comes, in part, at the cost of flight efficiency and
+numberofintrusionsmovestothepositivesideofthevertical capacity. This shows the potential benefit of the combination
+axis for the 3 and 5 knots case. of strategic and tactical separation management measures.
+Fig. 13 shows the additional number of intrusions due to However, not all of these differences can be attributed to the
+rogueaircraftforallthreeconceptsinthehighdensityscenar- difference in degree of centralisation between the concepts.
+ios. Overall, the number of intrusions increases as the number The design of the airspace was also a large factor in the
+of rogue aircraft increases. The hybrid concept resulted in observed differences between the three concepts.
+the lowest number of additional intrusions. The number of Firstly, because the hybrid concept made use of dedicated
+intrusions for the decentralised and centralised concepts is deconfliction layers, it only has half of the allowable cruising
+similar across rogue levels, although the decentralised does space compared to the centralised concept, which can have
+show more spread in its results. an impact on capacity. This means that the strategic planner
+has half the vertical space available. From Fig. 11 it can be
+V. DISCUSSION seen that at lower densities the dispersion of the delays of the
+There are a number of observations that can be made from hybridconceptwasbelowthecentralisedconcept.However,as
+theresultsoftheMetropolis2conceptcomparison.Thefirstis the traffic density increased the availability of cruising space
+thatthehybridconceptmanagedtoachievethelowestnumber became denser and the hybrid concept was not able to match
+of intrusions of the three concepts, even when considering the centralised concept.
+intrusion count as a function of instantaneous traffic density. Secondly, the beltway-like structure of the hybrid concept
+
+--- Page 9 ---
+
+for unconstrained airspace had aircraft in the air for longer strategicplanningdidnotdetect,duetouncertaintiesregarding
+becausethestrategicalgorithmtendedtopreferthesebeltways thepositionsofallaircraft.However,thiscameattheexpense
+over flying in constrained airspace. This can be seen in the of route efficiency and demand delay.
+density heat maps (Fig. 3) and the instantaneous density plot The decentralised concept provided the most equitable ac-
+in Fig. 5. This behaviour causes longer flight distances, but cess to the airspace. In terms of safety and demand delay, the
+because of its high degree of traffic alignment (on any point decentralisedconceptwasonparwiththecentralisedconcept,
+along a roundabout all vehicles are going in approximately resulting in a similar number of intrusions for both. However,
+the same direction at the same speed) conflict probability can the centralised concept was able to redistribute traffic more
+be reduced by a large amount. This shows that the airspace efficiently than the hybrid concept due to allowing more
+structure can have a significant impact on safety, especially if aircraft in constrained airspace.
+traffic is better aligned and spread out (albeit at the expense Toanswerthequestiononthedegreeofcentralisationofan
+of route efficiency). urbanairtrafficmanagementsystem,weproposeanimproved
+The decentralised concept does not globally optimize the hybridsystemwithmoreelaboratepathplanningandlessstrict
+paths of the aircraft. It does attempt to spread traffic through strategic planning that allow higher aircraft densities.
+flow control but local hotspots can still be seen within the
+ACKNOWLEDGMENT
+airspace. Moreover, the number of conflicts in the decen-
+tralisedconceptareanorderofmagnitudehigherthanboththe This research has received funding from the SESAR Joint
+centralised and hybrid concepts. However, when comparing Undertaking under the European Union’s Horizon 2020 re-
+the number of resulting intrusions to the centralised concept search and innovation programme under grant agreement No
+results, it can be seen that the decentralised concept is able to 892928 (Metropolis II).
+maintainsimilarlevelsofintrusionstothecentralisedconcept.
+REFERENCES
+The higher number of conflicts, therefore, achieve reactively,
+[1] CORUS consortium, “U-space Concept of Operations,” SESAR Joint
+what a pre-departure optimisation algorithm does proactively.
+Undertaking,Vol2.,Edition03.00.02,2019.
+It is interesting that by only using strategic separation or [2] N. Patrinopoulou, I. Daramouskas, V. Lappas, V. Kostopoulos, A. M.
+tactical separation, the number of intrusions remains compa- Veytia, C. A. Badea, J. Ellerbroek, J. Hoekstra, V. de Vries, J. van
+Ham, E. Sunil, P. M. Ponte Alonso, J. Pedrero Gonzalez, D. Bereziat,
+rable. The centralised concept was able to reduce network
+A.Vidosavljevic,andL.Sedov,“MetropolisII:InvestigatingtheFuture
+bottlenecks and maintain path efficiency. However, it is not ShapeofAirTrafficControlinHighlyDenseUrbanAirspace,”in2022
+able to plan completely for all circumstances, therefore a 30th Mediterranean Conference on Control and Automation (MED),
+2022,pp.649–655.
+tactical element remains indispensable. However, it can be
+[3] “Unmanned Aircraft System Traffic Management (UTM) | Federal
+difficult to effectively trade-off between both as it is seen AviationAdministration.”[Online].Available:https://www.faa.gov/uas/
+from the performance of the hybrid concept in the duration research development/traffic management
+[4] M.Doole,J.Ellerbroek,V.L.Knoop,andJ.M.Hoekstra,“Constrained
+efficiency (Fig. 9) and the demand delay (Fig. 10).
+urban airspace design for large-scale drone-based delivery traffic,”
+Another interesting result is the similarity between the Aerospace,vol.8,no.2,2021.
+centralised and decentralised concept in the safety results [5] G. Boeing, “Urban spatial order: street network orientation, configura-
+tion, and entropy,” Applied Network Science, vol. 4, no. 1, pp. 1–19,
+within constrained airspace (Fig. 8). This can be attributed
+2019.
+to the nature of constrained airspace, where the action and [6] C. Barrington-Leigh and A. Millard-Ball, “A global assessment of
+solutionspacearelimited.Thus,whentheseparationmethods street-networksprawl,”PLOSONE,vol.14,no.11,pp.1–16,112019.
+[Online].Available:https://doi.org/10.1371/journal.pone.0223078
+are limited (i.e., using either tactical or strategic), the airspace
+[7] Bauko¨rpermodell (LOD0.4) Wien. Accessed 2021-05-
+network structure itself has a greater influence on the safety. 20. [Online]. Available: https://www.data.gv.at/katalog/dataset/
+The results in terms of robustness to rogue aircraft show 76c2e577-268f-4a93-bccd-7d5b43b14efd
+[8] “Hall of Fame/Streets complete - OpenStreetMap Wiki.” [Online].
+that the hybrid concept is able to have the least number of
+Available: https://wiki.openstreetmap.org/wiki/Hall of Fame/Streets
+intrusions for all rogue levels. This can be related to the fact complete
+that the hybrid concept distributes traffic efficiently in the [9] P.Bowes,“Annualreport,”PitneyBowes,Tech.Rep.,2021.
+[10] V. Duchamp, B. Josefsson, T. Polishchuk, V. Polishchuk, R. Sa´ez,
+strategicphase,andthatitstacticalresolutionalgorithmproved
+and R. Wiren, “Air traffic deconfliction using sum coloring,” in 2019
+more effective in solving the type of conflicts that occurred IEEE/AIAA38thDigitalAvionicsSystemsConference(DASC),2019.
+with rogue vehicles. [11] V. Duchamp, L. Sedov, and V. Polishchuk, “Density-Adapting Layers
+towards PBN for UTM,” in ATM 2019, 13th USA/Europe Air
+VI. CONCLUSION Traffic Management Research and Development Seminar, ser. ATM
+Seminar 2019, Vienne, Austria, Jun. 2019. [Online]. Available:
+The hybrid concept was able to achieve the highest level of https://hal-enac.archives-ouvertes.fr/hal-02178436
+safetybycombiningcentralisedstrategicanddecentralisedtac- [12] E. Sunil, J. Hoekstra, J. Ellerbroek, F. Bussink, D. Nieuwenhuisen,
+A.Vidosavljevic,andS.Kern,“Metropolis:RelatingAirspaceStructure
+tical separation management. The “ring road” routing method andCapacityforExtremeTrafficDensities,”inATMseminar2015,11th
+helpedincreasesafetybyalargefactorinthehybridconceptas USA/EUROPEAirTrafficManagementR&DSeminar,Portugal,2015.
+therewerefeweraircraftinconstrainedairspace.Thestrategic [13] “Deliverables–Metropolis2.”[Online].Available:https://metropolis2.
+eu/deliverables/
+planningofthehybridconceptdistributedtrafficandmitigated
+[14] J. Hoekstra and J. Ellerbroek, “Bluesky ATC simulator project: an
+networkbottlenecks.Moreover,thetacticalseparationstrategy open data and open source approach,” in Conference: International
+further improved the safety by resolving the conflicts that the
+ConferenceforResearchonAirTransportation,2016.

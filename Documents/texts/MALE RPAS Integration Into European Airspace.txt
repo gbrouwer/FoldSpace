@@ -1,0 +1,1150 @@
+
+
+--- Page 1 ---
+
+MALE RPAS INTEGRATION INTO EUROPEAN AIRSPACE
+Part 2: Real-Time Simulation Analysis of Operations with Remain Well Clear
+Emmanuel Sunil†, Erik Theunissen§, Timothy Bleakley‡, Erik-Jan Hartlieb†, Paul Kuiper†,
+Marieke Suijkerbuijk†, Tim Dufourmont† and Timothy Grebe‡
+†Royal Netherlands Aerospace Centre (NLR), Amsterdam, The Netherlands
+§Information Systems Delft (ISD), Leiderdorp, The Netherlands
+‡General Atomics Aeronautical Systems Inc. (GA-ASI), San Diego, United States of America
+Abstract determine if the ATCO is already aware of, and is in the
+process of resolving a conflict, before reporting it. At the
+At present, Medium Altitude Long Endurance
+same time, the procedures should provide RPAS pilots with
+(MALE) Remotely Piloted Aircraft Systems (RPAS) are
+more flexibility than described in the current standards to
+only permitted to fly in segregated airspace in Europe.
+resolve conflicts. In TMAs, this approach is likely to reduce
+Because such restrictions limit the efficiency of MALE
+the number of unnecessary go-arounds needed to resolve
+RPAS operations, several European projects are working on
+conflicts during final approach when DTA alerts are issued.
+the procedures needed to allow routine MALE RPAS flights
+in unsegregated European airspace. To contribute to these 1 Introduction
+efforts, the Royal Netherlands Aerospace Center (NLR) has
+In addition to supporting defense operations, Medium
+partnered with General Atomics Aeronautical Systems Inc.
+Altitude Long Endurance (MALE) Remotely Piloted
+(GA-ASI) and Information System Delft (ISD) to gather the
+Aircraft Systems (RPAS) have numerous civilian
+data needed to develop MALE RPAS airspace integration
+applications ranging from infrastructure inspection to
+procedures through a series of Real-Time Simulation (RTS)
+search and rescue. However, the current regulatory
+experiments. This paper summarizes the results of the
+environment in Europe inhibits such applications as they
+second RTS campaign performed in November 2020 under
+only permit MALE RPAS operations in segregated
+this collaboration, which focused on the procedures needed
+airspace, i.e., “airspace of specified dimensions allocated
+for the Remain Well Clear (RWC) component of Detect and
+for exclusive use to a specific user” [1]. Furthermore, each
+Avoid (DAA). RWC systems provide RPAS pilots with
+MALE RPAS flight requires numerous permissions from
+cues that reduce the chance of a Collision Avoidance (CA)
+national aviation authorities, and this process can be very
+situation from occurring. In this work, the GA-ASI Conflict
+time consuming. As a result of these restrictions, the
+Prediction and Display System (CPDS), a DAA alerting,
+frequency and the operational efficiency of MALE RPAS
+guidance and display system that meets the requirements set
+flights in Europe are presently limited.
+in RTCA DO-365B, was used. In addition to an active
+Royal Netherlands Airforce RPAS pilot, the RTS also Recognizing the need for a common European
+involved a number of experienced Air Traffic Controllers approach to address this challenge, several SESAR and
+(ATCOs) and airline pilots. The experiment considered EDA projects are currently working towards a
+several challenging RWC scenarios in both controlled and comprehensive set of procedures, more formally known as
+uncontrolled airspace classes, in both en-route and Terminal a Concept of Operations (CONOPS), to enable MALE
+Maneuvering Area (TMA) settings. This included RWC RPAS operations in unsegregated European airspace [2] [3]
+encounters during the final approach phase to analyze the [4] [5] [6] [7]. Similar studies have also been performed in
+procedures needed for the new DAA Terminal Alerting the United States [8] [9] [10]. In general, these studies focus
+(DTA) logic described in RTCA DO-365B. The results on ensuring that the main difference between RPAS and
+indicated that both ATCOs and RPAS pilots can become conventional aircraft - the fact that the RPAS pilot is
+accustomed to operations with RWC/DAA with relatively physically separated from his/her aircraft - does not
+little additional training. The results also suggest that RPAS adversely affect existing airspace users. Moreover for
+pilots should avoid excessive RWC-related radio Europe, SESAR advocates for a phased approach to MALE
+communications as this could have a negative effect on RPAS integration, with an “accommodation” phase in the
+ATCO workload. To this end, RPAS pilots are short-term (by 2025) with minimal changes to existing ATC
+recommended to integrate the information provided on the systems, and a “full integration” phase in the longer-term
+DAA display with information in radio communications to
+
+--- Page 2 ---
+
+(by 2030) that will require the introduction of new RTCA DO-365B. As such, the participants were instructed
+technologies such as Detect and Avoid (DAA). to use the RWC procedures described in RTCA DO-365B
+in order to evaluate and recommend improvements to these
+To complement the aforementioned initiatives for
+procedures, particularly when considering operations in
+integrating MALE RPAS into European airspace, the Royal
+European airspace. The RTS also considered scenarios with
+Netherlands Aerospace Center (NLR) has partnered with
+Command and Control (C2) lost link and Radio Telephony
+General Atomics Aeronautical Systems Inc. (GA-ASI) and
+(R/T) failure in order to validate the procedures developed
+Information Systems Delft (ISD). The main objective of this
+for these contingencies during the first study in 2019 [12] .
+collaboration is to gather the empirical data needed for
+developing a MALE RPAS airspace integration CONOPS This paper is structured as follows: Section 2 provides
+through a series of Real-Time Simulation (RTS) the reader with background information about RWC. The
+experiments. The aim is to take into account both nominal design of the experiment is described in Section 3. The
+and off-nominal scenarios, as well as operations in airspaces results of the five most interesting experiment scenarios are
+classes A-G, i.e., for operations in both controlled and presented and analyzed in Section 4. Section 5 summarizes
+uncontrolled airspace classes. It is expected that the results the main conclusions of the present study, and describes
+of these RTS experiments can be used as an additional topics that are planned for future research.
+source of data to aid policy makers, regulators and
+stakeholders, such as Air Traffic Controllers (ATCOs) and
+2 Background
+(RPAS) pilots, with their decision-making process in order
+to accelerate the integration of MALE RPAS into European
+2.1 Layers of Safety in ATM
+airspace.
+In contemporary Air Traffic Management (ATM),
+This paper presents the design and results of the
+there are four concentric layers of safety that aim to prevent
+second RTS campaign performed under this collaboration
+mid-air collisions; see Figure 1. The outer-most safety layer
+in November 2020. The main goal of this RTS was to
+aims to avoid conflicts on a strategic timescale, i.e., before
+consider the procedures needed to operate with the Remain
+take-off. Airspace design is an example of this layer.
+Well Clear (RWC) component of Detect and Avoid (DAA)
+However, not all conflicts can be solved on a strategic
+systems. RWC is the one of the two main functions of DAA.
+timescale because uncertainties can cause variations
+It aims to provide RPAS pilots with the alerts and guidance
+between the planned and the actual routes flown by aircraft,
+needed to maintain a safe distance from other traffic, and
+e.g., diversions due to weather. The second layer of safety,
+thereby decrease the need for Collision Avoidance (CA, the
+known as separation provision service, aims to deal with
+second function of DAA) maneuvers as much as possible.
+such uncertainties. This service is primarily performed by
+As such, RWC is often considered to be the unmanned
+ATCOs in controlled airspace and they are supported by
+equivalent of present day ‘see-and-avoid’ rule. But in
+radar, active surveillance and automation to provide this
+contrast to see-and-avoid, for which the definition of ‘well
+service.
+clear’ is subjective, RWC systems make use of quantitative
+data from cooperative (e.g., ADS-B) and non-cooperative
+sensors (e.g., air-to-air radar), as well as a mathematically
+well-defined criteria for determining conflicts.
+For the purposes of this study, the GA-ASI Conflict
+Prediction and Display System (CPDS) was integrated into
+NLR simulators, to provide RPAS pilots with RWC cues
+during the RTS. CPDS was designed to meet the latest
+RTCA standards for DAA equipment, namely RTCA DO-
+365B [11]. In addition to an active Royal Netherlands
+Airforce RPAS pilot, the RTS also involved a number of
+experienced Air Traffic Controllers (ATCOs) and airline
+pilots. The experiment considered several challenging RWC Figure 1: Layers of safety in ATM
+encounters in both controlled and uncontrolled airspace
+The third safety layer, known as self-separation,
+classes, in both en-route and Terminal Maneuvering Area
+requires pilots to visually steer their aircraft away from
+(TMA) settings. This included RWC encounters during the
+neighboring traffic using a technique known as “see-and-
+final approach phase to analyze the procedures needed for
+avoid”. Although self-separation layer is applicable for all
+the new DAA Terminal Alerting (DTA) logic described in
+airspace classes, in practice it is primarily used in
+
+--- Page 3 ---
+
+uncontrolled airspace classes. The fourth and final layer of Corrective Alert approximately 75 seconds before a
+safety focuses on last-resort Collision Avoidance (CA). The predicted loss of DWC would occur. If the time until a
+Traffic Alert and Collision and Avoidance System II (TCAS predicted loss of DWC decreases below approximately 25
+II) is an example of a CA system. This onboard system seconds, the Warning Alert is declared.
+interrogates the transponders of aircraft in the airspace
+To provide the pilot with guidance to avoid a loss of
+around an aircraft, to identify potential collisions, and
+DWC, the directions in which a DAA alert is predicted to
+provides pilots with traffic alerts, and in closer range,
+occur are indicated, color-coded yellow for a Corrective
+(coordinated) conflict resolution advisories to avoid mid-air
+Alert and red for a Warning Alert.
+collisions.
+As a result of these four safety layers, mid-air 2.3 RTCA Procedures for Remain Well Clear
+collisions are, thankfully, extremely rare events in today’s Alerts
+ATM system. To ensure that RPAS operate in unsegregated
+In the Operational Services and Environment
+airspace with same level of safety as manned traffic, RPAS
+Description (OSED) of [13]. the pilot action after a
+must also be able to comply with all four layers of safety.
+Corrective Alert is described as follows: ‘The pilot uses
+Although MALE RPAS may carry the same
+training, judgment, and display of traffic to assess the threat
+Communications, Navigation and airspace Surveillance
+and the need to maneuver. If the PIC can’t maneuver in
+(CNS) equipment as their manned counterparts, there is one
+response to ATC Traffic Advisory, the PIC will inform
+critical difference: the pilot is not on-board. Consequently,
+ATC’.
+the pilot cannot ‘see and avoid’ other aircraft by looking out
+of the flight deck. Instead, he/she needs a technological In [13]. the associated pilot action is specified as: ‘The
+means to perform both the self-separation and CA tasks. DAA warning alert is intended to inform the PIC that
+The technological means to perform both these functions immediate action is required to maintain DWC. The
+are often referred to as Detect and Avoid (DAA). warning alert necessitates immediate awareness of the PIC
+and a prompt ownship maneuver’.
+It should be noted that the self-separation layer of
+DAA is called Remain Well Clear (RWC). This paper
+2.4 Conflict Prediction and Display System
+focuses on the procedures needed for RWC.
+(CPDS)
+2.2 RTCA Remain Well Clear Definition and CPDS is a modular system comprised of separate
+Alerting components for data parsing and processing, alerting and
+guidance computations, and display. The components are
+In May 2017 RTCA published DO-365, the Minimum
+integrated using industry-standard Data Distribution
+Operational Performance Standards (MOPS) for UAS
+Service (DDS) Middleware. The first version of the GA-
+Detect and Avoid Systems [13]. Four months later the
+ASI Conflict Prediction and Display System (CPDS) was
+Federal Aviation Administration (FAA) published
+realized in June 2011 [13]. After the quantification of the
+Technical Standard Order (TSO) C-211 for Detect and
+DWC volume by SC-228 in 2014, this was used as the basis
+Avoid (DAA) Systems [14] referencing [13]. for the
+for the specification and configuration of the alerting and
+required minimum performance standards. An important
+guidance function in CPDS.
+milestone achieved with the DAA MOPS was the
+quantitative definition of DAA Well Clear (DWC), a CPDS complies with the requirements for DAA
+temporal and spatial boundary around the aircraft intended alerting and guidance data presentation specified in DO-
+to be an electronic means of avoiding conflicting traffic. 365. Yellow heading bands on the DAA traffic display
+The definition of a horizontal DWC boundary comprises indicate the directions in which the loss of DWC is predicted
+both a spatial and a temporal threshold that are combined in to occur within the Corrective Alert time and red heading
+the so-called modified tau equation. The spatial threshold in bands mark the directions in which a Warning Alert is
+this equation is referred to by DMOD, which for the en- predicted.
+route phase is set to 4000 ft and for the DAA Terminal Area
+(DTA) to 1500 ft. Outside the DTA, the temporal
+component of the modified tau equation is equal to 35
+seconds. For DTA traffic, tau is set to 0.
+Both DAA alerting and guidance requirements are
+specified in relation to a prediction of losing DWC. In a non-
+maneuvering encounter, the pilot will be provided with a
+
+--- Page 4 ---
+
+a) The NARSIM Radar simulator
+b) The NARSIM Tower simulator with Rotterdam airport
+scenery
+Figure 3: The NLR ATC Research Simulator
+(NARSIM)
+Figure 2. Example GA-ASI CPDS display during an RA Two components of NARSIM were used in this study,
+namely NARSIM Radar for Approach (APP) and Area
+CPDS goes beyond the minimum requirements with
+Control Center (ACC) simulation, and NARSIM Tower
+the depiction of the conflict space on the Cockpit Display of
+(TWR) for airport simulation; see Figure 3. During the
+Traffic Information (CDTI) and the addition of a vertical
+simulations, the built-in Radio Telephony (R/T) system was
+profile display that depicts the vertical cross-section of the
+used to emulate VHF voice communications between
+conflict space.
+ATCOs, pseudo pilots and the RPAS pilot. The system was
+also used to emulate a fixed landline connection between
+3 Experiment Design the ATCOs and the RPAS pilot as a backup communication
+means during C2 Lost Link and R/T loss scenarios.
+3.1 Apparatus
+3.1.2 Multi UAS Supervision Testbed (MUST)
+For this series of projects, NLR is using two of its
+The Multi UAS Supervision Testbed, or MUST, was
+simulators, namely the NLR ATM Research Simulator
+developed by NLR as a reconfigurable generic RPAS
+(NARSIM) and the Multi UAS Supervision Testbed
+research simulation facility. MUST consists of two main
+(MUST). The combination of these two simulators is
+components: the RPAS flight dynamics simulator and the
+referred as the MALE RPAS Real-time simulation Facility
+RPAS Remote Pilot Station (RPS). The MUST RPS is
+(MRRF).
+shown in Figure 4. For the purposes of this study, the GA-
+ASI CPDS has been integrated into the MUST simulator to
+3.1.1 NLR ATM Research Simulator (NARSIM)
+provide the RPAS pilot with RWC cues during the
+NARSIM was developed to evaluate new ATC
+experiment.
+procedures, automation tools and ATCO Human-Machine
+Interfaces (HMIs). To this end it simulates the most
+important aspects of a real ATC system, including realistic
+radar data and aircraft behavior. It also offers multiple
+ATCO and pseudo-pilot working positions. NARSIM
+development began in the late 1980s using commercial off-
+the-shelf hardware. But because its software is written
+entirely in-house at NLR, it can be easily adapted for a wide
+variety of ATC research studies and ATCO training courses.
+
+--- Page 5 ---
+
+3.2 MALE RPAS and Related Assumptions
+The GA-ASI MQ-9B SkyGuardian was used as the
+MALE RPAS platform in this study. A 3-D model of this
+aircraft was provided by GA-ASI and it was implemented
+in the MRRF; see Figure 5. Additionally, the kinematics
+model in the MUST simulator was adapted to match the
+performance of the SkyGuardian; see Table 1.
+Figure 5: The General Atomics SkyGuardian RPAS
+Table 1: Characteristics of the GA-ASI SkyGuardian
+Figure 4: The NLR Multi UAS Supervision Testbed
+(MUST) Characteristic Value
+Maximum Take-Off Weight 5,670 kg
+MUST has two control modes: Autopilot (AP) and
+Length 11.7 m
+Flight Management System (FMS) modes. In AP mode,
+RPAS heading, altitude, speed and vertical speed values can Wingspan 24 m
+be adjusted and activated independently. Furthermore, AP Ceiling FL 400
+mode allows pilots to initiate circular loiter patterns at the Cruise speed 122 kts
+current position. In FMS mode, the RPAS autonomously
+Max speed 210 kts
+flies waypoints along a predefined route. The pilot can
+select any waypoint in a route as the next active waypoint Additionally, the simulation and the CONOPS were
+to fly directly to it. The pilot can provide control inputs via developed with the following MALE RPAS related
+touchscreen / keyboard + mouse / Hands On Throttle and assumptions:
+Stick (HOTAS).
+• The RPAS has all the CNS equipment required for
+In addition to the above control modes, MUST Instrument Flight Rules (IFR) flights.
+simulates the basic functionality of an Automatic Take-Off
+• The RPAS has a single C2 link. The C2 link transmits
+and Landing System (ATLS) whereby take-off and landing
+pilot commands from the RPS to the RPAS, and
+can be initiated by the RPAS pilot at the press of a button
+transmits telemetry data from the RPAS to the RPS.
+on the autopilot HMI. A range-and-bearing tool is available
+The C2 link is also used for voice communications
+on the moving map display. This tool can be particularly
+(R/T).
+useful for the pilot during contingency situations when it is
+necessary to deviate from the programmed route. • The RPAS has an Automatic Take-Off and Landing
+System (ATLS). ATLS fully automates the take-off
+To enable RWC simulation, Automatic Dependent
+and landing phases of flight. The pilot can manually
+Surveillance-Broadcast (ADS-B) and air-to-air radar
+abort ATLS actions if required.
+models were developed for MRRF. ADS-B data was used
+to track cooperative targets, and it was the primary source • The RPAS is flown with the pilot in the loop, except
+of data for DAA in this study. The ADS-B sensor had a in the case of C2 lost link.
+maximum reception range of 100 NM and an update rate of
+• The RPAS automatically changes its transponder code
+1 Hz. It was modelled as described in [12] and [14]. On the
+to 7400 after a predefined time interval during C2 lost
+other hand, non-cooperative targets were tracked using the
+link.
+air-to-air radar. The radar was modelled according to the
+minimum specifications in [15] and had a max range of 6 • The RPS has primary and secondary backup voice
+NM, an azimuth of ±110o, an elevation of ±15o and an communication systems that can be used to contact
+update rate of 1 Hz.
+
+--- Page 6 ---
+
+ATC. during C2 lost link and R/T voice considered nominal RPAS operations in TMA and en-route
+communications failures. airspaces, respectively, without conflicts or contingencies
+and they were used as baseline scenarios for comparative
+• The RPAS is single engined.
+purposes. The remaining ten scenarios considered conflict
+scenarios between the RPAS and background traffic.
+3.3 Airport and Airspace
+Additionally, three scenarios included RPAS contingencies
+Rotterdam The Hague Airport (ICAO: EHRD) was after the conflicts were resolved. Each scenario had a total
+used as the case-study airport in this study. EHRD is a busy duration of one hour. A full overview of the experiment
+single runway civilian airport with a mix of both IFR and scenarios is available in Table 3.
+VFR traffic. At EHRD, runway 24, with a length of 2,200
+Table 3: List of experiment scenarios
+meters was used for all simulation runs; see Figure 6.
+Total No.
+# Scenario Name Contingency Movements
+1 Baseline TMA - 26
+2 Baseline En-
+- 27
+Route*
+3 Crossing
+Encounter with
+- 30
+Unknown VFR
+Figure 6: Layout of the Rotterdam airport traffic
+[source: Google Maps] 4 En-route
+C2 Lost Link 40
+Encounters I*
+To facilitate conflicts, the RPAS did not use standard Air
+5 En-route Transponder
+Traffic Services (ATS) routes. Instead, a different route was 45
+Encounters II Failure
+designed for the RPAS for each scenario.
+6 Blunder by RPAS
+All background VFR and IFR traffic, i.e., non-RPAS - 37
+on Approach
+traffic, used standard Air Traffic Services (ATS) routes as
+7 Overtaking on
+defined in the Netherlands Aviation Information
+final by IFR - 23
+Publication (AIP). To this end, all ATS routes within the
+Traffic
+following airspace regions were modelled for the
+8 VFR Take-off
+experiment. Table 2 lists the airspace regions considered. - 27
+without clearance
+Background traffic had different callsigns and routes in
+9 Blunder by VFR
+every scenario to avoid learning effects for the experiment
+Traffic during - 27
+participants.
+final approach*
+Table 2: Airspace regions modelled in the RTS
+10 Blunder involving
+Airspace two VFR traffic - 28
+Airspace Name Altitudes
+Type / Class on downwind*
+Rotterdam Control CTR / GND – 11 Blunder by VFR
+Traffic Region Class C 3000 ft Helicopter
+R/T loss 29
+Rotterdam Terminal TMA / 1500 ft – Crossing
+Maneuvering Area 1 Class E 5500 ft Runway*
+Schiphol Terminal TMA / 1500 ft –
+12 Head-on
+Maneuvering Area 1 Class A 9500 ft
+encounter in TMA
+Amsterdam Sector En-route/ 9500 ft – - 30
+with unknown
+South Class A 19500 ft
+traffic*
+Uncontrolled airspace Uncontrolled / GND –
+outside Rotterdam CTR Class G 1500 ft It should be noted that the results section of this paper
+focuses on the five most interesting scenarios that led to the
+3.4 Experiment Scenarios
+main conclusions of this study. These five scenarios are
+A total of twelve scenarios were performed over a total marked with an asterisk (*) in Table 3.
+of 3.5 days in November 2020. Of these, the first two runs
+
+--- Page 7 ---
+
+3.5 Experiment Participants part, all participants were provided with the RPAS route and
+other basic details about the scenario. The second part of the
+The main participants involved in the experiment are
+pre-scenario briefing was provided only to the pilots. This
+listed in Table 4. Note that the ACC ATCO only
+included the exact details of the planned conflict between
+participated in the en-route scenarios of the experiment (see
+the RPAS and an intruder aircraft (call-signs, conflict times,
+Table 3). It should be noted that the ATCOs and pseudo
+intruder trajectories etc.). This part of the briefing also
+pilots received monetary compensation for their time.
+provided specific instructions to the pilots to increase the
+Table 4: Main Experiment Participants likelihood of conflicts, including the ‘blunders’ they were
+expected to make as part of each scenario. As such, the
+# Role Notes
+ATCOs did not have prior knowledge of the conflict(s) that
+MALE RPAS Active RNLAF MQ9A pilot with
+1 would take place in each run, in order to obtain a more
+Pilot 7 years of flight experience
+realistic response to each conflict.
+2 TWR ATCO Retired with 30+ years of
+Each scenario was followed by a debriefing session
+experience
+during which the experiment participants explained the
+3 APP ATCO Retired with 35+ years of
+timeline of events, and their decision-making process.
+experience
+These discussions led to specific recommendations towards
+4 ACC ATCO Retired with 35+ years of
+improving the procedures for operations with RWC and for
+experience
+the contingency situations considered; see section 4.
+5 Pseudo Pilot Active 737 instructor, Ex F50
+pilot 3.8 Questionnaires
+6 Pseudo Pilot Active MD11F pilot
+The ATCOs and the RPAS pilot were requested to fill
+7 Pseudo Pilot Active A320 pilot
+in a questionnaire after each run. The questionnaires asked
+8 Pseudo Pilot Retired B777 pilot the participants to rate their perceived workload, Situational
+Awareness (SA), safety, and realism. The questionnaires
+3.6 Training
+differed between the RPAS pilot and the ATCOs. The
+Prior to the experiment, all experiment participants results of the questionnaires for each scenario are presented
+were trained to use their respective part of the MRRF over in section 4.
+a full day. The pseudo pilots and ATCOs that took part in
+the experiment were already familiar with NARSIM as they 3.9 Simulation Simplifications
+have all participated in previous NARSIM experiments.
+Nonetheless, the pseudo pilots and ATCOs were given a 3.9.1 RPAS Ground Simulation
+primer on the most important NARSIM functionalities, The MUST simulator does not have a realistic RPAS
+including the new features that were introduced for this taxi model. Therefore for TMA scenarios, the RPAS was
+experiment. Additionally, all experiment participants were spawned at the threshold of the active runway prior to take-
+briefed on DAA and specifically on RWC, as well as on off. Similarly, after landing, the RPAS vacated the runway
+their expected responses to different DAA alerts according by steering onto the grass next to the runway, and was then
+to RTCA. deleted from the simulation. Because of this simplification,
+this study does not consider RPAS ground operations.
+The training for the RPAS pilot consisted of two main
+parts: MUST familiarization and CPDS usage. A DAA
+3.9.2 Weather
+expert who led the development of CPDS provided the
+All experiment runs were performed with ideal
+RPAS pilot with a tutorial on how to use CPDS, including
+weather conditions, namely daylight lighting, unlimited
+the appropriate responses for the different RWC alerts as
+visibility, calm winds (< 2kts and constant direction), and
+specified in RTCA DO-365B; see section 2.3 for more
+with a cloud ceiling of 3000 ft.
+details. This training was performed using a number of
+dedicated conflict scenarios that highlighted the features
+and correct utilization CPDS. 4 Results and Analysis
+This section presents the results of the five most
+3.7 Experiment Procedure
+interesting scenarios of the RTS that lead to the main
+The experiment was performed over three full days in
+conclusions of this study. Note that the baseline
+November 2020. The participants were briefed prior to each
+scenarios, which considered nominal operations in en-
+scenario. This briefing consisted of two parts. In the first
+route and TMA settings without conflicts, are not
+
+--- Page 8 ---
+
+described below. Nonetheless, the questionnaire warning alert. The RPAS pilot commented during the
+results of the baseline scenarios are used in the debriefing that his pre-emptive action was aimed at
+analysis that follows for comparative purposes. preventing an anticipated dangerous situation from
+occurring in the future. It is assumed that RWC aural
+4.1 En-Route Encounters I and C2 Lost Link alerts, which were not turned ON during this
+experiment, will provide pilots with more clarity on
+4.1.1 Summary of Events
+when and when not to maneuver in response to alerts.
+During this run, the RPAS flew a zig-zag route in
+This will be analyzed in future experiments.
+en-route airspace at FL115; see Figure 7.
+Figure 7: Route flown by the RPAS during the ‘En-
+Figure 8: CPDS screenshot of the encounter with
+Route Encounters I + C2 Lost Link’ run
+SWT7019
+The route and altitude profile of the RPAS for
+In the second part of this scenario, the RPAS
+this run was designed in an effort to create conflicts
+descended to the Rotterdam TMA with intentions to
+with traffic on the Standard Arrival Routes (STARS)
+land. However, during the approach, the RPAS
+to Rotterdam and Schiphol airports. During the
+experienced C2 lost link. Because C2 was not restored
+simulation, the ACC ATCO noticed several conflicts
+after a pre-determined time, the RPAS automatically
+involving the RPAS and inbound aircraft. In all these
+changed its squawk code to 7400 and flew to its
+cases, the ATCO issued radar vectors to the intruders
+predefined C2 lost link loiter waypoint, LTR, which is
+(inbound traffic) to resolve these conflicts before the
+located north of Rotterdam airport; see Figure 7.
+conflict escalated to an RWC alert on CPDS. In many
+Because the APP and TWR ATCOs did not know the
+cases, the RPAS pilot reported the intruders he saw on
+vertical profile of the RPAS during its flight to LTR,
+CPDS to the ATCO even though no alerts were issued.
+they delayed several outbounds out of concern that the
+In one such encounter, the RPAS pilot steered his
+RPAS could interfere with the Standard Instrument
+aircraft without clearance to resolve a future conflict
+Departure (SID) routes of RWY24 at Rotterdam.
+with a descending aircraft before an RWC alert was
+During this time, the RPAS pilot and the TMA ATCO
+issued on CPDS; see Figure 8. Note here the red range
+communicated with each other using the backup fixed
+ring does not indicate an alert – only that an alert
+line telephone since R/T is also unavailable during C2
+would occur in the future if the RPAS maintained its
+lost link. This helped the ATCO to understand the
+track, speed and altitude, and if traffic situation
+intentions of the RPAS. This interaction was
+remained unchanged. Instead, RWC alerts are shown
+performed in Dutch as both parties treated the
+on CPDS by changing the shape and color of the
+interaction as a regular phone call. After two orbits at
+intruder aircraft’s symbol, and warning alerts the
+LTR, C2 was restored as per the scenario scripting.
+intruder’s symbol turns red. The ACC ATCO
+The RPAS was cleared to land.
+indicated during the post experiment briefing that he
+was already aware of this intruder but did not consider
+it to be a problem, so the maneuver by the RPAS pilot 4.1.2 Questionnaire Results
+was found to be surprising and unnecessary. This was The questionnaire results for the experiment
+indeed the case as the concerned intruder passed participants are given in Figure 9. Here, the blue line
+behind the RPAS with sufficient vertical margin and indicates the results from the baseline run for
+as such this encounter did not meet the criteria of a reference, while the orange lines are the results for this
+
+--- Page 9 ---
+
+run. As expected, all participants experienced a higher
+workload and lower perceived safety than the baseline
+case as a result of the conflicts and the C2 lost link
+contingency that occurred in this scenario. Curiously,
+the ACC ATCO indicated he had a higher situational
+awareness during this run. He indicated during the
+debriefing that this was because this scenario required
+greater focus than the baseline simulation because of
+the numerous conflicts that needed to be resolved.
+d) RPAS Pilot
+Figure 9: Questionnaire results for the ‘En-Route
+Encounters I + C2 Lost Link’ run
+4.1.3 Analysis
+The following learning points were obtained from
+this run:
+• The RPAS pilot should not maneuver his/her
+aircraft without clearance, especially for an
+a) TWR ATCO intruder in airspace class A-C that has not yet
+caused a DAA alert. Such maneuvers are
+detrimental to ATCO SA, and could, therefore,
+lead to less trust in the DAA system/procedures.
+• RPAS pilots are recommended to integrate the
+information provided on the DAA display with
+information in radio communications to
+determine if the ATCO is already aware of, and
+is in the process of resolving a conflict, before
+reporting it. This approach may reduce the
+amount of DAA related R/T between the RPAS
+b) APP ATCO
+pilot and ATC, and could therefore be beneficial
+for ATCO workload.
+• In addition to pre-defining the horizontal route
+towards contingency loiter waypoints in the
+RPAS flight plan, it is also necessary to pre-
+define the vertical profile towards such
+waypoints in order to increase the predictability
+for ATCOs during contingency situations such
+as C2 lost link. Such waypoints should be
+predefined for all phases of flight, and should be
+c) ACC ATCO geographically separated from prevailing traffic
+flows to avoid conflicts during loitering.
+• During R/T failure the backup fixed line
+telephone connection should be used to re-
+establish communications with ATC. Standard
+
+--- Page 10 ---
+
+R/T phraseology in the English language should 4.2.2 Questionnaire Results
+be used on the backup telephone. The questionnaire results for this run are shown
+in Figure 12. Here it can be seen that the TWR ATCO
+rated all metrics slightly higher than the baseline run.
+4.2 Blunder by VFR Traffic During Final
+As a result of the conflict resolution action taken by
+Approach
+the RPAS pilot, TWR did not consider the safety of
+operations to be negatively affected. The APP ATCO
+4.2.1 Summary of Events
+rated both workload and SA at comparable levels to
+In this scenario, a conflict occurred between a
+the baseline scenario, while rating safety and realism
+VFR helicopter and the RPAS as the RPAS is on final
+to be better than the baseline. APP explained that the
+approach. As the helicopter, callsign HELI,
+ease with which the RPAS fit into a natural opening in
+approached the field from the west, TWR instructed
+the approach sequence increased safety as he did not
+the helicopter to land behind the RPAS. However, the
+have to issue commands to the aircraft next in the
+helicopter misunderstood TWR instructions and
+sequence to ensure sufficient spacing. Although the
+turned to base directly in front of the RPAS on final.
+conflict had a negative effect on the perceived safety
+Because the conflict occurred during final, a DTA
+level, the RPAS pilot considered the progression of the
+warning alert was triggered on CPDS. On noticing the
+conflict in this scenario to be highly realistic to what
+alert, the RPAS pilot immediately executed and
+he had personally experienced in real operations.
+declared a missed approach as per the procedure
+defined prior to the experiment for DTA warning
+alerts. The flown route of the RPAS for this scenario
+is displayed in Figure 10. Note that the simulation was
+stopped after the initiation of the missed approach. The
+CPDS screenshot of the conflict is shown in Figure 11.
+a) TWR ATCO
+Figure 10: Route flown by the RPAS during the
+‘Blunder by VFR traffic during final approach’ run
+b) APP ATCO
+Figure 11: CPDS screenshot of the DTA warning alert
+conflict with HELI during RPAS final approach
+
+--- Page 11 ---
+
+RPAS to land. The route flown by the RPAS can be
+seen in Figure 13. The CPDS screenshot of the conflict
+is displayed in Figure 14.
+d) RPAS Pilot Figure 13: Route flown by the RPAS during the
+Figure 12: Questionnaire results for the ‘Blunder by ‘Blunder involving two VFR traffic on downwind’ run
+VFR traffic during final approach’ run
+4.2.3 Analysis
+The conflict considered in this scenario occurred
+because the intruder blundered by turning to base too
+early - a classic blunder in DAA literature that is often
+used to explain the benefits of DAA. The RPAS pilot
+resolved the conflict by initiating a missed approach as
+required by the procedure described in RTCA DO-
+365B [15]. Because the intruder was in front and
+below the ownship, and because no other aircraft
+obstructed the RPAS, the go around led to a swift
+resolution of the conflict without negatively affecting
+safety. Therefore, it can be concluded that the go-
+around was the correct resolution for the conflict
+geometry that occurred during this run.
+Figure 14:CPDS screenshot of the DTA warning alert
+conflict with PH-TIN during RPAS final approach
+4.3 Blunder Involving Two VFR Traffic on
+Downwind 4.3.2 Questionnaire Results
+The questionnaire results for this run are shown
+4.3.1 Summary of Events
+in Figure 15. Because several go-arounds occurred
+In this run, two VFR aircraft trailed the RPAS.
+during this run (in addition to the one used to resolve
+All three aircraft were on the same approach to the
+the conflict experienced by the RPAS), and because
+runway. When the RPAS turned to final, both VFRs
+this increased the level of coordination required
+blundered and turned base without clearance. This
+between TWR and APP, TWR rated this run with a
+caused the RPAS to become ‘sandwiched’ between the
+higher level of workload than the baseline condition.
+two VFRs causing a DTA warning alert conflict with
+However, despite the increased number of missed
+the VFR traffic in front of the RPAS. The RPAS pilot
+approaches, APP perceived safety to be substantially
+reacted by initiating a missed approach as
+higher during this run than for the baseline condition.
+recommended by DO-365 procedures. However,
+As expected, the conflict between the RPAS and the
+because the intruder was in front and above the RPAS,
+VFR traffic during final decreased the perceived
+the conflict actually became more serious during the
+safety, and increased the workload felt by the RPAS
+climb out - the time to Closest Point of Approach
+pilot.
+(CPA) decreased from 33 seconds to 12 seconds
+during the climb out. Because of the busy traffic
+situation, the APP controller instructed the RPAS to
+loiter at its TMA contingency loiter waypoint before
+an opening in the sequence made it possible for the
+
+--- Page 12 ---
+
+high vertical speed that resolved the conflict and
+waiting for the RPAS to achieve the desired vertical
+speed delayed the resolution of this conflict. The data
+shown on CPDS confirms this - the time to CPA
+decreased from 33 seconds when the warning was
+declared to 12 seconds when the RPAS had achieved
+sufficient vertical speed to clear the traffic. The pilot
+indicated, given the geometry of this conflict, a right
+turn would have resolved the conflict faster and
+therefore would have been a safer maneuver than the
+missed approach. This scenario suggests that missed
+a) TWR ATCO approaches are not suitable for all conflict geometries
+on final, especially for cases when the intruder is in
+front and above the ownship.
+4.4 Blunder by VFR Helicopter Crossing
+Runway and R/T Failure
+4.4.1 Summary of Events
+During this scenario, the RPAS experienced a
+conflict with a medivac helicopter during its initial
+climb out from Rotterdam runway 24. The helicopter
+was en route to Erasmus Medical Center, and was
+instructed by the TWR ATCO to cross the field at the
+b) APP ATCO
+final end of runway 24, i.e., the landing side of the
+runway, to prevent a conflict with the departing RPAS.
+However, the helicopter pilot misunderstood TWR
+instructions and crosses the field directly in front of
+the RPAS, as the RPAS was climbing through 600ft.
+Because of the sudden nature of the blunder made by
+the helicopter pilot, the conflict had an initial TCPA of
+only 11 seconds thereby triggering an immediate
+warning alert on CPDS. The RPAS pilot steered his
+aircraft 32 degrees to the left to resolve the conflict
+based on the CPDS heading guidance bands to resolve
+the conflict. Nonetheless, due to the last second
+d) RPAS Pilot
+blunder made by the helicopter the RPAS momentarily
+Figure 15: Questionnaire results for the ‘Blunder
+lost well clear during the resolution. After the conflict
+involving two VFR traffic on downwind’ run
+was resolved, the RPAS pilot notified TWR on the
+resolution and requested clearance to resume the
+4.3.3 Analysis
+planned route of the RPAS.
+As for the previous scenario, the RPAS pilot
+followed the guidance in DO365B and executed a The CPDS screenshot of the initial conflict and
+missed approach. However, during the debriefing of its resolution are displayed in Figure 16.
+this run, the RPAS pilot suggested that a horizontal
+maneuver would have been a better resolution option
+in this scenario. This was because the RPAS was
+sandwiched between two intruders on base that were
+initially above the RPAS when the warning alert was
+declared. Therefore, in addition to initiating a missed
+approach, it was also necessary for the pilot to select a
+
+--- Page 13 ---
+
+DO-365B [11], the RPAS pilot decided that it would
+be easier to resolve by steering 5 degrees to the left.
+This resolved the conflict and the pilot decided to
+continue the landing.
+The route flown by the RPAS during this run is
+shown in Figure 17.
+a) Warning alert with tcpa of 11 seconds
+Figure 17: Route flown by the RPAS during the
+‘Blunder by VFR Helicopter crossing runway and R/T
+failure’ run
+4.4.2 Questionnaire Results
+The questionnaire results for this run are
+displayed in Figure 4.40.
+b) Resolution 15 degrees to the left. Momentary loss of
+well clear.
+Figure 16: CPDS screenshots of the conflict with PH-
+MEDI, a medivac helicopter en route to Erasmus
+Medical Center
+Once the RPAS was in approach airspace it
+experienced a R/T failure. Because attempts to cycle a) TWR ATCO
+the radios were not successful, the RPAS pilot
+changed the squawk code to 7600 and called the APP
+ATCO using the backup telephone. In contrast to the
+en-route scenario described previously in section 4.1,
+this time both the controller and the pilot used English
+and regular R/T phraseology on the backup telephone.
+APP provided the RPAS pilot with vectors to intercept
+the RP24B approach to runway 24 at Rotterdam.
+Because of the busy traffic situation, APP requested
+the RPAS to hang up and call again when he neared
+the IAF of RP24B. The RPAS pilot provided APP with
+his phone number before hanging up. At the IAF, the b) APP ATCO
+RPAS pilot called APP again using the backup
+telephone. APP provided the RPAS clearance to start
+the RP24B approach. During final, CPDS issued a
+DTA warning alert with a VFR aircraft that had
+crossed the field and was instructed by TWR to loiter
+east of the field. Although the procedure for a DTA
+warning alert is to perform a missed approach as per
+
+--- Page 14 ---
+
+immediate action taken by the pilot, were crucial to
+preventing a potential mid-air collision.
+In contrast to DO-365B procedures, the RPAS
+pilot decided not to use a missed approach for the DTA
+warning alert caused by a loitering aircraft on final.
+Instead, the pilot resolved this conflict using a minor
+horizontal maneuver, and then successfully landed the
+RPAS. During the debriefing, the pilot stated that the
+red heading band for this intruder only overlapped
+with ownship track by two degrees, and therefore it
+was far easier and safer to resolve by steering the
+d) RPAS Pilot RPAS 5o to the left than executing a missed approach.
+Figure 18: Questionnaire results for the ‘Blunder by
+The TWR controller agreed with the RPAS pilot and
+VFR Helicopter crossing runway and R/T failure’ run
+added that a missed approach should only be used
+Here, APP rated workload and SA similarly to when there is a serious safety risk as it has a large
+the baseline condition. This suggests that the effect on ATCO workload. This scenario, therefore,
+procedure for using the backup telephone during R/T provides additional evidence that it is not necessary to
+failure does not have a negative impact on operations. resolve all warning alerts on final with missed
+Despite initially not noticing the RPAS-helicopter approaches. In fact, in some cases, a missed approach
+conflict, TWR considered his SA to be better than the can reduce safety (as was the case in the previous
+baseline scenario. One potential explanation for this scenario; see section 4.3). It should be noted that
+strange result is that TWR became more and more CPDS only issues red heading bands for the range of
+used to expecting the unexpected as every experiment headings that lead to a warning alert. Although this is
+scenario had either an RPAS related contingency or in contrast to the requirements in DO-365B which
+conflict(s). During scenario debriefing, the TWR state that all headings should be blocked for DTA
+ATCO was highly appreciative that the RWC alert warning alerts (to indicate that no horizontal maneuver
+provided to the RPAS pilot that made it possible for may be used), this design choice made it possible for
+the pilot to resolve a conflict that he noticed very late. the RPAS pilot avoid an unnecessary missed approach
+As for most previous conflicts, the RPAS pilot rated using CPDS.
+his workload to be higher, and his perceived safety
+Several lessons can be learnt from the R/T
+level to be lower, relative to the baseline situation. In
+failure scenario that occurred in this run. Because of
+spite of this, the RPAS pilot stated during the
+the traffic situation, the APP ATCO disconnected the
+debriefing that CPDS provided him with the
+call. However, given that the R/T equipment has
+information he needed to quickly resolve the conflict
+already failed, it would be better to not disconnect the
+with the helicopter by steering left - this explains the
+back-up telephone connection as well (in case it is
+higher pilot SA rating than for the baseline TMA
+difficult to reestablish communications later). In the
+simulation.
+rare cases where it would be operationally necessary
+to disconnect the back-up telephone connection, it is
+4.4.3 Analysis
+highly recommended to agree on a lost
+A very serious last-second conflict occurred
+communications procedure before disconnecting.
+between the RPAS and the medivac helicopter at the
+Furthermore, it recommended that the RPAS pilot
+start of this run. Nonetheless, the RPAS pilot was able
+should always initiate the voice communications via
+to make a quick conflict resolution decision based on
+the backup telephone since he/she is more likely to
+the information provided in CPDS. As this conflict
+notice the R/T failure before the ATCO, even this
+occurred with an initial time to CPA of just 11
+means that pilot will have to first speak to an ATC
+seconds, it is understandable that the RPAS lost DWC
+supervisor before being connected to the specific
+during the resolution of this conflict even though the
+ATCO in question. Finally, the RPAS pilot is
+RPAS pilot steered an incredible 32° to the left. But,
+encouraged to directly contact APP if R/T failure
+because TWR did not notice this conflict, the alerts
+occurs during take-off, and contact the next ATC
+and guidance provided by CPDS, as well as the
+
+--- Page 15 ---
+
+center/sector in the path of the RPAS if R/T failure
+occurs during the hand-off from one center to the next.
+4.5 Head-on Conflict with Non-Cooperative
+Traffic in Uncontrolled Airspace
+4.5.1 Summary of Events
+In this scenario, the RPAS track was head-on with a
+non-cooperative aircraft in class G airspace at the same
+altitude. Because the intruder was non-cooperative, it was
+detected by the onboard air-to-air radar. When distance
+between the two aircraft was less than 5.5 NM, a corrective
+RWC alert was issued on CPDS. Because the conflict
+occurred in uncontrolled airspace the RPAS pilot had to
+resolve the conflict without ATC assistance. The RPAS
+pilot observed the development of the conflict for about 30 Figure 20: CPDS screenshot of the conflict with a non-
+seconds and then steered right to resolve. At that point, the cooperative intruder in class G uncontrolled airspace
+conflict escalated to a warning alert. Therefore, the pilot
+increased to the turn rate to increase the speed of resolution, 4.5.2 Questionnaire Results
+leading to a 32o heading change. Because the intruder The questionnaire results for this scenario are
+changed its track towards east, it fell outside the radar’s field shown in Figure 21. Here it can be seen that the TWR
+of view. When the RPAS pilot returned to his route towards ATCO rated all metrics slightly higher in this scenario
+the airport, the intruder re-appeared into the radar’s FOV. In than for the baseline run. Although APP rated
+an attempt to keep the intruder in the radar’s FOV, the
+workload, SA and realism to be the same as for the
+RPAS flew a zig-zag pattern behind the intruder. Once the
+baseline run, he rated safety to be lower in this run.
+RPAS entered controlled airspace, the intruder flew away
+This could be because many inbound aircraft had to be
+from the RPAS track. The RPAS landed without further
+put into holdings in this scenario. As for most previous
+incident. Due to the amount of traffic in this run, APP had
+conflict scenarios, the RPAS pilot considered his
+to put several aircraft into holding. This was unrelated to the
+RPAS conflict. The route flown by the RPAS in this run, workload and SA to be higher, while scoring safety
+including the zig-zag track, can be seen in Figure 19. The lower than the baseline simulation.
+CPDS screenshot of the conflict between the RPAS and the
+non-cooperative intruder can be seen in Figure 20.
+a) TWR ATCO
+Figure 19: Route flown by the RPAS for the ‘Head-on
+conflict with non-cooperative traffic in uncontrolled
+airspace’ run
+
+--- Page 16 ---
+
+Time Simulation (RTS) experiments. The present
+paper focused on analyzing the procedures needed for
+the Remain Well Clear (RWC) component of Detect
+and Avoid (DAA). To this end, NLR performed a
+Real-Time Simulation (RTS) experiment involving
+experienced Air Traffic Controllers (ATCOs), RPAS
+pilot, and airline pilots. The experiment considered
+conflict scenarios in controlled and uncontrolled
+airspace classes, in both en-route and Terminal
+Maneuvering Area (TMA) settings. The experiment
+made use of the GA-ASI Conflict Prediction and
+b) APP ATCO Display System (CPDS), a RWC Human-Machine
+Interface (HMI) that is compliant with the latest
+RTCA technical standards for Detect and Avoid
+(DAA) systems, namely RTCA DO-365B.
+The results of the RTS led to following RPAS
+integration procedures and human-factors related
+conclusions that were not identified in prior fast-time
+simulations:
+• CPDS increased the Situational Awareness (SA)
+of the RPAS pilot during nominal operations and
+during conflicts. This was reflected in the
+d) RPAS Pilot
+questionnaire results of the RPAS pilot.
+Figure 21: Questionnaire results for the ‘Head-on
+conflict with non-cooperative traffic in uncontrolled • In many cases, ATCOs detected and resolved
+airspace’ run
+conflicts at the same time as when an alert was
+4.5.3 Analysis declared on CPDS. This suggests that the alert
+There are two main learning points from this run: timings used in CPDS match the internal conflict
+definitions used by ATCOs.
+• It is wise for pilots to observe conflicts for a few
+moments before initiating a resolution. This will
+• Excessive conflict reports by pilots can have a
+make it possible to judge if an alert is a nuisance
+negative effect on ATCO workload. To this end,
+alert, especially after integrating the information in
+the R/T with the information on the DAA display. RPAS pilots are recommended to integrate the
+However, once an alert has been judged to be a information on the DAA display with
+legitimate conflict, immediate action should be taken
+communication exchanges on R/T to determine
+to prevent the conflict situation from getting worse.
+if ATC is already aware of, and is in the process
+• Extra vigilance is required for radar-only intruders of resolving, a conflict before reporting it to
+that cause conflicts because alerts are only provided
+ATC. Furthermore, observing intruders causing
+for such intruders if they remain within the air-to-air
+alerts for a few moments can be used to filter out
+radar’s field of view.
+nuisance alerts that do not require further action
+(e.g. momentary alerts caused by maneuvering
+5 Conclusions and Future Work
+traffic). These aspects should be included in the
+This paper is part of an ongoing, multi-year study
+training given to RPAS pilots to make
+that aims to support the development of the procedures
+needed for integrating Medium Altitude Long operations with DAA fit within existing ATC
+Endurance (MALE) Remotely Piloted Aircraft norms as much as possible.
+Systems (RPAS) into European airspace using Real-
+
+--- Page 17 ---
+
+• In order to reduce the effect of DAA on ATCO the runway to be nuisance alerts because
+workload pilots should: such encounters would not cause a manned
+IFR aircraft on final to declare a missed
+o Only report conflicts that have triggered
+approach. Preventing such differences
+corrective or warning alerts. Reports for
+between manned aircraft and RPAS,
+preventive RWC alerts are not necessary.
+especially those that do not have a safety
+This complements the previous conclusion
+benefit, would be beneficial to improve
+to reduce ATCO workload.
+efficiency and stakeholder acceptance of
+o Only maneuver to resolve a corrective alert RPAS operations, and thus accelerate the
+after ATC clearance as indicated in RTCA
+integration of RPAS into the airspace.
+DO-365B.
+• In addition to pre-defining the horizontal route
+• Pilots should be aware that non-cooperative towards contingency loiter waypoints in the
+intruders can disappear from the DAA HMI if RPAS flight plan, it is also necessary to pre-
+the intruder flies outside the air-to-air radar’s define the vertical profile towards such
+Field Of View (FOV). It is recommended to waypoints in order to increase the predictability
+depict the radar’s FOV as a toggleable feature on for ATCOs during contingency situations such
+the DAA display for non-cooperative intruders. as C2 lost link. Such waypoints should be
+predefined for all phases of flight, and should be
+• There was general consensus among the
+geographically separated from prevailing traffic
+experiment participants that missed-approaches
+flows to avoid conflicts during loitering.
+are not always the best resolution option for
+• When communications are performed using the
+warning alerts on final approach as currently
+back-up telephone, both ATCOs and RPAS
+required by the new DAA Terminal
+pilots should continue to use English and
+maneuvering area Alert (DTA) function
+standard R/T phraseology – it should not be
+specified in RTCA DO-365B for three main
+treated as a regular telephone call. Furthermore,
+reasons:
+a lost comms procedure should be agreed upon
+o Firstly, missed approaches are not always before disconnecting the telephone if it is
+the safest resolution option for all conflict necessary to disconnect the telephone for
+geometries on final approach. This was operational purposes. Because the RPAS pilot is
+found to be the case in experiment more likely to notice the failure of R/T he/she
+scenarios where the intruder was above the should establish comms using the backup
+RPAS or was overtaking the RPAS, as a telephone. Contact should be made to the last
+simultaneous missed approach by the ATC center the RPAS was in contact with
+intruder could potentially aggravate the except during take-off and during hand over
+conflict severity in such cases. from one sector to the next. In these cases, the
+pilot should contact APP and the next ATC
+o Secondly, some warning alerts on final can
+center in the flight plan, respectively.
+be resolved using minor horizontal
+resolutions after which the RPAS can safely
+The next RTS planned in this series of projects
+continue its landing. This was demonstrated will consider both the RWC and the Collision
+in some experiment scenarios. Avoidance (CA) safety layers of DAA systems. This
+will include scenarios to investigate how DAA can be
+o Finally, the ATCOs considered warning
+used for increasing safety during aerial work missions,
+alerts caused by VFR aircraft loitering near as well as scenarios that will trigger auto-CA during
+
+--- Page 18 ---
+
+C2 lost link situations. Additionally, the next Measure the Efficiency Impact of a Flying
+experiment will consider the use of DAA equipment RPAS in the Non-Segregated Airspace,” in
+for facilitating CDTI Assisted Visual Separation 35th IEEE Digital Avionics Systems
+(CAVS) to increase runway throughput for RPAS Conference (DASC 2016), 2016.
+operations. Future studies will also quantify the impact
+of the differences between RTCA and EUROCAE [8] Aviation Rule Making Committee
+standards for DAA on operations in European (ARC), “Unmanned Aircraft Systems
+airspace. The results of these future studies will be (UAS) in Controlled Airspace,” 2019.
+made available to the ATM community and policy
+[9] N. M. Paczam, J. Cooper and E.
+makers in an effort to accelerate the full integration
+Zakrzewski, “Integrating Unmanned
+MALE RPAS into unsegregated European airspace.
+Aircraft into NEXTGEN Automation
+Sytems,” in Digital Avionics Systems
+Acknowledgements Conference (DASC 2012), 2019.
+The authors would like to thank the pilots and air
+[10] K. Swieringa, R. Young, R. Vinona
+traffic controllers that made the experiment described in this
+and M. Hague, “UAS Concept of
+paper possible.
+Operations and Vehicle Technologies
+References Demostration,” in Integrated
+Cmmunications Navigation and
+[1] International Civil Aviation
+Surveillance Conference (ICNS 2019),
+Organization, “Remotely Piloted Aircraft
+2019.
+System (RPAS) Concept of Operations
+(CONOPS) for International IFR [11] RTCA Special Committee 228, “DO-
+Operations,” ICAO, Montreal, 2017. 365 B Minimum Operational Performance
+Standards (MOPS) for Detect and Avoid
+[2] M. Fielding, G. Ward, R. Raposo and
+(DAA) Systems,” RTCA, Washington
+R. de Muynck, “Project CLAIRE
+D.C., 2021.
+Demonstration Report,” 2015.
+[12] E. Sunil, R. Jackson, E.-J. Hartlieb, P.
+[3] E. Pastor, “ERAINT Project Closeout
+Kuiper, M. Suijkerbuijk, W. Poland and T.
+Report,” 2015.
+Dufourmont, “MALE RPAS Integration
+[4] EDA, “Accomodation of Military IFR into European Airspace Part 1: Real-Time
+MALE RPAS under GAT Airspace Classes Simulation Analysis of Contingencies in
+TMAs,” in Integrated Communications,
+A-C,” EDA, 2019.
+Navigation and Surveillance Conference ,
+[5] M. Perez-Batle, E. Pastor, X. Prats, P. 2021.
+Royo and R. Cuadrado, “Maintaining
+separation between airliners and RPAS in [13] RTCA Special Committee 228, “DO-
+non-segregated airspace,” in 365 - Minimum Operational Performance
+FAA/Eurocontrol ATM R&D Seminar, Standards (MOPS) for Detect and Avoid
+(DAA) Systems,” RTCA, Washington
+2013.
+D.C., 2017.
+[6] D. Geister, G. Schwoch, R. Geister
+and B. Korn, “Integrating RPAS - [14] FAA, “Technical Standard Order
+Published Approach Procedures vs. Local (TSO) C211,” FAA, Washington D.C.,
+Arrangements,” in Integrated 2017.
+Communications Navigations and
+[15] E. Theunissen, B. Suarez and K. Kirk,
+Surveillance (ICNS) Conference, 2017.
+“Development, Integration and Testing of a
+[7] C. Brando, M. Perez-Batlle, M. Lopez Stand-Alone CDTI with Conflict Probing
+and E. Pastor, “Paired T-Test Analysis to
+
+--- Page 19 ---
+
+Support,” in Proceedings of the AIAA [18] RTCA Special Committee 228,
+Infotech@Aerospace Conference, 2012. “RTCA DO-366 Minimum Operational
+Performance Specifications (MOPS) air
+[16] T. Langejan, E. Sunil, J. Ellerbroek
+Air-to-Air Radar for Traffic Surveillance,”
+and J. Hoekstra, “Effect of ADS-B
+RTCA, Washinton D.C., 2017.
+Characteristics on Airborne Conflict
+Detection and Resolution,” in SESAR
+Innovation Days 2016, Delft, 2016.
+[17] RTCA Special Committee 186, “DO- 2022 Integrated Communications Navigation
+242A Minimum Aviation System and Surveillance (ICNS) Conference
+Performance Standards for Automatic
+April 5-7, 2022
+Dependent Surveillance Broadcast (ADS-
+B),” RTCA, Washington D.C., 2002.

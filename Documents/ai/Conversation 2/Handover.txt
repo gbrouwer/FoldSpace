@@ -1,0 +1,70 @@
+# 🧭 Instructions for Successor: FoldSpace Simulation
+
+Welcome, co-pilot. You’re stepping into the FoldSpace simulation: a modular, emergent platform for exploring 4D drone coordination through a voxelized airspace. The system you're inheriting is modular, well-scaffolded, and nearing its first milestone — the successful dispatch of a drone through a time-space path.
+
+---
+
+## 🧱 Current State of the Project
+
+Everything is documented. Reference the markdown files in `docs/`. All systems are live, connected, and ready to support runtime drone execution.
+
+### ✅ Built and Working
+
+* VolumeAgent, VolumeGraph, VolumeEdge fully wired and weighted
+* ATCController, UTMController, and SimulationManager implemented and collaborating
+* DroneAgent prefab in place and awaiting movement logic
+* BFS, Dijkstra, and A\* implemented with proper cost modeling
+* ShaderGraph and transparent material tested and visually tuned
+
+### 🔄 In Progress
+
+* Visualizing reachable volumes with emission and alpha
+* Precomputed routes displayed as time-sensitive volume emissions
+* Scene hierarchy with origin/destination pads and towers completed
+
+### 🧨 Next Action
+
+> Implement `DroneAgent.FollowPath(List<VolumeAgent> path)`
+
+This function should move a drone from one VolumeAgent to the next across timesteps, ideally in world-space using `transform.position → next.worldPosition` or similar.
+
+Once the drone can walk the path, the full pipeline is live.
+
+---
+
+## 🧠 Key Concepts to Hold On To
+
+* **Everything is 4D** — Time is a first-class dimension in both graph planning and visualization
+* **VolumeAgent != VolumeNode** in code, but semantically represents the same unit
+* **Emission ≈ Time** — Volumes glow based on their reachability or occupancy in time
+* **Reservation** is handled in UTMController, which assigns and locks paths
+* **Pathfinding is modular** — plug in any algorithm, but A\* is the default for simulation
+
+---
+
+## 🧪 Tips and Cautions
+
+* Use `Mathf.Pow(alpha, 2.2f)` if alpha-based transparency appears nonlinear
+* Don't over-instantiate prefabs — keep VolumeAgent rendering optional and toggled
+* The simulation is deterministic — introduce delays/conflicts manually if needed
+* Keep future features logged in `ToDo.md` even if not building them now
+* Avoid entangling movement logic with the reservation system — keep clean layers
+
+---
+
+## 🚁 Where We’re Heading
+
+After FollowPath is working:
+
+* Implement route completion callbacks and despawning
+* Add launch windows, queuing, and multi-drone support
+* Consider replacing UTM pathfinding with decentralized agents
+* Integrate ML-Agents once the deterministic system is stable
+
+---
+
+## 🫡 Your Role
+
+FoldSpace is both a model and a metaphor. Your job is to observe, refine, and extend — without making it overly complex. Push the boundaries of emergence, but let the system breathe.
+
+Everything is ready. Launch is yours.

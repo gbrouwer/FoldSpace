@@ -1,0 +1,670 @@
+
+
+--- Page 1 ---
+
+ENRI Int. Workshop on ATM/CNS. Tokyo, Japan. (EIWAC 2015)
+[EN-A-062] Complexity Analysis of the Concepts of Urban
+Airspace Design for METROPOLIS Project
++A. Vidosavljevic*, D. Delahaye*, E. Sunil**, F. Bussink***, J. Hoekstra**
+*MAIAA-Applied Mathematics Laboratory
+Ecole Nationale de l'Aviation Civile (ENAC)
+Toulouse, France
+[vidosavljevic | delahaye]@recherche.enac.fr
+**Control and Simulation
+Faculty of Aerospace Engineering, TU Delft
+Delft, The Netherlands
+[e.sunil | j.m.hoekstra]@tudelft.nl
+***Cockpit and Flight Operations
+National Aerospace Laboratory (NLR)
+Amsterdam, The Netherlands
+frank.bussink@nlr.nl
+Abstract: The world population is expected to grow further with a major increase in population living in urban
+areas. Exploiting the door-to-door concept to the full extent, a considerable part of conventional vehicles may be
+replaced by personal aerial vehicles. Cargo delivery system will the follow same philosophy using unmanned
+aerial vehicles. This brings up completely new challenges for future air traffic management in urban
+environments. The Metropolis research project investigates radically new airspace design concepts for the urban
+environments 50+ years into the future, which are extreme when compared to today in terms of traffic density,
+complexity and constraints. This work presents the results of simulation data analysis and a comparison of
+concepts of urban airspace design regarding organizational (complexity) metrics. The aim was to identify how
+the structure involved in the concept of urban airspace design influences the complexity of the traffic situation.
+In this work geometrical metrics, which are only linked to trajectory structure and not to the system used to
+process them, were used to measure complexity. A robust extension of proximity-convergence metrics as a
+compound metric has been developed for the ultimate concept evaluation.
+Keywords: Future urban airspace design, Traffic complexity, Metropolis, Personal Air Vehicles, Unmanned Air
+Vehicle
+1. INTRODUCTION density, complexity and constraints. The fundamental,
+According to the United Nation Population office, but still practical, question underlying this research is
+the world population is expected to grow from 7 billion structure-capacity relation: Does adding structure to the
+in 2011 to 9.3 billion in 2050 [1]. What is more critical, airspace design increase or decrease capacity? How
+it is expected that the population living in urban areas does it influence traffic complexity, safety or
+will be doubled by that time reaching 6.3 billion [1]. efficiency? To have a better understanding of
+Exploiting door-to-door concept to full extent, it is alternatives, four extreme concepts have been designed
+expected that a considerable part of conventional in the project [6], differing in the terms of structure and
+vehicles will be replaced by personal air vehicles (PAV) control involved. Ranging from a free-flight concept
+[2]. Amazon, Google, DHL and other’s interested in a with no structure involved, called Full Mix, the level of
+future delivery system using unmanned air vehicle structure is gradually increased in the Layers and Zones
+(UAV) reveals that cargo delivery will follow same concept until a fully structured concept is reached in the
+door-to-door philosophy [3] [4] [5]. This brings up Tubes concept. Proposed concepts were implemented in
+completely new challenges for the future Air Traffic a simulation program called Traffic Manager (TMX)
+Management (ATM) in urban environments. [7], a medium fidelity desktop simulation application
+designed for interaction studies of aircraft in present or
+The focus of Metropolis research project has
+future ATM environments, and were evaluated under
+investigated radically new airspace design concepts for
+different scenarios of Metropolis growth. In the end
+the urban environments 50+ years into the future, which
+are extreme when compared to today in terms of traffic
+1
+
+--- Page 2 ---
+
+ENRI Int. Workshop on ATM/CNS. Tokyo, Japan. (EIWAC 2015)
+over 6 million flights were simulated for which data was
+logged for the post-processing.
+This work presents the results of simulation data
+analysis and comparison of concepts of urban airspace
+design regarding organizational (complexity) metrics.
+Section 2 contains brief description of the concept of
+urban airspace design, as seen by the members of the
+Metropolis project consortium. Next, in section 3 an
+overview of the existing complexity metrics will be
+presented with description of the metrics used in this
+paper for the data analysis. A robust extension of
+proximity-convergence metrics as a compound metric
+will be also presented here. In section 4 some results of Figure 1: Schematic view of the Layers concept
+concept evaluation and analysis, regarding complexity
+While flights are still allowed to use direct
+of traffic situation they produce, are presented and
+(shortest) routes, traffic segmentation reduces
+discussed. Finally the main conclusions will be listed in
+heterogeneity of the relative velocities between aircraft
+section 5.
+flying at the same layer, therefore reducing conflict rate.
+Remaining conflicts are solved using the same
+2. DESIGN OF AIRSPACE CONCEPTS automated ASAS with combined heading and speed
+This section contains a brief description of the manoeuvres. Increased safety comes at the price of
+airspace concepts design. For the more detailed efficiency, as flights might not be able to use their
+description please refer to [6]. optimal altitude.
+Since the goal was not to design one ultimate 2.3. Zones concept
+concept, but rather investigate the structure-complexity
+Zones concept takes a further step in segmentation
+relation, four concepts have been proposed: Full Mix,
+of the airspace compared to the Layers concept. It is
+Layers, Zones and Tubes, with increasing structure in
+based on the principle that traffic is homogeneous in
+mind, from the one with no structure involved up to a
+different zones of airspace in which traffic moves at
+fully structured airspace.
+the same speed and follows the same global
+2.1. Full Mix concept direction.
+Underlying assumption of this concept, that any A distinction is made between circular and radial
+structuring of traffic flows decreases overall efficiency zones (Fig. 2). Circular zones are similar to ring roads
+of the system, is justified by the fact that traffic demand and allow journeys in the outer area of the city. Radial
+in the future urban environment will most likely be zones serve as connections between these concentric
+unstructured (door-to-door philosophy). Moreover, Free zones and enables traffic to travel to and away from the
+Flight research had shown that today, spreading the city centre. Each zone is unidirectional as shown in the
+traffic in airspace results in fewer conflicts, which are figure. Both types of zones segment airspace only in the
+easy to solve by cockpit crew assisted by an Airborne horizontal plane, meaning that flights may use their
+Separation Assurance System (ASAS), which alerts and optimal altitude. The horizontal path is computed at
+advises the crew [8]. pre-tactical level using the A* shortest path algorithm.
+ASAS manoeuvres consists of speed and altitude
+In the Full Mix concept, aircraft are therefore
+change in that order of priority.
+permitted to use the direct path between origin and
+destination, as well as optimum flight altitudes and
+velocities, thus reducing flight costs. Tactical control of
+the traffic is handled, in decentralized fashion, by an
+automated ASAS developed in [9], allowing three types
+of resolution manoeuvres: heading, altitude and speed
+change, that ensures conflict-free trajectories.
+2.2. Layers concept
+Based on existing principle of hemispheric flight
+levels, airspace in the Layers concept is separated into
+Figure 2: Top view of the Zone topology
+different vertical bands (layers) that limit allowed
+heading ranges (Fig. 1).
+2
+
+--- Page 3 ---
+
+ENRI Int. Workshop on ATM/CNS. Tokyo, Japan. (EIWAC 2015)
+much the system is invariant to changes in the initial
+conditions and also external influences.
+3.2. Overview of existing metrics
+Research into air traffic complexity metrics has
+attracted considerable attention in recent years.
+Proposed models can be grouped into two groups: the
+first one focused on the air traffic control officer
+(ATCo) workload, and the second one focus on traffic
+complexity using automatic conflict resolution
+Figure 3: Fixed route Tubes concept topology
+algorithms.
+2.4. Tubes concept The first group of models has the objective to
+Finally, the Tubes concept represents a fully model the control workload associated with given traffic
+structured airspace concept that is based on assumption situations. The main approaches are as follows. In the
+that by providing conflict-free 4D tubes for each flight model based on traffic level [11], the workload is
+at pre-tactical level, both safety and efficiency of the defined as the proportion of control time (duration of
+flight could be increased. control actions taken to resolve conflicts) over an hour.
+The queue-based model [12] considers a control sector
+In the Metropolis implementation of the Tubes
+as a system supplying service and the queuing theory is
+concept a fixed route system has been designed, and
+used to determine the maximum acceptable arrival rate
+time-based separation is used to have pre-planned
+for a sector. Models based on airspace structure [13]
+conflict free routes. Tubes topology is based on a
+[14] estimate the capacity and complexity of a sector
+diagonal grid layout consisting of edges (tubes) and
+based solely on its structure (flight levels, routes, route
+vertices (nodes) as on Fig. 3. In order to take advantage
+intersections, etc.). In the context of operational control,
+of the 3D airspace, a number of tube levels of
+the ideal option would be to find a metric which
+decreasing granularity are foreseen. For route planning,
+precisely measures the cognitive difficulty to manage a
+the A* depth-first search algorithm is used to plan the
+certain situations. There are various reviews that have
+shortest trajectory from origin to destination, prior to
+been studying factors that impact upon controller
+departure.
+workload and their relation to the workload experienced
+by a controller. The list of factors includes a number of
+3. COMPLEXITY METRICS traffic and airspace characteristics like: total number of
+This section presents the overview of the existing airplanes, minimum distance between airplanes, number
+complexity metrics and describes metrics used in the of changes in direction, speed and altitude, number of
+Metropolis project to compare different concepts of predicted conflicts, etc. In NASA, the Dynamic density
+urban airspace design. model [15] [16] [17] has been developed as a weighted
+sum of traffic complexity factors. In [18] a multivariate
+3.1. Scope analysis based upon simulation modelling is proposed.
+Future urban transport is a safety critical system However, the listed models are not generalized and are
+and maintaining safe separation between vehicles and linked to, and limited to, a specific sector structure and
+with other obstacles is imperative for the system. When also sensitive to controllers used to infer the model.
+a conflict is detected, a resolution process is launched Other approaches [19] [20] model the complexity
+which, in certain situations, may generate new conflicts. of a traffic situation using automatic conflict resolution
+This interdependency between conflicts is linked to the algorithms, for which the number of trajectory
+level of mixing between trajectories. In addition, modifications required in processing a given situation is
+uncertainty with respect to positions and speeds measured. These methods are highly dependent on the
+increases the difficulty of predicting future trajectories. type of algorithm used to resolve conflicts.
+The difficulty to control a system depends on both its
+Airspace concepts, presented in section 2, differ in
+sensitivity to initial conditions and interdependency of
+the level of structure and in the way how the system is
+conflicts [10].
+managed and controlled. For this reason, previously
+One of the research goals of the Metropolis listed approaches are not suitable as it is necessary to
+projects was to identify how the structure involved in use an intrinsic traffic complexity metric that is only
+the concepts influence the complexity of the traffic linked to trajectory structure, and not to the system used
+situation. Measuring and comparing complexity of the to process them. In the next section some geometrical
+resulting traffic situations, it is implicitly possible to metrics, presented in [10] [21], are studied and a robust
+compare how difficult it is to control a given system. In extension of proximity-convergence metric will be
+addition measuring the robustness will determine how elaborated.
+3
+
+--- Page 4 ---
+
+ENRI Int. Workshop on ATM/CNS. Tokyo, Japan. (EIWAC 2015)
+a) b)
+Figure 5: Converging/Diverging airplanes example [10]
+Figure 4: Two situations of spatial distribution of airplanes [10]
+For the given time and for each airplane under
+3.3. Geometrical approaches
+consideration, we open a spatial weighting window
+These metrics are calculated at a given instant cantered on that airplane. Then, a complexity metric
+using the positions and speed vectors of airplanes associated with referenced airplane, as in (3), is
+present in the chosen geographical zone. Each of these calculated adding together factors of all pairs of
+geometrical metrics exhibits a particular characteristic airplanes in the reference window.
+associated with the complexity of the situation.
+∑
+3.3.1. Proximity indicator (3)
+The proximity indicator is used to characterize the
+3.3.4. Robust extension of the metric
+geographical distribution of airplanes in the given
+volume of airspace. It allows us to identify spatial zones The geometrical approaches presented so far use
+with high levels of aggregation in relation to their noiseless observations, allowing us to generate
+volume. Thus, for a constant number of airplanes in a instantaneous metrics. Due to possible changes in initial
+sector, proximity is used to distinguish whether these conditions (delay) and external issues (wind,
+planes are distributed homogeneously (Fig. 4a) or in the disruptions, regulations, etc.), the stochastic aspect of
+form of clusters (Fig. 4b). observations needs to be taken into account in order to
+generate reliable (robust) metrics. To do this, trajectory
+For two airplanes and , the proximity is
+observations, computed through simulation using a set
+calculated by weighting coefficient given in formula (1).
+of flight plans, are affected by noise, particularly in the
+( ) , (1) temporal dimension. In the context of stochastic process
+theory, this phenomenon is known as clock shifting:
+where is a parameter fixed by the user, and is
+“the trajectory continues to conform to the flight plan in
+normalized distance1 between airplanes.
+the spatial dimension, but the position of the vehicles on
+3.3.2. Convergence indicator the trajectory may be subject to significant deviations in
+the temporal dimension [22]”.
+The convergence indicator is used to quantify the
+geometric structure of the speed vectors of airplanes in A robust complexity metric for a given airplane at
+the given volume of airspace. Thus, for identical a given time is computed taking into account all
+proximity values, the convergence indicator allows us to possible pairs of trajectory samples of observed
+distinguish between converging and diverging airplanes airplanes existing in spatiotemporal window centred on
+(Fig. 5). referenced airplane (Fig. 6). Red lines in the figure
+indicate all possible pairs of samples for planes and .
+For two airplanes and , the level of variation of
+Complexity associated with an airplane with respect to
+their relative distance is given by the formula (2), and
+they converge if, and only if, this level of variation is plane at a given time is computed as an time
+averaging of the proximity-convergence metric over all
+negative.
+pairs of samples ( ) and it is given
+( )
+⃗ ⃗⃗
+, (2) by formula (4).
+w
+ve
+h
+c
+e
+t
+r
+o
+e
+r s
+⃗
+r e s p
+an
+ec
+d
+t i v
+⃗
+e l y
+r
+.
+e present relative position and speed
+∑ ∑ (4)
+3.3.3. Proximity-convergence metric
+where and represent variation of relative
+In reality, the risk associated with the convergence
+of a pair of airplanes also depends on the relative distance and normalized distance of airplane at the
+distance between them [21]. We must, therefore, time and airplane at the time , while is
+simultaneously account for the speeds and relative number of sample pairs.
+distances of each pair of airplanes.
+1 Due to the fact that separation norms are not the same in the
+horizontal and vertical planes distance is normalized by their value
+(e.g. 5NM and 1000ft)
+4
+
+--- Page 5 ---
+
+ENRI Int. Workshop on ATM/CNS. Tokyo, Japan. (EIWAC 2015)
+the effect of the airspace structure itself on the
+⃗⃗⃗⃗ ⃗ ⃗⃗⃗ ⃗⃗ operations: structure’s vehicle separation ability.
+Finally, taking into account that a probabilistic
+⃗⃗⃗⃗
+distribution function is used for flight’s origin-
+⃗⃗⃗⃗ ⃗ ⃗⃗⃗ ⃗⃗ destination pair computation, there were two repetitions
+of each designed scenario. In the end over 6 million
+⃗⃗⃗ ⃗ ⃗ ⃗⃗⃗ ⃗⃗
+⃗⃗⃗⃗ ⃗ ⃗⃗⃗ ⃗⃗ flights were simulated for which data was logged for
+processing.
+⃗⃗⃗⃗
+For more detail about simulation platform, design
+⃗⃗⃗⃗ ⃗ ⃗⃗⃗ ⃗⃗
+of the Metropolis city and traffic scenarios please refer
+to [6].
+⃗⃗⃗⃗
+4.2. Results
+⃗⃗⃗⃗ ⃗ ⃗⃗⃗ ⃗⃗ Due to the fact that there are many independent
+scenario variables: traffic volume, period of the day,
+usage of ASAS, to analyse their effects it is necessary to
+Figure 6: Spatiotemporal window perform multiple tests for which all except one variable
+for the reference airplane ⃗⃗ and time would be fixed. Following sub-sections present the most
+relevant results of the concepts evaluation.
+A robust complexity metric associated with
+airplane is computed as the sum over all pairs of 4.2.1. Comparison according to traffic volume
+observed planes in the spatiotemporal window by (5). For this analysis all concepts have been compared
+according to four different traffic density levels: low,
+∑
+(5) medium, high and ultra-high density, with ASAS
+enabled. Resulting complexity, for each concept-density
+Finally, the complexity of the given traffic pair, is the average of the six scenarios: three periods of
+situation at a given time is then calculated using the sum the day with two repetitions.
+of the robust complexity metrics of the airplanes present Number of flights for each traffic density slightly
+in that geographical zone for the given time. differs depending on the period of the day and
+simulation repetition as a result of different demand
+patterns. Flight plans on average had 11,790 flights in
+4. SIMULATION DATA ANALYSIS
+low, 15,416 flights in medium, 18,550 flights in high,
+To compare the four airspace concepts in terms of
+and 21,784 flights in ultra-high density scenario. Due to
+complexity, large-scale simulation experiments were
+Tubes concept ability to delay or cancel a flight before
+performed. Proposed concepts were implemented in a
+take-off, in cases where there is no available space for a
+simulation platform called Traffic Manager (TMX) [7],
+route clearance with sufficient spacing to ensure a
+a medium fidelity desktop simulation application
+conflict-free route, number of flights for Tubes concept
+designed for interaction studies of aircraft in present or
+is always lower compared to other concepts. To be able
+future ATM environments, developed by NLR.
+to compare the results of different concepts, computed
+4.1. Experiment design complexity metric is divided by the total number of
+flight of respected scenario.
+The Metropolis scenarios were designed for a
+fictional city based on the present-day Paris 50 years in Fig. 7 shows the full complexity distribution (min,
+the future. Similar to other modern cities, the zoning max, median values and interquartile range – IQR) for
+also applies to the fictional Metropolis city that is four airspace concepts and four traffic volumes.
+divided into three major districts: city centre, inner ring
+and outer ring, with specific land-use.
+Based on different predictions of the population
+growth (14-26 million) and travel demand assumptions,
+four scenarios were computed differing in the traffic
+volume: low, medium, high and ultra-high volume
+scenario. In addition to multiple traffic volumes, using
+business and residential zones, different traffic demand
+patterns were experienced during course of the day,
+respectively: morning, lunch and evening period
+scenario. Furthermore, the scenarios were simulated
+with and without the ASAS enabled, in order to study
+Figure 7: Complexity min, max value and IQR
+in function of traffic volume
+5
+
+--- Page 6 ---
+
+ENRI Int. Workshop on ATM/CNS. Tokyo, Japan. (EIWAC 2015)
+Figure 9: Layers concept convergence-proximity graph
+Figure 8: Complexity metric average value for the lunch period and different traffic volumes
+in function of traffic volume
+Having in mind the initial idea of the Tubes
+The main conclusion, drawn from Fig. 7, is that concept to design conflict-free 4D route of the flights at
+traffic complexity, as expected, increases with traffic pre-tactical level (when flights are spawned), one could
+density for all concepts. The relationship between expect that Tubes concept performs the best in the terms
+complexity and density is described by power function of the traffic complexity. Taking into account absolute
+as on Fig. 8. Figure shows almost quadratic relation values of the complexity, indeed, Tubes concept result
+between complexity and density for all concepts except in traffic situation with lowest complexity. Due to flight
+Zones concept. Zones has a steeper complexity function cancelation, however, Tubes had the lowest traffic
+as a result of the Zones structure saturation at the higher volume, which in turn results in higher complexity
+traffic volumes. The complexity increase for all value per flight.
+concepts is caused by increase of both: proximity and
+Finally, the Zones concept had significantly poorer
+convergence, as shown in the Fig. 9 for the Layers
+performance regarding complexity compared to other
+concept2. This is explained by the fact that, with
+concepts. The explanation for this is in the Zones
+increase in traffic volume for the same airspace volume,
+concept structure design that consists of concentric rings
+vehicles come geographically closer increasing
+and radials. The radials converge to the city centre
+proximity metric, while trajectory intersections, that are
+causing higher concentration (higher proximity) of the
+greater in number, increase convergence metric.
+traffic in the core city area. In addition, traffic is
+Another observation from the Fig. 7 is the order of structured only in the horizontal dimension and not
+concepts sorted by the increasing level of complexity: separated in the third dimension creating high
+Layers, Full Mix, Tubes and Zones, that is preserved convergence areas around structural crossing points
+with traffic volume. The order is based on comparison (ring and radial intersections). This effect is more
+of average and median complexity values, which is expressed at the higher traffic densities. It is expected
+relevant taking into account size of the confidence that a different Zones concept design might result in a
+intervals that are rather small. better traffic complexity. However, a general conclusion
+is that the introduction of the higher structure into
+Layers and Full Mix concepts are both based on
+airspace without the involvement of traffic management
+direct routing principle, with the difference that in the
+in general results in the higher traffic complexity.
+Layers concept cruising altitude is prescribed for a
+given heading. The fact that at each flight level, in the The order of the concepts sorted by the increasing
+Layers concept, flights are homogeneous in flight level of complexity doesn’t change when robustness is
+direction reduces flight convergence compared to Full included, as in Fig. 10. Results show a correlation
+Mix concept. In addition, choice of cruising level, based between traffic density and robust complexity that
+on flight direction, increases the usage extent of the increases with density, similarly to the general metrics
+vertical dimension of the airspace. Additional vertical case. Although order of concepts is not changed, Tubes
+separation of flights reduces the traffic proximity, which concept complexity increases the most when robust
+in combination with lower convergence result in lower metric is used. This leads to conclusion that Tubes
+traffic complexity for Layers concept than Full Mix concept has lower level of robustness compared to other
+concept. concepts and therefore is more influenced by changes in
+the initial conditions (delay in particular). Additionally,
+performance of the Layers concept is decreased at the
+higher traffic volumes compared to Full Mix concept,
+and the two concepts are very similar when robustness
+is considered.
+2 Similar figures are found for other concepts and other period of day.
+6
+
+--- Page 7 ---
+
+ENRI Int. Workshop on ATM/CNS. Tokyo, Japan. (EIWAC 2015)
+Concepts that doesn’t regulate flights before
+take-off (ground delay program), like Full Mix, Layers
+and Zones, experience, in general, higher traffic
+complexity with the increase of supply of commercial
+areas. Due to inability to separate flights before take-off,
+high commercial areas supply results in high traffic
+density in the city centre immediately after flight
+departure, increasing complexity of traffic situation.
+This is even more expressed for the Zones concept with
+a fixed structure that reduces set of allowed conflict
+resolution manoeuvres types. Although there is a high
+demand for the commercial areas in the morning period,
+Figure 10: Robust complexity min, max value and IQR
+the resulting traffic complexity for the Zones is lower
+in function of traffic volume
+compare to the evening period as flights are partly
+4.2.2. Comparison according to period of the day sequenced by the structure before reaching the core city
+For this analysis, all concepts have been compared area (Fig. 12).
+according to three rush-hour periods of the day: As opposite, the complexity of the Tubes concept
+morning, lunch and evening period with ASAS enabled. doesn’t increase with increase of commercial areas
+As in previous analysis, complexity value for each supply. This is explained with the ability of Tubes to
+concept-period pair is the average of the eight scenarios: delay a flight before take-off in order to ensure a
+four densities with two repetitions. In order to scale it, conflict-free route. However, decrease of the Tubes
+final complexity metric is divided by the total number traffic complexity is the result of rejected flights for
+of flight of respected scenario. which a conflict free 4D route wasn’t available at the
+Morning period is characterized by a high demand time when they had been spawned.
+for the commercial areas (people going to work) 60% of
+flights. This cause high inbound traffic in the morning
+as business areas are mostly located in the core city
+centre. As a difference, evening period is characterized
+by a high supply of commercial areas: commercial-
+residential (e.g. people going home) 55% of traffic and
+commercial-commercial (e.g. people going shopping
+after work) 20%, causing high outbound traffic. Finally
+lunch period has a more balanced demand patterns
+compared to other two periods.
+Fig. 11 shows full the complexity distribution (min,
+max, median values and interquartile range – IQR) for
+four airspace concepts and three periods of the day. The
+first conclusion is that the order of the concepts sorted
+by the increasing level of complexity doesn’t change a) Evening
+with the period of the day and is the same as the order
+shown in previous analysis: Layers, Full Mix, Tubes
+and Zones. However complexity for all concepts
+changes with the period of the day caused by different
+traffic demand patterns.
+b) Morning
+Figure 12: Zones concept complexity map
+of the most complex traffic situation
+Figure 11: Complexity min, max value and IQR
+in function of period of the day
+7
+
+--- Page 8 ---
+
+ENRI Int. Workshop on ATM/CNS. Tokyo, Japan. (EIWAC 2015)
+Figure 13: Complexity min, max value and IQR Figure 14: Robust complexity min, max value and IQR
+with/without ASAS enabled for different traffic volumes with/without ASAS enabled for different traffic volumes
+4.2.3. Effects of the ASAS Fig. 14 shows a summary of the concept
+comparison using robust complexity metric. The most
+All the previous analyses are based on simulated
+distinct difference compared to general metric case is
+data with ASAS enabled. This section studies the effects
+that traffic complexity increase slightly, if at all, without
+of ASAS itself on the traffic complexity. Concepts are
+ASAS. The explanation is in the fact that although the
+compared according to traffic density with and without
+flight intrusions are more severe without ASAS, due to
+ASAS enabled. Darker colours in the figures (left bars)
+domino effect (new conflicts that are result of previous
+represent scenarios with ASAS enabled; while lighter
+conflict resolution manoeuvres) there is greater number
+(right bars) represent scenarios without ASAS enabled.
+of conflicts detected when ASAS is enabled. Greater
+Complexity values are averaged over different periods
+number of conflict resolution manoeuvres results in
+of the day and repetitions.
+traffic situation that is less predictable therefore harder
+Fig. 13 shows a summary of the concept
+to control. This increases complexity with ASAS
+comparison using general complexity metric. The
+enabled when robustness is included. Traffic situation
+general conclusion is that complexity increases if
+without ASAS is more predictable and therefore more
+conflicts remain unsolved. This is expected as in
+robust.
+conflicts aircrafts come closer together which the
+Further, at the higher traffic densities, robust
+increases traffic proximity. Also intersecting routes in
+complexity for the Zones without ASAS is even lower
+conflicts cause higher convergence of the traffic. In total
+than when ASAS is enabled. There are two reasons for
+this results in a higher traffic complexity.
+this behaviour. The first is Zone structure that reaches
+Therefore Tubes concept is unaffected by the
+its limits at the higher densities. And the second is
+ASAS, since traffic separation is maintained in the route
+CD&R algorithm that is unable to properly solve
+planning phase and therefore there are no additional
+conflicts, due to limited set of available manoeuvres for
+conflicts left to be solved by the ASAS. The order of
+the Zones, and fault coordination with traffic merging
+remaining concepts sorted by the increasing level of
+algorithm.
+complexity remains almost unchanged when ASAS is
+disabled: Layers, Full Mix and Zones. For all three
+concepts, there is around 70% increase of traffic 5. CONCLUSIONS
+complexity without ASAS for the low traffic volume Based on the different scenarios and the different
+and the percentage decreases with increase of traffic complexity metrics the following conclusions are made.
+volume. This means that efficiency of the ASAS is
+When general metrics are considered, list of the
+decreased with increase of traffic density (once volume
+concepts ordered by increasing level of complexity is as
+approaches airspace capacity).
+follows: Layers, Full Mix, Tubes and Zones concept.
+Additionally, it is observed that Full Mix concept This order is preserved at all periods of the day and for
+performance is improved compared to Layers with the all traffic densities.
+increase of traffic density without ASAS. This is
+The traffic complexity increase due to traffic
+reasonable, since the traffic is more distributed over
+density shows an almost quadratic relation for all
+available airspace in the fully unstructured concepts
+concepts except Zones. Concepts without flight
+(like Full Mix) compared to structured concepts, when
+regulation before take-off (Full Mix, Layers and Zones)
+there is no control of the traffic (pre-departure delay,
+experience higher traffic complexity with the increase
+ASAS, etc.).
+of commercial areas supply (evening period).
+8
+
+--- Page 9 ---
+
+ENRI Int. Workshop on ATM/CNS. Tokyo, Japan. (EIWAC 2015)
+Tubes performance apparently increases with ACKNOWLEDGMENTS
+increase of commercial areas supply due to increased This research received funding from the Seventh
+number of rejected flight for which a conflict free 4D Framework Programme of the European Commission
+route wasn’t available at the time when they had been under grant number 341508 (Metropolis).
+spawned.
+The authors would like to thank other participants
+The order of the concepts is not changed when in the Metropolis project: Bruno Lamiscarre, Georges
+robust complexity metric is considered. Even thought, Mykoniatis (ENAC), Joost Ellerbroek (TUD), Dennis
+Tubes concept is the most influenced by the robust Nieuwenhuisen, Pim van Leeuwen, Roalt Aalmoes,
+complexity metric. This is due to the fact that robustness Marieke Suijkerbuijk (NLR), Oliver Schneider, Stefan
+considers the stochastic aspect of observations which Kern (DLR) for their valuable contribution to: the
+are affected by the noise, particularly in the temporal design of the concepts and their implementation,
+dimension. Since time is the main method of flight assistance with the execution of the simulation runs,
+separation in the Tubes concept, the fixed 3D structure metrics definition, and helping with project
+causes an additional convergence of the flights rather management tasks.
+than separating flights. This leads to conclusion that
+Tubes concept has lower level of robustness compared
+to other concepts and therefore is more influenced by
+REFERENCES
+changes in the initial conditions (delay in particular). [1] United Nations, Department of Economic and
+Additionally, performance of the Layers concept is Social Affairs, Population Division, "World
+decreased at the higher traffic volumes compared to Full Population Prospects: The 2015 Revision, Report
+Mix concept.
+No. ESA/P/WP.24 1," United Nations, New York,
+The Full Mix, Layers and Zones concepts show an 2015.
+almost proportional increase (around 70%) in
+complexity when ASAS is disabled. The efficiency of
+[2] E. Kolawole, "The flying car: Are we there yet?,"
+the ASAS is decreased with increase of traffic density
+The Washington Post, 2012.
+(once volume approaches airspace capacity). Due to
+domino effect, there is greater number of conflict
+detected when ASAS is enabled, and accordingly there [3] P. Misener, "Amazon PrimeAir: Petition for
+is greater number of conflict resolution manoeuvres. As Exemption to FAA," Amazon.com, 2014.
+a result traffic situation is less predictable with ASAS,
+therefore less robust and harder to control. On the other
+[4] G. Warwick, "Google details Project Wing:
+hand, traffic situation without ASAS is more predictable
+Unmanned Package-Delivery R&D," Aviation
+and therefore more robust.
+Week & Space Technology, 3 Nov 2014.
+The final conclusion is that, regarding complexity,
+the less structured concept, like Layers and Full Mix,
+[5] DHL, "DHL pacelocopter Press release: DHL
+performs better than structured concepts. This result is
+parcelcopter launches initial operations for research
+independent to the test scenarios and the complexity
+metrics used in the analysis. Taking into account purposes," DHL Global, 2014.
+performed tests, the Layers concept was chosen as the
+best concept regarding complexity. Its performance [6] E. Sunil, J. Ellerbroek, J. Hoekstra, F. Bussink, D.
+remains stable for all periods of the day and all traffic Nieuwenhuisen, A. Vidosavljevic and S. Kern,
+densities. Therefore, it represents a good balance
+"Metropolis: Relating Airspace Structure and
+between a fully unstructured and a structured concept,
+Capacity for Extreme Traffic Densities," in 11th
+where the structure involved separates flights compared
+USA/EUROPE Air Traffic Management R&D
+to the unstructured concept (Full Mix) but doesn’t cause
+a traffic concentration as in structured concepts (Zones, Seminar (ATM2015), Lisboa, Portugal, 2015.
+Tubes). However it shows less robustness at higher
+traffic densities compared to Full Mix concept, which
+requires further testing.
+9
+
+--- Page 10 ---
+
+ENRI Int. Workshop on ATM/CNS. Tokyo, Japan. (EIWAC 2015)
+[7] F. Bussink, J. Hoekstra and B. Heesbeen, "Traffic [15] I. Laudeman, S. Shelden and R. Branstorm,
+manager: a flexible desktop simulation tool "Dynamic density: an air traffic management
+enabling future ATM research," in 24th Digital metric," NASA, 1998.
+Avionics Systems Conference (DASC'05), vol. 1,
+pp. 3-B, 2005. [16] B. Sridhar, K. Seth and S. Grabbe, "Airspace
+complexity and its application in air traffic
+[8] J. Hoekstra, R. Ruigrok and R. van Gent, "Free management," in Proceedings of the US Europe
+Flight in a Crowded Airspace?," in 3rd ATM Seminar, Santa Fe, NM, USA, 2001.
+USA/Europe Air Traffic Management R&D
+Seminar (ATM2000), Naples, 2000. [17] G. Chatterji and B. Sridhar, "Measure for air traffic
+controller workload prediction," in Proceedings of
+[9] J. Hoekstra, R. van Gent and R. Ruigrok, the 1st AIAA Aircraft Technology, Integration, and
+"Designing for safety: the 'free flight' air traffic Operation Forum, Los Angeles, CA, USA, 2001.
+management concept," Reliability Engineering and
+System Safety, no. 75, pp. 215-232, 2002. [18] A. Majumdar and W. Y. Ochieng, "The factors
+affecting air traffic controller workload: a
+[10] D. Delahaye and S. Puechmorel, Modeling and multivariate analysis based upon simulation
+Optimization of Air Traffic, London: Wiley-ISTE, modelling of controller workload," Imperial
+2013. College, London, 2000.
+[11] D. Schmidt, "A queuing analysis on the air traffic [19] G. Granger and N. Durand, "A traffic complexity
+controller’s workload," IEEE Transactions on approach trough cluster analysis," in Proceedings
+Systems, Man, and Cybernetics, vol. 8, pp. 492- of the US Europe ATM Seminar, Budapest,
+498, 1978. Hungary, 2003.
+[12] L. Maugis and J. Gotteland, "Techniques de [20] K. Lee, E. Feron and A. Prichett, "Air traffic
+détermination de la capacité des secteurs de complexity: an input-output approach," in
+contrôle de l’espace aérienne: statistiques et Proceedings of the US Europe ATM Seminar,
+simulations," Centre d’études de la navigation Barcelona, Spain, 2007.
+aérienne, France, 1997.
+[21] D. Delahaye and S. Puechmorel, "Air traffic
+[13] M. Janic and V. Tosic, "En route sector capacity complexity: Toward intrinsic metrics," in 3rd
+model," Transportation Science, vol. 25, no. 4, USA/Europe Air Traffic Management R&D
+1991. Seminar, Napoli, 2000.
+[14] F. Netjasov, M. Janic and V. Tosic, "Developing a [22] D. Delahaye and S. Puechmorel, "Air traffic
+generic metric of terminal airspace traffic complexity based on Dynamical systems," in 49th
+complexity," Transportmetrica, vol. 7, no. 5, pp. IEEE Conference on Decision and Control
+369-394, 2011. (CDC2010), Atlanta, 2010.
+10

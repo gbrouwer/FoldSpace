@@ -1,0 +1,628 @@
+
+
+--- Page 1 ---
+
+See discussions, stats, and author profiles for this publication at: https://www.researchgate.net/publication/4206219
+Traffic manager: a flexible desktop simulation tool enabling future ATM
+research
+Conference Paper · January 2005
+DOI: 10.1109/DASC.2005.1563344 · Source: IEEE Xplore
+CITATIONS READS
+23 441
+3 authors:
+Frank Bussink Jacco Hoekstra
+Netherlands Aerospace Centre Delft University of Technology
+30 PUBLICATIONS 537 CITATIONS 162 PUBLICATIONS 3,027 CITATIONS
+SEE PROFILE SEE PROFILE
+Bart Heesbeen
+Netherlands Aerospace Centre - NLR
+9 PUBLICATIONS 87 CITATIONS
+SEE PROFILE
+All content following this page was uploaded by Jacco Hoekstra on 09 January 2017.
+The user has requested enhancement of the downloaded file.
+
+--- Page 2 ---
+
+TRAFFIC MANAGER: A FLEXIBLE DESKTOP SIMULATION TOOL
+ENABLING FUTURE ATM RESEARCH
+Frank Bussink B. S., National Institute of Aerospace (NIA), Hampton, Virginia
+Dr. ir. Jacco Hoekstra and Ir. Bart Heesbeen, National Aerospace Laboratory (NLR),
+Amsterdam, Netherlands
+Abstract airspace users [1, 2]. The aviation user community
+has long identified a need to significantly increase
+In 1997, the National Aerospace Laboratory of
+airspace capacity and to improve the flexibility of
+the Netherlands (NLR) started working on an Air
+aircraft operations. This need and the introduction
+Traffic Management (ATM) concept called “Free
+of new surveillance technology brought about a
+Flight.” Under this concept, aircraft are allowed to
+new operational paradigm called “Free Flight.”
+choose their own path, while maintaining separation
+from all other aircraft. The study originally focused As part of the research into Free Flight,
+on the human factors of airborne separation in a NASA began developing a new concept of
+Free Flight environment. To provide flight crews operation called Distributed Air/Ground - Traffic
+with a challenging task that might provide insight Management (DAG-TM). Under DAG-TM, users
+into some interesting cockpit human factors issues would share information, collaborate on decision-
+of airborne separation, artificially high traffic making and distribute decision authority to the most
+densities and high conflict rates were required. This appropriate decision maker, with the goal of
+called for a simulation platform scalable to meet the improving system capacity as well as increasing
+traffic needs and flexible enough to model the flexibility and efficiency. The National Aerospace
+interaction of aircraft in this new environment. The Laboratory of the Netherlands (NLR) has
+simulation tool developed was called the Traffic collaborated with NASA in research and
+Manager (TMX). development to explore the feasibility of DAG-TM.
+Over the past eight years, researchers at both With an initial focus on the human factors
+NLR and NASA Langley Research Center (LaRC) elements of Free Flight, new tools and procedures
+have continued to enhance and improve TMX. Used were developed to validate the concept and to gain
+as a stand-alone traffic simulator, scenario insight into the paradigm. Traffic Manager (TMX)
+generator, scenario editor and player, experiment was born out of the study’s need for a realistic
+control station, data recording tool or as a rapid simulation environment, capable of simulating
+prototyping environment, its modular design, traffic patterns in a Free Flight environment. An
+simplicity of use and extensibility made TMX a essential element of this environment is for aircraft
+valuable asset to many ATM research projects. to self-separate; for this purpose several conflict
+detection and resolution algorithms were developed.
+In this paper we present a short history on the
+development of TMX, give a description of its The first NLR study showed not only that Free
+major features, cover specific research capabilities Flight is a promising concept for airspace with a
+such as the Airborne Separation Assistance System, relatively low density, but also that it is capable of
+and give some examples of applications of TMX in handling much higher traffic densities than today’s
+research projects. centrally organized Air Traffic Management (ATM)
+system [3]. As a result of this study, Free Flight has
+become more acceptable to the aeronautical
+Introduction
+research community.
+Although the flying public is impacted by
+delays at the airports, many times the cause is in the
+Development History
+en-route areas as airways become congested. This
+en-route capacity problem triggers more delays and Development of TMX started in 1996, initially
+results in time and fuel losses for the majority of the as an off-line desktop simulation application for an
+0-7803-9307-4/05/$20.00 ©2005 IEEE.
+3.B.4-1
+
+--- Page 3 ---
+
+interaction study of multiple aircraft in a Free Flight modular structure in which existing modules can
+environment. The focus of this study was to grow and mature.
+develop and compare different algorithms for
+conflict resolution. From earlier experiments, a
+Description of TMX
+rudimentary real-time, six degrees-of-freedom
+traffic simulator was available. With an initial
+capability of simulating 10 aircraft, this simulator User Interface
+was extended with a graphical user interface and Used as a stand-alone air traffic simulator,
+enhanced with the EUROCONTROL Base of TMX can operate in real-time or fast-time mode,
+Aircraft DAta (BADA) performance models. For accepting user input both from predefined scenario
+the initial study aircraft navigation guidance was files (which contain time-stamped commands to
+implemented as direct routing from origin to create, control, and delete aircraft throughout a
+destination airport with great circle trajectories. scenario) and from a graphical user interface [4].
+Conflict detection was based on extrapolation of The user interface contains a radar-like traffic
+aircraft state vectors to a maximum look-ahead window with zoom/pan functionality, a button
+time. For conflict resolution, a number of methods menu bar, a command/message window, an altitude
+were used, ranging from extended Visual Flight bar and a flight strip window, as shown in Figure 1.
+Rules (VFR) right-of-way rules to variants of the
+Modified Voltage Potential (MVP) algorithm [3].
+After this desktop investigation, there was a
+desire to test the developed conceptual conflict
+detection and resolution (CD&R) algorithms in a
+human-in-the-loop experiment using NLR’s motion
+base real-time simulator, the Research Flight
+Simulator (RFS). In order to use TMX in a
+networked traffic simulation, a connection with the
+RFS and its subsystems was created using UDP/IP
+over Ethernet. Position and state information for the
+simulated TMX traffic was broadcasted over
+Ethernet to simulate Automatic Dependent
+Surveillance - Broadcast (ADS-B). This data was
+used to generate traffic information on the cockpit
+displays and was used by the CD&R algorithms to
+send data to the RFS warning systems. Figure 1. TMX User Interface
+In the following years, TMX was ported from The radar window (main window) displays
+a UNIX-based platform to the Windows simulated traffic in map perspective with coastlines
+environment and was used in more sophisticated for geographical orientation and user-defined sector
+experiments. With every new experiment, the and airspace boundaries. Wind vector fields may
+capabilities of TMX were expanded to suit the need also be displayed. The main radar window can be
+for more functionality. With every functionality replaced by an alternative screen showing a simple
+enhancement, emphasis was put on the main TMX aircraft navigation display for both the horizontal
+development philosophy. This philosophy dictates and vertical situation. In addition, tape gauges for
+that every step in the development of TMX is the aircraft actual and selected speeds and vertical
+primarily driven by the short-term goals of the next speed are available. This view can be selected for
+research experiment, but with an eye on future any aircraft within the traffic simulation.
+opportunities and developments that can already be
+The button bar (below main window) allows
+foreseen. This rapid prototype philosophy suited
+the user to bypass command line inputs by using a
+many research projects that depended on on-time
+pointing device. The button bar consists of two
+availability of new functionality and resulted in a
+rows of buttons. The top row selects a subset of
+3.B.4-2
+
+--- Page 4 ---
+
+buttons on the second row. Both the function of commanding an aircraft to change heading, speed or
+each button and the menu structure of the buttons altitude, or when a user wants to select a new
+are completely user-configurable by means of a altitude at which to display the wind field of a 3D
+data file. The buttons can be used to store often- wind-grid.
+used commands as well as complete macros.
+The command/message window (lower left- Architecture
+hand corner) allows the user to enter keyboard
+Aside from the primary traffic state update
+commands at a command line prompt. This console
+loop, TMX employs an event-driven architecture
+can also be used for the prompting of relevant
+with a command stack populated from scenario
+messages, such as events, errors or warnings.
+files, from user interface input, and from externally
+The flight strip window (lower right-hand connected flight simulators, as shown in Figure 2.
+corner) displays flight data of one or more selected Each command is put on the Command Stack at the
+aircraft. By default, the strips display call-sign, simulation time stated in its timestamp. The
+origin, destination, altitude, heading, speed, and rate Command Stack works as a First In First Out
+of climb. However, the contents of the strips can be (FIFO) buffer. The first command in the stack is
+changed to include project-specific information. passed to the Process Command module. Process
+Command interprets the command and executes all
+The altitude bar (right of main window)
+necessary actions and sets appropriate parameters.
+primarily displays the altitude of the traffic on the
+If scenario recording is activated all executed
+radar window. However, when creating a new
+commands will be time stamped and written to a
+aircraft, this bar can also be used to quickly select
+selected scenario file. Recorded scenarios can be
+the desired aircraft type, altitude, and speed by
+used for playback and as new initial conditions.
+clicking on the bar instead of using the command
+Also included is a data-logging module for post-
+line. The bar also changes its functionality when
+experiment analysis.
+Figure 2. TMX Architecture
+Aircraft Model simulation and prediction within the ATM domain.
+BADA was developed and is being maintained by
+The six degree-of-freedom TMX dynamics and
+the EUROCONTROL Experimental Centre in
+performance models were developed using BADA.
+Brétigny, France. BADA uses a Total Energy
+The main application of BADA is trajectory
+3.B.4-3
+
+--- Page 5 ---
+
+Model, a reduced point-mass model that equates the interfaces, up to 500 external simulators can logon
+rate of work done by forces acting on the aircraft to to the TMX environment. Any of these simulators
+the rates of increase of potential and kinetic energy. can either take-over an existing TMX aircraft or be
+To do so, BADA uses an Operations Performance created as a new entity into the simulation. Taking
+Model, which defines the mass, flight envelope, over existing aircraft provides the flexibility to
+aerodynamics, engine thrust, and fuel consumption design and test scenarios off-line, without the use of
+for a given aircraft type. The BADA Airline external simulators.
+Procedure Model defines the speeds that are to be
+used during the climb, cruise and descent flight
+Research Capabilities of TMX
+phases [5].
+Initially designed to study various aspects of
+TMX aircraft models are integrated with auto-
+Free Flight, TMX has evolved into one of NLR’s
+flight functionality, 4D Flight Management System
+key research tools for a variety of ATM research
+(FMS) guidance, and a pilot model. The pilot model
+projects. Through the collaboration between NLR
+includes parameters for reaction time and
+and NASA, TMX now also forms an important part
+scheduling effects.
+of the ATM research environment at NASA
+Due to a constant emphasis on computational Langley Research Center (LaRC) in Hampton,
+efficiency, TMX can simulate up to 1000 aircraft Virginia. Both NLR and NASA LaRC have
+simultaneously. These aircraft can operate from continued to work on improving and enhancing
+gate to gate, with simulations for pushback, taxiing, TMX, resulting in TMX being used in a variety of
+take-off, en-route, approach and landing. international research projects.
+Major capabilities that have been developed
+External Interfaces for these projects include:
+The wide range of interfaces supported by
+• ADS-B Model
+TMX makes it a very versatile traffic simulation
+• TIS-B Model
+tool. Given that TMX can be hooked up to almost
+• ASAS
+any simulation and even to flight hardware of a
+• Wind & Weather
+research aircraft, its application to ATM research is
+• Airborne Precision Approach Spacing
+nearly limitless.
+For connection with the motion simulator at
+NLR, special Ethernet Management and
+ADS-B Model
+Programming Utilities have been developed to cope
+with the need for flexibility and fast debugging of ADS-B is considered to be one of the enabling
+Ethernet communication. These routines and technologies for Free Flight and other future ATM
+utilities provide more efficiency and transparency concepts. For that reason, a generic ADS-B model
+when working with Ethernet communication. The has been designed and implemented in TMX. The
+routines and utilities are based on a method that ADS-B model is split into transmitter and receiver
+uses ASCII database files to describe Ethernet components. This makes it possible to simulate the
+traffic. This method has been successfully used at real process of sending out ADS-B messages and
+NLR for several years and has proven to be receiving ADS-B messages from other aircraft,
+valuable and powerful [6]. including the real-life limitations that affect both
+transmitter and receiver hardware. The ADS-B
+Another way of connecting simulators to TMX
+model also models errors in position and state
+is through Distributed Interactive Simulation (DIS)
+reporting.
+or High Level Architecture (HLA). TMX can also
+be connected through the Internet using DirectPlay, The transmitter component collects data from
+a component of Microsoft DirectX. Through each aircraft and transmits this data at a given
+DirectPlay, TMX can host a web session that allows update rate for each message. (e.g.,1 second for
+desktop simulators to log on to the traffic
+simulation in progress. By means of all these
+3.B.4-4
+
+--- Page 6 ---
+
+state vector report). Messages that are currently Figure 3 shows the ADS-B message reception
+implemented, include1: function for r = 90 nm and r = 100 nm.
+1 2
+• State vector data: contains information
+1
+about an aircraft or vehicle’s current
+0.9
+kinematic state
+0.8
+• Mode status data: contains current
+operational information about the 0.7
+transmitting participant 0.6
+• Air reference velocity data: contains 0.5
+velocity information that is not required 0.4
+from all airborne ADS-B transmitting 0.3
+participants, and that may not be
+0.2
+required at the same update rate as the
+0.1
+position and velocity element in the state
+0
+vector report. 80 85 90 95 100 105 110
+Range (nm)
+• Target state data: provides information
+on the horizontal and vertical targets for
+the active flight segment.
+• Trajectory change data: contains long-
+term intent information providing
+strategic path information for path
+prediction and other functions, such as
+conformance monitoring. This
+information can include waypoint
+constraints, Trajectory Change Points
+(TCPs), and their connecting flight
+segments.
+• TRACON data: user defined on
+condition report, containing data
+imperative to the Airborne Precision
+Approach Spacing algorithm
+The receiver component determines whether or
+not an aircraft will receive a message. The
+probability of reception near the ADS-B range
+limits is determined by a drop-model. For this, two
+range distance parameters are specified, between
+which the probability of message reception varies
+according to the following function:
+1 Note: messages can be formatted according to the RTCA
+MASP for ADS-B (DO-242A).
+noitpeceR
+egasseM
+B-SDA
+fo
+ytilibaborP
+Figure 3. ADS-B Message Reception Range
+All messages are stored into buffers and
+aircraft can only retrieve data from messages they
+actually received. Between transmissions, the
+received ADS-B data is extrapolated and used by
+the applications within TMX.
+TIS-B Model
+Traffic Information Service Broadcast (TIS-B)
+provides suitably equipped aircraft and ground
+vehicles with surveillance information broadcasted
+from a ground server. To represent some of the
+functionality of TIS-B, a simplified primary
+surveillance radar model has been implemented.
+The radar model provides primary radar returns to
+the TIS-B model, which subsequently combines this
+data with available ADS-B data. The ground-based
+transmitter then broadcasts the data over the same
+channel as the ADS-B data, but at a reduced update
+rate (12 seconds for state vector reports). Aircraft
+can distinguish TIS-B data from ADS-B data by
+examining the participant address identifier in the
+message. The current implementation is designed
+around the ADS-B model and is very rudimentary.
+It serves only as a means of providing ADS-B data
+for aircraft that are not ADS-B equipped. No real-
+life TIS-B service volumes or characteristics have
+been simulated.
+3.B.4-5
+
+--- Page 7 ---
+
+ASAS has indicated that PASAS reduces the essentiality of
+intent-based CD&R algorithms [3].
+TMX was designed to simulate multiple
+aircraft, each equipped with an Airborne Separation
+Assistance System or ASAS. ASAS will detect a Wind and Weather
+predicted loss of separation (conflict) within a
+To assess the effect of wind prediction errors,
+certain look-ahead time. This is often referred to as TMX employs a wind model that contains two
+conflict detection.
+distinct 3D wind grids. One wind grid is filled with
+A conflict resolution module inside the ASAS truth wind and the other grid is filled with predicted
+calculates a recommended maneuver to avoid loss wind data. The ASAS module and many other
+of separation (Figure 4). A number of methods for systems use the predicted wind data, while the
+conflict resolution have been implemented: altitude aircraft dynamics model uses the truth wind data, to
+step, cross product of speed vectors, extended VFR simulate the effects of the wind as the aircraft
+right-of-way rules and two different experiences it. The wind grids can be populated by
+implementations of the Modified Voltage Potential grid data downloaded from the National Oceanic
+(MVP), including one specifically designed for and Atmospheric Administration (NOAA) website.
+maneuvers without speed changes [3, 7]. Once inserted into the wind model, this data can be
+used to visualize national and even global wind
+patterns.
+To depict weather cells, TMX uses 3D
+polygons. These polygons move in accordance with
+the wind direction and velocity. Furthermore, a
+level of severity can be assigned to each of these
+polygons. Within the ASAS module, the predictive
+ASAS system can detect and issue warnings on
+polygons by displaying bands on the horizontal and
+vertical display. Future enhancements will include
+the ability of the CD&R algorithms to detect and
+resolve conflicts with polygons.
+Airborne Precision Approach Spacing
+Besides looking at ways to increase en-route
+capacity, TMX has also been used to look at
+Figure 4. Conflict Resolution
+reducing uncertainties in the arrival process.
+The ASAS module also encompasses an intent- Reducing uncertainties could effectively increase
+based CD&R algorithm, which uses Trajectory airport arrival capacities even without altering in-
+Change information from other traffic to detect and trail separation minima. For that purpose, an
+resolve conflicts. With intent-based algorithms it is algorithm for merging multiple aircraft arrival
+possible to extend the look-ahead time and detect streams and precisely spacing aircraft over the
+conflicts much sooner. Taking into account the runway threshold has been developed by NASA
+planned trajectory changes, they also reduce the LaRC and implemented within TMX. This airborne
+number of nuisance and false alerts [8]. tool, called Airborne Merging and Spacing for
+Terminal Arrivals (AMSTAR), uses charted arrival
+Besides CD&R, this module also contains
+routes containing lateral and vertical constraints and
+conflict prevention functionality in the form of
+lead final approach speed to generate speed
+“Predictive ASAS” (PASAS). PASAS is used to
+guidance, which when followed results in an
+prevent aircraft from maneuvering into a conflict by
+aircraft crossing the runway threshold at an
+providing “no-go” bands on the vertical speed tape,
+assigned spacing interval.
+the heading/track tape and the speed tape. Research
+3.B.4-6
+
+--- Page 8 ---
+
+To set up the arrival stream, an airport enhanced to incorporate the AMSTAR guidance
+scheduler/sequencer has been developed within algorithm, improve waypoint constraint adherence,
+TMX to issue Required Times of Arrival (RTAs) at refine aircraft models, augment the ADS-B range
+TRACON entry points (the “metering fixes”). The model, and increase the scope of data recording
+sequencer/scheduler uses ADS-B data, together [10]. Initial analysis of the data focused primarily
+with a database of arrival routes, a prediction of on the precision with which the assigned spacing
+winds along the arrival routes, and a matrix of was achieved at the runway threshold (Figure 5).
+required separations according to aircraft wake
+turbulence class, to issue RTAs and assign aircraft
+sequences. While an operationally deployed
+sequencer/scheduler—as part of a ground-based
+decision support tool suite—would likely determine
+arrival routes and landing runways based upon
+optimal runway balancing criteria, the TMX
+sequencer/scheduler uses arrival routes and runways
+that are assigned a priority through the TMX
+scenario files.
+Applications of TMX
+Many revolutionary ATM concepts need to be
+studied in depth before any recommendation about
+practical implementation can be made. That calls
+for a comprehensive simulation of all aspects of a
+Figure 5. Spacing Errors in a Nominal Scenario
+concept. Through fast-time, Monte Carlo studies,
+insight can be provided into potential benefits, The airspace modeled for the study was the
+safety implications, and the stability of a complex Dallas Fort-Worth TRACON, with three
+system. However, it is also necessary to have standardized arrival routes. All aircraft in the arrival
+human players interact with a novel concept in an flow were assumed to be AMSTAR-capable. RTA
+operationally viable environment [9]. The success errors at the TRACON entry point for each aircraft
+of TMX is a result of its wide range of applicability, were randomly selected from a normal distribution,
+from fast-time, Monte Carlo batch simulation to and each test condition was repeated 40 times. The
+full-featured flight-test environments. Some of the results of the study indicated that the AMSTAR
+major applications are: concept and prototype onboard systems performed
+satisfactorily under the nominal test condition,
+• Off-line (fast-time) Traffic Simulation
+which included errors averaging up to 20 degrees in
+• On-line (real-time) Traffic Simulation
+predicted wind direction, as well as bounded
+• Internet Traffic Simulation
+random errors in the time when aircraft entered the
+• In-flight Traffic Simulation TRACON [11].
+• Experiment Control Station
+On-Line Traffic Simulation
+The subsequent sections describe examples of
+In June of 2004, NASA Ames and Langley
+research projects that used the variety of TMX
+Research Centers jointly conducted a human-in-the-
+applications.
+loop experiment, to address concept feasibility
+issues pertaining to integrated air/ground operations
+Off-Line Traffic Simulation of DAG-TM (Figure 6). Under the En Route Free
+Maneuvering component of DAG-TM, flight crews
+In 2004, NASA LaRC commenced a fast-time
+of appropriately equipped “autonomous” aircraft fly
+study to evaluate the performance of AMSTAR.
+under Autonomous Flight Rules. These aircraft
+This study made use of the batch capability of
+were able to choose their own route and altitude,
+TMX. Preparatory to this study, TMX was
+3.B.4-7
+
+--- Page 9 ---
+
+subject to maintaining separation from all other aircraft control. This large-scale, high-fidelity
+aircraft. Controllers continued to provide separation experiment with pilots and controllers has indicated
+between “managed” aircraft unequipped for that many autonomous aircraft can be added to a
+autonomous flight and traffic flow management moderately high number of managed aircraft in the
+services for all aircraft. During the experiment, same airspace without increasing controller
+TMX provided background aircraft equipped with workload, while maintaining flight crew workload
+ASAS that were capable of flying under the at acceptable levels. The experiment has also
+Autonomous Flight Rules. In addition, the map demonstrated that a well-integrated and compatible
+perspective of the TMX radar screen gave set of advanced air/ground automation and well-
+researchers an overview of the situation. Secondary defined procedures will be required to enable the
+or “slave” TMX stations were used for pseudo capacity gains without compromising safety [12].
+Figure 6. Joint NASA Ames / Langley DAG-TM Experiment
+Internet Traffic Simulation In-Flight Traffic Simulation
+As part of the Free Flight feasibility study, The Self-Separation and Sequencing (SSS)
+NLR performed two Internet experiments that Flight Experiment was conducted by NASA LaRC
+involved many real pilots in order to study human as part of the Small Aircraft Transportation System
+interaction effects on the Free Flight operation. For (SATS) project. The goal of this experiment was to
+this experiment, TMX was extended with Internet determine if instrument-rated general aviation (GA)
+game host functionality, creating a distributed pilots could self-separate and sequence their
+simulation network. Pilots were provided with a aircraft, while following a simulated aircraft, into a
+PC-based flight simulator featuring an Electronic simulated non-towered, non-radar airport during
+Flight Instrument System (EFIS), an autopilot, and simulated Instrument Meteorological Conditions.
+ASAS, but without an FMS (though there was a TMX served as the main basis of the airborne
+simulated FMS path on the navigation display). research software. For this purpose TMX was
+Through this flight simulator, pilots from all over installed onboard a Cirrus SR22X research aircraft,
+the world were able to log onto TMX and as shown in Figure 7.
+participate in a running traffic scenario. The results
+indicated that human pilots behaved very similar to
+the pilot models. In addition, it also showed that
+humans were better at avoiding peak conflict rates
+in complex conflict geometries, because they were
+able to anticipate potential problem areas [13].
+3.B.4-8
+
+--- Page 10 ---
+
+starting, stopping, pausing and recommencing a
+scenario, as well as time-control messages. An
+experiment leader can also use TMX to oversee the
+scenario, introduce special events such as system
+failures, and log events when they occur. The
+opposite applies as well, where commands can be
+sent to TMX from any remote simulation to control
+TMX. This feature was extensively used during the
+NASA Ames / Langley DAG-TM experiment. In
+this experiment, secondary or “slave” TMX stations
+at NASA LaRC were linked to a primary or
+“master” TMX station and used as pseudo aircraft
+stations. These slave TMX stations included the full
+TMX feature set, with the ability to oversee the
+scenario and control the aircraft when necessary.
+Each station was assigned to an air traffic control
+sector and, through the use of “Voice over IP”,
+pseudo pilots were in direct contact with the ATC
+controllers at NASA Ames. Commands entered on
+a slave station were sent to the master station for
+validation and processing. Commands were only
+implemented by the master station, which would
+subsequently send out the changes, so that the
+Figure 7. TMX Onboard Cirrus SR22X changes would be reflected on all other slave
+stations. Through this capability it was possible to
+The TMX software provided traffic generation,
+control multiple streams of aircraft with relative few
+conflict detection and prevention, visual and audio
+human operators.
+alerts and was used as a decision support tool in
+support of self-separation operations. Additional
+software was developed for the interface between Conclusion
+TMX and the onboard systems. Quantitative
+Research into future ATM concepts and
+analyses of the data acquired during the SSS Flight
+applications calls for a simulation tool that is
+Experiment suggested that a GA pilot’s ability to
+flexible and capable enough to meet any research
+fly an instrument approach was not adversely
+simulation requirement. TMX is such a tool.
+affected by the additional tasks of self-separating
+Through its wide range of capabilities, as a fast-
+and sequencing. Furthermore, analyses of
+time batch study simulator or as an in-flight traffic
+qualitative data collected during the SSS Flight
+simulator, TMX has proven to be a valuable asset to
+Experiment indicated that the level of workload
+many types of ATM research. With its capability of
+experienced by a pilot, while flying an instrument
+simulating up to 1000 aircraft simultaneously, each
+approach and performing self-separation and
+equipped with ADS-B, ASAS and FMS, its
+sequencing tasks, was no greater than that
+capability to connect to external simulators through
+experienced when performing baseline (i.e., current
+a multitude of interfaces, its architecture or its
+day) approaches [14].
+design philosophy, which makes it possible to have
+new research capability available in short time,
+Experiment Control Station TMX has proven itself to be an extremely useful
+tool. With its roots in Free Flight, TMX will
+In many experiments, TMX has served as the
+continue to help modernize and improve the way
+primary experiment control station. Through TMX,
+we use our airspace system today.
+control messages can be sent to any participant in
+the simulation or to any federate in a federation of
+simulations. These messages include commands for
+3.B.4-9
+
+--- Page 11 ---
+
+References Management Simulation: Results, Progress And
+Plans”, AIAA MST, Austin TX
+[1] Federal Aviation Administration, Operational
+Evaluation Plan, http://www.faa.gov/programs/oep/ [10] Bussink, F.J.L., N.A. Doble, B.E. Barmore, S.
+Singer, 2004, “A Fast Time Simulation
+[2] Delays to Air Transport in Europe, Annual
+Environment For Airborne Merging And Spacing
+Report 1999
+Research”, 23rd Digital Avionics Systems
+[3] Hoekstra, J.M., 2001, “Designing For Safety: Conference, Salt Lake City, UT
+The Free Flight Air Traffic Management Concept”,
+[11] Krishnamurthy, K., B.E. Barmore, F.J.L.
+Doctoral Thesis, Delft University of Technology,
+Bussink, 2005, “Airborne Precision Spacing In
+ISBN 90-806343-2-8
+Merging Terminal Arrival Routes: A Fast-Time
+[4] Heesbeen, W.W.M., J.M. Hoekstra, M.S.V. Simulation Study”, 6th USA/Europe Air Traffic
+Valenti Clari, 2003, “Traffic Manager: Traffic Management R&D Seminar, Baltimore, MD
+Simulation For Validation of Future ATM
+[12] Barhydt, R., P. Kopardekar, 2005, “JOINT
+Concepts”, AIAA Modeling And Simulation
+Ames/Langley Experiment Evaluation Of
+Technologies Conference & Exhibit, Austin, TX
+Integrated Air/Ground Operations For En-Route
+[5] Nuic, A., 2003, “User Manual for the Base of Free Maneuvering”, 6th USA/Europe Air Traffic
+Aircraft Data (BADA) – Revision 3.5”, Eurocontrol Management R&D Seminar, Baltimore, MD
+Experimental Centre, Bretigny, France
+[13] Hoekstra, J.M., R. van Gent, J. Groeneweg,
+http://www.eurocontrol.int/eec/public/standard_pag
+2003, “Airborne Separation Assurance Validation
+e/ACE_bada.html
+With Multiple Humans-In-The-Loop”, 5th
+[6] Groeneweg, J., 2001, “Ethernet I/F Management USA/Europe Air Traffic Management R&D
+and Programming Utilities”, Amsterdam, NLR, Seminar, Budapest
+NLR-TR-2001-271
+[14] Ramiscal E., J. Murdoch, J. McNabb, F.J.L.
+[7] Hoekstra, J.M., R.C.J. Ruigrok, R.N.H.W.van Bussink, 2004, “Feasibility of Self-Separation and
+Gent, J. Visser, B. Gijsbers, M.S.V. Valenti Clari, Sequencing during GPS Instrument Approaches“,
+W.W.M. Heesbeen, B.G. Hilburn, J. Groeneweg, 23rd Digital Avionics Systems Conference, Salt
+F.J.L. Bussink, H.A.P. Blom, 2000, “Overview of Lake City, UT
+NLR Free Flight Project 1997-1999”, NLR-TP-
+2000-227.
+Email Addresses
+[8] Ruigrok, R.C.J., M.S.V. Valenti Clari, 2003,
+Frank Bussink, f.j.bussink@larc.nasa.gov
+“The Impact Of Aircraft Intent Information And
+Traffic Separation Assurance Responsibility On En- Jacco Hoekstra, hoekstra@nlr.nl
+Route Airspace Capacity”, 5th USA/Europe Air
+Bart Heesbeen, heesbeen@nlr.nl
+Traffic Management R&D Seminar, Budapest
+[9] Prevot, T., S. Shelden, E. Palmer, W. Johnson,
+V. Battiste, N. Smith, T. Callantine, P. Lee, J. 24th Digital Avionics Systems Conference
+Mercer, 2003, “Distributed Air/Ground Traffic
+October 30, 2005
+3.B.4-10
+View publication stats

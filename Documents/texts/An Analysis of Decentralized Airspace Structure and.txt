@@ -1,0 +1,1368 @@
+
+
+--- Page 1 ---
+
+An Analysis of Decentralized Airspace Structure and
+Capacity Using Fast-Time Simulations
+Emmanuel Sunil, Joost Ellerbroek, Jacco Hoekstra, Andrija Vidosavljevic,
+Michael Arntzen, Frank Bussink, Dennis Nieuwenhuisen
+To cite this version:
+Emmanuel Sunil, Joost Ellerbroek, Jacco Hoekstra, Andrija Vidosavljevic, Michael Arntzen, et al..
+An Analysis of Decentralized Airspace Structure and Capacity Using Fast-Time Simulations. Journal
+of Guidance, Control, and Dynamics, 2017, 40 (1), pp. 38-51. ￿10.2514/1.G000528￿. ￿hal-01457367￿
+HAL Id: hal-01457367
+https://enac.hal.science/hal-01457367v1
+Submitted on 13 Feb 2017
+HAL is a multi-disciplinary open access L’archive ouverte pluridisciplinaire HAL, est
+archive for the deposit and dissemination of sci- destinée au dépôt et à la diffusion de documents
+entific research documents, whether they are pub- scientifiques de niveau recherche, publiés ou non,
+lished or not. The documents may come from émanant des établissements d’enseignement et de
+teaching and research institutions in France or recherche français ou étrangers, des laboratoires
+abroad, or from public or private research centers. publics ou privés.
+
+--- Page 2 ---
+
+An Analysis of Decentralized Airspace Structure and Capacity
+Using Fast-Time Simulations
+EmmanuelSunil*,JoostEllerbroek† andJaccoHoekstra‡
+DelftUniversityofTechnology(TUDelft),Delft,2628HS,TheNetherlands
+AndrijaVidosavljevic§
+EcoleNationaledel’AviationCivile(ENAC),Toulouse,31055,France
+MichaelArntzen¶||,FrankBussink** andDennisNieuwenhuisen††
+NationalAerospaceLaboratory(NLR),Amsterdam,1059CM,TheNetherlands
+The work that is presented in this paper is part of an ongoing study on the relationship between
+airspace structure and capacity. The present paper investigates the degree of structuring needed
+tomaximizecapacityfordecentralizeden-routeairspace. Tothisend, fourdecentralizeden-route
+airspace concepts, which vary in terms of the number of constrained degrees of freedom, were
+comparedusingfast-timesimulations,forbothnominalandnon-nominalconditions. Theairspace
+structure-capacity relationship was studied from the effect of multiple traffic demand densities on
+airspacemetrics.Theresultsindicatedthatstructuringmethodsthatover-constrainedthehorizontal
+pathofaircraftreducedcapacity, astrafficdemanddisplaysnopredominantpatternsinthehori-
+zontaldimensionfordecentralization. Theresultsalsoshowedthatcapacitywasmaximizedwhena
+verticalsegmentationofairspacewasusedtoseparatetrafficwithdifferenttraveldirectionsatdif-
+ferentflightlevels. Thismodeofstructuringimprovedperformanceovercompletelyunstructured
+airspacebyreducingrelativevelocitiesbetweenaircraftcruisingatthesamealtitude,whileallowing
+directhorizontalroutes.
+*PhDCandidate,ControlandSimulation,FaultyofAerospaceEngineering,e.sunil@tudelft.nl
+†AssistantProfessor,ControlandSimulation,FaultyofAerospaceEngineering
+‡Professor,ControlandSimulation,FaultyofAerospaceEngineering
+§ResearchAssociate,MAIAA-AppliedMathematicsLaboratory
+¶R&DEngineer,Environment&PolicySupport(NLR)
+||AssistantProfessor,AircraftNoiseandClimateEffects,FaultyofAerospaceEngineering,DelftUniversityofTechnology(TUDelft)
+**R&DEngineer,CockpitandFlightOperations
+††R&DEngineer,ATMandAirports
+
+--- Page 3 ---
+
+Nomenclature
+Cv = Convergenceindicatorbetweenaircraftiandj[-]
+ij
+Cx = Complexitycontributionofaircraftiandj[-]
+ij
+d = Distancebetweenaircraftiandj[Nmi]
+ij
+I^ = Normalizedhorizontalintrusionseverity[-]
+H
+I = TotalIntrusionSeverity[-]
+sev
+I^ = Normalizedverticalintrusionseverity[-]
+V
+LA = Aweightedloudnessontheground[dB(A)]
+n = Numberofsamplesinasimulationrun[-]
+s
+n = Numberofconflicts[-]
+cfl
+n = Numberofintrusions[-]
+int
+p = Relativepositionvectorbetweenaircraftiandj[Nmi]
+ij
+Pr = Proximityindicatorbetweenaircraftiandj[-]
+ij
+s = Displacementvector[Nmi]
+S1 = Setofallconflictswithoutconflictresolution[-]
+S2 = Setofallconflictswithconflictresolution[-]
+T = Thrustvector[lbf]
+t = Starttimeofanintrusion[s]
+0int
+t = Endtimeofanintrusion[s]
+1int
+t = Totalsimulationtime[s]
+sim
+v = Relativevelocityvectorbetweenaircraftiandj[kts]
+ij
+W = WorkDone[MJ]
+I. Introduction
+Atpresent,trafficseparationinen-routeairspaceisprimarilyperformedbyground-basedAirTrafficControllers
+(ATCo), and relies on a rigid network of airways [1, 2]. The structure of this network historically depended on the
+physicallocationofradionavigationbeacons,datingbacktotheearly1950s[3]. Thisairwaysystemwasdevisedto
+helppilotsnavigatesafelyunderInstrumentFlightRules(IFR),usingsimplesinglechannelradios[3]. Eventhough
+modernairlinershavethenecessaryequipmenttoflyarbitraryroutesaccurately,airwaynavigationisstillusedduring
+busy daytime operations in most parts of the world [4]. This is because airways limit aircraft flight paths along
+predefined trajectories, making it easier for the ATCo to monitor and de-conflict traffic flows [5, 6]. However, as
+airwaysdonotalwaysallowforefficientairspaceusage,thiscentralizedairspacedesignhasbeenwidelyreportedto
+benearingsaturationlevels[4,7,8,9].
+In order to cope with the projected increases in traffic demand, a transfer of the traffic separation responsibility
+
+--- Page 4 ---
+
+from the ground to the cockpit has been proposed as an alternative to the current operational model. To realize the
+resultingdecentralizedseparationparadigm,sometimesreferredtoas‘self-separation’,significantprogresshasbeen
+made towards the development of airborne Conflict Detection and Resolution (CD&R) algorithms [10]. However,
+little effort has been devoted towards decentralized airspace design. In particular, there is no consensus in existing
+literature if some form of traffic organization, or structuring, is also needed to maximize capacity for decentralized
+separation; while Free Flight researchers advocate that higher densities can be achieved through a reduction of traf-
+fic flow constraints [6, 11, 12], other studies argue that capacity would benefit more from a further structuring of
+airspace[13,14,15]. Thesediametricallyopposedviewsindicatethattherelationshipbetweenairspacestructureand
+capacityisnotwellunderstoodfordecentralization,i.e. doesmoreorlessstructuringleadtoahighercapacity? Or,
+doesthedegreeofstructuringrequiredtomaximizecapacityvarywithtrafficdensity?
+Toanswerthesequestions,thisstudyanalyzesthedegreeofstructuringneededtomaximizecapacityfordecentral-
+izedseparationusingfast-timesimulations. Tothisend, fouren-routeairspaceconcepts, rangingfromacompletely
+unstructureddirectroutingconcept,toahighlystructuredtubenetworkusing4Dtrajectories,arecomparedwithinthe
+samesimulationenvironment,formultipletrafficdemandscenarios.Theeffectofstructureoncapacityissubsequently
+analyzedfromtheeffectoftrafficdemandvariationsonsafety,efficiency,stability,arrivalsequencing,complexityand
+noise pollution metrics. By including rogue aircraft that ignore concept dependent routing requirements in selected
+simulationruns,therobustnessoftheconceptstonon-nominalconditionsisalsoanalyzedinthisstudy.
+TheanalysisdescribedinthisworkisperformedwithinthecontextofahypotheticalPersonalAerialTransportation
+System (PATS). This setting was adopted to provide the extreme traffic densities, up to 30,000 aircraft per 10,000
+square nautical miles, needed to ‘stress-test’ and compare the four concepts in terms of capacity using a fast-time
+simulationapproach.Notethattheaimofthisstudyisnottoprovideanyspecificconclusionsregardingdesignoptions
+for a future PATS; the focus is only on the analysis of the airspace structure-capacity relationship for decentralized
+separation.
+This paper is structured as follows. Section II defines the notion of airspace structure, and describes the design
+offourdecentralizedairspaceconceptsofincreasingstructure. ThisisfollowedinSectionIIIwiththesetupoftwo
+separatesimulationstudiesthatareusedtocomparetheconcepts. Theresultsofthesesimulationsarepresentedand
+discussedinSectionsIVandV,respectively. FinallythemainconclusionsaresummarizedinSectionVI.
+II. DesignofAirspaceConcepts
+Airspace structure can be defined as a procedural mechanism for a priori separation and organization of en-
+routetraffic. Anexampleofthisincurrent-dayoperationsisthehemisphericrule, whichseparateseast-boundfrom
+west-boundtrafficatalternating verticalflightlevels[16]. More generally, anyapriori structuring oftrafficimplies
+posingconstraintsononeormoreofthefourdegreesoffreedomthatdescribeaircraftmotion(bothspatialaswellas
+temporal). Usingthisdefinitionofairspacestructure,fourdecentralizedairspaceconcepts,namedFullMix,Layers,
+
+--- Page 5 ---
+
+Zones and Tubes, have been designed by incrementally increasing the number of constraints applied. This section
+describesandcomparestheconceptualdesignofthesefourairspaceconcepts.
+A. FullMix
+TheFullMixairspaceconceptcanbemostaptlydescribedas‘completelyunstructuredairspace’.Inthisconcepttraffic
+issubjectedtoonlyphysicalconstraints,suchasweather,staticobstaclesandterrain. TheFullMixconceptassumes
+that any structuring of traffic decreases overall system efficiency, and that safety is actually improved by dispersing
+thetrafficovertheavailableairspace. Therefore,aircraftintheFullMixconceptmakeuseofdirecthorizontalroutes,
+aswellasoptimumaltitudesandvelocities,tominimizefuelusageandotherrelatedtripcosts.
+AsnolevelofairspacestructureisusedtoseparatepotentiallyconflictingtrajectoriesinFullMix,safeseparation
+between aircraft is entirely dependent on airborne self-separation automation, see Section III.A.3. Since Full Mix
+imposesnoconstraintsonthepathofaircraft,combinedheading,speedandaltitudeconflictresolutionmaneuversare
+usedtoreducedeviationsfromtheoptimalroute.
+B. Layers
+TheLayersconceptcanbeseenasanextensiontothehemisphericrule[16].Inthisconcept,theairspaceissegmented
+into vertically stacked bands, with each altitude layer limiting horizontal travel to within an allowed heading range.
+ThissegmentationofairspaceisexpectedtoimprovesafetywhencomparedtotheFullMixconcept,byreducingthe
+probabilityofconflictswithcrossingtrafficforcruisingaircraft. However,thisincreasedsafetycomesatthepriceof
+efficiency;whiledirecthorizontalroutesarestillpossible,verticalflightprofilesaredictatedbythebearingbetween
+originanddestination,andthecorrespondingaltitudebandwiththerequiredheadingrange. Asaresult,flightsmay
+notbeabletocruiseattheiroptimumflightlevels,increasingfuelburnwhencomparedtoFullMix. Anexceptionto
+theheading-altituderuleismadeforclimbinganddescendingaircraft;theseaircraftareallowedtomaintainheading
+Figure1. IsometricviewoftheLayersconceptwithonecompletesetofaltitudebands. Here, eachaltitudebandconstrainsaircraft
+headingstowithinapredefinedrange.
+
+--- Page 6 ---
+
+whileclimbingordescendingtotheirdestinationaltitude.
+Figure 1 displays a schematic of the Layers concept. Here it can be seen that each altitude layer corresponds to
+aheadingrangeof45o andhasaheightof300ft. Withthesedimensions, twocompletesetsoflayersfitwithinthe
+airspacevolumeusedtocompareconcepts,seeSectionIII.B.1. Asaresult,shortflightscanstayatlowaltitudeswhile
+longerflightscanimprovefuelburnbyflyingathigherflightlevels. Thisisexpectedtomitigatetheefficiencydropof
+predeterminedaltitudesinthisconcept.
+The Layers concept also makes use of the same self-separation automation utilized by Full Mix, albeit with re-
+strictionsontheallowedresolutionmaneuvers. Whilecombinedheading,speedandaltituderesolutionsarepermitted
+forclimbinganddescendingtraffic,forcruisingaircraft,altituderesolutionswouldcreatenewconflictswithtrafficin
+adjacentlayers. Resolutionsarethereforelimitedtocombinedheadingandspeedmaneuversforcruisingaircraft.
+C. Zones
+SimilartoLayers,theZonesconceptseparatestrafficbasedonsimilarityoftraveldirection. However,inthiscase,a
+horizontalsegmentationofairspaceisusedtoseparatetrafficalongpre-definedtrajectories. Inthisrespect,theZones
+concept resembles the airway-based airspace design used today in that it facilitates travel towards and away from
+locationswithhightrafficdemand.
+ThehorizontaltopologyusedbytheZonesconcept,seeinFigure2,consistsoftwomajorzonetypes: radialand
+ringzones. Radialzonesseparateinboundandoutboundtrafficfromthecenterofthetopology,whichcoincideswith
+anareawithhightrafficdemand. Concentricringzones,ontheotherhand,functionasconnectionsbetweentheradial
+zones,andseparatesclockwiseandanti-clockwisetrafficflowsfromeachother. Aircraftcantravelbetweenanytwo
+pointsinthetopologyusingacombinationofradialandringzones. Asthereisnoverticalsegmentationofairspacein
+thisconcept,optimumaltitudesareselectedbasedontheplannedflightdistancebetweenoriginanddestination. The
+Zonesconceptusedforsimulationsconsistedof41rings. Thenumberofradialsdependedonthedistancefromthe
+centerofthetopologytoensureadequateseparationbetweenadjacentradials;72radialswereusedfordistancesupto
+Anti-Clockwise Ring
+Clockwise Ring
+Inbound Radial
+Outbound Radial
+Figure2. TopdownviewofanexampleZonesconcept,whichconstrainstrafficinthehorizontalplane.
+
+--- Page 7 ---
+
+6Nmifromthecenter,afterwhich216radialsweredefined.
+TheZonesconceptalsousesself-separationautomationtoseparateaircraftflyingwithinthesamezone,aswellas
+toassistwiththemergingofaircraftbetweenringandradialzones. SincetheZonestopologydictatesthehorizontal
+pathofanaircraft,headingresolutionsarenotallowedforthisconcept.
+D. Tubes
+Asamaximumstructuringofairspace,thefinalconceptimplementsfour-dimensionaltubesthatprovideafixedroute
+structure in the air. Here, the aim is to increase the predictability of traffic flows by using preplanned conflict free
+routes.
+The tube topology can be thought of as a graph with nodes and edges, see Figure 3. The nodes are connection
+pointsforoneormoreroutes,whiletheedgesarethetubesconnectingtwonodes. Tubesatthesamehorizontallevel
+neverintersect,exceptatthenodes,andaredimensionedtofitexactlyoneaircraftintheverticalandhorizontalplane.
+Toprovidemultipleroutealternatives,theTubesimplementationusesatotalof13tubelayersthatareplacedabove
+eachother,withdecreasinggranularity. Thisway,shortflightsprofitfromafinegridatthelowestlayer,whileatthe
+sametime,longerflightsbenefitfromlengthiertubesathigherlayers. Finally,itshouldbenotedthataircraftareonly
+allowedtoclimb/descendthroughonetubelayeratatime.
+Unlike the other concepts, the Tubes concept uses time-based separation. This mode of separation dictates that
+when an aircraft passes a node, it will ‘occupy’ that node for a prescribed time interval. Within this occupancy
+interval no other aircraft is allowed to pass through that node to prevent conflicts. For each node, an interval list is
+maintainedthatkeepstrackofthetimesatwhichthatnodeisexpectedtobeoccupied. Theselistsaresharedbetween
+allaircraft,andupdatedwhenevernewflightsenterthenetwork. Furthermore,newflightsareonlyallowedtoselect
+routes that are not predicted to conflict with existing aircraft in the network. To ensure that separation at the nodes
+alsoguaranteesseparationwithinthetubes,allaircraftwithinthesamelayerarerequiredtoflyatthesamevelocity.
+Thisprescribedspeedincreaseswiththealtitudeofthelayertomatchthedecreasinggranularityofthetubenetwork.
+Amajoradvantageofthismodeofseparationisthatitallowsthetubenetworktobebidirectional,astheoccupancy
+Figure3. IsometricviewofanexampleTubestopology,whichconstrainstrafficalongallfourdimensionsofmotion.Thedashedlinesare
+usedtoindicatetheplacementofnodesaboveeachother.
+
+--- Page 8 ---
+
+Four Airspace Design Concepts of Increasing Structure
+Full Mix Layers Zones Tubes
+0 Constrained Degrees of Freedom 1 Constrained Degrees of Freedom 2 Constrained Degrees of Freedom 4 Constrained Degrees of Freedom
+Altitude X Position X Position
+Y Position Y Position
+Altitude
+Speed
+Figure4. Fourpointairspacestructuringframework.ThelevelofstructureisincreasedfromFullMixtoTubesbyincrementallyincreasing
+thenumberofconstraintsapplied.
+of a node is independent of travel direction. This simplifies its design, and enables a closer packing of tubes in the
+topology.
+Thetime-basedseparationandpreplannedroutesusedbytheTubesconceptmakesitsimilartosome4DTrajectory
+BasedOperations(TBO)conceptsthathavebeendiscussedinliterature. However,itshouldbenotedthatmostTBO
+conceptsutilizeacentralized planningapproachinwhichgloballyoptimumroutesaredeterminedusinganiterative
+approach,afternegotiationsbetweenanairspaceuserandanAirNavigationServiceProvider(ANSP)[13]. Aircraft
+in the Tubes concept, on the other hand, use decentralized route planning whereby the shortest (conflict free) route
+isselected,giventheavailabilityofthetubetopologyatthetimeofflightplancalculation,i.e.,routesareselectedin
+Tubesusingthe‘first-come-first-served’principle.
+E. ConceptComparison
+Figure 4 compares the four airspace concepts described above in terms of the number of constrained degrees of
+freedom.Thefigureshowsthatoptionsfortrajectoryplanningbecomeincreasinglyrestrictedasthedegreeofstructure
+isincrementallyincreasedfromFullMixtoTubes;whileallfourdegreesoffreedomareavailableinFullMix,inthe
+Tubesconcept, aircrafthavenodegreesoffreedom, andarerequiredtorigidlyfollowpreplannedspace-timeroutes
+through a predefined topology. Between these two extremes, the Layers and Zones concepts were defined to allow
+three and two degrees of freedom respectively. This choice was made such that the four concepts span the entire
+rangefromunstructuredtostructuredairspace. Thus, acomparisonofthefourconceptsusingfast-timesimulations
+can be used to analyze the structure-capacity relationship for decentralized airspace. The goal of these simulations
+is not to arrive at precise capacity estimations for the four concepts, but rather to consider on how the degree of
+structuring affects capacity. Correspondingly, the concepts are subjected to multiple traffic demand densities, and a
+relativecapacityrankingisperformedbymeasuringtheeffectoftrafficdensitychangesonseveralairspacemetrics.
+
+--- Page 9 ---
+
+III. SimulationDesign
+Twoseparatefast-timesimulationexperimentswereconductedtocomparethefourairspaceconceptsintermsof
+capacityandrobustness. Thissectiondescribesthedesignofthesetwoexperiments.
+A. SimulationDevelopment
+1. SimulationPlatformandVehicleModeling
+The Traffic Manager (TMX) software, developed by the National Aerospace Laboratory of the Netherlands (NLR),
+was used as the simulation platform in this research. The TMX simulator is well established in the ATM research
+community,andhasbeenusedinmanypreviousAirTrafficManagement(ATM)relatedsimulationstudies. Formore
+informationonTMXcapabilities,thereaderisreferredto[17].
+InordertosimulatePersonalAerialVehicle(PAV)dynamics,parametersofexistingpoint-massaircraftmodelsin
+TMX,whicharebasedonEurocontrol’sBADAAircraftPerformanceModels(APM)[18],wereadaptedtomatchthe
+performancespecificationsofseveralPAVsthatarecurrentlyunderdevelopment. Intotal, threedifferentPAVtypes
+wereusedinthesimulations.
+2. ConceptImplementation
+ThefourconceptswereimplementedbymodifyingTMX’strajectoryplanningfunctions. TheFullMixconceptused
+thedirecthorizontalrouteandthemostfuelefficientaltitude,asdeterminedbytheAPMs. Layersalsousedthedirect
+horizontaltrajectory. However,altitudewasselectedbasedonthebearingtothedestinationandthematchingaltitude
+from a predefined list (see Section II.B). Additionally, distance determined the choice between the upper and lower
+layersets;flightswithacruisingdistancelessthan22Nmiusedthelowerlayerset.
+FortheZonesconcept,theA*pathplanningalgorithmwasusedtodeterminetheshortestrouteoveritspredefined
+horizontal topology, while the most fuel efficient altitude was chosen by the APMs. Tubes also employed A* to
+calculatetheshortestpath, butinthiscase, itwasalsousedtoexaminewhethertheselectedroutewasconflict-free.
+Here,aninstantaneousplanningapproachwasusedwherebytheoccupancyofeachnodealongaproposedroutewas
+checkedat trafficdesired departure times. If any node along a proposed route was found to be occupied by another
+flight,thecorrespondingroutewasdiscarded,andtheA*algorithmbacktrackedtoevaluatethenextbestsolution. If
+noroutecouldbefound,apre-departuredelaywasappliedinmultiplesof10secondsuptoamaximumof30minutes.
+Afterthisperiod,thetubenetworkwasconsideredtobesaturated,andthatflightwascanceled. Onceanappropriate
+routewasfound,aircraftwererequiredtofollowtheirpreplannedroutesascloselyaspossible,includingarrivaltime
+intervalsateachnode.
+ForbothZonesandTubes,theA*algorithmusedinthisworkhadtobemodifiedfromthegenericversion. This
+wasbecauseoriginsanddestinationsfortrafficwerelocatedoutsidetheairspacevolumeusedtodesigntheconcepts
+
+--- Page 10 ---
+
+(see Section III.B.1). Consequently, the generic A* algorithm could yield unfeasible solutions due to aircraft bank
+angle limitations imposed by the APMs. To solve this problem, the A* implementation in this work differs slightly
+fromtheconventionalalgorithmbyallowingalreadyvisitednodestoberecheckedifbankanglelimitswereexceeded,
+i.e.,byremarking‘closednodes’as‘opennodes’. AcompletedescriptionoftheA*algorithmcanbefoundin[19].
+3. Self-SeparationAutomation
+The Full Mix, Layers and Zones concepts relied on airborne self-separation automation for tactical separation. It
+consistedofseparateConflictDetection(CD),ConflictResolution(CR)andConflictPrevention(CP)modules. CD
+wasperformedthroughlinearextrapolationofaircraftpositionsoveraprescribed‘look-ahead’time. Onceconflicts
+werepredicted,theModifiedVoltagePotential(MVP)algorithmwasusedforCRinapairwisefashion,resultingin
+implicit cooperative resolution strategies. Finally, the CP algorithm ensured that aircraft did not turn into conflicts,
+inanefforttomitigateconflictchainreactions. Previousresearchshowedthatthisthreeprongedsystemwashighly
+effectiveinsolvingmulti-aircraftconflicts.Furthermore,thissystemwasfoundtobecomputationallyefficientaseach
+aircraftisonlyconcernedwithitsownseparationwithneighboringtraffic. Formoredetails,pleaseconsult[20].
+Basedoninitialtestruns,alook-aheadtimeof60seconds,aswellasseparationmarginsof0.135Nmihorizontally
+and150ftvertically,werefoundtobesuitablefortheAPMsusedhere.Sincethefocusofthisstudyisondecentralized
+en-route airspace, self-separation was performed only within the experiment airspace block, defined to be between
+1650-6500 ft (see Section III.B.1). Additionally, aircraft were assumed to have perfect knowledge of the states of
+neighboringtraffictofocusexclusivelyonthestructure-capacityrelationship.
+4. Wind
+In real-life operations, wind uncertainties are a common source of prediction error. To take this effect into account,
+windwasdeliberatelyomittedfromthesimulation’strajectoryplanningfunctionstostudytheeffectofuncertainties,
+which could cause deviations from the planned trajectory, on the four airspace concepts. To this end, wind was
+modeledasauniformandtime-invariantvectorfieldwithrandomdirectionandrandomspeed(12-22kts). Although
+these conditions cannot be assumed by default, for a short time interval in a small observed area, and at sufficient
+altitudestocleargroundobstacles,asforthecurrentstudy,thisassumptionisadequateforthepurposesofthiswork.
+B. TrafficScenarios
+1. TestingRegionandFlightProfiles
+Tocreatehighdensitytrafficscenarios,asmallsquareregion,withanareaof1600Nmi2,wasusedfortrafficsimu-
+lations. Althoughthisresearchfocusesonen-routeairspacedesign, arrivalanddepartureoperationsweresimulated
+toensurethattheresultsdidnotignoretheimpactofgroundconstraints. Correspondingly,aircrafttook-offfromone
+of1600arrival/departurelocationsthatwereevenlydistributedatgroundlevel,againstthedirectionofthewind. To
+
+--- Page 11 ---
+
+preventtake-offconflicts,aircrafthadaminimumcreationintervalof60secondsateachorigin,correspondingtothe
+CDlook-aheadtime.
+After take-off, aircraft climbed to the ‘experiment airspace block’, defined between 1650 ft and 6500 ft. Once
+aircraft entered the experiment block, they followed concept dependent routing requirements, both horizontally and
+vertically. At a predetermined distance from their destination (which depended on the cruise altitude), aircraft de-
+scendedoutoftheexperimentblock. Standardizedclimb/descentprofileswereusedbelowtheexperimentblockfor
+allairspaceconcepts,andwerespecifiedusingtheAPMs. Tosimplifysimulationdevelopment,runwaycapacitywas
+not managed during landing. Instead, the effect of arrivals was analyzed using the ‘arrival sequencing’ metric, see
+SectionIII.E.4.
+Relativelylowaltitudeswereselectedfortheexperimentblocktolimitthehorizontalareaneededforsimulation.
+Given the constant climb/descent profiles below the experiment block, higher altitudes would have increased the
+horizontalareaneededforthesimulations.Alargerareawouldinturnincreasethetrafficvolumesneededtorealizethe
+desireddensities,increasingcomputationaleffortwithouttangiblebenefitsintermsoftheprimaryresearchgoals. On
+asimilarnote,allaircrafttook-offfromandlandedatoneofthe1600arrival/departurelocationsthatweredefinedin
+thesquaresimulationarea.Interactionswithaircraftoutsidethisareawouldnotcontributeheavilytoanunderstanding
+oftheairspacestructure-capacityrelationship,particularlyfordecentralization. Thus,suchinteractionsareoutsidethe
+scopeofthiswork.
+2. TrafficDemand
+Fourtrafficdemandscenariosofincreasingdensitywereusedtocomparetheconcepts,andweredefinedintermsof
+theinstantaneousnumberofaircraftintheair,seeTable1. Thesescenarioshadaanaveragetripdistanceandspeed
+of30Nmiand120kts,respectively,andmadeuseofassumptionsforfuturepercapitademandforPAVs,see[21]for
+moredetails.
+Table1. InstantaneousTrafficVolumeoftheFourDemandScenarios
+Scenario Low Medium High Ultra
+InstantaneousTraffic
+2,625 3,375 4,125 4,875
+Volume
+In addition to different demand volumes, traffic scenarios were created with different demand patterns. Here,
+scenarioswithlargelyconverging,divergingand‘mixed’demandpatternswereused.Thesedifferentdemandpatterns
+werecreatedbyvaryingtheratiooforiginsanddestinationsthatactedassourcesandsinks,andbyvaryingtheaircraft
+creationtimeintervalsindifferentregionsofthesimulationarea.
+
+--- Page 12 ---
+
+3. RogueAircraft
+Inaseparateexperiment,‘rogueaircraft’wereintroducedatrandomtimeintervals.Theirseparationrequirementswere
+seventimeslargerhorizontally,andfourtimeslargervertically,whencomparedtonormalaircraftinthesimulation.
+These aircraft flew haphazardly through the airspace with continuously varying heading and altitude. Furthermore,
+rogueaircraftwerenon-cooperative. Thismeantthatnormalaircraftweresolelyresponsiblefordetectingandresolv-
+ingconflictswithrogueaircraftusingitsself-separationautomation,inallconcepts.Althoughtimebasedseparationis
+usedinTubes,theself-separationautomationdescribedaboveisusedwithspeedresolutionstoresolveconflictswith
+rogueaircraftalone. Bymonitoringtheeffectofrogueaircraftonsafetymetrics,therobustnessofthefourconcepts
+tonon-nominaleventscanbeanalyzed.
+C. SimulationProcedureandDataLogging
+Toenableafaircomparisonbetweenallconcepts, standardizedsimulationconditionswereusedtominimizeunsys-
+tematicvariationintheresults. Foraparticularrepetitionofatrafficdemandvolume, thecreationtimesofaircraft,
+theorigin-destinationcombinations,thestrengthanddirectionofthesimulatedwind,aswellastheintroductionand
+trajectoriesofrogueaircraft(innon-nominalexperiment),werekeptconstantacrossallconcepts. Additionally,sce-
+narioshadadurationoftwohours,consistingofa45minute(trafficvolume)buildupperiod,a1hourloggingperiod,
+duringwhichthetrafficvolumewasheldconstantattherequiredlevel,anda15minutewinddownperiod,requiredto
+allowaircraftcreatedduringthelogginghourtofinishtheirflights,andpreventabnormallyshortflightsfromskewing
+theresults.
+Twotypesofloggingwereused. Event-drivenloggingkepttrackofthepropertiesofconflictsandintrusionsas
+theyoccurred. Itwasalsousedtostoreflightefficiencydatawhenanaircraftarrivedatitsdestination,includingthe
+timeintervalbetweenconsecutivearrivalsateachdestination. Periodicloggingwasusedtomonitorthestatusofall
+flightsintheexperimentairspaceblockevery30seconds. Thiswasrequiredtomonitortrafficvolumes,aswellasfor
+computingstructuralcomplexityandnoisepollutionmetrics.
+D. IndependentVariables
+Twoseparateexperimentswereperformed: thenominalexperimentandthenon-nominalexperiment.
+1. NominalExperiment
+The nominal experiment focused on the impact of airspace structure on capacity under ideal conditions; although
+trafficwassubjectedtoauniformwindfield(seeSectionIII.A.4),nootherdetrimentstoaircraftmotionwereincluded
+inthisexperiment. Thetwoindependentvariablesofthisexperiment,andtheirlevels,are:
+1. Airspaceconcept: FullMix,Layers,ZonesandTubes
+
+--- Page 13 ---
+
+2. Trafficdemand: Low,Medium,HighandUltra(seeTable1)
+For each of the 16 experiment conditions, six repetitions were performed, consisting of two converging, two
+diverging and two mixed traffic demand patterns. Additionally, the scenarios were also simulated with and without
+tacticalCRtomeasureairspacestability,resultinginatotalof192nominalsimulationruns(4conceptsx4demand
+scenariosx6repetitionsx2CRsettings).
+2. Non-NominalExperiment
+Thegoalofthesecondexperimentwastocomparetherelativerobustnessoftheconceptstonon-nominalsituations.
+Forthispurpose,rogueaircraftwereaddedtotrafficscenariosduringthelogginghour,inadditiontowind. Thetwo
+independentvariablesofthisexperiment,andtheirlevels,are:
+1. Airspaceconcept: FullMix,Layers,ZonesandTubes
+2. Numberofrogueaircraft: 4,8,16and32
+Theresulting16non-nominalexperimentconditionswereperformedusingthe‘Medium’trafficdemandscenario
+listed in Table 1. Once again, six repetitions, as well as simulations with and without tactical CR were performed,
+resultinginatotalof192non-nominalsimulationruns(4conceptsx4roguescenariosx6repetitionsx2CRsettings).
+E. DependentVariables
+Sixcategoriesofdependentvariablesareusedtocomparetheconcepts:safety,efficiency,stability,arrivalsequencing,
+structuralcomplexityandnoisepollution. Themetricsusedtoaccesseachcategoryaredescribedbelow.
+1. Safety
+Safety metrics focus on the ability of an airspace concept to maintain safe separation between aircraft. Separation
+performanceismeasuredintermsofthenumberofintrusionsandconflicts. Here,intrusionsaredefinedasviolations
+of minimum separation requirements, while conflicts are defined as predicted intrusions, i.e., when two (or more)
+aircraftareexpectedtoviolateseparationrequirementswithinapredetermined‘look-ahead’time(60secondsinthis
+research).
+Intrusionsdonotimplycollisions. Therefore,inadditiontocountingthenumberofintrusions,itisimportantto
+considertheseverityofanintrusion. Theseverityofanintrusion,I ,isdependentonthepathofanaircraftthrough
+sev
+theprotectedzoneofanother,seeFigure5,andiscomputedusingthefollowingexpression:
+[ ( )]
+I = max min I^ (t);I^ (t) (1)
+sev H V
+t0int (cid:0)t1int
+
+--- Page 14 ---
+
+I
+v
+I
+H
+A
+Figure5. Frontviewofanintrusion.Thedashedlineshowstheintrusionpathofanaircraftthroughtheprotectedzoneofanother.
+Here, I^ andI^ arethehorizontalandverticalintrusionsthatarenormalizedwithrespecttothecorresponding
+H V
+minimumseparationrequirements,whilet andt arethestartandendtimesofanintrusion. Usingtheabove
+0int 1int
+relation,theintrusionseverityfortheintrusionpathshowninFigure5isequaltothenormalizedhorizontalintrusion
+atpoint‘A’.
+ThelastsafetymetricisIntrusionPreventionRate(IPR).Asthenamesuggests,thismetricconsiderstheproportion
+ofintrusionsthatweresuccessfullyavoided,andiscomputedasfollows:
+n (cid:0)n
+IPR= cfl int (2)
+n
+cfl
+Here,n andn arethenumberofconflictsandintrusions,respectively.
+cfl int
+2. Efficiency
+The efficiency of the concepts is analyzed using the work done metric. This metric considers the optimality of an
+aircraft’s trajectory, and therefore has a strong correlation with fuel/energy consumption. For each flight, the work
+done,W,iscomputedas:
+∫
+W = T(cid:1)ds (3)
+path
+Here,Tisthethrustvectorandsisthedisplacementvector.
+3. Stability
+Resolvingconflictsmaycausenewconflictsatveryhightrafficdensitiesduetothescarcityofairspace. Thestability
+of the airspace as a direct result of conflict resolution maneuvers has been measured in literature using the Domino
+EffectParameter(DEP)[12,22]. TheDEPcanbevisualizedthroughtheVenndiagrampicturedinFigure6. Here,
+S1isthesetofallconflictswithoutresolutions,andS2isthesetofallconflictswithresolutions,foridenticaltraffic
+scenarios.Furthermore,threeregionscanbeidentifiedinFigure6fromtheunionandrelativecomplementsofthetwo
+sets,withR1=S1nS2,R2=S1[S2andR3=S2nS1.
+
+--- Page 15 ---
+
+Figure6. TheDominoEffectParameter(DEP)comparessimulationswithandwithoutConflictResolution(CR)tomeasureairspace
+stability
+BycomparingthenumberofR1andR3conflicts,theproportionofadditional‘destabilizing’conflictsthatwere
+triggeredbyresolutionmaneuverscanbedetermined. Thus,theDEPisdefinedas[22]:
+R3(cid:0)R1 S2
+DEP = = (cid:0)1 (4)
+S1 S1
+It should be noted that the Tubes concept does not use tactical conflict resolution (expect with rogue aircraft).
+Hence,theDEPhasnomeaningforTubes.
+4. ArrivalSequencing
+Althoughrunwayoccupancywasnotmanagedforlandingtraffic,theeffectofairspacestructureonapproachsequenc-
+ingisexaminedaposterioribyconsideringthetimeintervalbetweensuccessivearrivalsateachdestination. Boththe
+number of arrivals within 60 seconds each other (equaling the CD look-ahead time), and the average time interval
+betweensuccessivearrivals,ateachdestination,hasbeenusedtomeasurearrivalsequencing.
+5. StructuralComplexity
+Complexitymetricsareusedtomeasurethedifficultyofcontrollingagiventrafficsituation. Althoughcomplexityin
+ATMresearchoftenreferstoATCoworkload,theclassofintrinsic,orgeographical,complexitymetrics,whichonly
+considerthetrafficpatternsgeneratedbyanairspaceconcept,ismostappropriateforthisresearch.
+Twoindicatorsareusedtomeasureintrinsiccomplexity. Theproximityindicator,Pr,describesthegeographical
+distribution of aircraft within a specified volume of airspace, enabling the identification of spatial zones with high
+levelsofaggregation,relativetotheconsideredvolume. Ontheotherhand,theconvergenceindicator,Cv,measures
+thegeometricdistributionofaircraftspeedvectorstodistinguishbetweenconverginganddivergingtrafficflows[23].
+Tocomputeintrinsiccomplexity,foreachaircraftunderconsideration,aspatialweightingwindowthatiscentered
+on that aircraft is opened. Then, a complexity metric associated with the reference aircraft is determined by adding
+togethertheproductofthetwoabovecomplexityfactorsforallpairsofaircraftwithinthereferencewindow:
+
+--- Page 16 ---
+
+Cx
+z }|ij {
+∑ p (cid:1)v
+Cx i =(cid:21) (cid:0) ij d ij (cid:1)e (cid:0)(cid:11)d2 ij (5)
+j=Cvij (cid:20)0 | {izj } | {z }
+Cv Pr
+ij ij
+Here,subscriptsiandj representthetwoaircraftconsidered,(cid:11)and(cid:21)areparametersfixedbytheuser,d isthe
+ij
+normalizeddistancebetweenaircraft,andp andv representtherelativepositionandspeedvectors,respectively.
+ij ij
+Although aircraft positions are known accurately within the simulation, in real life operations, there is always
+someuncertaintyregardingthepreciselocationofaircraft. Toensureareliableandrobustcomplexityanalysis, itis
+necessarytotakethiseffectintoaccount. Therefore,thecomplexitymetricshownaboveisextendedbyconsidering
+allpossiblepairsoftrajectorysampleswithinaspatio-temporalwindowthatiscenteredoneachaircraft,i.e.,bytime
+averagingthecomplexitymetricCx fromeq.5overallpairsofsamplesij withinaspecifiedtimeinterval. Finally,
+ij
+the robust complexity for a given traffic situation is calculated as the sum of the robust complexity metrics for all
+aircraftpresentintheairspaceunderevaluation.
+Sincecomplexityisdefinedforaparticulartrafficsituationatagiventimeinstant,foreasiercomparisonofcon-
+cepts,itisnecessarytoaggregatetherobustcomplexitymetric,Cx(t),overthetotalnumberofsamplestakenforeach
+simulationrun,n . Thisisdoneusingastructuralcomplexitymetric,SCx,definedas:
+s
+1
+∑ns
+(cid:3)
+SCx= Cx(t)+(cid:12)maxCx(t); n =maxn (6)
+n(cid:3)
+t s
+s
+t=0
+Here,(cid:12)isaparameterfixedbytheusertorepresenttherelativeimportanceofthemaximumcomplexitycompared
+totheaveragecomplexity,foraparticularsimulationrun. Inthiswork,(cid:12) =0:05wasselected. Itshouldbenotedthat
+nodifferencestothetrendoftheSCxmetricwerefoundfor(cid:12) valuesbetween0:01and0:3. Formoredetailsonthe
+complexitymetricsused,pleasereferto[24].
+6. NoisePollution
+NoisepollutionisanalyzedusingtheLA noisemetric,calculatedas[25]:
+eq
+0 1
+t∫
+sim
+@ 1 LA(t) A
+LA eq =10log 10 t 10 10 dt (7)
+sim
+0
+wheret isequaltoonehour,correspondingtothedurationofthelogginghour,andLA(t)isthetimedependent,
+sim
+A-weighted loudness level on the ground due to all the aircraft in a scenario, in dB(A). The computation of LA(t)
+uses noise-power-distance relations that are similar to those found in environmental noise prediction programs such
+as the Integrated Noise Model (INM) ) [26]. These relations (not shown) were established based on the data that is
+availableforPAVscurrentlybeingdesigned,includingtheMaximumTake-OffWeight(MTOW)andFAAregulations
+
+--- Page 17 ---
+
+governingthemaximumnoisethatisallowedtobegeneratedbytilt-rotoraircraft.
+The footprints of the LA metricare assessed by calculating iso-contour lines at the 68 dB(A) level. Although
+eq
+noiseregulationsintheNetherlandsarebasedonthe48and58dB(A)LoudnessDayEveningNight(LDEN)sound
+levels,norequirementshavebeenspecifiedforthelargeamountofPAVtrafficconsideredinthiswork.Hence,thenext
+level,68dB(A),wasselectedforthecurrentanalysis. Theencapsulatedareaofthiscontourcanbeusedtocompare
+concepts. A larger contour area implies a larger exposure to noise pollution. More details on the noise modeling
+methodusedinthisworkcanbefoundin[27].
+IV. Results
+In this section, the results of the nominal and non-nominal experiments are presented separately. For both ex-
+periments, theeffectoftheindependentvariables(airspaceconceptandtrafficdemand/numberofrogueaircraft)on
+thedependentmeasuresisanalyzedusingerrorbarcharts, displayingthemeanandthe95%confidenceintervalfor
+each simulation condition. As identical scenarios were performed with and without tactical CR, whenever relevant,
+separateerrorbarchartsareusedtoassesstheneedandtheeffectofCRonthefourconcepts. Thesechartsarecreated
+byconsolidatingthedemanddataperconcept.
+A. NominalExperiment
+Morethansixmillionindividualflightsweresimulatedduringthenominalexperiment. Ofthese,datafromapproxi-
+matelythreemillionflightsthatflewduringthelogginghourhavebeenanalyzed.Togainabettersenseontheamount
+oftrafficsimulated,aswellastoexplaintheconsequentimplicationsontheanalysisofthedependentvariables,itis
+firstnecessarytoconsiderthetrafficvolumesanddensitiesthatwereactuallyrealizedduringtheexperiment.
+1. TrafficVolumeandDensity
+Figure7ashowsthetotaltrafficvolumesimulatedduringthelogginghour,persimulationrun,forallconcept-demand
+combinations. Here it can be seen that the traffic volume simulated for the Full Mix, Layers and Zones concepts
+25,000
+20,000
+15,000
+10,000
+5,000
+Full Mix Layers Zones Tubes
+nuR
+reP
+emuloV
+ciffarT
+Low Medium High Ultra
+3.5
+3.0
+2.5
+2.0
+1.5
+1.0
+0.5
+Full Mix Layers Zones Tubes
+a) Totaltrafficvolume
+]2MN/CA[
+ytisneD
+Low Medium High Ultra
+b) Averagetrafficdensity
+Figure7. Meansand95%confidenceintervalsofthetotalnumberofflightsandtheaveragedensitypersimulationrun
+
+--- Page 18 ---
+
+are the same and range from 12,000 aircraft in the Low scenario, to 22,000 aircraft in the Ultra scenario. On the
+otherhand,theTubesconceptisshowntodeviatefromtheotherconceptsforalldemandconditions,eventhoughall
+conceptsweresubjectedtothesamescenarios. Infact,themaximumtrafficvolumeachievedbytheTubesconceptin
+theUltrascenarioislessthantheMediumdemandvolumerealizedbythethreelessstructuredconcepts, indicating
+that demand could not be met by Tubes. This is because the Tubes concept used pre-departure delays and flight
+cancellationswheneverconflictfreeroutescouldnotbefoundatscenariospecifieddeparturetimes. Asotherconcepts
+didnothavetheabilitytodelayorcancelflights,allflightsinthedemandscenariosweresimulated.
+Inadditiontototalvolume,itisalsonecessarytoconsiderthetrafficdensitiesrealizedduringthesimulation,see
+Figure 7b. Here it is clear that traffic density is fairly similar for the Full Mix, Layers and Zones concepts for all
+demandconditions. Conversely,theTubesconceptresultedinthehighesttrafficdensities,despitethelowernumber
+of flights simulated for all demand scenarios (compare Figure 7a with Figure 7b). This paradoxical result can be
+explainedbythefactthataircraftintheTubesconceptwereoftenforcedtouseindirectandlongerrouteswhenthe
+shortestpathbetweenanorigin-destinationpairwascongestedi.e.,notconflictfreepriortodeparture. Thus,average
+distances were much higher for Tubes (see efficiency metrics), causing aircraft to exist for longer durations in the
+experimentvolume,whichinturnresultedinhigherdensitiesthantheotherconcepts.
+These differences in traffic volume and density for the Tubes concept need to be taken into account when con-
+sidering the other dependent variables. Although Figure 7a suggests that Tubes has a lower airspace capacity when
+comparedtotheotherconcepts,itshouldbenotedthatthefiguredoesnotimplythattheotherconceptsareableto,for
+instance,facilitatethehighervolumessafely. Therefore,conclusionswithrespecttocapacityalsodependontheother
+dependentvariablesdiscussedbelow,andcannotbebasedpurelyontheamountoftrafficsimulated. Moreover,when-
+everappropriate,thesemetricsarecomputedrelativetothenumberofflightssimulatedtoallowforafaircomparison
+betweenconcepts.
+2. Safety
+The number of conflicts and intrusions per flight for all simulation conditions are displayed in Figures 8 and 9, re-
+spectively. As expected, the number of conflicts and intrusions increased with traffic demand for all concepts, see
+Figures 8a and 9a. Furthermore, the figures also show that the more structured Zones and Tubes concepts led to
+significantlyhighernumbersofconflictsandintrusionscomparedtothelessstructuredFullMixandLayersconcepts.
+TheeffectoftacticalCRonthenumberofconflictsandintrusionsispicturedinFigures8band9b,respectively.
+Here,theresultswithCRONreflectthesafetyofeachconceptasawhole,whereastheresultswithCROFFshowshow
+wellconceptsareabletopreventconflictsfromoccurring. AsTubesdidnotusetacticalCR,therewerenodifferences
+betweentheONandOFFconditions. Fortheotherthreeconcepts,thenumberofintrusionswasconsiderablyreduced
+withCRON.However,theeffectofCRonthenumberofconflictsdidnotfollowthesametrend. ForFullMixand
+Zones, the number of conflicts increased with CR ON. This was expected, as resolution maneuvers increase flight
+
+--- Page 19 ---
+
+40
+35
+30
+25
+20
+15
+10
+5
+0
+Full Mix Layers Zones Tubes
+thgilF
+reP
+stcilfnoC
+fo
+rebmuN
+Low Medium High Ultra
+18
+16
+14
+12
+10
+8
+6
+4
+2
+0
+Full Mix Layers Zones Tubes
+a) Effectoftrafficdemand(withconflictreso-
+lution)
+thgilF
+reP
+stcilfnoC
+fo
+rebmuN
+CR OFF CR ON
+b) EffectofConflictResolution(CR)
+Figure8. Meansand95%confidenceintervalsofthenumberofconflictsperflight
+1.6
+1.4
+1.2
+1.0
+0.8
+0.6
+0.4
+0.2
+0.0
+Full Mix Layers Zones Tubes
+thgilF
+reP
+snoisurtnI
+fo
+rebmuN
+Low Medium High Ultra
+3.0
+2.5
+2.0
+1.5
+1.0
+0.5
+0.0
+Full Mix Layers Zones Tubes
+a) Effectoftrafficdemand(withconflictreso-
+lution)
+thgilF
+reP
+snoisurtnI
+fo
+rebmuN
+CR OFF CR ON
+b) EffectofConflictResolution(CR)
+Figure9. Meansand95%confidenceintervalsofthenumberofintrusionsperflight
+distancesandtheconsequentprobabilityofencounteringotheraircraft. However,fortheLayersconcept,theopposite
+wasfound,withCRONleadingtoalowernumberofconflicts. Thisunusualresultisfurtheranalyzedusingstability
+metrics.
+It is also worth noting that the Tubes concept, which aimed at de-conflicting flights prior to take-off, resulted in
+a very high number of conflicts and intrusions for all scenarios. This was because the trajectory planning functions
+usedintheTubesconceptdidnottakeuncertainties,suchaswind,intoaccount. Theseuncertaintiescausedaircraftto
+deviatefromtheirplannedflightpathsduringthesimulation,resultinginalargenumberofconflictsduetothetight
+packingoftheTubestopology.AsnotacticalCRwasusedintheTubesconcept,theseconflictsalsoresultedinalarge
+numberofintrusions.
+Tofurtheranalyzetrendsinthenumberofsafetyincidents, therelativevelocitymagnitudesbetweenconflicting
+aircraftiscomputed,seeFigure10. Here,onlyconflictsbetweencruisingaircraft,anddataforsimulationswithCR
+OFF, are used, in order to consider the inherent safety of each concept. From this figure, it is clear that the vertical
+airspacesegmentationusedbytheLayersconceptsignificantlyreducedrelativevelocitiescomparedtotheotherthree
+concepts,explainingthehighsafetyofthisconcept.
+The effect of the independent variables on intrusion severity is pictured in Figure 11. Here it can be seen that
+theZonesconceptresultedinthelowestintrusionseverity, despiteexperiencingthehighestnumberofconflictsand
+
+--- Page 20 ---
+
+240
+220
+200
+180
+160
+140
+120
+100
+80
+60
+Full Mix Layers Zones Tubes
+]stk[
+edutingaM
+yticoleV
+evitaleR
+Low Medium High Ultra
+Figure10. Meansand95%confidenceintervalsoftherelativevelocitymagnitudesbetweenconflictingaircraftincruise(withoutconflict
+resolution)
+0.70
+0.65
+0.60
+0.55
+0.50
+0.45
+0.40
+0.35
+0.30
+Full Mix Layers Zones Tubes
+]-[
+ytireveS
+noisurtnI
+Low Medium High Ultra
+0.70
+0.65
+0.60
+0.55
+0.50
+0.45
+0.40
+0.35
+0.30
+Full Mix Layers Zones Tubes
+a) Effectoftrafficdemand(withconflictreso-
+lution)
+]-[
+ytireveS
+noisurtnI
+CR OFF CR ON
+b) EffectofConflictResolution(CR)
+Figure11. Meansand95%confidenceintervalsoftheintrusionseveritymetric
+100
+95
+90
+85
+80
+Full Mix Layers Zones Tubes
+]%[
+etaR
+noitneverP
+noisurtnI
+Low Medium High Ultra
+100
+90
+80
+70
+60
+50
+40
+Full Mix Layers Zones Tubes
+a) Effectoftrafficdemand(withconflictreso-
+lution)
+]%[
+etaR
+noitneverP
+noisurtnI
+CR OFF CR ON
+b) EffectofConflictResolution(CR)
+Figure12. Meansand95%confidenceintervalsoftheIntrusionPreventionRate(IPR)metric
+intrusions. Furthermore,thefigureshowsthatintrusionseverityisnotsignificantlydependentontrafficdemand. This
+suggests that intrusion severity is more a function of the selected CR algorithm than airspace structure. Due to the
+resolutionmaneuversinitiatedbytheMVPalgorithm,intrusionseveritywasreducedwhenCRwasenabledforFull
+Mix,LayersandZones,seeFigure11b.
+Figure12showstheresultsfortheIntrusionPreventionRate(IPR)metric,whichmeasurestheabilityofaconcept
+to solve conflicts without causing intrusions. For Full Mix, Layers and Zones, Figure 12a shows that IPR increases
+with traffic demand, while the rate of change of the metric appears to decrease with traffic demand and increasing
+airspace structure. This is because the rate of increase of intrusion number with traffic demand is less than that of
+
+--- Page 21 ---
+
+conflictnumber,andthedifferencebetweentheratesofchangeofconflictsandintrusionsdecreaseswithincreasing
+demandandstructure,compareFigures8aand9a.
+Moreinterestingly,Figure12bshowsthatIPRisnon-zeroforallconceptswithCROFF.Theseconflicts,termed
+‘falseconflicts’astheywereresolvedwithoutinterventionfromthetacticalCRalgorithm, werelikelytohavebeen
+caused by the state based CD method used in this work. As this CD implementation relied on linear extrapolation
+of aircraft trajectories to predict conflicts, aircraft, which were turning or climbing/descending to follow concept
+dependent routing requirements, would trigger conflicts if they were momentarily in the projected paths of other
+aircraft. Figure12balsoshowsthatIPRincreasedwithairspacestructureforCROFF,andisthehighestforTubes.
+Thissuggeststhatincreasingtrafficstructuredoesimprovetheproportionofintrusionsthatcanbeavoidedasaresult
+oftheprescribedroutingofthemorestructuredconcepts,eventhoughtheabsolutenumberofconflictsandintrusions
+werefoundtoincreasewithstructureanddemand.
+On the other hand, IPR was found to be very high (greater than 90%) with CR ON for the three concepts that
+usedtacticalCR,seeFigure12b. AlthoughfalseconflictscanalsobeexpectedforCRON,theCPalgorithm,which
+wasalsoactivatedwithtacticalCR,preventedaircraftfromturningintoconflicts,thusavoidingconflictsofthetype
+mentionedfortheCROFFcase. Additionally,thesimilarityofthismetricforFullMix,LayersandZonesindicates
+thattherelativeperformanceoftheMVPCRalgorithmremainsconstant. However,asindicatedabove,theabsolute
+numberofintrusionshasagreaterbearingonthesafetycomparisonbetweenconcepts.
+3. Efficiency
+Efficiency, measured using the work done metric, is shownin Figure13. Here, a positivecorrelation between work
+done,levelofairspacestructureandtrafficdemandcanbeseen. TheFullMixconceptdisplaysthelowestworkdone,
+andiscloselyfollowedbytheLayersconcept. Thedifferencebetweenthesetwoconceptscanbetracedbacktothe
+inefficientaltitudesusedbytheLayersconcept,whereasFullMixusedthemostoptimumhorizontalandverticalflight
+pathstoimproveefficiency. TheTubesconceptledtothehighestworkdone,implyingthataircraftflewsignificantly
+longerdistancesinthisconcept. FortheFullMix,LayersandZonesconcepts,workdonewasfoundtobehigherwith
+350
+300
+250
+200
+150
+Full Mix Layers Zones Tubes
+]JM[
+enoD
+kroW
+Low Medium High Ultra
+350
+300
+250
+200
+150
+Full Mix Layers Zones Tubes
+a) Effectoftrafficdemand(withconflictreso-
+lution)
+]JM[
+enoD
+kroW
+CR OFF CR ON
+b) EffectofConflictResolution(CR)
+Figure13. Meansand95%confidenceintervalsoftheworkdonemetric
+
+--- Page 22 ---
+
+2.0
+1.5
+1.0
+0.5
+0.0
+−0.5
+−1.0
+Full Mix Layers Zones Tubes
+retemaraP
+tceffE
+onimoD
+Low Medium High Ultra
+Figure14. Meansand95%confidenceintervalsoftheDominoEffectParameter(DEP)
+CR ON due to the extra distance flown during tactical CR maneuvers, see Figure 13b. These trends were also seen
+whencomparingthedistancetraveledbetweenconcepts(notshown).Thus,theresultsstronglyindicatethatefficiency
+decreaseswithincreasingairspacestructureanddensity,aswellaswhentacticalCRisused.
+4. Stability
+The stability of the airspace as result a of CR maneuvers is measured using the Domino Effect Parameter (DEP).
+A negative DEP implies a net stabilizing effect of tactical CR whereby conflict chain reactions are outweighed by
+thosethataresolvedwithoutpushingaircraftintosecondaryconflicts,whereasapositivevalueindicatestheopposite,
+withconflictchainreactionscausingairspaceinstability. TheDEPforallconcept-scenariocombinationsispictured
+in Figure 14. Note that the DEP is consistently zero for Tubes as it did not use tactical CR. For the other three
+concepts,theDEPfortheLowdemandscenarioissimilarandnegative. Howeverathigherdemandlevels,theDEP
+increasestopositivevaluesfortheFullMixandZonesconcepts. Thissuggeststhatthemaneuveringroomavailable
+to solve conflicts decreases rapidly with increasing airspace density for these two concepts, making it progressively
+moredifficulttoavoidintrusionswithouttriggeringadditionalconflicts. ThisisparticularlytruefortheZonesconcept
+whichexperiencedaverylargeDEPincreasebetweentheHighandUltrademandscenarios,whileforFullMix,the
+DEPappearstosettleatavalueofapproximately0.5.
+AlthoughtheDEPalsoincreasedwithdemandforLayers,itremainednegativefortherangeofdensitiesconsid-
+eredinthiswork,seeFigure14. ThissuggeststhattheverticalsegmentationoftrafficusedbytheLayersconceptis
+moreabletopreventconflictpropagationfromoccurring,andisbetteratassistingtheMVPCRalgorithminsolving
+the conflicts that do occur by reducing conflict angles and relative velocities between aircraft cruising at the same
+altitude,i.e.,throughthealignmentofneighboringtraffic. Thisresultexplainsthereductioninthenumberofconflicts
+withCRON,notedearlierforLayers(seeFigure8).
+5. ArrivalSequencing
+Thenumberofconsecutivearrivalswithatimeintervalsmallerthan60seconds(equalingtheCDlook-aheadtime),
+per destination, is shown in Figure 15a. This figure shows that the Tubes concept violated the 60 second threshold
+
+--- Page 23 ---
+
+3.0
+2.5
+2.0
+1.5
+1.0
+0.5
+0.0
+Full Mix Layers Zones Tubes
+htiW
+slavirrA
+fo
+rebmuN
+sdnoces
+06
+<
+lavretnI
+Low Medium High Ultra
+900
+800
+700
+600
+500
+400
+300
+200
+100
+Full Mix Layers Zones Tubes
+a) Number of arrivals with an interval less
+than60seconds
+]s[
+lavretnI
+lavirrA
+egarevA
+Low Medium High Ultra
+b) Average arrival interval between consecu-
+tivelandings
+Figure15. Meansand95%confidenceintervalsofthearrivalsequencingbetweenconsecutiveflightsateachdestination(withconflict
+resolution)
+theleast. Thissuggeststhatthetimebasedseparationusedtoseparatetrafficinthepredefinedtubestopologyalmost
+alwaysensuredadequateseparationattherunway. Thisisbecauseallaircraftusedthesamedescentratesbelowthe
+experiment volume. Hence a runway conflict could only occur only if two or more aircraft attempted to land at the
+samerunwayatthesametimefromdifferentnodesinthetopology(ascenariowithalowprobabilitygiventhereduced
+trafficvolumeaccommodatedbyTubes).Theotherthreeconcepts,however,resultedinupto2.6aircraftarrivingwith
+insufficient spacing at the runway for the Ultra demand scenario. Although this is partly due to the higher traffic
+volumes handled by these concepts, this result shows that some form of arrival metering may be necessary for Full
+Mix,LayersandZones.But,astheaveragearrivalintervalbetweenaircraftisalwaysgreaterthan300secondsforthese
+threeconcepts,seeFigure15b,arrivalsequencingcanlikelybemanagedbyvaryingthespeedsofconflictingaircraft
+during the final descent. Given the high average arrival intervals for all concepts, the different ways of structuring
+en-routeairspacearenotexpectedadverselyimpactarrivalprocedures.
+6. StructuralComplexity
+Figure16displaystheresultsfortheStructuralComplexity(SCx)metric,normalizedwithrespecttothetotalnumber
+offlightssimulatedperconcept. Here,highvaluescorrespondstotrafficsituationsthataremoredifficulttocontrol,
+andthosethataremoresensitivetouncertainties.Figure16ashowsthatSCxfollowedasimilartrendtothenumberof
+conflictsandintrusions,withacleardistinctionbetweenthetwolessstructuredconcepts,whichdisplayalineargrowth
+ofSCxwithdemand,whencomparedtothetwomorestructuredconcepts,whichresultedinaquadraticincreaseof
+SCxwithdemand. Thisstronglysuggeststhatlittlestructuringofairspace,asusedbyFullMixandLayers,results
+intrafficpatternsthatareeasiertocontrolthanthoseproducedbythepredeterminedroutesoftheZonesandTubes
+concepts.
+The pre-plannedroutes usedby the Tubesconcept wereexpectedto resultin thelowestcomplexity. Infact, the
+absoluteSCxvalueswerethelowestforTubes. However,whentheresultswerenormalized,thecontributionofeach
+flighttoSCxwasfoundtobemuchhigherforTubesthanfortheotherconcepts. ThehighcomplexityoftheZones
+
+--- Page 24 ---
+
+10
+8
+6
+4
+2
+0
+Full Mix Layers Zones Tubes
+larutcurtS
+dezilamroN
+ytixelpmoC
+Low Medium High Ultra
+10
+8
+6
+4
+2
+0
+Full Mix Layers Zones Tubes
+a) Effectoftrafficdemand(withconflictreso-
+lution)
+larutcurtS
+dezilamroN
+ytixelpmoC
+CR OFF CR ON
+b) EffectofConflictResolution(CR)
+Figure16. Meansand95%confidenceintervalsofthenormalizedStructuralComplexity(SCx)metric
+1.4
+1.2
+1.0
+0.8
+0.6
+0.4
+0.2
+0.0
+Full Mix Layers Zones Tubes
+lareneG
+dezilamroN
+ytixelpmoC
+CR OFF CR ON
+Figure17. Meansand95%confidenceintervalsoftheeffectofConflictResolution(CR)onthenormalizedgeneralcomplexitymetric
+conceptcanbetracedtotrafficconvergenceattheintersectionsbetweenringandradialzones.
+As expected, no differences in SCx between CR ON and CR OFF were found for the Tubes concept, see Fig-
+ure 16b. However, the overlapping error-bars for the Full Mix, Layers and Zones concepts indicate that SCx was
+not significantly affected by CR maneuvers. This result can be explained by the fact that the computation of the
+SCxmetricconsidersallpossibletrajectoryrealizations/evolutionsbetweenaircraftpairswithinapredefinedspatio-
+temporalwindow,negatingtheeffectofthespecificresolutionmaneuversusedtoavoidintrusions. Therefore,itcan
+beconcludedthattheSCxmetricisnotsuitabletoanalyzetheeffectofCRmaneuversonintrinsiccomplexity.
+TogainmoreinsightontheeffectofCRoncomplexity,theinfluenceofCRmaneuversonthegeneralcomplexity
+metric,describedbyeq.5,isdisplayedinFigure17. Here,itcanbeseenthatCRONreducedthegeneralcomplexity
+metricfortheFullMix,LayersandZonesconcepts,indicatingthatCRimprovesthecontrollabilityofagiventraffic
+situation,asexpected.
+7. NoisePollution
+NoisefootprintsforallfourconceptsaredisplayedinFigure18. Thisfigurewascreatedusingdatafromasimulation
+for the ‘Ultimate’ demand volume and with a converging demand pattern, see Section III.B.2. Figures 18a and 18b
+showthatFullMixandLayersresultedinverysimilarnoiseloadsontheground,consistingofahighintensitynoise
+
+--- Page 25 ---
+
+a) FullMix b) Layers
+c) Zones d) Tubes
+Figure18. Noisefootprintsforan‘Ultimate’demandscenariowithaconvergingtrafficdemandpattern
+1600
+1400
+1200
+1000
+800
+600
+400
+200
+0
+Full Mix Layers Zones Tubes
+]2MN[
+86QEAL
+Low Medium High Ultra
+800
+700
+600
+500
+400
+300
+200
+100
+Full Mix Layers Zones Tubes
+a) Effectoftrafficdemand(withconflictreso-
+lution)
+]2MN[
+86QEAL
+CR OFF CR ON
+b) EffectofConflictResolution(CR)
+Figure19. Meansand95%confidenceintervalsoftheareaencapsulatedbytheLAeqnoisemetricforiso-contourlinesat68dB
+loadatthemainconvergencepointatthebottomofthesimulationarea, thatdecayedwithincreasingdistancefrom
+thatpoint. Incontrast,theZonesandTubesconceptsresultedinfootprintsthatclearlydepictsthestructuringoftraffic
+usedbythesetwoconcepts. FortheZonesconcept,Figure18cshowshighernoiselevelsalongthegroundprojections
+ofthepredefinedringandradialzones. ThissuggeststhattheZonesconceptmayallowforeasiermitigationofnoise
+pollutionbydefiningitstopologyalonglessinhabitedareas.
+TheTubesconceptisshowntohavedistributedsoundevenlyduetoitsgrid-likestructure, seeFigure18d. Fur-
+thermore, Tubes appears to have caused the lowest noise impact on the ground and was the only concept without a
+highintensitynoiseloadattheconvergencepoint. However,thesetrendsarerelatedtothelowertrafficvolumethat
+couldbeaccommodatedbytheTubesconcept,seeFigure7a. Unliketheothermetricsdiscussedabove,alinearnor-
+
+--- Page 26 ---
+
+malizationwithrespecttothetotalnumberofflightscouldnotbeusedasnoiseismeasuredindB,alogarithmicunit.
+ThiscomplicatesadirectcomparisonwiththeTubesconceptinrelationtonoisepollution.
+Inadditiontothenoisefootprintsdiscussedabove,theLAeqmetricisusedtoquantitativelystudythenoiseimpact
+bycomputingtheareaencapsulatedbyiso-contourlinesatthe68dB(A)level. Figure19ashowsthatnoisepollution
+at68dB(A)isquitesimilarforFullMix,LayersandZones. Ontheotherhand,theTubesconcept,whichcausedthe
+lowesttotalnoiseimpactontheground,ledtothelargestareaatthe68dB(A)levelforthehigherdemandscenarios.
+ThissuggeststhatthetotalnoiseonthegroundwouldhavebeenthehighestfortheTubesconcepthaditbeenableto
+meettherequiredtrafficdemand. Asexpected,CRONledtoaslightlyhighernoiseimpactfortheFullMix,Layers
+andZonesconcepts,seeFigure19b,asresolutionmaneuversincreasedflightdistancesforthesethreeconcepts.
+B. Non-NominalExperiment
+Asstatedearlier,thepurposeofthenon-nominalexperimentistocomparetherelativerobustnessofthefourairspace
+conceptswhensubjectedtoincreasingnumbersofrogueaircraft. Sincerogueaircraftprimarilyaffectsafetymetrics,
+thefollowingparagraphsdiscussthenumberofconflictsandintrusionsbetweenrogueand2.7millionnormalaircraft
+thatwereloggedduringthisexperiment.
+Figures 20 and 21 display the number of conflicts and intrusions per flight with rouge aircraft alone, i.e., only
+safety incidents between normal and rouge aircraft were counted for these two figures. Here it can be seen that
+increasingthenumberofrogueaircraftalsoincreasesthenumberofconflictsandintrusionsforallconcepts. Further
+analysis indicated that the nonlinear increase in the number of rogue aircraft only led to a linear increase in the
+numberofconflictsandintrusionsforallconcepts,suggestingthatallconceptsaremorerobustthaninitiallyexpected.
+Nonetheless, Figures 20a and 21a showthatthe safety ofthe Tubesconcept is considerablymore affectedby rouge
+aircraftthanitisfortheFullMix,LayersandZonesconcepts.
+As the trajectories of rogue aircraft were not known in advance, aircraft in the Tubes concept used the MVP
+CR algorithm to avoid intrusions with rogue aircraft alone. Since the tube topology specifies both the horizontal
+and vertical flight profiles, only speed resolution maneuvers were possible. Figures 20b and 21b shows that these
+0.7
+0.6
+0.5
+0.4
+0.3
+0.2
+0.1
+0.0
+Full Mix Layers Zones Tubes
+thgilF
+reP
+stcilfnoC
+fo
+rebmuN
+tfarcriA
+eugoR
+htiW
+4 Rogue 8 Rogue 16 Rogue 32 Rogue
+0.5
+0.4
+0.3
+0.2
+0.1
+0.0
+Full Mix Layers Zones Tubes
+a) Effect of number of rogue aircraft (with
+conflictresolution)
+thgilF
+reP
+stcilfnoC
+fo
+rebmuN
+tfarcriA
+eugoR
+htiW
+CR OFF CR ON
+b) EffectofConflictResolution(CR)
+Figure20. Meansand95%confidenceintervalsofthenumberofconflictsperflightwithrogueaircraftalone
+
+--- Page 27 ---
+
+0.06
+0.05
+0.04
+0.03
+0.02
+0.01
+0.00
+Full Mix Layers Zones Tubes
+thgilF
+reP
+snoisurtnI
+fo
+rebmuN
+tfarcriA
+eugoR
+htiW
+4 Rogue 8 Rogue 16 Rogue 32 Rogue
+0.20
+0.15
+0.10
+0.05
+0.00
+Full Mix Layers Zones Tubes
+a) Effect of number of rogue aircraft (with
+conflictresolution)
+thgilF
+reP
+snoisurtnI
+fo
+rebmuN
+tfarcriA
+eugoR
+htiW
+CR OFF CR ON
+b) EffectofConflictResolution(CR)
+Figure21. Meansand95%confidenceintervalsofthenumberofintrusionsperflightwithrogueaircraftalone
+0.9
+0.8
+0.7
+0.6
+0.5
+0.4
+0.3
+0.2
+0.1
+0.0
+Full Mix Layers Zones Tubes
+thgilF
+reP
+snoisurtnI
+fo
+rebmuN
+4 Rogue 8 Rogue 16 Rogue 32 Rogue
+Figure22. Meansand95%confidenceintervalsofthetotalnumberofintrusionsperflightforthenon-nominalexperiment(withconflict
+resolution)
+resolutionsdidreducethenumberofconflictsandintrusionswithrogueaircraftforTubes. Asexpected,CRONalso
+improvedthesafetyoftheotherthreeconceptsagainstrogueaircraft.
+The above result may suggest that tactical CR can be used to complement the safety of the pre-planned Tubes
+concept. However, closer inspection of the simulation data indicated that CR maneuvers made it more difficult for
+conflict resolving (normal) aircraft to meet the specified Required Time of Arrival (RTA) at waypoints along pre-
+plannedroutes. Thisinturnresultedinadditionalintrusionsbetweennormalaircraft,thatwereavoidedwhenrogue
+aircraftwerenot includedinthe simulations. Infact, the resultingbreak-downofthepre-planned routescausedthe
+highesttotalnumberofintrusionsperflightfortheTubesconcept,whileforthethreelessstructuredconcepts,thetotal
+numberofintrusionswasnotaffectedbythenumberofrogueaircraft,seeFigure22. Thereforethesimpleaddition
+of tactical CR is not guaranteed to improve the robustness of the Tubes concept. To improve robustness and safety,
+largermarginscouldbeappliedtotimeconstraintsatwaypointsalongaroute. However,thiswouldfurtherdecrease
+theefficiencyoftheTubesconcept,seeFigure13a.
+V. Discussion
+Inthispaper,fouren-routeairspaceconceptsofincreasingstructure,namedFullMix,Layers,ZonesandTubes,
+were compared using two fast-time simulation experiments that involved over eleven million flights. These simula-
+tionsfocusedonthedegreeofstructuringneededtomaximizecapacityfordecentralizedseparation,andinvestigated
+
+--- Page 28 ---
+
+whethertheoptimalmodeofstructuringdependedontrafficdensity. Thesimulationsalsostudiedtherobustnessof
+thedifferentstructuringmethodstonon-nominalevents. Here,capacitywasinferredfromtheeffectofmultipletraffic
+demandscenariosonsafety,efficiency,stability,arrivalsequencing,structuralcomplexityandnoisepollutionmetrics,
+whilerobustnesswasassessedfromtheinfluenceofincreasingnumbersofrogueaircraftonsafetymetrics.
+Asindicatedpreviously,thegoalofthisworkisnottoproposeanoperationallyreadyairspacedesign,buttofocus
+onhowthelevelofstructuringaffectsairspacecapacityfordecentralization. Inrelationtothisspecificgoal,andcon-
+sideringtheresultsofallmetricsinunison,itcanbeconcludedthatsomelimitedstructureintheverticaldimension,
+as demonstrated by the Layers concept, can be beneficial in terms of capacity. This is because traffic demand, in
+additiontovaryingintime,displaysnopredominantpatternsinthehorizontaldimensionfordecentralization. There-
+fore,astricthorizontalstructuringofairspacecancauseamismatchbetweentheimposedstructureandthedemand
+pattern, as for the Zones and Tubes concepts. This in turn caused artificial bottlenecks at the intersection points of
+theirpredefinedtopologies,reducingoverallperformance. Ontheotherhand,theverticalairspacesegmentationused
+by the Layers concept dispersed traffic vertically, and grouped traffic by similarity of travel direction. This reduced
+thechanceofconflictsbyloweringrelativevelocitiesbetweencruisingaircraftwhencomparedtothecompletelyun-
+structuredFullMixconcept,withoutundulyaffectingefficiency,structuralcomplexityornoisepollutionmetrics,as
+directhorizontalrouteswerestillpossiblewithLayers. Theseconclusionswerenotexpectedaspreviousresearchhad
+focusedprimarilyoneitherfullystructuredorfullyunstructuredairspacedesigns.
+For the range of densities considered in this work, the results of the nominal simulations also indicate that the
+optimummethodofstructuringisindependentoftrafficdensity. Infact,theresultsshowacleardistinctionbetween
+thetwolessstructuredandthetwomorestructuredconcepts;whileperformancedegradedwithincreasingdensityfor
+all concepts, it did so at a much higher rate for Zones and Tubes. In particular, the safety of the Zones and Tubes
+conceptsdeterioratedrapidlyforthehigherdensities,indicatingthattheairspacehadbecomesaturatedforthesetwo
+highly structured concepts. When considering the fact that route planning was more computationally intensive for
+ZonesandTubes,theadditionalconstraintsimposedontrafficbythesetwoconceptsdidnottranslateintobenefitsin
+termsofcapacity.
+The clear distinction between the two more and two less structured concepts was not, however, found for the
+results of the non-nominal simulations. In that experiment, the safety of the Full Mix, Layers and Zones concepts
+wasnotsignificantlyaffectedbyrogueaircraft. Thissuggeststhattacticalconflictresolution,whichwasusednatively
+by these three concepts to resolve conflicts between nominal aircraft, could also effectively compensate for non-
+cooperative aircraft, without adversely affecting capacity. This was not the case for the Tubes concept. Here, the
+uncertaintiescausedbyrogueaircraftmadeitdifficultfornominalaircrafttoadheretotimeconstraintsatwaypoints
+alongaroute.Theresultingbreakdownofthepre-plannedspace-timeroutesusedbyTubestoseparateaircraftcaused
+a large number of unintended conflicts and intrusions. The performance of Tubes wasalso affected by wind for the
+samereason. Whileallconceptswerenegativelyinfluencedbyuncertainties,thecurrentresultsshowthatthesafety
+
+--- Page 29 ---
+
+of highly structured and planned airspace concepts is particularly vulnerable to variations between the intended and
+actualflighttrajectories.
+Formanymetrics,theFullMixandLayersconceptsexhibitedverysimilarbehavior. Thesimilaritybetweenthese
+two concepts was highlighted by their noise footprints, which were indistinguishable. The only difference between
+thesetwoconceptsisthemethodofaltitudeselection;aircraftinFullMixusedthemostfuel-efficientaltitude,while
+for Layers, altitude was dependent on the direction to the destination. Therefore, Full Mix was expected, and was
+alsofound,tobeslightlymoreenergyefficient. However,thesimilarityinefficiencybetweenthesetwoconceptsmay
+bearesultoftheshortcruisingdistancesusedinthiswork, andlongerdistancesmayfurtherincreasetheefficiency
+differencesbetweenFullMixandLayers.
+AlthoughtheverticalstructuringusedbyLayersreducedefficiencyrelativetotheunstructuredFullMixconcept,
+itledtothehigheststabilityofallfourstructuringoptions. ThishighstabilitywasreflectedbythenegativeDomino
+EffectParameter(DEP)valuesloggedforalldensitiesintheLayersconcept. AnegativeDEPindicatesareduction
+inthenumberconflictswhenthetacticalConflictResolution(CR)algorithmisenabled,eventhoughCRmaneuvers
+increaseflightdistancesand,correspondingly,theprobabilityofencounteringotheraircraft. Itishypothesizedthata
+negativeDEPiscausedbythealignmentofneighboringtraffic,andtheconsequentreductionofrelativevelocitiesthat
+aidsCRperformance,abehaviorthatisfurtheramplifiedbythelimitedheadingrangesavailabletocruisingaircraft
+in the Layers concept. Although negative DEPs were also found for Full Mix and Zones at low demand levels, at
+higher densities, these modes of structuring transitioned to positive DEP vales, indicating a greater degradation of
+airspace stability with density. Hence, the stability analysis indicates that the altitude constraints utilized by Layers
+canaccommodateevenhigherdensitiesthanwhatwasconsideredinthiswork,withoutsignificantlyreducingsafety
+orefficiency. Thisreiteratesthenotionthatalimiteddegreeofverticalstructuringcanbebeneficialforthecapacity
+androbustnessofdecentralizedairspace.
+Itshouldbenotedthattheresultsofthisstudyare,tosomedegree,sensitivetothespecificparametersettingsse-
+lectedfortheconcepts.However,giventhemagnitudeofthedifferencesinalloftheresults,aswellastheconsistency
+between results, it is unlikely that the overall trends are affected by different settings; capacity for decentralization
+was found to improve when structural constraints did not affect the horizontal path of aircraft. This conclusion is
+mostapplicablefortrafficscenarioswithoutanydistincthorizontalpatterns. Fortrafficdemandcaseswithdiscernible
+horizontalpatterns,suchasforcurrenthub-and-spokeoperations,airspaceconceptsthatpermitflexibleroutinginthe
+horizontaldirectionarealsoexpectedtoperformwell,assuchstructuringwouldnotconflictwithanydemandpattern.
+Nonetheless,itmaybepossibletotailorthetopologiesofmorestructuredconceptstomatchsuchscenarios.
+
+--- Page 30 ---
+
+VI. Conclusions
+Thisworkinvestigatedthedegreeofstructuringneededtomaximizecapacityfordecentralizeden-routeairspace.
+Tothisend,fourdecentralizeden-routeairspaceconceptsofincreasingstructurewerecomparedusingfast-timesim-
+ulations. Forthestudieddensities,thefollowingconclusionscanbedrawn:
+• Capacity benefits when the horizontal path of aircraft is not over-constrained. This is because traffic demand
+displaysnopredominantpatternsinthehorizontaldimension,fordecentralization.
+• Capacity is maximized when vertical constraints are used to separate traffic with different travel directions at
+different flight levels. This mode of structuring improved performance over completely unstructured airspace
+bydecreasingrelativevelocitiesbetweenaircraftcruisingatthesamealtitude,whileallowingdirecthorizontal
+routes. Thereducedrelativevelocitiesalsoincreasedthestabilityoftheairspacetotacticalconflictresolutions.
+• Conversely, structuringmodesthatimposedhorizontalconstraintscausedaconvergenceoftrafficattheinter-
+sectionsofstructuralelements. Thesetrafficconcentrationsreducedoverallperformanceforsuchconcepts.
+• Theoptimummethodofstructuringwasfoundtobeindependentofdensity. Capacitygenerallybenefitedfrom
+areductionofstructuralconstraints.
+• Robustnesstouncertaintiesissignificantlyreducedwhendecentralizationusingtimebasedseparationiscom-
+binedwithapredefinedandfixedthreedimensionalroutestructure.
+Acknowledgments
+This research received funding from the Seventh Framework Programme of the European Commission under
+grantnumber341508(Metropolis). TheauthorswouldliketothankPimvanLeeuwen(NLR)forassistingwiththe
+design of the Tubes concept, Roalt Aalmoes (NLR) for his work on metrics definition, Oliver Schneider and Stefan
+Kern(DLR)fortheireffortstowardsthedesignoftheLayersconcept,DanielDelhaye(ENAC)forhisinsightsonair
+trafficcomplexitymeasurement,GeorgesMykoniatis(ENAC)forhelpingwithprojectmanagementtasksandMarieke
+Suijkerbuijk(NLR)foraidingwithsimulationimplementationtasks.
+References
+[1] Lee, P. U., Mercer, J., Gore, B., Smith, N., Lee, K., and Hoffman, R., “Examining airspace structural components and
+configuration practices for dynamic airspace configuration,” AIAA Guidance, Navigation, and Control Conference, AIAA-
+2008-7228,2008,pp.18–21.
+[2] Doble,N.A.,Hoffman,R.,Lee,P.U.,Mercer,J.,Gore,B.,Smith,N.,andLee,K.,“Currentairspaceconfigurationpractices
+andtheirimplicationsforfutureairspaceconcepts,”AIAAAviationTechnology,IntegrationandOperations(ATIO)Confer-
+ence,AIAA-2008-8936,Anchorage,2008.
+
+--- Page 31 ---
+
+[3] Nolan,M.,FundamentalsofAirTrafficControl,Chapter1HistoryofATC,DelmarCengageLearning,5thed.,2010.
+[4] Magill,S.A.N.,“EffectofDirectRoutingonATCCapacity,”USA/EuropeAirTrafficManagementR&DSeminar,Orlando,
+1998.
+[5] Eby,M.S.,“ASelf-OrganizationalApproachforResolvingAirTrafficConflicts,”LincolnLaboratoryJournal,Vol.7,No.2,
+1994,pp.239–254.
+[6] Hoekstra,J.M.,vanGent,R.N.H.W.,andRuigrok,R.C.J.,“Designingforsafety: thefreeflightairtrafficmanagement
+concept,”ReliabilityEngineering&SystemSafety,Vol.75,No.2,Feb.2002,pp.215–232.
+[7] Dell’Olmo,P.andLulli,G.,“AnewhierarchicalarchitectureforAirTrafficManagement:Optimisationofairwaycapacityin
+aFreeFlightscenario,”EuropeanJournalofOperationalResearch,Vol.144,No.1,Jan.2003,pp.179–193.
+[8] SESARConsortium,“TheConceptofOperationsataglance,”Tech.rep.,SingleEuropeanSky,2007.
+[9] JointPlanningandDevelopmentOffice,“ConceptofoperationsfortheNextGenerationAirTransportationSystem,”Tech.
+rep.,FAA,June2007.
+[10] Kuchar,J.K.andYang,L.C.,“AReviewofConflictDetectionandResolutionModelingMethods,”IEEETransactionson
+IntelligentTransportationSystems,Vol.1,2000,pp.179–189.
+[11] Ballin,M.,Hoekstra,J.,Wing,D.,andLohr,G.,“NASALangleyandNLRResearchofDistributedAir/GroundTrafficMan-
+agement,”AIAAAircraftTechnology,Integration,andOperations(ATIO)Conference,AIAA-2002-5826,AmericanInstitute
+ofAeronauticsandAstronautics,2002.
+[12] Krozel,J.,Peters,M.,Bilimoria,K.,Lee,C.,andMitchell,J.,“Systemperformancecharacteristicsofcentralizedanddecen-
+tralizedairtrafficseparationstrategies,”USA/EuropeAirTrafficManagementR&DSeminar,2001.
+[13] Klooster, J., Torres, S., Earman, D., Castillo-Effen, M., Subbu, R., Kammer, L., Chan, D., andTomlinson, T., “Trajectory
+synchronizationandnegotiationinTrajectoryBasedOperations,”IEEE/AIAADigitalAvionicsSystemsConference(DASC),
+2010,pp.1.A.3–1–1.A.3–11.
+[14] Prevot, T., Battiste, V., Palmer, E., and Shelden, S., “Air traffic concept utilizing 4D trajectories and airborne separation
+assistance,”AIAAGuidance,Navigation,andControlConference,AIAA-2003-5770,2003.
+[15] Wichman,K.,Lindberg,L.,Kilchert,L.,andBleeker,O.,“Four-Dimensionaltrajectorybasedairtrafficmanagement,”AIAA
+Guidance,Navigation,andControlConference,AIAA-2004-5413,2004,p.11.
+[16] InternationalCivilAviationOrganization,“Annex2,RulesoftheAir,”Tech.rep.,July2005.
+[17] Bussink, F., Hoekstra, J., andHeesbeen, B., “Trafficmanager: aflexibledesktopsimulationtoolenablingfutureATMre-
+search,”IEEEDigitalAvionicsSystemsConference(DASC),Vol.1,IEEE,2005,pp.3.B.4–31–10.
+[18] Nuic,A.,Poles,D.,andMouillet,V.,“BADA:AnadvancedaircraftperformancemodelforpresentandfutureATMsystems,”
+InternationalJournalofAdaptiveControlandSignalProcessing,Vol.24,No.10,2010,pp.850–866.
+[19] Hart, P., Nilsson, N., and Raphael, B., “A Formal Basis for the Heuristic Determination of Minimum Cost Paths,” IEEE
+TransactionsonSystemsScienceandCybernetics,Vol.4,No.2,July1968,pp.100–107.
+
+--- Page 32 ---
+
+[20] Hoekstra,J.M.,Designingforsafety: thefreeflightairtrafficmanagementconcept,PhDDissertation,DelftUniversityof
+Technology,Delft,Nov.2001.
+[21] Sunil,E.,Hoekstra,J.,Ellerbroek,J.,Bussink,F.,Nieuwenhuisen,D.,Vidosavljevic,A.,andKern,S.,“Metropolis:Relating
+AirspaceStructureandCapacityforExtremeTrafficDensities,”USA/EuropeAirTrafficManagementR&DSeminar,Lisbon,
+2015.
+[22] Bilimoria,K.,Sheth,K.,Lee,H.,andGrabbe,S.,“Performanceevaluationofairborneseparationassuranceforfreeflight,”
+AIAAGuidance,NavigationandControlConference,AIAA-2000-4269,2000.
+[23] Delahaye,D.andPuechmorel,S.,“Airtrafficcomplexity: towardsintrinsicmetrics,”USA/EuropeAirTrafficManagement
+R&DSeminar,2000.
+[24] Vidosavljevic,A.,Delahaye,D.,Sunil,E.,Bussink,F.,andHoekstra,J.M.,“ComplexityAnalysisoftheConceptsofUrban
+AirspaceDesignforMetropolisProject,”ENRIInternationalWorkshoponATM/CNS,2015.
+[25] Ruijgrok,G.J.,ElementsofAviationAcoustics,Chapter9NoiseMeasures,DelftUniversityPress,2004.
+[26] Boeker,E.R.,Dinges,E.,He,B.,Fleming,G.,Roof,C.J.,Gerbi,P.J.,Rapoza,A.S.,andHemann,J.,“IntegratedNoise
+Model(INM)Version7.0,”Tech.Rep.FAA-AEE-08-01,Jan.2008.
+[27] Arntzen,M.,Aalmoes,R.,Bussink,F.,Sunil,E.,andHoekstra,J.M.,“Noisecomputationforfutureurbanairtrafficsystems,”
+Inter-NoiseCongress:ImplementingNoiseControlTechnology,2015.

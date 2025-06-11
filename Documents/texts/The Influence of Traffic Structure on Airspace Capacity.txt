@@ -1,0 +1,541 @@
+
+
+--- Page 1 ---
+
+The Influence of Traﬀic Structure on Airspace Capacity
+Emmanuel Sunil, Jacco Hoekstra, Joost Ellerbroek, Frank Bussink, Andrija
+Vidosavljevic, Daniel Delahaye, Roalt Aalmoes
+To cite this version:
+Emmanuel Sunil, Jacco Hoekstra, Joost Ellerbroek, Frank Bussink, Andrija Vidosavljevic, et al.. The
+Influence of Traﬀic Structure on Airspace Capacity. ICRAT 2016, 7th International Conference on
+Research in Air Transportation, Jun 2016, Philadelphia, United States. ￿hal-01333624￿
+HAL Id: hal-01333624
+https://enac.hal.science/hal-01333624v1
+Submitted on 17 Jun 2016
+HAL is a multi-disciplinary open access L’archive ouverte pluridisciplinaire HAL, est
+archive for the deposit and dissemination of sci- destinée au dépôt et à la diffusion de documents
+entific research documents, whether they are pub- scientifiques de niveau recherche, publiés ou non,
+lished or not. The documents may come from émanant des établissements d’enseignement et de
+teaching and research institutions in France or recherche français ou étrangers, des laboratoires
+abroad, or from public or private research centers. publics ou privés.
+
+--- Page 2 ---
+
+The Influence of Traffic Structure on
+Airspace Capacity
+Emmanuel Sunil1, Jacco Hoekstra1, Joost Ellerbroek1, Frank Bussink2,
+Andrija Vidosavljevic3, Daniel Delhaye3 and Roalt Aalmoes4
+1Control and Simulation, Faculty of Aerospace Engineering, TU Delft, Delft, The Netherlands
+2Cockpit and Flight Operations, National Aerospace Laboratory (NLR), Amsterdam, The Netherlands
+3Laboratory of Applied Mathematics, Ecole Nationale de l’Aviation Civile (ENAC), Toulouse, France
+4Air Transport Environment, National Aerospace Laboratory (NLR), Amsterdam, The Netherlands
+Abstract—Airspace structure can be used as a procedural Free-Flight researchers, for instance, advocate that higher
+mechanism for a priori separation and organization of en-route densities can be achieved through a reduction of traffic flow
+air traffic. Although many studies have explored novel constraints and structure [5]–[7], whereas other studies argue
+structuring methods to increase en-route airspace capacity, the that capacity would benefit more from a further structuring of
+relationship between the level of structuring of traffic and airspace [8], [9]. This dichotomy suggests that airspace
+airspace capacity is not well established. To better understand structure and capacity are invariably tied together. The
+the influence of traffic structure on airspace capacity, in this relationship between these two variables, however, is not well
+research, four airspace concepts, representing discrete points understood, i.e., does more or less structuring lead to higher
+along the dimension of structure, were compared using large- capacity? Or, is there a transition point, where a further
+scale simulation experiments. By subjecting the concepts to increase in capacity will require a switch from one approach
+multiple traffic demand scenarios, the structure-capacity to the other?
+relationship was inferred from the effect of traffic demand
+variations on safety, efficiency and stability metrics. These To answer these questions, in this work, the impact of
+simulations were performed within the context of a future airspace structure on capacity is investigated as part of the
+personal aerial transportation system, and considered both Metropolis project, a research initiative funded through the
+nominal and non-nominal conditions. Simulation results suggest Seventh Framework Programme of the European
+that the structuring of traffic must take into account the expected Commission. To this end, four airspace concepts, ranging
+traffic demand pattern to be beneficial in terms of capacity. from a decentralized direct routing concept, to a highly
+Furthermore, for the heterogeneous, or uniformly distributed, structured tube network using 4D trajectory-based operations,
+traffic demand patterns considered in this work, a decentralized are compared using large-scale simulation experiments. The
+layered airspace concept, in which each altitude band limited analysis is performed within the context of a futuristic
+horizontal travel to within a predefined heading range, led to the personal air transportation system, to enable exploration of
+best balance of all the metrics considered. extreme traffic densities that would be impossible to achieve
+in the current operational context. The goal of the simulations
+Keywords – airspace structure; airspace capacity; en-route
+is not to arrive at precise capacity estimations for the four
+airspace design; air traffic control; air transportation system
+performance concepts, but rather to consider how the level of structuring
+affects capacity. Therefore, the concepts are subjected to
+multiple traffic scenarios with heterogeneous demand
+I. INTRODUCTION
+patterns, and a relative capacity ranking is performed by
+The current en-route airspace design is centred around measuring how safety, efficiency and stability metrics vary
+predefined airways, sectors and ground-based Air Traffic with traffic demand. By including rogue aircraft that ignore
+Controllers (ATCo) [1]. Although enhancements to air traffic concept dependent routing requirements in selected simulation
+systems and procedures have led to incremental capacity scenarios, the robustness of the concepts to non-nominal
+improvements, the current centralized system architecture has conditions is also investigated in this study.
+been widely reported to be nearing saturation levels [2]–[4].
+To keep pace with the ever growing demand for air This paper begins with descriptions of the four airspace
+transportation, it is necessary to investigate novel methods of concepts used to empirically relate airspace structure and
+organizing and structuring traffic to increase en-route airspace capacity in section II. This is followed in section III with the
+capacity. However, a fundamental relationship between the setup of two simulation experiments used to compare the
+level of structuring of traffic and resulting properties, such as concepts. The results of the experiments are presented and
+efficiency and safety, is not well established, and different discussed in sections IV and V respectively. Finally the main
+studies in this field report seemingly contradictory findings. conclusions are summarized in section VI.
+This research received funding from the Seventh Framework Programme of
+the European Commission under grant number 341508 (Metropolis)
+
+--- Page 3 ---
+
+II. AIRSPACE CONCEPTS
+To empirically study the structure-capacity relationship,
+four en-route airspace concepts of increasing structure, named
+Full Mix, Layers, Zones and Tubes, have been defined. This
+section describes the conceptual design of the four concepts.
+A. Full Mix
+The Full Mix airspace concept can be most aptly described
+as ‘unstructured airspace’. As demand is often unstructured,
+the Full Mix concept assumes that any structuring of traffic
+decreases overall system efficiency, and that safety is actually
+improved by the spreading of traffic over the available Figure 2: Top down view of the Zones topology. Given the personal air
+airspace. Therefore aircraft in the Full Mix concept use direct transportation scenario used in this work, the Zone concept is designed to
+horizontal routes, as well as optimum altitudes and velocities, take into account the layout of a modern city.
+to minimize fuel usage and other related trip costs.
+heading while climbing or descending to their destination
+In Full Mix, traffic separation responsibility is altitude.
+decentralized to each individual aircraft. As no level of
+Figure 1 displays a schematic view of the Layers concept
+airspace structure is used to separate potentially conflicting
+as implemented in this is research. Here, it can be seen that
+trajectories, safe separation between aircraft is entirely that each layer corresponds to a heading range of 45o and has
+dependent on self-separation automation, see section III for
+a height of 300 ft. With these dimensions, two complete sets
+more details. Since Full Mix imposes no restrictions to the
+of layers fit within the airspace volume used to simulate
+path of aircraft, combined heading, speed and altitude conflict
+traffic, see section III for more details on the experiment
+resolution maneuvers are used.
+volume. As a result, short flights can stay at low altitudes
+B. Layers while longer flights can improve fuel burn by flying at higher
+flight levels. This is expected to mitigate the efficiency drop
+In this concept, the airspace is segmented into vertically
+of predetermined altitudes in this concept.
+stacked bands, with each altitude band limiting horizontal
+travel to within an allowed heading range, similar to the The Layers concept also makes use of the same self-
+hemispheric rule. The resulting vertical segmentation of separation automation utilized by Full Mix, albeit with
+airspace is expected to improve safety when compared to the restrictions on the allowed resolution maneuvers. While
+Full Mix concept, by reducing the relative velocities, and combined heading, speed and altitude resolutions are
+thereby reducing conflict probabilities, between aircraft permitted for climbing and descending traffic, for cruising
+cruising at the same altitude. However, this increased safety aircraft, resolutions are limited to combined heading and
+comes at the price of efficiency; while direct horizontal routes speed maneuvers for cruising aircraft.
+are still possible, vertical flight profiles are dictated by the
+C. Zones
+bearing between origin and destination, and the corresponding
+altitude band with the required heading range. Thus, flights Similar to Layers, the Zones concept separates traffic
+might not be able to cruise at their optimal altitude, resulting based on similarity of travel direction. However, in this case, a
+in higher fuel burn. An exception is made for climbing and horizontal segmentation of airspace is used to separate traffic
+descending aircraft; these aircraft are allowed to maintain along pre-defined trajectories. In this respect, the Zones
+concept somewhat resembles the airway based airspace design
+used today.
+As a personal aerial transportation scenario is used in this
+work, the Zones topology takes into account the layout of
+urban environments in the design of its structure, see Figure 2.
+Here, two major zone types can be seen: circular and radial
+zones. Circular zones are used in a similar way to ring roads
+in contemporary cities, while the radial zones facilitate travel
+towards and away from the city center, and function as
+connections between the circular zones. Additionally, both
+zone types are defined to be unidirectional to further aid
+traffic separation. As there is no vertical segmentation of
+airspace in this concept, optimum altitudes are selected based
+Figure 1: Side view of the Layers concept. Two complete layer sets have been on the planned flight distance between origin and destination.
+defined within the airspace volume used to simulate traffic.
+
+--- Page 4 ---
+
+The Zones concept also uses self-separation to separate III. EXPERIMENT DESIGN
+aircraft flying within the same zone, as well as to assist with
+Two large-scale simulation experiments were conducted to
+the merging of aircraft between circular and radial zones.
+compare the four airspace concepts in terms of capacity. This
+Since the zone topology dictates the horizontal path of an
+section describes the design of these two experiments.
+aircraft, heading resolutions are not allowed for this concept.
+A. Simulation Development
+D. Tubes
+1) Simulation Platform
+As a maximum structuring of airspace, the fourth concept
+implements four-dimensional tubes that provide a fixed route The Traffic Manager (TMX) software, developed by the
+structure in the air. Here, the aim is to increase predictability National Aerospace Laboratory of the Netherlands (NLR),
+of traffic flows by means of pre-planned conflict free routes. was used as the simulation platform in this research. TMX has
+been extensively validated and has been used for numerous
+The tube topology used in this study can be thought of as a ATM related simulation studies. For more information on
+graph with nodes and edges, see Figure 3. The nodes of the TMX capabilities, the reader is referred to [10] .
+graph are connection points for one or more routes. The edges
+are the tubes connecting two nodes. Tubes at the same 2) Concept Implementation
+horizontal level never intersect, except at the nodes, and are Aircraft in the Full Mix concept were programmed to use
+dimensioned to fit exactly one aircraft in the vertical and the direct horizontal route and the most fuel efficient altitude,
+horizontal plane. To provide multiple route alternatives, a total as determined by the APMs. Layers also used the direct
+of thirteen tube layers are placed above each other with horizontal trajectory. However, altitude was selected based on
+decreasing granularity. This way, short flights profit from a the bearing to the destination and the matching altitude from a
+fine grid at the lowest layer, while at the same time, longer predefined list. Additionally, total flight distance determined
+flights benefit from lengthier straight tubes in higher layers. the choice between the upper and lower layer sets; flights less
+Aircraft are only allowed to climb/descend through one tube than 22 Nmi used the lower layer set, see Figure 1.
+layer at a time.
+For the Zones concept, the A* path planning algorithm
+Unlike the other concepts, the Tubes concept uses time- was used to determine the shortest route over a predefined
+based separation of aircraft to ensure safety within the horizontal topology, while the most fuel efficient altitude was
+network. This mode of separation dictates that when an chosen. Tubes also employed A* to calculate the shortest
+aircraft passes a node, it will ‘occupy’ that node for a path, but in this case, it was also used to examine whether the
+prescribed time interval. Within this occupancy interval no selected path was conflict-free. Here, an instantaneous
+other aircraft is allowed to pass through that node, and new planning approach was used whereby the occupancy of each
+flights may only pass through a particular node if the node along a proposed route was checked at traffic desired
+necessary occupancy interval is completely free. To ensure departure times. If any node along a proposed route was found
+that separation at the nodes ensures separation within the to be occupied by another flight, the corresponding route was
+tubes as well, all aircraft within the same tube layer are discarded, and the A* algorithm backtracked to evaluate the
+required to fly at the same velocity. This prescribed speed next best solution. If no route could be found, a pre-departure
+increases with the altitude of the layer to match the decreasing delay was applied in multiples of 10 seconds up to a
+granularity of the tube network. A major advantage of this maximum of 30 minutes. After this period, the tube network
+method of separation is that it allows the tube network to be was considered to be saturated, and that flight was canceled. A
+bi-directional, as the occupancy at a node is independent of complete description of the A* algorithm can be found in
+travel direction. This simplifies the design, and enables closer [11].
+packing of tubes in the topology.
+3) Self-Separation Automation
+The Full Mix, Layers and Zones concepts relied on self-
+separation automation for tactical separation, consisting of
+separate Conflict Detection (CD), Conflict Resolution (CR)
+and Conflict Prevention (CP) modules. CD was performed
+through linear extrapolation of aircraft positions over a
+prescribed ‘look-ahead’ time. Once conflicts were predicted,
+the Modified Voltage Potential (MVP) algorithm is used for
+CR in a pair wise fashion, resulting in implicit cooperative
+resolution strategies. Finally, the CP algorithm ensures that
+aircraft do not turn into conflicts, in an effort to mitigate
+conflict chain reactions. Previous research showed that this
+Figure 3: An example tube topology with three layers of decreasing
+granularity. The dashed yellow lines are used to indicate the placement of three pronged system was highly effective in solving multi-
+nodes above each other. Tubes are bi-directional. aircraft conflicts. For more details, please consult [5].
+
+--- Page 5 ---
+
+Based on initial test runs, a look-ahead time of 60 seconds,
+and separation margins of 0.135 Nmi horizontally and 150 ft
+vertically, were selected. Also, aircraft were assumed to have
+perfect knowledge of the states of neighboring traffic to focus
+exclusively on the structure-capacity relationship.
+4) Wind
+Wind was modeled as a uniform and time-invariant vector
+field with random direction and speed. Wind was deliberately
+omitted from the simulation's trajectory planning functions to
+study the effect of uncertainties, which could cause deviations
+from the planned trajectory, on safety. Thus, the wind used in Figure 4: Map of fictional city used as the simulation physical environment.
+Simulation data is logged for the airspace volume between 1600-6500ft
+the simulation has a similar effect to wind prediction errors in
+real life operations. C. Independent Variables
+Two separate experiments were performed; the nominal
+B. Traffic Scenarios
+experiment and the non-nominal experiment.
+1) Testing Region
+1) Nominal Experiment
+Given the personal air transport scenario, a fictional city
+was designed to represent the simulation's physical The nominal experiment focused on the impact of airspace
+environment. To create high density traffic scenarios, a small structure on capacity; although traffic was subjected to a
+portion of the city, with an area of 1600 square Nmi, was used uniform wind field, no other detriments to aircraft motion
+for traffic simulations, see Figure 4. Here it can be seen that were included. For this experiment, four levels of airspace
+the city is divided into three major districts: city center, inner structure and four traffic demand scenarios represented the
+ring and outer ring. To define origin and destination points for independent conditions. Six repetitions were performed for
+traffic, 1600 ‘PAV-ports’ were evenly distributed over the city each experiment condition (two repetitions for three traffic
+in a grid pattern. Although traffic is simulated over the entire demand patterns). Furthermore, the scenarios were simulated
+city, data is only logged between 1650 ft and 6500 ft, as the with and without conflict resolution, resulting in a total of 192
+focus of this research is on en route airspace design. nominal runs.
+2) Traffic Demand 2) Non-Nominal Experiment
+Four demand scenarios of increasing density were used to This experiment is aimed at comparing the relative
+compare the concepts, and are defined in terms of robustness of the concepts to non-nominal situations. For this
+instantaneous traffic demand, see Table 1. These scenarios purpose, the four airspace concepts were compared for
+were created by setting the average nominal trip time to simulations with 4, 8, 16, and 32 rogue aircraft. These rogue
+fifteen minutes, and rely on assumptions for future population aircraft were introduced randomly during the logging hour,
+growth and per capita demand for PAVs, see [12] for more and flew haphazardly through the airspace. Nominal aircraft
+details. were solely responsible for resolving conflicts with rogue
+aircraft using its self-separation automation, in all concepts.
+In addition to traffic volume, it is also necessary to Although time based separation is used in Tubes, the self-
+consider urban traffic patterns. To this end, city blocks were separation automation described above is used with speed
+characterized as either commercial or residential, with a resolutions to resolve conflicts with rogue aircraft alone. Once
+greater proportion of commercial buildings near the city again, 6 repetitions were performed, with and without conflict
+center, see Figure 4. This distinction made it possible to resolution, resulting in a total of 192 non-nominal runs.
+simulate morning rush hour as traffic converging towards
+commercial areas of a city. Similarly, evening rush hour could D. Dependent Variables
+be simulated as traffic diverging from the city center to Three categories of dependent variables are used to
+suburban residential areas. Therefore, for each traffic volume, compare the concepts: safety, efficiency and stability. The
+scenarios with converging, diverging and 'mixed' traffic flows metrics used to access each category are described below.
+were created. Also, each scenario had a duration of two hours,
+consisting of a forty-five minute build-up period, a one hour 1) Safety
+logging period, and a fifteen minute wind-down period. Safety metrics focus on the ability of an airspace concept
+to maintain safe separation between aircraft. Separation
+TABLE 1: TRAFFIC DEMAND SCENARIOS performance is measured in terms of the number of intrusions
+and conflicts. Here, intrusions are defined as violations of
+Scenario Low Medium High Ultra
+minimum separation requirements, while conflicts are defined
+Instantaneous
+Traffic Volume 2,625 3,375 4,125 4,875 as predicted intrusions, i.e., when two (or more) aircraft are
+
+--- Page 6 ---
+
+expected to violate separation requirements within a
+predetermined `look-ahead’ time (60 seconds in this research).
+Intrusions do not imply collisions. Therefore, in addition
+to counting the number of intrusions, it is important to
+consider the severity of an intrusion. The severity of an
+intrusion is dependent on the path of an aircraft through the Figure 5: Side view of an intrusion. The red dashed line shows the intrusion
+path of an aircraft through the protected zone of another.
+protected zone of another, see Figure 5, and is computed using
+the following expression:
+(1)
+H I e n r t e s , e ver it a y nd = t0 ian m tr−e a tx t1hinet � h m or i i n zo � n ÎH ta ( l t ) a , n Î d V ( v t) e � rt � ical intrusions
+that are normalized with respect to the corresponding
+minimum ÎsHeparatiÎoVn requirements, while and are the
+start and end times of an intrusion. Using the above relation,
+the intrusion severity for the intrusion patth 0 i s n h t own ti 1 n i n F t igure 5
+is equal to the normalized horizontal intrusion at point ‘A’. Figure 6: The Domino Effect Parameter (DEP) relates the additional conflicts
+caused by resolution maneuvers to airspace stability
+2) Efficiency
+condition. Whenever relevant, the effect of CR is also
+The efficiency of the concepts is analyzed using the work
+discussed using separate error bar charts.
+done metric. This metric considers the optimality of an
+aircraft's trajectory, and therefore has a strong correlation with A. Nominal Experiment
+fuel/energy consumption. For each flight, the work done is Over six million flights were simulated during this
+computed as: experiment. Data from approximately 50% of these flights,
+which flew during the logging period, are analyzed for these
+(2)
+results. The analysis begins by considering the traffic volumes
+and densities simulated, and the consequent implications on
+W= � 𝐓𝐓 d𝐬𝐬
+Here, and are the thpartuhst and displacement vectors. the analysis of the dependent measures.
+3) Sta
+𝐓𝐓
+bility
+𝐬𝐬
+1) Traffic Volume and Density
+Resolving conflicts may cause new conflicts at very high
+The total traffic volume and average traffic density per
+traffic densities due to the scarcity of airspace. The stability of
+simulation run is displayed are Figures 7 and 8, respectively.
+the airspace as a direct result of conflict resolution maneuvers
+For Full Mix, Layers and Zones, traffic volumes and densities
+has been measured in literature using the Domino Effect
+were fairly similar. However, in both cases, the Tubes concept
+Parameter (DEP) [6]. The DEP can be visualized through the
+deviates significantly from the other concepts. In terms of
+Venn diagram pictured in Figure 6. Here S1 is the set of all
+traffic volume, Tubes simulated significantly fewer aircraft for
+conflicts without resolutions, and S2 is the set of all conflicts
+all demand scenarios. This is because Tubes delayed and
+with resolutions, for identical scenarios. Furthermore, three
+cancelled flights if conflict free routes were not available at
+regions can be identified in Figure 6 from the union and
+scenario specified departure times. Despite the lower traffic
+relative complements of the two sets, with ,
+volume, Tubes caused the highest traffic densities. This
+and .
+inconsistent trend is due to the significantly longer routes of
+R1=S1\S2
+By comparing R3 with R1, the proportion of additional the Tubes concept (see efficiency metrics), which in turn
+R2=S1∪S2 R3=S2\S1
+‘destabilizing’ conflicts that were triggered by resolution increased flight durations and traffic densities.
+maneuvers can be determined. Thus, the DEP is inversely
+These differences in traffic volumes and densities for
+proportional to airspace stability, and is defined as [6]:
+Tubes need to be taken into account when considering the
+other dependent variables. Although Figure 7 suggests that the
+(3) Tubes concept has a lower airspace capacity relative to the
+other concepts, it should be noted that the figure does not
+𝑅𝑅3−𝑅𝑅1 𝑆𝑆2
+𝐷𝐷𝐷𝐷𝐷𝐷= = −1 imply that the other concepts are able to, for instance,
+𝑆𝑆IV1. RES𝑆𝑆U1LTS
+facilitate the higher volumes safely. Therefore, conclusions
+The results of the nominal and non-nominal experiments with respect to capacity also depend on the other dependent
+are presented separately in this section. The effect of the variables discussed below, and cannot be based purely on the
+independent variables on the dependent variables are analyzed amount of traffic simulated. Moreover, whenever appropriate,
+using error bar charts that displays the mean, and the 95% these metrics are computed relative to the number of flights
+confidence interval of the mean, for each simulation simulated to allow for a fair comparison between concepts.
+
+--- Page 7 ---
+
+a) Effect of traffic demand a) Effect of traffic demand
+(with conflict resolution) (with conflict resolution)
+b) Effect of Conflict Resolution (CR) b) Effect of Conflict Resolution (CR)
+Figure 8: Traffic density per simulation run Figure 9: Number of conflicts per flight Figure 10: Number of intrusions per flight
+2) Safety Figure 11 shows that intrusion severity is not significantly
+dependent on traffic demand, and is fairly similar for the three
+The number of conflicts and intrusions per flight for all
+concepts using tactical CR. This suggests that intrusion
+simulation conditions are displayed in Figures 9 and 10,
+severity is more a function of the selected CR algorithm than
+respectively. As expected, the number of conflicts and
+airspace structure. Due to the resolution maneuvers initiated
+intrusions increased with traffic demand for all concepts.
+by the MVP algorithm, intrusion severity was reduced when
+Furthermore, the figures also show that the more structured
+CR was enabled for Full Mix, Layers and Zones.
+Zones and Tubes concepts led to significantly higher numbers
+of conflicts and intrusions compared to the less structured Full 3) Efficiency
+Mix and Layers concepts.
+Efficiency, measured using the work done metric, is
+The effect of tactical CR on the number of safety incidents shown in Figure 12. Here, a positive correlation between work
+is also pictured in Figures 9 and 10. As Tubes did not use done and the degree of airspace structure, as well as between
+tactical CR, there were no differences between the ON and work done and traffic demand, can be seen. The Full Mix
+OFF conditions. For the other three concepts, the number of concept led to the lowest work done, closely followed by the
+intrusions was considerably reduced with CR ON. However, Layers concept. Conversely, the Tubes concept led to the
+the effect of CR on the number of conflicts did not follow the highest work done, implying that aircraft flew significantly
+same trend. For Full Mix and Zones, the number of conflicts longer distances in this concept. As conflict resolution
+increased with CR ON. This was expected, as resolution maneuvers increase flight distances, work done was increased
+maneuvers increase flight distances and the consequent with CR ON (not shown).
+probability of encountering other aircraft. However, for the
+4) Stability
+Layers concept, the opposite was found, with CR ON leading
+to a lower number of conflicts. This unusual result is further The stability of the airspace is analyzed using the DEP, see
+analyzed using stability metrics. Figure 13. A negative DEP implies a net stabilizing effect of
+tactical CR whereby conflict chain reactions are outweighed
+It is interesting to note that the Tubes concept, which
+by those that are solved without pushing aircraft into
+aimed at deconflicting flights prior to take-off, resulted in a
+secondary conflicts, whereas positive values indicate a large
+very high number of conflicts and intrusions for all scenarios.
+number of conflict chain reactions, and thus airspace
+This is because the trajectory planning functions used by
+instability. Figure 13 shows that DEP is consistently zero for
+Tubes did not take uncertainties, such as wind, into account.
+Tubes as it did not use tactical CR. For the other three
+These uncertainties caused aircraft to deviate from their
+concepts, the DEP for the Low demand scenario is similar and
+planned flight paths during the simulation, resulting in a large
+negative. However at higher demand levels, the DEP increases
+number of conflicts due to the tight packing of the Tubes
+to positive values for the Full Mix and Zones concepts. This
+topology. As no tactical CR was used by Tubes, the conflicts
+suggests that the maneuvering room available to solve
+also resulted in a large number of intrusions.
+conflicts decreases rapidly with increasing airspace density for
+these two concepts, making it progressively more difficult to
+
+--- Page 8 ---
+
+a) Effect of traffic demand
+(with conflict resolution) Figure 12: Work done per flight a) Effect of traffic demand
+(with conflict resolution) (with conflict resolution)
+b) Effect of Conflict Resolution (CR)
+b) Effect of Conflict Resolution (CR)
+Figure 11: Intrusion severity
+Figure 13: Domino Effect Parameter Figure 14: Number of conflicts per flight
+with rogue aircraft
+avoid intrusions without triggering additional conflicts. This is
+particularly true for the Zones concept which experienced a
+very large DEP increase between the High and Ultra demand
+scenarios.
+Although the DEP also increased with demand for Layers,
+it remained negative for the range of densities considered in
+this work. Thus the Layers concept is more able to prevent
+conflict propagation from occurring, and is better at assisting
+the MVP CR algorithm in solving the conflicts that do occur,
+by reducing conflict angles and relative velocities between a) Effect of traffic demand
+(with conflict resolution)
+aircraft cruising at the same altitude. This result explains the
+reduction of the number of conflicts noted earlier for Layers
+with CR ON.
+B. Non-Nominal Experiment
+As stated earlier, the purpose of the non-nominal
+experiment is to compare the relative robustness of the
+different airspace structuring methods when subjected to
+increasing numbers of rogue aircraft. Since rogue aircraft
+primarily affect safety metrics, the following paragraphs b) Effect of Conflict Resolution (CR)
+discuss the properties of conflicts and intrusions between
+Figure 15: Number of intrusions per flight
+rogue and 2.7 million normal aircraft. Thus only incidents
+with rogue aircraft (with conflict resolution)
+between rogue and normal aircraft are considered.
+algorithm to avoid co nf licts with r og ue ai rcr aft alone. Since
+Figures 14 and 15 display the number of conflicts and
+Tubes specified the horizontal a nd vertical flight profiles,
+intrusions per flight with rogue aircraft alone. Here, it can be
+speed resolutions were used. Figure 14b shows that these
+seen that increasing the number of rogue aircraft increases the
+resolutions did reduce the number of conflicts with rogue
+number of conflicts and intrusions for all concepts. The
+aircraft for Tubes. Similarly, Figure 15b shows the number of
+figures also show that the Tubes concept is considerably more
+intrusions for all concepts (including Tubes) improved
+affected by rouge aircraft than the other three concepts.
+significantly with CR ON. Finally, it is noted that intrusion
+As the trajectories of rogue aircraft were not known in severity was unaffected by the number of rogue aircraft for all
+advance, aircraft in the Tubes concept used the MVP CR concepts, although it did decrease with CR ON (not shown).
+
+--- Page 9 ---
+
+V. DISCUSSION VI. CONCLUSIONS
+In this work, four concepts of increasing structure, named The results of the simulation experiments suggests that the
+Full Mix, Layers, Zones and Tubes, were compared using fast structuring of traffic must take into account the expected
+time simulations to study the influence of traffic structure on traffic demand pattern to be beneficial in terms of capacity.
+capacity and robustness. For the heterogeneous demand patterns used here, a
+segmentation into altitude bands with similar headings, as for
+In contrast to previous research, which focused on either
+Layers, showed safety and stability benefits when compared
+fully structured or fully unstructured concepts, the current
+to the unstructured Full Mix concept, while the strict
+results clearly indicate that the moderately structured Layers
+structuring and predefined routing of the Zones and Tubes
+concept led to the best overall performance. Although
+concepts only reduced performance. For the traffic densities
+unexpected, this result can be explained by the heterogeneous,
+considered, no reversal can be observed for this trend.
+or uniformly distributed, traffic demand scenarios used in this
+work. For such demand patterns, strict structuring of airspace, As a large number of conflicts and intrusions were found
+as for Zones and Tubes, increased flight distances and caused for all concepts, it is recommended to investigate novel
+traffic concentrations at intersection points of the predefined conflict detection and resolution algorithms that cope with the
+topologies. On the other hand, the vertical structuring used by limited maneuvering room available at extreme traffic
+the Layers concept separated traffic with significantly densities. It is also recommended to further investigate the
+different headings, without constraining the horizontal path of effects of parameters of the Layers concept, such as heading
+aircraft. This improved safety and stability by reducing range per altitude band, on capacity.
+relative velocities, compared to the unstructured Full Mix
+concept, without unduly affecting efficiency metrics. REFERENCES
+Therefore, it can be concluded that the optimum level of
+[1] N. A. Doble, R. Hoffman, P. U. Lee, J. Mercer, B. Gore, N. Smith,
+structuring is dependent on the traffic demand pattern, and for
+and K. Lee, “Current airspace configuration practices and their
+heterogeneous demand scenarios, a moderate degree of implications for future airspace concepts,” in 8th Aviation Technology
+structure, as exemplified by the Layers concept, results in the Integration Operations Seminar, AIAA, Anchorage, AK, 2008.
+highest capacity. [2] Magill, S., “Effect of Direct Routing on ATC Capacity,” in
+Proceedings of the 2nd USA/Europe Air Traffic Management R&D
+For the range of densities considered, the results also show Seminar, Orlando, 1998.
+that a switch between structuring methods is not required to [3] SESAR Consortium, “The Concept of Operations at a glance,” Single
+European Sky, 2007.
+maximize capacity. In fact, the results indicate the opposite,
+[4] Joint Planning and Development Office, “Concept of operations for
+with a clear distinction between the two less structured and the
+the Next Generation Air Transportation System,” FAA, Jun. 2007.
+two more structured concepts; while performance degraded [5] J. M. Hoekstra, R. N. H. W. van Gent, and R. C. J. Ruigrok,
+with increasing demand for all concepts, it did so at a higher “Designing for safety: the ‘free flight’ air traffic management
+rate for Zones and Tubes. Furthermore, the results of the non- concept,” Reliab. Eng. Syst. Saf., vol. 75, no. 2, pp. 215–232, Feb.
+nominal experiment showed that the rigid topology and 2002.
+[6] J. Krozel, M. Peters, K. D. Bilimoria, C. Lee, and J. S. . Mitchell,
+preplanned routes used by the Tubes concept reduced its
+“System performance characterisitcs of centralized and decentralized
+resilience to the haphazard motion of rogue aircraft, while the air traffic separation strategies,” in 4th USA/Europe Air Traffic
+flexible structuring of Full Mix and Layers revealed higher Management R&D Seminar, Santa Fe, 2001.
+robustness to non-nominal events. [7] M. Ballin, J. Hoekstra, D. Wing, and G. Lohr, “NASA Langley and
+NLR Research of Distributed Air/Ground Traffic Management,” in
+The poor performance of the Tubes concept stands in contrast AIAA’s Aircraft Technology, Integration, and Operations (ATIO)
+with the positive results of structuring traffic using pre- 2002 Technical Forum, 2002.
+[8] J. Klooster, S. Torres, D. Earman, M. Castillo-Effen, R. Subbu, L.
+defined trajectories found in literature. However, those `TBO’
+Kammer, D. Chan, and T. Tomlinson, “Trajectory synchronization
+concepts generally used globally optimum trajectories, based and negotiation in Trajectory Based Operations,” in Digital Avionics
+on current airspace status and expected future demand. The Systems Conference (DASC), 2010.
+Tubes concept, on the other hand, used an instantaneous [9] T. Prevot, V. Battiste, E. Palmer, and S. Shelden, “Air traffic concept
+utilizing 4D trajectories and airborne separation assistance,” in
+planning approach that selected the shortest available route at
+Proceedings of the AIAA Guidance, Navigation, and Control
+the time of departure, to meet the high flexibility of operation Conference, AIAA-2003-5770, Austin, TX, USA, 2003.
+needed to realize a future personal aerial transportation [10] F. Bussink, J. Hoekstra, and B. Heesbeen, “Traffic manager: a flexible
+system. Regardless, the results of the current study show that desktop simulation tool enabling future ATM research,” in Digital
+Avionics Systems Conference, 2005
+pre-planned trajectories, which are common to both TBO and
+[11] J. M. Hoekstra, “Designing for safety: the free flight air traffic
+Tubes, are negatively affected by uncertainties. In the case of management concept,” PhD Dissertation, Delft University of
+Tubes, these uncertainties, such as those caused by wind, Technology, Delft, 2001.
+made it difficult for aircraft to follow RTAs at waypoints [12] E. Sunil, J. Hoekstra, J. Ellerbroek, F. Bussink, D. Nieuwenhuisen, A.
+Vidosavljevic, and S. Kern, “Metropolis: Relating Airspace Structure
+along a planned route, resulting in a large number of
+and Capacity for Extreme Traffic Densities,” in USA/Europe Air
+unintended conflicts and intrusions. Traffic Management R&D Seminar, Lisbon, 2015.
